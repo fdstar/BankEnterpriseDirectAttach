@@ -20,13 +20,8 @@ namespace BEDA.CIB.Contracts.Requests
     /// <summary>
     /// 定期账户查询
     /// </summary>
-    public class TIMEQUERYTRNRQ
+    public class TIMEQUERYTRNRQ : BIZRQBASE
     {
-        /// <summary>
-        /// 客户端交易的唯一流水号，最长30位，必输
-        /// </summary>
-        [XmlElement(Order = 0)]
-        public string TRNUID { get; set; }
         /// <summary>
         /// 查询账户
         /// </summary>

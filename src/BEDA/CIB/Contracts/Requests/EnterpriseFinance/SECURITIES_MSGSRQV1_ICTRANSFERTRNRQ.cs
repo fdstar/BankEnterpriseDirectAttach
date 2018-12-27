@@ -20,13 +20,8 @@ namespace BEDA.CIB.Contracts.Requests
     /// <summary>
     /// 快速转账支付及其指令查询（不采用工作流）
     /// </summary>
-    public class ICTRANSFERTRNRQ
+    public class ICTRANSFERTRNRQ : BIZRQBASE
     {
-        /// <summary>
-        /// 客户端交易的唯一标志，否则客户端将无法分辨响应报文的对应关系,最大30位,建议值为YYYYMMDD+序号 必输
-        /// </summary>
-        [XmlElement(Order = 0)]
-        public string TRNUID { get; set; }
         /// <summary>
         /// 请求支付信息节点,如果不输则为查询客户端交易流水号（TRNUID）的交易情况
         /// </summary>

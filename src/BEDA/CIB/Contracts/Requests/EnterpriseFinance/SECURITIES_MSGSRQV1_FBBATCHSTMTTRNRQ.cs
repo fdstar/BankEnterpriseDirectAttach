@@ -20,13 +20,8 @@ namespace BEDA.CIB.Contracts.Requests
     /// <summary>
     /// 批量托收或子账户托收明细查询
     /// </summary>
-    public class FBBATCHSTMTTRNRQ
+    public class FBBATCHSTMTTRNRQ : BIZRQBASE
     {
-        /// <summary>
-        /// 客户端交易的唯一标志，否则客户端将无法分辨响应报文的对应关系,最大30位,建议值为YYYYMMDD+序号 必输
-        /// </summary>
-        [XmlElement(Order = 0)]
-        public string TRNUID { get; set; }
         /// <summary>
         /// 批量托收或子账户托收明细查询内容
         /// </summary>

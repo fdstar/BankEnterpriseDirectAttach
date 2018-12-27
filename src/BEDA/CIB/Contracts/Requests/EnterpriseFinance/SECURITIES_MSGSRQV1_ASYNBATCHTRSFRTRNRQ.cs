@@ -20,13 +20,8 @@ namespace BEDA.CIB.Contracts.Requests
     /// <summary>
     /// 异步批量支付 (最多100笔，不采用工作流) 
     /// </summary>
-    public class ASYNBATCHTRSFRTRNRQ
+    public class ASYNBATCHTRSFRTRNRQ : BIZRQBASE
     {
-        /// <summary>
-        /// 客户端交易的唯一标志，否则客户端将无法分辨响应报文的对应关系,最大30位,建议值为YYYYMMDD+序号 必输
-        /// </summary>
-        [XmlElement(Order = 0)]
-        public string TRNUID { get; set; }
         /// <summary>
         /// 异步批量支付请求,如果不传那么就只是查询
         /// </summary>

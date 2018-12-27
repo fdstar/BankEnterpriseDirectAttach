@@ -20,13 +20,8 @@ namespace BEDA.CIB.Contracts.Requests
     /// <summary>
     /// 交易流水分页查询请求（返回包含虚拟子账户交易信息）
     /// </summary>
-    public class BALNTRADEINQUIRYTRNRQ
+    public class BALNTRADEINQUIRYTRNRQ : BIZRQBASE
     {
-        /// <summary>
-        /// 客户端交易的唯一流水号，最长30位，必输
-        /// </summary>
-        [XmlElement(Order = 0)]
-        public string TRNUID { get; set; }
         /// <summary>
         /// 在响应报文中包含该内容 ，非必输
         /// </summary>

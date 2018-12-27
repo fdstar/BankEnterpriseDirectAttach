@@ -20,13 +20,8 @@ namespace BEDA.CIB.Contracts.Requests
     /// <summary>
     /// 提交托收请求
     /// </summary>
-    public class GATHERTRNRQ
+    public class GATHERTRNRQ : BIZRQBASE
     {
-        /// <summary>
-        /// 客户端交易的唯一标志，否则客户端将无法分辨响应报文的对应关系,最大30位,建议值为YYYYMMDD+序号 必输
-        /// </summary>
-        [XmlElement(Order = 0)]
-        public string TRNUID { get; set; }
         /// <summary>
         /// 托收请求节点，如果没有此节点则为查询功能
         /// </summary>

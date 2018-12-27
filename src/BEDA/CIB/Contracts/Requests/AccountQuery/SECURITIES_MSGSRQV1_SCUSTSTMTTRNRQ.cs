@@ -20,13 +20,8 @@ namespace BEDA.CIB.Contracts.Requests
     /// <summary>
     /// 账户余额和交易流水分页查询
     /// </summary>
-    public class SCUSTSTMTTRNRQ
+    public class SCUSTSTMTTRNRQ : BIZRQBASE
     {
-        /// <summary>
-        /// 客户端交易的唯一流水号，最长30位，必输
-        /// </summary>
-        [XmlElement(Order = 0)]
-        public string TRNUID { get; set; }
         /// <summary>
         /// 在响应报文中包含该内容 ，非必输
         /// </summary>

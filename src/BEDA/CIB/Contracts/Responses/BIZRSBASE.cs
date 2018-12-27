@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 namespace BEDA.CIB.Contracts.Responses
 {
     /// <summary>
-    /// 业务处理响应结果
+    /// 业务处理响应结果基类
     /// </summary>
     public abstract class BIZRSBASE
     {
