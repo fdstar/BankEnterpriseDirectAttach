@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.168
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BEDA", "BEDA\BEDA.csproj", "{2F00A5A5-FB7B-4F4F-B7E2-539A632B449D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2F00A5A5-FB7B-4F4F-B7E2-539A632B449D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F00A5A5-FB7B-4F4F-B7E2-539A632B449D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F00A5A5-FB7B-4F4F-B7E2-539A632B449D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F00A5A5-FB7B-4F4F-B7E2-539A632B449D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CCE7D3E0-90DD-488A-B6B4-F93ED75EB4D3}
+	EndGlobalSection
+EndGlobal
