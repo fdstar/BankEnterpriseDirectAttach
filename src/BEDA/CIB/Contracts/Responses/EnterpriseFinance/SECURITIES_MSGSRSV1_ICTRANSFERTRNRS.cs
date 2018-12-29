@@ -30,7 +30,7 @@ namespace BEDA.CIB.Contracts.Responses
     /// <summary>
     /// 响应交易处理信息节点
     /// </summary>
-    public class XPMTRS : Requests.XMPTRQ
+    public class XPMTRS : Requests.XMPTRQ<Requests.RQBODY>
     {
         /// <summary>
         /// 网银跟踪号	必回

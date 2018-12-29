@@ -204,32 +204,6 @@ namespace BEDA.CIB.Contracts.Requests
         public string ACCTID { get; set; }
     }
     /// <summary>
-    /// 付款人账户信息
-    /// </summary>
-    public class GATHER_ACCTFROM
-    {
-        /// <summary>
-        /// 付款账号，最大32位	必输
-        /// </summary>
-        [XmlElement(Order = 0)]
-        public string ACCTID { get; set; }
-        /// <summary>
-        /// 付款账户名称，最大50位	必输
-        /// </summary>
-        [XmlElement(Order = 1)]
-        public string NAME { get; set; }
-        /// <summary>
-        /// 付款收报行号，长度12位、他行时必须输入
-        /// </summary>
-        [XmlElement(Order = 2)]
-        public string BANKNUM { get; set; }
-        /// <summary>
-        /// 付款人开户行名称，最大50位，他行时必须输入
-        /// </summary>
-        [XmlElement(Order = 3)]
-        public string BANKDESC { get; set; }
-    }
-    /// <summary>
     /// 付款信息节点
     /// </summary>
     public class PAYINFO
@@ -245,10 +219,10 @@ namespace BEDA.CIB.Contracts.Requests
         [XmlElement(Order = 1)]
         public string CONTRACTID { get; set; }
         /// <summary>
-        /// 付款人账户信息	必输
+        /// 付款人账户信息	必输  付款收报行号(长度12位)、付款人开户行名称（最大50位）他行时必须输入
         /// </summary>
         [XmlElement(Order = 2)]
-        public GATHER_ACCTFROM ACCTFROM { get; set; }
+        public CORRELATEACCT ACCTFROM { get; set; }
         /// <summary>
         /// 缴费方式    必输
         /// 交易类型<see cref="GATHERINFO.TRNTYPE"/>为1时的缴费方式：

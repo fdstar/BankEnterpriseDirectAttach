@@ -25,19 +25,20 @@ namespace BEDA.CIB.Contracts.Requests
         /// <summary>
         /// 请求支付信息节点,如果不输则为查询客户端交易流水号（TRNUID）的交易情况
         /// </summary>
-        [XmlElement(Order = 1)]
-        public XMPTRQ XMPTRQ { get; set; }
+        [XmlElement("XMPTRQ", Order = 1)]
+        public XMPTRQ<RQBODY> XMPTRQ { get; set; }
     }
     /// <summary>
     /// 请求支付信息节点,如果不输则为查询客户端交易流水号（TRNUID）的交易情况
     /// </summary>
-    public class XMPTRQ
+    /// <typeparam name="T"></typeparam>
+    public class XMPTRQ<T>
     {
         /// <summary>
         /// 内部账户信息，内部账号，18位，非必输可不填
         /// </summary>
         [XmlElement(Order = 0)]
-        public RQBODY FUNDACCT { get; set; }
+        public T FUNDACCT { get; set; }
         /// <summary>
         /// 转账必要信息  必输
         /// </summary>

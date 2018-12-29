@@ -5,4 +5,9 @@
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="CIB\Contracts\Requests\StockExchange\" />
+    <Folder Include="CIB\Contracts\Requests\VirtualSubaccount\" />
+  </ItemGroup>
+
 </Project>
