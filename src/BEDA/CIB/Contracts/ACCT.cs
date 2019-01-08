@@ -71,7 +71,7 @@ namespace BEDA.CIB.Contracts
         /// 是否转向财务公司内部账户，非必输  1-是，0或空-否
         /// </summary>
         [XmlElement(Order = 5)]
-        public int? COLLECT { get; set; }
+        public string COLLECT { get; set; }
     }
     /// <summary>
     /// 关联账户信息
