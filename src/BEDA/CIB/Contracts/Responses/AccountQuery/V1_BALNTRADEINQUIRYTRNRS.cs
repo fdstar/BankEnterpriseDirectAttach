@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
@@ -74,15 +75,51 @@ namespace BEDA.CIB.Contracts.Responses
     public class BALNTRADEINCONTENT
     {
         /// <summary>
-        /// 起始日期，格式yyyyMMdd，必回
+        /// 起始日期，格式yyyy-MM-dd，必回
         /// </summary>
-        [XmlElement(Order = 0)]
-        public string DTSTART { get; set; }
+        [XmlIgnore]
+        public DateTime DTSTART { get; set; }
         /// <summary>
-        /// 终止日期，格式yyyyMMdd，必回
+        /// 起始日期，格式yyyy-MM-dd ,对应<see cref="DTSTART"/>
         /// </summary>
-        [XmlElement(Order = 1)]
-        public string DTEND { get; set; }
+        [XmlElement("DTSTART", Order = 0)]
+        public string DTSTARTStr
+        {
+            get
+            {
+                return this.DTSTART.ToString("yyyy-MM-dd");
+            }
+            set
+            {
+                if (DateTime.TryParseExact(value, "yyyy-MM-dd", CultureInfo.CurrentCulture, DateTimeStyles.None, out DateTime tmp))
+                {
+                    this.DTSTART = tmp;
+                }
+            }
+        }
+        /// <summary>
+        /// 终止日期，格式yyyy-MM-dd，必回
+        /// </summary>
+        [XmlIgnore]
+        public DateTime DTEND { get; set; }
+        /// <summary>
+        /// 终止日期，格式yyyy-MM-dd ,对应<see cref="DTEND"/>
+        /// </summary>
+        [XmlElement("DTEND", Order = 1)]
+        public string DTENDStr
+        {
+            get
+            {
+                return this.DTEND.ToString("yyyy-MM-dd");
+            }
+            set
+            {
+                if (DateTime.TryParseExact(value, "yyyy-MM-dd", CultureInfo.CurrentCulture, DateTimeStyles.None, out DateTime tmp))
+                {
+                    this.DTEND = tmp;
+                }
+            }
+        }
         /// <summary>
         /// 柜员流水号
         /// </summary>
@@ -101,8 +138,26 @@ namespace BEDA.CIB.Contracts.Responses
         /// <summary>
         /// 记账日期，必回，例2017-07-04T11:06:21
         /// </summary>
-        [XmlElement(Order = 5)]
-        public string DTACCT { get; set; }
+        [XmlIgnore]
+        public DateTime DTACCT { get; set; }
+        /// <summary>
+        /// 记账日期，必回，例2017-07-04T11:06:21 ,对应<see cref="DTACCT"/>
+        /// </summary>
+        [XmlElement("DTACCT", Order = 5)]
+        public string DTACCTStr
+        {
+            get
+            {
+                return this.DTACCT.ToString("yyyy-MM-ddTHH:mm:ss");
+            }
+            set
+            {
+                if (DateTime.TryParseExact(value, "yyyy-MM-ddTHH:mm:ss", CultureInfo.CurrentCulture, DateTimeStyles.None, out DateTime tmp))
+                {
+                    this.DTACCT = tmp;
+                }
+            }
+        }
         /// <summary>
         /// 交易金额，为负值表示冲正  必回
         /// </summary>

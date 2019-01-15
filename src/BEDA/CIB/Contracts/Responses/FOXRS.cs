@@ -13,6 +13,11 @@ namespace BEDA.CIB.Contracts.Responses
     public class FOXRS 
     {
         /// <summary>
+        /// 服务端响应报文
+        /// </summary>
+        [XmlIgnore]
+        public string ResponseContent { get; set; }
+        /// <summary>
         /// 登录消息响应实体
         /// </summary>
         [XmlElement(Order = 0)]

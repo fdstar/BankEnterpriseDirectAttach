@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BEDA.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -52,8 +53,23 @@ namespace BEDA.CIB.Contracts
         /// 若无预约转账需求，无需引入该节点。
         /// 若有 DTDUE 节点，则不能为空值。	非必输。
         /// </summary>
-        [XmlElement(Order = 7)]
-        public string DTDUE { get; set; }
+        [XmlIgnore]
+        public DateTime? DTDUE { get; set; }
+        /// <summary>
+        /// 客户端要求的转账执行日期， yyyy-MM-dd格式 ,对应<see cref="DTDUE"/>
+        /// </summary>
+        [XmlElement("DTDUE", Order = 7)]
+        public string DTDUEStr
+        {
+            get
+            {
+                return this.DTDUE?.ToString("yyyy-MM-dd");
+            }
+            set
+            {
+                this.DTDUE = value.TryConvert<DateTime>();
+            }
+        }
         /// <summary>
         /// 备注，可选，最大 60位	非必输
         /// </summary>

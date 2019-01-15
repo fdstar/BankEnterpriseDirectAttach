@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
@@ -83,10 +84,28 @@ namespace BEDA.CIB.Contracts.Responses
         [XmlElement(Order = 9)]
         public string RSLTID { get; set; }
         /// <summary>
-        /// 开户日期yyyy-MM-dd
+        /// 开户日期yyyyMMdd
         /// </summary>
-        [XmlElement(Order = 10)]
-        public string OPENDATE { get; set; }
+        [XmlIgnore]
+        public DateTime OPENDATE { get; set; }
+        /// <summary>
+        /// 开户日期yyyyMMdd ,对应<see cref="OPENDATE"/>
+        /// </summary>
+        [XmlElement("OPENDATE", Order = 10)]
+        public string OPENDATEStr
+        {
+            get
+            {
+                return this.OPENDATE.ToString("yyyyMMdd");
+            }
+            set
+            {
+                if (DateTime.TryParseExact(value, "yyyyMMdd", CultureInfo.CurrentCulture, DateTimeStyles.None, out DateTime tmp))
+                {
+                    this.OPENDATE = tmp;
+                }
+            }
+        }
         /// <summary>
         /// 账户实时余额
         /// </summary>

@@ -85,6 +85,7 @@ namespace BEDA.CIB
         }
         private TRs ExecuteInner<TRq, TRs>(TRq rq)
             where TRq : FOXRQ
+            where TRs : FOXRS
         {
             var restRequest = this.GetRestRequest(rq);
             var restResponse = this._client.Execute(restRequest);
@@ -92,13 +93,13 @@ namespace BEDA.CIB
         }
         private async Task<TRs> ExecuteInnerAsync<TRq, TRs>(TRq rq)
             where TRq : FOXRQ
+            where TRs : FOXRS
         {
             var restRequest = this.GetRestRequest(rq);
             var restResponse = await this._client.ExecuteTaskAsync(restRequest).ConfigureAwait(false);
             return this.GetResponse<TRs>(restResponse);
         }
         private IRestRequest GetRestRequest<TRq>(TRq request)
-            where TRq : FOXRQ
         {
             var xml = XmlHelper.Serializer(request, showDeclaration: false, removeDefaultNameSpace: true);
             var restRequest = new RestRequest(Method.POST);
@@ -112,9 +113,15 @@ namespace BEDA.CIB
             return restRequest;
         }
         private TRs GetResponse<TRs>(IRestResponse response)
+            where TRs : FOXRS
         {
             response.SetResponseEncoding();
-            return XmlHelper.Deserialize<TRs>(response.Content);
+            var rs = XmlHelper.Deserialize<TRs>(response.Content);
+            if (rs != null)
+            {
+                rs.ResponseContent = response.Content;
+            }
+            return rs;
         }
     }
 }
