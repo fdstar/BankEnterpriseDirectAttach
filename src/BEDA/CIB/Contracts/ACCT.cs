@@ -68,7 +68,7 @@ namespace BEDA.CIB.Contracts
         [XmlElement(Order = 4)]
         public string CITY { get; set; }
         /// <summary>
-        /// 是否转向财务公司内部账户，非必输  1-是，0或空-否
+        /// 是否转向财务公司内部账户，非必输  1-是，0或空-否 注意只有在支付时才可以按需输入该值，否则会导致异常
         /// </summary>
         [XmlElement(Order = 5)]
         public string COLLECT { get; set; }
