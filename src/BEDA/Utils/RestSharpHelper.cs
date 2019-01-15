@@ -19,7 +19,7 @@ namespace BEDA.Utils
         public static void SetResponseEncoding(this IRestResponse response)
         {
             var encoding = response.ContentEncoding;
-            if (string.IsNullOrWhiteSpace(encoding))
+            if (string.IsNullOrWhiteSpace(encoding) && !string.IsNullOrWhiteSpace(response.ContentType))
             {
                 var tmp = response.ContentType.Split(';').Select(s => s.Split('='));
                 var arr = tmp.LastOrDefault(t => t.Length == 2 && t[0].Trim().ToLower() == "charset");
