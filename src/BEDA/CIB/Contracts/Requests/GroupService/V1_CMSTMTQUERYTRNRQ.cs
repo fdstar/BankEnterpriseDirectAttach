@@ -67,10 +67,9 @@ namespace BEDA.CIB.Contracts.Requests
             }
             set
             {
-                var tmp = value.TryConvert<DateTime>();
-                if (tmp.HasValue)
+                if (value.TryParse(out DateTime tmp))
                 {
-                    this.DTSTART = tmp.Value;
+                    this.DTSTART = tmp;
                 }
             }
         }
@@ -91,10 +90,9 @@ namespace BEDA.CIB.Contracts.Requests
             }
             set
             {
-                var tmp = value.TryConvert<DateTime>();
-                if (tmp.HasValue)
+                if (value.TryParse(out DateTime tmp))
                 {
-                    this.DTEND = tmp.Value;
+                    this.DTEND = tmp;
                 }
             }
         }

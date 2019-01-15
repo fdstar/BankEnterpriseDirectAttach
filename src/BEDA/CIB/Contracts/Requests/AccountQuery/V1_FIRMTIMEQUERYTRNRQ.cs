@@ -26,6 +26,6 @@ namespace BEDA.CIB.Contracts.Requests
         /// 查询账户
         /// </summary>
         [XmlElement(Order = 1)]
-        public PAGED_RQBODY RQBODY { get; set; }
+        public PAGED_RQACCT RQBODY { get; set; }
     }
 }

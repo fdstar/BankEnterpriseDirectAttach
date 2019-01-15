@@ -1,4 +1,5 @@
 ﻿using BEDA.CIB.Contracts.Responses;
+using BEDA.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,13 +58,43 @@ namespace BEDA.CIB.Contracts.Requests
         /// <summary>
         /// 开始时间 格式：yyyy-MM-dd(必输)
         /// </summary>
-        [XmlElement(Order = 0)]
-        public string DTSTART { get; set; }
+        [XmlIgnore]
+        public DateTime? DTSTART { get; set; }
+        /// <summary>
+        /// 开始时间 格式：yyyy-MM-dd ,对应<see cref="DTSTART"/>	必输
+        /// </summary>
+        [XmlElement("DTSTART", Order = 0)]
+        public string DTSTARTStr
+        {
+            get
+            {
+                return this.DTSTART?.ToString("yyyy-MM-dd");
+            }
+            set
+            {
+                this.DTSTART = value.TryConvert<DateTime>();
+            }
+        }
         /// <summary>
         /// 结束时间 格式：yyyy-MM-dd(必输)
         /// </summary>
-        [XmlElement(Order = 1)]
-        public string DTEND { get; set; }
+        [XmlIgnore]
+        public DateTime? DTEND { get; set; }
+        /// <summary>
+        /// 结束时间 格式：yyyy-MM-dd ,对应<see cref="DTEND"/>	必输
+        /// </summary>
+        [XmlElement("DTEND", Order = 1)]
+        public string DTENDStr
+        {
+            get
+            {
+                return this.DTEND?.ToString("yyyy-MM-dd");
+            }
+            set
+            {
+                this.DTEND = value.TryConvert<DateTime>();
+            }
+        }
         /// <summary>
         /// 请求响应的页数（代表从第几页开始查询）（必输）
         /// </summary>

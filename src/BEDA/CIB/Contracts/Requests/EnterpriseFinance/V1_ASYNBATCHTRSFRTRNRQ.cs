@@ -1,4 +1,5 @@
 ﻿using BEDA.CIB.Contracts.Responses;
+using BEDA.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -65,13 +66,43 @@ namespace BEDA.CIB.Contracts.Requests
         /// <summary>
         /// 总笔数，整数	非必输
         /// </summary>
-        [XmlElement(Order = 3)]
+        [XmlIgnore]
         public int? TOTALCOUNT { get; set; }
+        /// <summary>
+        /// 总笔数，整数  对应<see cref="TOTALCOUNT"/>	非必输
+        /// </summary>
+        [XmlElement("TOTALCOUNT", Order = 3)]
+        public string TOTALCOUNTStr
+        {
+            get
+            {
+                return this.TOTALCOUNT?.ToString();
+            }
+            set
+            {
+                this.TOTALCOUNT = value.TryConvert<int>();
+            }
+        }
         /// <summary>
         /// 总金额，Decimal(17,2)	非必输
         /// </summary>
-        [XmlElement(Order = 4)]
+        [XmlIgnore]
         public decimal? TOTALAMOUNT { get; set; }
+        /// <summary>
+        /// 总金额，整数  对应<see cref="TOTALAMOUNT"/>	非必输
+        /// </summary>
+        [XmlElement("TOTALAMOUNT", Order = 4)]
+        public string TOTALAMOUNTStr
+        {
+            get
+            {
+                return this.TOTALAMOUNT?.ToString();
+            }
+            set
+            {
+                this.TOTALAMOUNT = value.TryConvert<decimal>();
+            }
+        }
         /// <summary>
         /// 货币符号RMB,目前仅支持RMB	非必输
         /// </summary>

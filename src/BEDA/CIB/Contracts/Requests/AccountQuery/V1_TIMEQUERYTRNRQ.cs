@@ -26,12 +26,12 @@ namespace BEDA.CIB.Contracts.Requests
         /// 查询账户
         /// </summary>
         [XmlElement(Order = 1)]
-        public PAGED_RQBODY RQBODY { get; set; }
+        public PAGED_RQACCT RQBODY { get; set; }
     }
     /// <summary>
     /// 分页查询账户
     /// </summary>
-    public class PAGED_RQBODY : RQACCT
+    public class PAGED_RQACCT : RQACCT
     {
         /// <summary>
         /// PAGE查询页码，每页100笔，不输默认第1页，必输

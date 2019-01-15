@@ -1,4 +1,5 @@
 ﻿using BEDA.CIB.Contracts.Responses;
+using BEDA.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -70,13 +71,43 @@ namespace BEDA.CIB.Contracts.Requests
         /// <summary>
         /// 总笔数	非必输
         /// </summary>
-        [XmlElement(Order = 3)]
+        [XmlIgnore]
         public int? TOTALCOUNT { get; set; }
+        /// <summary>
+        /// 总笔数，整数  对应<see cref="TOTALCOUNT"/>	非必输
+        /// </summary>
+        [XmlElement("TOTALCOUNT", Order = 3)]
+        public string TOTALCOUNTStr
+        {
+            get
+            {
+                return this.TOTALCOUNT?.ToString();
+            }
+            set
+            {
+                this.TOTALCOUNT = value.TryConvert<int>();
+            }
+        }
         /// <summary>
         /// 总金额	非必输
         /// </summary>
-        [XmlElement(Order = 4)]
+        [XmlIgnore]
         public decimal? TOTALAMOUNT { get; set; }
+        /// <summary>
+        /// 总金额，整数  对应<see cref="TOTALAMOUNT"/>	非必输
+        /// </summary>
+        [XmlElement("TOTALAMOUNT", Order = 4)]
+        public string TOTALAMOUNTStr
+        {
+            get
+            {
+                return this.TOTALAMOUNT?.ToString();
+            }
+            set
+            {
+                this.TOTALAMOUNT = value.TryConvert<decimal>();
+            }
+        }
         /// <summary>
         /// 凭证号，最大长度7位
         /// 目前工资发放指令可自动生成凭证 非必输
@@ -123,10 +154,10 @@ namespace BEDA.CIB.Contracts.Requests
     public class RPAYOFF
     {
         /// <summary>
-        /// 员工编号，最大长度 10位	必输
+        /// 排序号，最大长度 10位	必输
         /// </summary>
         [XmlElement(Order = 0)]
-        public string INDX { get; set; }
+        public int INDX { get; set; }
         /// <summary>
         /// 员工姓名，最大长度 20位	必输
         /// </summary>

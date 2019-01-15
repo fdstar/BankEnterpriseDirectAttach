@@ -39,6 +39,6 @@ namespace BEDA.CIB.Contracts.Requests
         /// 填1表示结算中心与成员单位之间互转   非必输
         /// </summary>
         [XmlElement(Order = 1)]
-        public int? XPMTTYPE { get; set; }
+        public int XPMTTYPE { get; set; }
     }
 }

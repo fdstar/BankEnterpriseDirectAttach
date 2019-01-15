@@ -1,4 +1,5 @@
 ﻿using BEDA.CIB.Contracts.Responses;
+using BEDA.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,6 +42,25 @@ namespace BEDA.CIB.Contracts.Requests
         /// <summary>
         /// 查询日期，yyyy-MM-dd，必输
         /// </summary>
-        public string QUERYDATE { get; set; }
+        [XmlIgnore]
+        public DateTime QUERYDATE { get; set; }
+        /// <summary>
+        /// 查询日期，yyyy-MM-dd ,对应<see cref="QUERYDATE"/>	必输
+        /// </summary>
+        [XmlElement("QUERYDATE")]
+        public string DTENDStr
+        {
+            get
+            {
+                return this.QUERYDATE.ToString("yyyy-MM-dd");
+            }
+            set
+            {
+                if (value.TryParse(out DateTime tmp))
+                {
+                    this.QUERYDATE = tmp;
+                }
+            }
+        }
     }
 }

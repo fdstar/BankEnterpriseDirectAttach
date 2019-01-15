@@ -73,7 +73,10 @@ namespace BEDA.Utils
                 {
                     return (T)serializer.Deserialize(sr);
                 }
-                catch (Exception ex)
+                catch
+#if DEBUG
+                (Exception ex)
+#endif
                 {
                     if (throwException) throw;
                     return default(T);
