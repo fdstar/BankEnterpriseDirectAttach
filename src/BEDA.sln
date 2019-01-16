@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BEDA", "BEDA\BEDA.csproj", "{2F00A5A5-FB7B-4F4F-B7E2-539A632B449D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BEDA", "BEDA\BEDA.csproj", "{2F00A5A5-FB7B-4F4F-B7E2-539A632B449D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BEDA.CIB.Samples", "BEDA.CIB.Samples\BEDA.CIB.Samples.csproj", "{281199AE-374A-42F4-8286-8DFCA8936F00}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{2F00A5A5-FB7B-4F4F-B7E2-539A632B449D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F00A5A5-FB7B-4F4F-B7E2-539A632B449D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2F00A5A5-FB7B-4F4F-B7E2-539A632B449D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{281199AE-374A-42F4-8286-8DFCA8936F00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{281199AE-374A-42F4-8286-8DFCA8936F00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{281199AE-374A-42F4-8286-8DFCA8936F00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{281199AE-374A-42F4-8286-8DFCA8936F00}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
@@ -71,8 +72,26 @@ namespace BEDA.CIB.Contracts.Responses
         /// <summary>
         /// 开户日期，格式yyyy-MM-dd
         /// </summary>
-        [XmlElement(Order = 4)]
-        public string OPENDATE { get; set; }
+        [XmlIgnore]
+        public DateTime OPENDATE { get; set; }
+        /// <summary>
+        /// 开户日期，格式yyyy-MM-dd ,对应<see cref="OPENDATE"/>
+        /// </summary>
+        [XmlElement("OPENDATE", Order = 4)]
+        public string OPENDATEStr
+        {
+            get
+            {
+                return this.OPENDATE.ToString("yyyy-MM-dd");
+            }
+            set
+            {
+                if (DateTime.TryParseExact(value, "yyyy-MM-dd", CultureInfo.CurrentCulture, DateTimeStyles.None, out DateTime tmp))
+                {
+                    this.OPENDATE = tmp;
+                }
+            }
+        }
         /// <summary>
         /// 利率，7位小数
         /// </summary>
@@ -81,8 +100,26 @@ namespace BEDA.CIB.Contracts.Responses
         /// <summary>
         /// 起息日期，格式yyyy-MM-dd
         /// </summary>
-        [XmlElement(Order = 6)]
-        public string DTSTART { get; set; }
+        [XmlIgnore]
+        public DateTime DTSTART { get; set; }
+        /// <summary>
+        /// 起息日期，格式yyyy-MM-dd ,对应<see cref="DTSTART"/>
+        /// </summary>
+        [XmlElement("DTSTART", Order = 6)]
+        public string DTSTARTStr
+        {
+            get
+            {
+                return this.DTSTART.ToString("yyyy-MM-dd");
+            }
+            set
+            {
+                if (DateTime.TryParseExact(value, "yyyy-MM-dd", CultureInfo.CurrentCulture, DateTimeStyles.None, out DateTime tmp))
+                {
+                    this.DTSTART = tmp;
+                }
+            }
+        }
         /// <summary>
         /// 定期账户余额，2位小数
         /// </summary>
@@ -91,8 +128,26 @@ namespace BEDA.CIB.Contracts.Responses
         /// <summary>
         /// 到期日，格式yyyy-MM-dd
         /// </summary>
-        [XmlElement(Order = 8)]
-        public string DTEND { get; set; }
+        [XmlIgnore]
+        public DateTime DTEND { get; set; }
+        /// <summary>
+        /// 到期日，格式yyyy-MM-dd ,对应<see cref="DTEND"/>
+        /// </summary>
+        [XmlElement("DTEND", Order = 8)]
+        public string DTENDStr
+        {
+            get
+            {
+                return this.DTEND.ToString("yyyy-MM-dd");
+            }
+            set
+            {
+                if (DateTime.TryParseExact(value, "yyyy-MM-dd", CultureInfo.CurrentCulture, DateTimeStyles.None, out DateTime tmp))
+                {
+                    this.DTEND = tmp;
+                }
+            }
+        }
         /// <summary>
         /// 币种
         /// </summary>
@@ -122,6 +177,6 @@ namespace BEDA.CIB.Contracts.Responses
         /// 定期账户类型: 0-普通定期 2-智能定期  3-普通通知 4-智能通知 5-结构性存款 6-新型结构性存款
         /// </summary>
         [XmlElement(Order = 14)]
-        public string TIMETYPE { get; set; }
+        public int TIMETYPE { get; set; }
     }
 }

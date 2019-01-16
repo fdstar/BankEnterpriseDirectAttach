@@ -16,6 +16,12 @@ namespace BEDA.CIB
     public class CIBClient : ICIBClient
     {
         private IRestClient _client;
+#if NETSTANDARD2_0
+        static CIBClient()
+        {
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+        }
+#endif
         /// <summary>
         /// 兴业银行调用构造
         /// </summary>

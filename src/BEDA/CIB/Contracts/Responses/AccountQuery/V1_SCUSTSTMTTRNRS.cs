@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
@@ -21,11 +22,6 @@ namespace BEDA.CIB.Contracts.Responses
     /// </summary>
     public class SCUSTSTMTTRNRS : BIZRSBASE
     {
-        /// <summary>
-        /// 账户信息，必回
-        /// </summary>
-        [XmlElement(Order = 2)]
-        public ACCOUNTRSBODY RSBODY { get; set; }
         /// <summary>
         /// 如果客户端发送COOKIE，同步的历史记录不包括原有的CLTCOOKIE，非必回
         /// </summary>
@@ -81,13 +77,49 @@ namespace BEDA.CIB.Contracts.Responses
         /// <summary>
         /// 起始日期，必回，yyyy-MM-dd
         /// </summary>
-        [XmlElement(Order = 0)]
-        public string DTSTART { get; set; }
+        [XmlIgnore]
+        public DateTime DTSTART { get; set; }
+        /// <summary>
+        /// 起始日期，必回，yyyy-MM-dd ,对应<see cref="DTSTART"/>
+        /// </summary>
+        [XmlElement("DTSTART", Order = 0)]
+        public string DTSTARTStr
+        {
+            get
+            {
+                return this.DTSTART.ToString("yyyy-MM-dd");
+            }
+            set
+            {
+                if (DateTime.TryParseExact(value, "yyyy-MM-dd", CultureInfo.CurrentCulture, DateTimeStyles.None, out DateTime tmp))
+                {
+                    this.DTSTART = tmp;
+                }
+            }
+        }
         /// <summary>
         /// 终止日期，必回，yyyy-MM-dd
         /// </summary>
-        [XmlElement(Order = 1)]
-        public string DTEND { get; set; }
+        [XmlIgnore]
+        public DateTime DTEND { get; set; }
+        /// <summary>
+        /// 终止日期，必回，yyyy-MM-dd ,对应<see cref="DTEND"/>
+        /// </summary>
+        [XmlElement("DTEND", Order = 1)]
+        public string DTENDStr
+        {
+            get
+            {
+                return this.DTEND.ToString("yyyy-MM-dd");
+            }
+            set
+            {
+                if (DateTime.TryParseExact(value, "yyyy-MM-dd", CultureInfo.CurrentCulture, DateTimeStyles.None, out DateTime tmp))
+                {
+                    this.DTEND = tmp;
+                }
+            }
+        }
         /// <summary>
         /// 定期账户集合，非必回
         /// </summary>
@@ -117,8 +149,26 @@ namespace BEDA.CIB.Contracts.Responses
         /// <summary>
         /// 记账日期，例2012-04-23T10:15:43
         /// </summary>
-        [XmlElement(Order = 3)]
-        public string DTACCT { get; set; }
+        [XmlIgnore]
+        public DateTime DTACCT { get; set; }
+        /// <summary>
+        /// 记账日期，例2012-04-23T10:15:43 ,对应<see cref="DTACCT"/>
+        /// </summary>
+        [XmlElement("DTACCT", Order = 3)]
+        public string DTACCTStr
+        {
+            get
+            {
+                return this.DTACCT.ToString("yyyy-MM-ddTHH:mm:ss");
+            }
+            set
+            {
+                if (DateTime.TryParseExact(value, "yyyy-MM-ddTHH:mm:ss", CultureInfo.CurrentCulture, DateTimeStyles.None, out DateTime tmp))
+                {
+                    this.DTACCT = tmp;
+                }
+            }
+        }
         /// <summary>
         /// 交易金额，为负值表示冲正，必回
         /// </summary>
@@ -220,22 +270,22 @@ namespace BEDA.CIB.Contracts.Responses
         /// 现转标志（非必回）0 现金 1 转账
         /// </summary>
         [XmlElement(Order = 23)]
-        public byte? CASHFLAG { get; set; }
+        public string CASHFLAG { get; set; }
         /// <summary>
         /// 冲补标志（非必回）0 正常 1 当日冲正 2-补帐 3-隔日补账
         /// </summary>
         [XmlElement(Order = 24)]
-        public byte? CBBZ { get; set; }
+        public string CBBZ { get; set; }
         /// <summary>
         /// 被冲账标志（非必回）0 正常 1 当日被冲正 2-隔日被冲正 3-当日被撤销 4-隔日被撤销
         /// </summary>
         [XmlElement(Order = 25)]
-        public byte? BCZBZ { get; set; }
+        public string BCZBZ { get; set; }
         /// <summary>
         /// 邮路选择（非必回）0 同城票交 3-大额实时 4-小额批量 8-跨行
         /// </summary>
         [XmlElement(Order = 26)]
-        public byte? ROUTECHOICE { get; set; }
+        public string ROUTECHOICE { get; set; }
         /// <summary>
         /// 业务参考号,预留 目前没有值（非必回）
         /// </summary>

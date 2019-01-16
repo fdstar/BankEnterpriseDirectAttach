@@ -26,7 +26,7 @@ namespace BEDA.Utils
         /// <returns></returns>
         public static string Serializer<T>(this T obj, Encoding encoding = null, bool showDeclaration = true, bool removeDefaultNameSpace = false)
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(T));
+            XmlSerializer serializer = new XmlSerializer(obj.GetType());
             if (encoding == null)
             {
                 encoding = Encoding.UTF8;

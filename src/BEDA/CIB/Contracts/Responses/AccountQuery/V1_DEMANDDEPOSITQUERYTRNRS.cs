@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
@@ -65,7 +66,25 @@ namespace BEDA.CIB.Contracts.Responses
         /// <summary>
         /// 起息日期，格式yyyyMMdd
         /// </summary>
-        [XmlElement(Order = 6)]
-        public string DTSTART { get; set; }
+        [XmlIgnore]
+        public DateTime DTSTART { get; set; }
+        /// <summary>
+        /// 起息日期，格式yyyyMMdd ,对应<see cref="DTSTART"/>
+        /// </summary>
+        [XmlElement("DTSTART", Order = 6)]
+        public string DTSTARTStr
+        {
+            get
+            {
+                return this.DTSTART.ToString("yyyyMMdd");
+            }
+            set
+            {
+                if (DateTime.TryParseExact(value, "yyyyMMdd", CultureInfo.CurrentCulture, DateTimeStyles.None, out DateTime tmp))
+                {
+                    this.DTSTART = tmp;
+                }
+            }
+        }
     }
 }

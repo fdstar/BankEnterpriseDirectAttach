@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
@@ -70,18 +71,72 @@ namespace BEDA.CIB.Contracts.Responses
         /// <summary>
         /// 起息日期，格式yyyyMMdd，必回
         /// </summary>
-        [XmlElement(Order = 7)]
-        public string DTSTART { get; set; }
+        [XmlIgnore]
+        public DateTime DTSTART { get; set; }
+        /// <summary>
+        /// 起息日期，格式yyyyMMdd ,对应<see cref="DTSTART"/>
+        /// </summary>
+        [XmlElement("DTSTART", Order = 7)]
+        public string DTSTARTStr
+        {
+            get
+            {
+                return this.DTSTART.ToString("yyyyMMdd");
+            }
+            set
+            {
+                if (DateTime.TryParseExact(value, "yyyyMMdd", CultureInfo.CurrentCulture, DateTimeStyles.None, out DateTime tmp))
+                {
+                    this.DTSTART = tmp;
+                }
+            }
+        }
         /// <summary>
         /// 到期日，格式yyyyMMdd，必回
         /// </summary>
-        [XmlElement(Order = 8)]
-        public string DTEND { get; set; }
+        [XmlIgnore]
+        public DateTime DTEND { get; set; }
+        /// <summary>
+        /// 到期日，格式yyyyMMdd ,对应<see cref="DTEND"/>
+        /// </summary>
+        [XmlElement("DTEND", Order = 8)]
+        public string DTENDStr
+        {
+            get
+            {
+                return this.DTEND.ToString("yyyyMMdd");
+            }
+            set
+            {
+                if (DateTime.TryParseExact(value, "yyyyMMdd", CultureInfo.CurrentCulture, DateTimeStyles.None, out DateTime tmp))
+                {
+                    this.DTEND = tmp;
+                }
+            }
+        }
         /// <summary>
         /// 支取日，格式yyyyMMdd，必回
         /// </summary>
-        [XmlElement(Order = 9)]
-        public string DTDRAW { get; set; }
+        [XmlIgnore]
+        public DateTime DTDRAW { get; set; }
+        /// <summary>
+        /// 支取日，格式yyyyMMdd ,对应<see cref="DTDRAW"/>
+        /// </summary>
+        [XmlElement("DTDRAW", Order = 9)]
+        public string DTDRAWStr
+        {
+            get
+            {
+                return this.DTDRAW.ToString("yyyyMMdd");
+            }
+            set
+            {
+                if (DateTime.TryParseExact(value, "yyyyMMdd", CultureInfo.CurrentCulture, DateTimeStyles.None, out DateTime tmp))
+                {
+                    this.DTDRAW = tmp;
+                }
+            }
+        }
         /// <summary>
         /// 质押情况，必回
         /// </summary>

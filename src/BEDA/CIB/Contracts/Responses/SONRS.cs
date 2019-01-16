@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 using System.Xml.Serialization;
 
@@ -18,8 +19,26 @@ namespace BEDA.CIB.Contracts.Responses
         /// <summary>
         /// 服务端日期时间，yyyy-MM-dd HH:mm:ss，必回
         /// </summary>
-        [XmlElement(Order = 1)]
-        public string DTSERVER { get; set; }
+        [XmlIgnore]
+        public DateTime DTSERVER { get; set; }
+        /// <summary>
+        /// 服务端日期时间，yyyy-MM-dd HH:mm:ss ,对应<see cref="DTSERVER"/>
+        /// </summary>
+        [XmlElement("DTSERVER", Order = 1)]
+        public string DTSERVERStr
+        {
+            get
+            {
+                return this.DTSERVER.ToString("yyyy-MM-dd HH:mm:ss");
+            }
+            set
+            {
+                if (DateTime.TryParseExact(value, "yyyy-MM-dd HH:mm:ss", CultureInfo.CurrentCulture, DateTimeStyles.None, out DateTime tmp))
+                {
+                    this.DTSERVER = tmp;
+                }
+            }
+        }
         /// <summary>
         /// 客户端要求生成USERKEY时发送key值，非必回，仅在GENUSERKEY为”Y”时必回
         /// </summary>
