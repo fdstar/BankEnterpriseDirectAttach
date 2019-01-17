@@ -33,11 +33,6 @@ namespace BEDA.CIB.Contracts.Responses
     public class XPMTRS : Requests.XMPTRQ<Requests.RQACCT>
     {
         /// <summary>
-        /// 网银跟踪号	必回
-        /// </summary>
-        [XmlElement(Order = -1)]
-        public string SRVRTID { get; set; }
-        /// <summary>
         /// 指令处理状态	必回
         /// </summary>
         [XmlElement(Order = 2)]

@@ -92,16 +92,11 @@ namespace BEDA.CIB.Contracts.Requests
     }
     /// <summary>
     /// 批量托收付款信息
+    /// <see cref="RQPAYINFO.BIZCODE0"/>和<see cref="RQPAYINFO.BIZCODE1"/>为必输
+    /// 另外<see cref="RQPAYINFO.BIZCODE2"/>此处业务中不存在，所以切记勿要输入
     /// </summary>
     public class FBBATCHGATHER_PAYINFO : RQPAYINFO
     {
-        /// <summary>
-        /// 业务种类代码，最大20位	必输
-        /// 同必输的还有<see cref="RQPAYINFO.BIZCODE1"/>
-        /// 另外BIZCODE2此处不存在，所以切记勿要输入<see cref="RQPAYINFO.BIZCODE2"/>
-        /// </summary>
-        [XmlElement(Order = 6)]
-        public string BIZCODE0 { get; set; }
         /// <summary>
         /// 托收备注，最大60位	必输
         /// </summary>

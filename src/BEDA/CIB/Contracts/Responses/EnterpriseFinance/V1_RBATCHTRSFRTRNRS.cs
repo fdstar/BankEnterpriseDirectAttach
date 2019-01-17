@@ -30,7 +30,7 @@ namespace BEDA.CIB.Contracts.Responses
     /// <summary>
     /// 实时批量支付与批量费用(最多100笔)响应内容
     /// </summary>
-    public class RBATCHTRSFRTRN_RSBODY : Requests.RBATCHTRSFRTRN_RQBODY<RBATCHTRSFRTRN_XFERINFO>
+    public class RBATCHTRSFRTRN_RSBODY : Requests.RBATCHTRSFRTRN_RQBODY<RBATCHTRSFRTRNRS_XFERINFO>
     {
         /// <summary>
         /// 批量支付指令处理状态
@@ -41,7 +41,7 @@ namespace BEDA.CIB.Contracts.Responses
     /// <summary>
     /// 批量收款人信息
     /// </summary>
-    public class RBATCHTRSFRTRN_XFERINFO : Requests.RBATCHTRSFRTRN_XFERINFO
+    public class RBATCHTRSFRTRNRS_XFERINFO : Requests.RBATCHTRSFRTRNRQ_XFERINFO
     {
         /// <summary>
         /// 核心交易处理结果

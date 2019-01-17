@@ -32,7 +32,14 @@ namespace BEDA.CIB.Samples
             //XFERINQTRNRQSample();
             //RPAYOFFTRNRQSample();
             //RPAYOFFINQTRNRQSample();
-            GATHERTRNRQSample();
+            //GATHERTRNRQSample();
+            //FBBATCHGATHERTRNRQSample();
+            //FBBATCHSTMTTRNRQSample();
+            //RBATCHTRSFRTRNRQSample();
+            //RECEIPTTRNRQSample();
+            //ICTRANSFERTRNRQSample();
+            //ICTRANSFERINQTRNRQSample();
+            //ASYNBATCHTRSFRTRNRQSample();
             #endregion
 
             Console.ReadLine();
@@ -535,12 +542,269 @@ namespace BEDA.CIB.Samples
                                 PAYMODE = 0,
                                 APPLYAMT = 12.7m,
                                 PURPOSE = "电费",
-
                             }
                         }
                     }
                 }
             };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.4.6	批量托收、批量子账户托收
+        /// </summary>
+        public static void FBBATCHGATHERTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.4.6", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_FBBATCHGATHERTRNRQ, V1_FBBATCHGATHERTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_FBBATCHGATHERTRNRQ
+            {
+                FBBATCHGATHERTRNRQ = new FBBATCHGATHERTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new FBBATCHGATHERTRN_RQBODY
+                    {
+                        ACCTID = mainAccountId,
+                        FIRMCODE = "8778",
+                        BIZCODE = "00100",
+                        LIMITDAYS = 1,
+                        TITLE = "批量托收",
+                        MEMO = "批量备注",
+                        TRNTYPE = 1,
+                        USE = "收电费",
+                        GATHERINFO = new List<FBBATCHGATHER_PAYINFO>
+                        {
+                            new FBBATCHGATHER_PAYINFO{
+                                INDX =1,
+                                CONTRACTID="2016",
+                                ACCTFROM =new CORRELATEACCT{
+                                    ACCTID = "117010100100107091",
+                                    NAME = "test"
+                                },
+                                PAYMODE=0,
+                                APPLYAMT=3.3m,
+                                PURPOSE="电费1",
+                                BIZCODE0="00100",
+                                BIZCODE1="00100",
+                                //BIZCODE2="00100", 切记此处不能输入BIZCODE2
+                                MEMO ="电费1"
+                            },
+                            new FBBATCHGATHER_PAYINFO{
+                                INDX =2,
+                                CONTRACTID="20170510",
+                                ACCTFROM =new CORRELATEACCT{
+                                    ACCTID = "622908121000127611",
+                                    NAME = "汪汪"
+                                },
+                                PAYMODE=0,
+                                APPLYAMT=5.7m,
+                                PURPOSE="电费2",
+                                BIZCODE0="00100",
+                                BIZCODE1="00100",
+                                //BIZCODE2="00100", 切记此处不能输入BIZCODE2
+                                MEMO ="电费2"
+                            },
+                        }
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.4.7	批量托收或子账户托收明细查询
+        /// </summary>
+        public static void FBBATCHSTMTTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.4.7", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_FBBATCHSTMTTRNRQ, V1_FBBATCHSTMTTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_FBBATCHSTMTTRNRQ
+            {
+                FBBATCHSTMTTRNRQ = new FBBATCHSTMTTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new FBBATCHSTMTTRN_RQBODY
+                    {
+                        ACCTID = mainAccountId,
+                        CLIENTREF = "20190117160138_3.4.6",
+                        PAGE = 1,
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.4.8	实时批量支付与批量费用(最多100笔)
+        /// </summary>
+        public static void RBATCHTRSFRTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.4.8", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_RBATCHTRSFRTRNRQ, V1_RBATCHTRSFRTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_RBATCHTRSFRTRNRQ
+            {
+                RBATCHTRSFRTRNRQ = new RBATCHTRSFRTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new RBATCHTRSFRTRN_RQBODY<RBATCHTRSFRTRNRQ_XFERINFO>
+                    {
+                        //TITLE= "实时批量支付与批量费用",
+                        ACCTFROM = new ACCTFROM
+                        {
+                            ACCTID = mainAccountId
+                        },
+                        BIZTYPE = 0,
+                        PURPOSE = "实时批量支付与批量费用",
+                        List = new List<RBATCHTRSFRTRNRQ_XFERINFO>
+                        {
+                            new RBATCHTRSFRTRNRQ_XFERINFO{
+                                INDX =1,
+                                ACCTTO =GetACCTTO(0),
+                                TRNAMT=1.1m,
+                                USE="对公行内"
+                            },
+                            new RBATCHTRSFRTRNRQ_XFERINFO
+                            {
+                                INDX =2,
+                                ACCTTO =GetACCTTO(1),
+                                TRNAMT=2.2m,
+                                USE="对私行内"
+                            },
+                            new RBATCHTRSFRTRNRQ_XFERINFO
+                            {
+                                INDX =3,
+                                ACCTTO =GetACCTTO(2),
+                                TRNAMT=3.2m,
+                                USE="对公跨行"
+                            },
+                            new RBATCHTRSFRTRNRQ_XFERINFO
+                            {
+                                INDX =4,
+                                ACCTTO =GetACCTTO(4),
+                                TRNAMT=4.1m,
+                                USE="对私跨行"
+                            },
+                        }
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.4.9	指令回单查询
+        /// </summary>
+        public static void RECEIPTTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.4.9", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_RECEIPTTRNRQ, V1_RECEIPTTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_RECEIPTTRNRQ
+            {
+                RECEIPTTRNRQ = new RECEIPTTRNRQ
+                {
+                    TRNUID = "20190117114159_3.4.1",
+                    BIZTYPE = 1,
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.4.10	快速转账支付及其指令查询（不采用工作流）  3.4.10.3 快速转账支付ICTRANSFERTRNRQ
+        /// </summary>
+        public static void ICTRANSFERTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.4.10.3", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_ICTRANSFERTRNRQ, V1_ICTRANSFERTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_ICTRANSFERTRNRQ
+            {
+                ICTRANSFERTRNRQ = new ICTRANSFERTRNRQ
+                {
+                    TRNUID = tid,
+                    XMPTRQ = new XMPTRQ<RQACCT>
+                    {
+                        XFERINFO = new XFERINFO
+                        {
+                            ACCTFROM = new ACCTFROM
+                            {
+                                ACCTID = mainAccountId
+                            },
+                            ACCTTO = GetACCTTO(3),
+                            TRNAMT = 3.1m,
+                            PURPOSE = "快速转账支付ICTRANSFERTRNRQ",
+                            DTDUE = DateTime.Now,
+                        }
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.4.10	快速转账支付及其指令查询（不采用工作流）3.4.10.5 支付指令查询ICTRANSFERINQTRNRQ请求
+        /// </summary>
+        public static void ICTRANSFERINQTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.4.10.5", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_ICTRANSFERINQTRNRQ, V1_ICTRANSFERINQTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_ICTRANSFERINQTRNRQ
+            {
+                ICTRANSFERINQTRNRQ = new ICTRANSFERINQTRNRQ
+                {
+                    TRNUID = tid,
+                    XFERINQRQ = new XFERINQRQ
+                    {
+                        CLIENTREF = "20190117193801_3.4.10.3"
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.4.12	异步批量支付 (最多100笔，不采用工作流)
+        /// </summary>
+        public static void ASYNBATCHTRSFRTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.4.12", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_ASYNBATCHTRSFRTRNRQ, V1_ASYNBATCHTRSFRTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_ASYNBATCHTRSFRTRNRQ
+            {
+                ASYNBATCHTRSFRTRNRQ = new ASYNBATCHTRSFRTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new ASYNBATCHTRSFRTRN_RQBODY
+                    {
+                        ACCTFROM = new ACCTFROM
+                        {
+                            ACCTID = mainAccountId
+                        },
+                        BIZTYPE = 1,
+                        PURPOSE = "异步批量支付",
+                    }
+                }
+            };
+            var txt = new RQ_XFERINFOTEXT();
+            var list =  new List<PayeeInfo>();
+            for (byte i = 0; i < 4; i++)
+            {
+                var acct = GetACCTTO(i);
+                var info = new PayeeInfo
+                {
+                    Account = acct.ACCTID,
+                    Name = acct.NAME,
+                    IsCIB = acct.INTERBANK[0],
+                    IsSameCity = acct.LOCAL[0],
+                    BankCode = acct.BANKNUM,
+                    BankName = acct.BANKDESC,
+                    Address = acct.CITY,
+                    Amount = i + 2.3m,
+                    Purpose = "异步>批量" + i,
+                };
+                list.Add(info);
+            }
+            txt.SetList(list);
+            rq.SECURITIES_MSGSRQV1.ASYNBATCHTRSFRTRNRQ.RQBODY.XFERINFOTEXT = txt;
             var rs = client.Execute(rq);
             Console.WriteLine(rs?.ResponseContent);
         }

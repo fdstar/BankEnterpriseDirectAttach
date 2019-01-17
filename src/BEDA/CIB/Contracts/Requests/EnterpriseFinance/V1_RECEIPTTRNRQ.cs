@@ -13,12 +13,12 @@ namespace BEDA.CIB.Contracts.Requests
     public class V1_RECEIPTTRNRQ : IRequest<V1_RECEIPTTRNRS>
     {
         /// <summary>
-        /// 指令回单查询请求
+        /// 指令回单查询请求，注意该业务为查询业务，传入的TRNUID为执行对应业务时的TRNUID
         /// </summary>
         public RECEIPTTRNRQ RECEIPTTRNRQ { get; set; }
     }
     /// <summary>
-    /// 指令回单查询请求
+    /// 指令回单查询请求，注意该业务为查询业务，传入的TRNUID为执行对应业务时的TRNUID
     /// </summary>
     public class RECEIPTTRNRQ : BIZRQBASE
     {
@@ -29,6 +29,6 @@ namespace BEDA.CIB.Contracts.Requests
         /// 3表示代发工资指令
         /// </summary>
         [XmlElement(Order = 1)]
-        public int BIZTYPE { get; set; }
+        public int BIZTYPE { get; set; } = 1;
     }
 }

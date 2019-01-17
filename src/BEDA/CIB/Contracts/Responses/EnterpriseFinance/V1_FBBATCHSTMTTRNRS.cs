@@ -126,16 +126,11 @@ namespace BEDA.CIB.Contracts.Responses
     }
     /// <summary>
     /// 付款信息
+    /// 此处<see cref="Requests.RQPAYINFO.BIZCODE0"/>和<see cref="Requests.RQPAYINFO.BIZCODE1"/>为必回
+    /// 另外<see cref="Requests.RQPAYINFO.BIZCODE2"/>此处业务中不存在
     /// </summary>
     public class FBBATCHSTMTTRN_PAYINFO : Requests.RQPAYINFO
     {
-        /// <summary>
-        /// 业务种类代码，最大20位	必输
-        /// 同必输的还有<see cref="Requests.RQPAYINFO.BIZCODE1"/>
-        /// 另外BIZCODE2此处不存在，所以切记勿要输入<see cref="Requests.RQPAYINFO.BIZCODE2"/>
-        /// </summary>
-        [XmlElement(Order = 6)]
-        public string BIZCODE0 { get; set; }
         /// <summary>
         /// 托收备注，最长60位
         /// </summary>

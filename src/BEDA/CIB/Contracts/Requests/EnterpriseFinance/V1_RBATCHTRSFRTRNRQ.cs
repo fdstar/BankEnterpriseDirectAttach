@@ -27,13 +27,13 @@ namespace BEDA.CIB.Contracts.Requests
         /// 实时批量支付与批量费用请求内容  如不传则为查询
         /// </summary>
         [XmlElement("RQBODY", Order = 1)]
-        public RBATCHTRSFRTRN_RQBODY<RBATCHTRSFRTRN_XFERINFO> RQBODY { get; set; }
+        public RBATCHTRSFRTRN_RQBODY<RBATCHTRSFRTRNRQ_XFERINFO> RQBODY { get; set; }
     }
     /// <summary>
     /// 实时批量支付与批量费用请求内容
     /// </summary>
     public class RBATCHTRSFRTRN_RQBODY<T>
-        where T: RBATCHTRSFRTRN_XFERINFO
+        where T: RBATCHTRSFRTRNRQ_XFERINFO
     {
         /// <summary>
         /// 批量指令标题，30位	非必输
@@ -148,7 +148,7 @@ namespace BEDA.CIB.Contracts.Requests
     /// <summary>
     /// 批量收款人信息
     /// </summary>
-    public class RBATCHTRSFRTRN_XFERINFO
+    public class RBATCHTRSFRTRNRQ_XFERINFO
     {
         /// <summary>
         /// 序号,最大5位	必输

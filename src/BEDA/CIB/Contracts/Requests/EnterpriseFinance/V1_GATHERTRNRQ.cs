@@ -205,6 +205,8 @@ namespace BEDA.CIB.Contracts.Requests
     }
     /// <summary>
     /// 付款信息节点
+    /// 注意默认只要输入<see cref="BIZCODE1"/>和<see cref="BIZCODE2"/>
+    /// <see cref="BIZCODE0"/>是不要输入的
     /// </summary>
     public class RQPAYINFO
     {
@@ -245,6 +247,11 @@ namespace BEDA.CIB.Contracts.Requests
         /// </summary>
         [XmlElement(Order = 5)]
         public string PURPOSE { get; set; }
+        /// <summary>
+        /// 业务种类代码，最大5位
+        /// </summary>
+        [XmlElement(Order = 6)]
+        public string BIZCODE0 { get; set; }
         /// <summary>
         /// 业务种类1，最大5位
         /// </summary>

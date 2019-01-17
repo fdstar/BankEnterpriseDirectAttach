@@ -133,7 +133,7 @@ namespace BEDA.CIB.Contracts.Responses
         /// 序号,最大5位	必输
         /// </summary>
         [XmlElement(Order = 0)]
-        public string INDX { get; set; }
+        public int INDX { get; set; }
         /// <summary>
         /// 收款人账户信息
         /// </summary>
