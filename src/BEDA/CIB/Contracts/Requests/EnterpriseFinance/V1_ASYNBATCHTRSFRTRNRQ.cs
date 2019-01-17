@@ -35,7 +35,7 @@ namespace BEDA.CIB.Contracts.Requests
     public class ASYNBATCHTRSFRTRN_RQBODY: ASYNBATCHTRSFRTRN
     {
         /// <summary>
-        /// 批量收款人列表，最多100笔
+        /// 批量收款人列表，最多100笔，注意请求时不需要填<see cref="ASYNBATCHTRSFRTRN.CHEQUENUM"/>
         /// </summary>
         [XmlElement("XFERINFOTEXT", Order = 9)]
         public RQ_XFERINFOTEXT XFERINFOTEXT { get; set; }
@@ -103,6 +103,11 @@ namespace BEDA.CIB.Contracts.Requests
                 this.TOTALAMOUNT = value.TryConvert<decimal>();
             }
         }
+        /// <summary>
+        /// 凭证号，注意请求时不需要填该值
+        /// </summary>
+        [XmlElement(Order = 5)]
+        public string CHEQUENUM { get; set; }
         /// <summary>
         /// 货币符号RMB,目前仅支持RMB	非必输
         /// </summary>

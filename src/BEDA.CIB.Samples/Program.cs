@@ -785,7 +785,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var txt = new RQ_XFERINFOTEXT();
-            var list =  new List<PayeeInfo>();
+            var list = new List<PayeeInfo>();
             for (byte i = 0; i < 4; i++)
             {
                 var acct = GetACCTTO(i);
@@ -805,8 +805,14 @@ namespace BEDA.CIB.Samples
             }
             txt.SetList(list);
             rq.SECURITIES_MSGSRQV1.ASYNBATCHTRSFRTRNRQ.RQBODY.XFERINFOTEXT = txt;
+            //rq.SECURITIES_MSGSRQV1.ASYNBATCHTRSFRTRNRQ.TRNUID = "20190117200215_3.4.12";//直接测试历史记录
             var rs = client.Execute(rq);
             Console.WriteLine(rs?.ResponseContent);
+            if (rs?.SECURITIES_MSGSRSV1.ASYNBATCHTRSFRTRNRS.RSBODY.XFERPRCSTS.XFERPRCCODE == XFERPRCCODEEnum.PAYOUT
+                || rs?.SECURITIES_MSGSRSV1.ASYNBATCHTRSFRTRNRS.RSBODY.XFERPRCSTS.XFERPRCCODE == XFERPRCCODEEnum.PART_PAYOUT)
+            {
+                var rList = rs.SECURITIES_MSGSRSV1.ASYNBATCHTRSFRTRNRS.RSBODY.XFERINFOTEXT.GetList();
+            }
         }
         #endregion
     }

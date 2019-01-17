@@ -33,11 +33,6 @@ namespace BEDA.CIB.Contracts.Responses
     public class ASYNBATCHTRSFRTRN_RSBODY : Requests.ASYNBATCHTRSFRTRN
     {
         /// <summary>
-        /// 凭证号
-        /// </summary>
-        [XmlElement(Order = 5)]
-        public string CHEQUENUM { get; set; }
-        /// <summary>
         /// 批量收款人列表，最多100笔
         /// </summary>
         [XmlElement("XFERINFOTEXT", Order = 9)]
