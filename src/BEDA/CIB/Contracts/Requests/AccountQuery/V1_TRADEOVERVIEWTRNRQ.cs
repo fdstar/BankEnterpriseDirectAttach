@@ -27,7 +27,7 @@ namespace BEDA.CIB.Contracts.Requests
         /// 交易概览查询请求
         /// </summary>
         [XmlElement(Order = 1)]
-        public TRADEOVERVIEWTRN_RQBODY TRADEOVERVIEWTRNRQBODY { get; set; }
+        public TRADEOVERVIEWTRN_RQBODY RQBODY { get; set; }
     }
     /// <summary>
     /// 交易概览查询请求
@@ -48,7 +48,7 @@ namespace BEDA.CIB.Contracts.Requests
         /// 查询日期，yyyy-MM-dd ,对应<see cref="QUERYDATE"/>	必输
         /// </summary>
         [XmlElement("QUERYDATE")]
-        public string DTENDStr
+        public string QUERYDATEStr
         {
             get
             {

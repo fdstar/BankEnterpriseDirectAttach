@@ -9,14 +9,25 @@ namespace BEDA.CIB.Samples
     {
         static void Main(string[] args)
         {
+            #region 3.2	登录消息
             //LoginSample();
+            #endregion
 
+            #region 3.3	账户查询
             //CURRACCTQUERYTRNRQSample();
             //TIMEQUERYTRNRQSimple();
             //TIMEDEPOSITQUERYTRNRQSample();
             //DEMANDDEPOSITQUERYTRNRQSample();
             //ACCOUNTQUERYTRNRQSample();
             //SCUSTSTMTTRNRQSample();
+            //BALNTRADEINQUIRYTRNRQSample();
+            //FIRMTIMEQUERYTRNRQSample();
+            //FSTMTTRNRQSample();
+            //TRADEOVERVIEWTRNRQSample();
+            #endregion
+
+            #region 3.4	企业财务室
+            #endregion
 
             Console.ReadLine();
         }
@@ -201,6 +212,115 @@ namespace BEDA.CIB.Samples
             var rs = client.Execute(rq);
             Console.WriteLine(rs?.ResponseContent);
         }
+        /// <summary>
+        /// 3.3.7	账号余额和交易流水分页查询（返回增加虚拟子账户交易信息）
+        /// </summary>
+        public static void BALNTRADEINQUIRYTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.3.7", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_BALNTRADEINQUIRYTRNRQ, V1_BALNTRADEINQUIRYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_BALNTRADEINQUIRYTRNRQ
+            {
+                BALNTRADEINQUIRYTRNRQ = new BALNTRADEINQUIRYTRNRQ
+                {
+                    TRNUID = tid,
+                    CLTCOOKIE = "123",
+                    RQBODY = new BALNTRADEIN_RQBODY
+                    {
+                        ACCTFROM = new ACCTFROM
+                        {
+                            ACCTID = mainAccountId
+                        },
+                        INCTRAN = new INCTRAN
+                        {
+                            DTEND = DateTime.Now.AddDays(-1),
+                            DTSTART = DateTime.Now.AddDays(-1),
+                            TRNTYPE = 2,
+                        },
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.3.8	单位定期一本通账户查询
+        /// </summary>
+        public static void FIRMTIMEQUERYTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.3.8", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_FIRMTIMEQUERYTRNRQ, V1_FIRMTIMEQUERYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_FIRMTIMEQUERYTRNRQ
+            {
+                FIRMTIMEQUERYTRNRQ = new FIRMTIMEQUERYTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new PAGED_RQACCT
+                    {
+                        ACCTID = mainAccountId
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.3.9	账户交易流水文件查询
+        /// </summary>
+        public static void FSTMTTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.3.9", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_FSTMTTRNRQ, V1_FSTMTTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_FSTMTTRNRQ
+            {
+                FSTMTTRNRQ = new FSTMTTRNRQ
+                {
+                    TRNUID = tid,
+                    CLTCOOKIE = "123",
+                    SCUSTSTMTRQ = new FSTMTTRNRQ_SCUSTSTMTRQ
+                    {
+                        ACCTFROM = new ACCTFROM
+                        {
+                            ACCTID = mainAccountId
+                        },
+                        INCTRAN = new FSTMTTRNRQ_INCTRAN
+                        {
+                            DTEND = DateTime.Now.AddDays(-1),
+                            DTSTART = DateTime.Now.AddDays(-1),
+                            TRNTYPE = 2,
+                            NUM = 100
+                        },
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+            var list = rs.SECURITIES_MSGSRSV1.FSTMTTRNRS.SCUSTSTMTRS.TRANLIST.GetDetails();
+        }
+        /// <summary>
+        /// 3.3.10	交易概览
+        /// </summary>
+        public static void TRADEOVERVIEWTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.3.10", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_TRADEOVERVIEWTRNRQ, V1_TRADEOVERVIEWTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_TRADEOVERVIEWTRNRQ
+            {
+                TRADEOVERVIEWTRNRQ = new TRADEOVERVIEWTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new TRADEOVERVIEWTRN_RQBODY
+                    {
+                        QUERYDATE = DateTime.Now.AddDays(-2)
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        #endregion
+
+        #region 3.4	企业财务室
         #endregion
     }
 }

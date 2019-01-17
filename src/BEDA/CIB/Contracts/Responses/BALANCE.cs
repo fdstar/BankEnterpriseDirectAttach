@@ -34,7 +34,7 @@ namespace BEDA.CIB.Contracts.Responses
             }
             set
             {
-                if (DateTime.TryParseExact(value, "yyyy-MM-dd", CultureInfo.CurrentCulture, DateTimeStyles.None, out DateTime tmp))
+                if (DateTime.TryParseExact(value, new string[] { "yyyy-MM-dd", "yyyy-MM-dd HH:mm:ss" }, CultureInfo.CurrentCulture, DateTimeStyles.None, out DateTime tmp))
                 {
                     this.DTASOF = tmp;
                 }

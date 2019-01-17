@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
@@ -151,8 +152,26 @@ namespace BEDA.CIB.Contracts.Responses
         /// <summary>
         /// 交易日期，yyyy-MM-dd HH:mm:ss
         /// </summary>
-        [XmlElement(Order = 14)]
-        public string TXN_DATE { get; set; }
+        [XmlIgnore]
+        public DateTime TXN_DATE { get; set; }
+        /// <summary>
+        /// 开户日期yyyyMMdd ,对应<see cref="TXN_DATE"/>
+        /// </summary>
+        [XmlElement("TXN_DATE", Order = 14)]
+        public string TXN_DATEStr
+        {
+            get
+            {
+                return this.TXN_DATE.ToString("yyyy-MM-dd HH:mm:ss");
+            }
+            set
+            {
+                if (DateTime.TryParseExact(value, "yyyy-MM-dd HH:mm:ss", CultureInfo.CurrentCulture, DateTimeStyles.None, out DateTime tmp))
+                {
+                    this.TXN_DATE = tmp;
+                }
+            }
+        }
         /// <summary>
         /// 用途
         /// </summary>
