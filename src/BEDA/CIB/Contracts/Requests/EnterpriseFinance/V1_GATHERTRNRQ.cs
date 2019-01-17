@@ -36,18 +36,18 @@ namespace BEDA.CIB.Contracts.Requests
         /// <summary>
         /// 请求托收信息节点 必输
         /// </summary>
-        public GATHERINFO GATHERINFO { get; set; }
+        public GATHERRQINFO GATHERINFO { get; set; }
     }
     /// <summary>
     /// 请求托收信息节点
     /// </summary>
-    public class GATHERINFO
+    public class GATHERRQINFO
     {
         /// <summary>
         /// 收款账户信息节点 必输
         /// </summary>
         [XmlElement(Order = 0)]
-        public GATHER_ACCTTO ACCTTO { get; set; }
+        public GATHERRQ_ACCTTO ACCTTO { get; set; }
         /// <summary>
         /// 单位编码， 4位	必输
         /// </summary>
@@ -189,12 +189,12 @@ namespace BEDA.CIB.Contracts.Requests
         /// 付款信息节点  必输
         /// </summary>
         [XmlElement(Order = 9)]
-        public PAYINFO PAYINFO { get; set; }
+        public RQPAYINFO PAYINFO { get; set; }
     }
     /// <summary>
     /// 收款账户信息节点
     /// </summary>
-    public class GATHER_ACCTTO
+    public class GATHERRQ_ACCTTO
     {
         /// <summary>
         /// 收款账户(兴业银行账户)，32位
@@ -206,13 +206,13 @@ namespace BEDA.CIB.Contracts.Requests
     /// <summary>
     /// 付款信息节点
     /// </summary>
-    public class PAYINFO
+    public class RQPAYINFO
     {
         /// <summary>
         /// 序号,最大8位	必输
         /// </summary>
         [XmlElement(Order = 0)]
-        public string INDX { get; set; }
+        public int INDX { get; set; }
         /// <summary>
         /// 合同号，最大20位	必输
         /// </summary>
@@ -225,7 +225,7 @@ namespace BEDA.CIB.Contracts.Requests
         public CORRELATEACCT ACCTFROM { get; set; }
         /// <summary>
         /// 缴费方式    必输
-        /// 交易类型<see cref="GATHERINFO.TRNTYPE"/>为1时的缴费方式：
+        /// 交易类型<see cref="GATHERRQINFO.TRNTYPE"/>为1时的缴费方式：
         /// 0表示系统内，  即向本行账户托收  正向托收-系统内缴费
         /// 1表示小额批量，跨行托收   正向托收-小额批量(他行)
         /// 2表示自缴。   正向托收-自缴

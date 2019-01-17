@@ -115,8 +115,25 @@ namespace BEDA.CIB.Contracts.Requests
         /// 如果预约，必须填写当日之后日期，预约期限最长不超过30天。
         /// 若无预约转账要求，无需引入该节点。若有 DTDUE 节点，则不能为空值。
         /// </summary>
-        [XmlElement(Order = 8)]
-        public string DTDUE { get; set; }
+        [XmlIgnore]
+        public DateTime? DTDUE { get; set; }
+        /// <summary>
+        /// 客户端期望的转账执行日期，格式：YYYY-MM-DD, 对应<see cref="DTDUE"/>	非必输 
+        /// 如果预约，必须填写当日之后日期，预约期限最长不超过30天。
+        /// 若无预约转账要求，无需引入该节点。若有 DTDUE 节点，则不能为空值。
+        /// </summary>
+        [XmlElement("DTDUE", Order = 8)]
+        public string DTDUEStr
+        {
+            get
+            {
+                return this.DTDUE?.ToString("yyyy-MM-dd");
+            }
+            set
+            {
+                this.DTDUE = value.TryConvert<DateTime>();
+            }
+        }
         /// <summary>
         /// 批量备注，最大60位	非必输
         /// </summary>

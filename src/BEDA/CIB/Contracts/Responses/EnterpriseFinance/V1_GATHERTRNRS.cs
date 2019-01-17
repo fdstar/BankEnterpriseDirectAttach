@@ -36,7 +36,7 @@ namespace BEDA.CIB.Contracts.Responses
         /// 请求托收、回款信息节点 必回
         /// </summary>
         [XmlElement(Order = 0)]
-        public GATHERINFO GATHERINFO { get; set; }
+        public GATHERRSINFO GATHERINFO { get; set; }
         /// <summary>
         /// 交易结果
         /// </summary>
@@ -46,7 +46,7 @@ namespace BEDA.CIB.Contracts.Responses
     /// <summary>
     /// 请求托收、回款信息节点
     /// </summary>
-    public class GATHERINFO
+    public class GATHERRSINFO
     {
         /// <summary>
         /// 受理编号，托收时 必回
@@ -57,19 +57,19 @@ namespace BEDA.CIB.Contracts.Responses
         /// 收款账户信息节点
         /// </summary>
         [XmlElement(Order = 1)]
-        public GATHER_ACCTTO ACCTTO { get; set; }
+        public GATHERRS_ACCTTO ACCTTO { get; set; }
         /// <summary>
         /// 单位编码， 4位	必回
         /// </summary>
         [XmlElement(Order = 2)]
         public string FIRMCODE { get; set; }
         /// <summary>
-        /// 业务编码， 5位。 <see cref="Requests.GATHERINFO.BIZCODE"/>	必回
+        /// 业务编码， 5位。 <see cref="Requests.GATHERRQINFO.BIZCODE"/>	必回
         /// </summary>
         [XmlElement(Order = 3)]
         public string BIZCODE { get; set; }
         /// <summary>
-        /// 托收摘要代号 <see cref="Requests.GATHERINFO.SUMM"/> 非必回
+        /// 托收摘要代号 <see cref="Requests.GATHERRQINFO.SUMM"/> 非必回
         /// </summary>
         [XmlElement(Order = 4)]
         public string SUMM { get; set; }
@@ -97,12 +97,12 @@ namespace BEDA.CIB.Contracts.Responses
         /// 付款信息节点	必回
         /// </summary>
         [XmlElement(Order = 9)]
-        public PAYINFO PAYINFO { get; set; }
+        public RSPAYINFO PAYINFO { get; set; }
     }
     /// <summary>
     /// 收款账户信息节点
     /// </summary>
-    public class GATHER_ACCTTO
+    public class GATHERRS_ACCTTO
     {
         /// <summary>
         /// 收款账户(兴业银行账户)，32位
@@ -119,7 +119,7 @@ namespace BEDA.CIB.Contracts.Responses
     /// <summary>
     /// 付款信息节点
     /// </summary>
-    public class PAYINFO : Requests.PAYINFO
+    public class RSPAYINFO : Requests.RQPAYINFO
     {
         /// <summary>
         /// 支付金额，整数位最长15位，小数2位
@@ -127,11 +127,11 @@ namespace BEDA.CIB.Contracts.Responses
         [XmlElement(Order = 9)]
         public decimal PAYAMT { get; set; }
         /// <summary>
-        /// 托收结果代码，整数。非0表示错误， 
+        /// 托收结果代码，整数。非0表示错误，  必回
         /// -1：表示处理未提交
         /// 0: 托收成功
         /// 1：托收失败
-        /// 2：银行处理中 必回
+        /// 2：银行处理中
         /// 3：销账处理
         /// </summary>
         [XmlElement(Order = 10)]

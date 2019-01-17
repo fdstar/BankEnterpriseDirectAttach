@@ -106,8 +106,10 @@ namespace BEDA.CIB
             return this.GetResponse<TRs>(restResponse);
         }
         private IRestRequest GetRestRequest<TRq>(TRq request)
+            where TRq : FOXRQ
         {
             var xml = XmlHelper.Serializer(request, showDeclaration: false, removeDefaultNameSpace: true);
+            request.RequestContent = xml;
             var restRequest = new RestRequest(Method.POST);
             restRequest.AddParameter(new Parameter
             {

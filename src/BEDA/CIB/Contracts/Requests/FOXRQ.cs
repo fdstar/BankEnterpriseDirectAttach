@@ -13,6 +13,11 @@ namespace BEDA.CIB.Contracts.Requests
     public class FOXRQ
     {
         /// <summary>
+        /// 当前的请求报文，只有在执行请求后才会由程序赋值
+        /// </summary>
+        [XmlIgnore]
+        public string RequestContent { get; internal set; }
+        /// <summary>
         /// 登录消息请求实体
         /// </summary>
         [XmlElement(Order = 0)]

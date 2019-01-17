@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BEDA.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -75,8 +76,23 @@ namespace BEDA.CIB.Contracts.Responses
         /// <summary>
         /// 客户端期望的转账执行日期，格式：YYYY-MM-DD
         /// </summary>
-        [XmlElement(Order = 8)]
-        public string DTDUE { get; set; }
+        [XmlIgnore]
+        public DateTime? DTDUE { get; set; }
+        /// <summary>
+        /// 客户端期望的转账执行日期，格式：YYYY-MM-DD, 对应<see cref="DTDUE"/>
+        /// </summary>
+        [XmlElement("DTDUE", Order = 8)]
+        public string DTDUEStr
+        {
+            get
+            {
+                return this.DTDUE?.ToString("yyyy-MM-dd");
+            }
+            set
+            {
+                this.DTDUE = value.TryConvert<DateTime>();
+            }
+        }
         /// <summary>
         /// 备注，最大60位	非必输
         /// </summary>

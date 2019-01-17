@@ -2,6 +2,7 @@
 using BEDA.CIB.Contracts.Requests;
 using BEDA.CIB.Contracts.Responses;
 using System;
+using System.Collections.Generic;
 
 namespace BEDA.CIB.Samples
 {
@@ -27,6 +28,11 @@ namespace BEDA.CIB.Samples
             #endregion
 
             #region 3.4	企业财务室
+            //XFERTRNRQSample();
+            //XFERINQTRNRQSample();
+            //RPAYOFFTRNRQSample();
+            //RPAYOFFINQTRNRQSample();
+            GATHERTRNRQSample();
             #endregion
 
             Console.ReadLine();
@@ -321,6 +327,223 @@ namespace BEDA.CIB.Samples
         #endregion
 
         #region 3.4	企业财务室
+        /// <summary>
+        /// 3.4.1	转账汇款指令提交
+        /// </summary>
+        public static void XFERTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.4.1", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_XFERTRNRQ, V1_XFERTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_XFERTRNRQ
+            {
+                XFERTRNRQ = new XFERTRNRQ
+                {
+                    TRNUID = tid,
+                    CLTCOOKIE = "123",
+                    XFERRQ = new XFERRQ
+                    {
+                        XFERINFO = new XFERINFO
+                        {
+                            ACCTFROM = new ACCTFROM
+                            {
+                                ACCTID = mainAccountId,
+                                NAME = mainAccountName
+                            },
+                            ACCTTO = GetACCTTO(3),
+                            PURPOSE = "转账",
+                            TRNAMT = 1.77m,
+                        }
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 获取转账账号 
+        /// 0 普通转账、对公收款账号(行内)
+        /// 1 兴业银行对私收款账号（行内）
+        /// 2 普通转账、对公收款账号(跨行)
+        /// 3 普通转账、对私收款账号(跨行)
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        private static ACCTTO GetACCTTO(byte type)
+        {
+            switch (type)
+            {
+                case 0://普通转账、对公收款账号(行内)
+                    return new ACCTTO
+                    {
+                        ACCTID = "117010100100107091",
+                        INTERBANK = "Y",
+                        LOCAL = "Y",
+                        NAME = "test",
+                    };
+                case 1://兴业银行对私收款账号（行内）
+                    return new ACCTTO
+                    {
+                        ACCTID = "622909117529613510",
+                        INTERBANK = "Y",
+                        LOCAL = "Y",
+                        NAME = "小金人",
+                    };
+                case 2://普通转账、对公收款账号(跨行)
+                    return new ACCTTO
+                    {
+                        ACCTID = "123455555",
+                        INTERBANK = "N",
+                        LOCAL = "Y",
+                        NAME = "平安银行测试2222",
+                        BANKDESC = "平安银行股份有限公司上海九江路支行",
+                        CITY = "上海市"
+                    };
+                default://普通转账、对私收款账号(跨行)
+                    return new ACCTTO
+                    {
+                        ACCTID = "6225885123771966",
+                        INTERBANK = "N",
+                        LOCAL = "Y",
+                        NAME = "陈晨",
+                        BANKDESC = "中国工商银行股份有限公司北京通州支行新华分理处",
+                        CITY = "北京市"
+                    };
+            }
+        }
+        /// <summary>
+        /// 3.4.2	查询转账交易状态
+        /// </summary>
+        public static void XFERINQTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.4.2", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_XFERINQTRNRQ, V1_XFERINQTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_XFERINQTRNRQ
+            {
+                XFERINQTRNRQ = new XFERINQTRNRQ
+                {
+                    TRNUID = tid,
+                    CLTCOOKIE = "123",
+                    XFERINQRQ = new XFERINQRQ
+                    {
+                        CLIENTREF = "20190117114159_3.4.1"
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.4.3	工资发放指令提交
+        /// </summary>
+        public static void RPAYOFFTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.4.3", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_RPAYOFFTRNRQ, V1_RPAYOFFTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_RPAYOFFTRNRQ
+            {
+                RPAYOFFTRNRQ = new RPAYOFFTRNRQ
+                {
+                    TRNUID = tid,
+                    CLTCOOKIE = "123",
+                    RPAYOFFRQ = new RPAYOFFRQ
+                    {
+                        RPAYOFFINFO = new RPAYOFFINFO<RPAYOFF>
+                        {
+                            ACCTFROM = new ACCTFROM
+                            {
+                                ACCTID = mainAccountId
+                            },
+                            TITLE = "工资发放",
+                            DESCRIPTION = "006",
+                            RPAYOFFLIST = new RPAYOFFLIST<RPAYOFF>
+                            {
+                                List = new List<RPAYOFF>()
+                            },
+                        }
+                    }
+                }
+            };
+            var acct = GetACCTTO(1);
+            rq.SECURITIES_MSGSRQV1.RPAYOFFTRNRQ.RPAYOFFRQ.RPAYOFFINFO.RPAYOFFLIST.List.Add(
+                new RPAYOFF
+                {
+                    INDX = 1,
+                    ACCTID = acct.ACCTID,
+                    ACCTNAME = acct.NAME,
+                    TRNAMT = 2.2m
+                });
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.4.4	工资发放指令查询
+        /// </summary>
+        public static void RPAYOFFINQTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.4.4", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_RPAYOFFINQTRNRQ, V1_RPAYOFFINQTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_RPAYOFFINQTRNRQ
+            {
+                RPAYOFFINQTRNRQ = new RPAYOFFINQTRNRQ
+                {
+                    TRNUID = tid,
+                    CLTCOOKIE = "123",
+                    XFERINQRQ = new XFERINQRQ
+                    {
+                        CLIENTREF = "20190117135721_3.4.3"
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.4.5	单笔托收、子账户托收、回款查询
+        /// </summary>
+        public static void GATHERTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.4.5", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_GATHERTRNRQ, V1_GATHERTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_GATHERTRNRQ
+            {
+                GATHERTRNRQ = new GATHERTRNRQ
+                {
+                    TRNUID = tid,
+                    GATHERRQ = new GATHERRQ
+                    {
+                        GATHERINFO = new GATHERRQINFO
+                        {
+                            ACCTTO = new GATHERRQ_ACCTTO
+                            {
+                                ACCTID = mainAccountId,
+                            },
+                            FIRMCODE = "8778",
+                            BIZCODE = "00100",
+                            LIMITDAYS = 1,
+                            TITLE = "单笔托收",
+                            MEMO = "备注测试",
+                            TRNTYPE = 1,
+                            PAYINFO = new RQPAYINFO
+                            {
+                                INDX = 1,
+                                CONTRACTID = "2016",
+                                ACCTFROM = new CORRELATEACCT
+                                {
+                                    ACCTID = "117010100100107091",
+                                    NAME = "test"
+                                },
+                                PAYMODE = 0,
+                                APPLYAMT = 12.7m,
+                                PURPOSE = "电费",
+
+                            }
+                        }
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
         #endregion
     }
 }

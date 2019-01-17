@@ -16,7 +16,7 @@ namespace BEDA.CIB.Contracts.Responses
         /// 服务端响应报文
         /// </summary>
         [XmlIgnore]
-        public string ResponseContent { get; set; }
+        public string ResponseContent { get; internal set; }
         /// <summary>
         /// 登录消息响应实体
         /// </summary>

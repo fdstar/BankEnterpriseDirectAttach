@@ -123,8 +123,24 @@ namespace BEDA.CIB.Contracts.Requests
         /// 客户端要求的指令执行日期，如果客户端未发送DTDUE，则服务器将尽可能早执行转账。格式：YYYY-MM-DD
         /// 允许填写当日至当日加29天，不允许填写当日之前的日期。	非必输
         /// </summary>
-        [XmlElement(Order = 7)]
-        public string DTDUE { get; set; }
+        [XmlIgnore]
+        public DateTime? DTDUE { get; set; }
+        /// <summary>
+        /// 客户端期望的转账执行日期，格式：YYYY-MM-DD, 对应<see cref="DTDUE"/>	非必输 
+        /// 允许填写当日至当日加29天，不允许填写当日之前的日期
+        /// </summary>
+        [XmlElement("DTDUE", Order = 7)]
+        public string DTDUEStr
+        {
+            get
+            {
+                return this.DTDUE?.ToString("yyyy-MM-dd");
+            }
+            set
+            {
+                this.DTDUE = value.TryConvert<DateTime>();
+            }
+        }
         /// <summary>
         /// 工资指令备注，长度50	非必输
         /// </summary>

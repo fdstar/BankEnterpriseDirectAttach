@@ -22,14 +22,14 @@ namespace BEDA.CIB.Contracts.Responses
     public class RPAYOFFINQTRNRS : BIZRSBASE
     {
         /// <summary>
-        /// 工资指令响应
+        /// 如果客户端发送COOKIE，同步的历史记录不包括原有的CLTCOOKIE	非必回
         /// </summary>
         [XmlElement(Order = 2)]
-        public RPAYOFFRS RPAYOFFRS { get; set; }
+        public string CLTCOOKIE { get; set; }
         /// <summary>
-        /// 指令处理状态
+        /// 工资指令响应
         /// </summary>
         [XmlElement(Order = 3)]
-        public XFERPRCSTS XFERPRCSTS { get; set; }
+        public RPAYOFFRS RPAYOFFRS { get; set; }
     }
 }

@@ -59,12 +59,12 @@ namespace BEDA.CIB.Contracts.Responses
         [XmlElement(Order = 3)]
         public string FIRMCODE { get; set; }
         /// <summary>
-        /// 业务编码， 5位。 <see cref="Requests.GATHERINFO.BIZCODE"/>	必回
+        /// 业务编码， 5位。 <see cref="Requests.GATHERRQINFO.BIZCODE"/>	必回
         /// </summary>
         [XmlElement(Order = 4)]
         public string BIZCODE { get; set; }
         /// <summary>
-        /// 托收摘要代号 <see cref="Requests.GATHERINFO.SUMM"/> 非必回
+        /// 托收摘要代号 <see cref="Requests.GATHERRQINFO.SUMM"/> 非必回
         /// </summary>
         [XmlElement(Order = 5)]
         public string SUMM { get; set; }
@@ -127,12 +127,12 @@ namespace BEDA.CIB.Contracts.Responses
     /// <summary>
     /// 付款信息
     /// </summary>
-    public class FBBATCHSTMTTRN_PAYINFO : Requests.PAYINFO
+    public class FBBATCHSTMTTRN_PAYINFO : Requests.RQPAYINFO
     {
         /// <summary>
         /// 业务种类代码，最大20位	必输
-        /// 同必输的还有<see cref="Requests.PAYINFO.BIZCODE1"/>
-        /// 另外BIZCODE2此处不存在，所以切记勿要输入<see cref="Requests.PAYINFO.BIZCODE2"/>
+        /// 同必输的还有<see cref="Requests.RQPAYINFO.BIZCODE1"/>
+        /// 另外BIZCODE2此处不存在，所以切记勿要输入<see cref="Requests.RQPAYINFO.BIZCODE2"/>
         /// </summary>
         [XmlElement(Order = 6)]
         public string BIZCODE0 { get; set; }
