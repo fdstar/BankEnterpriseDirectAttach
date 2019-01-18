@@ -46,7 +46,8 @@ namespace BEDA.CIB.Samples
             //XPMTTRNRQSimple();
             //CMSTMTQUERYTRNRQSimple();
             //CMMBRQUERYTRNRQSimple();
-            CMHISBLNCTRNRQSimple();
+            //CMHISBLNCTRNRQSimple();
+            //CMINNERQUERYTRNRQSimple();
             #endregion
 
             Console.ReadLine();
@@ -938,6 +939,34 @@ namespace BEDA.CIB.Samples
                         },
                         DTEND = DateTime.Now.AddDays(-1),
                         DTSTART = DateTime.Now.AddMonths(-11),
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.7.5	内部往来查询
+        /// </summary>
+        public static void CMINNERQUERYTRNRQSimple()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.7.5", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_CMINNERQUERYTRNRQ, V1_CMINNERQUERYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_CMINNERQUERYTRNRQ
+            {
+                CMINNERQUERYTRNRQ = new CMINNERQUERYTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new CMINNERQUERYTRN_RQBODY
+                    {
+                        FUNDACCT = new RQACCT
+                        {
+                            ACCTID = mainAccountId
+                        },
+                        MBRACCT = new RQACCT
+                        {
+                            ACCTID = mainAccountId
+                        },
                     }
                 }
             };

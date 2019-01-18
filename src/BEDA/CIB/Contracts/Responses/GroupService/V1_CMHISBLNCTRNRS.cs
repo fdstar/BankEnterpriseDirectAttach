@@ -26,7 +26,7 @@ namespace BEDA.CIB.Contracts.Responses
         /// <summary>
         /// 历史留存金额查询响应内容
         /// </summary>
-        [XmlElement("RSBODY", Order = 2)]
+        [XmlElement(Order = 2)]
         public CMHISBLNCTRN_RSBODY RSBODY { get; set; }
     }
     /// <summary>

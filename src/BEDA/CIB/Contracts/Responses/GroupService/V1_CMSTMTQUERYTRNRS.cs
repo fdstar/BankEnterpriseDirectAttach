@@ -26,12 +26,12 @@ namespace BEDA.CIB.Contracts.Responses
         /// 集团账户成员交易明细查询响应内容
         /// </summary>
         [XmlElement(Order = 2)]
-        public CMINNERQUERYTRN_RSBODY RSBODY { get; set; }
+        public CMSTMTQUERYTRN_RSBODY RSBODY { get; set; }
     }
     /// <summary>
     /// 集团账户成员交易明细查询响应内容
     /// </summary>
-    public class CMINNERQUERYTRN_RSBODY
+    public class CMSTMTQUERYTRN_RSBODY
     {
         /// <summary>
         /// MORE是否有下一页，Y有，N无
@@ -42,12 +42,12 @@ namespace BEDA.CIB.Contracts.Responses
         /// 集团账户成员交易明细集合
         /// </summary>
         [XmlElement("CONTENT")]
-        public List<CMINNERQUERYTRN_CONTENT> List { get; set; }
+        public List<CMSTMTQUERYTRN_CONTENT> List { get; set; }
     }
     /// <summary>
     /// 集团账户成员交易明细
     /// </summary>
-    public class CMINNERQUERYTRN_CONTENT
+    public class CMSTMTQUERYTRN_CONTENT
     {
         /// <summary>
         /// 结算中心信息
