@@ -22,24 +22,9 @@ namespace BEDA.CIB.Contracts.Responses
     public class XPMTTRNRS : BIZRSBASE
     {
         /// <summary>
-        /// 网银系统跟踪号	必回
+        /// 响应交易处理信息节点
         /// </summary>
         [XmlElement(Order = 2)]
-        public string SRVRTID { get; set; }
-        /// <summary>
-        /// 集团中心账户信息  (兴业银行账户) 必回
-        /// </summary>
-        [XmlElement(Order = 3)]
-        public Requests.RQACCT FUNDACCT { get; set; }
-        /// <summary>
-        /// 转账信息节点	必回
-        /// </summary>
-        [XmlElement(Order = 4)]
-        public XFERINFO XFERINFO { get; set; }
-        /// <summary>
-        /// 指令处理节点
-        /// </summary>
-        [XmlElement(Order = 5)]
-        public XFERPRCSTS XFERPRCSTS { get; set; }
+        public XPMTRS XPMTRS { get; set; }
     }
 }

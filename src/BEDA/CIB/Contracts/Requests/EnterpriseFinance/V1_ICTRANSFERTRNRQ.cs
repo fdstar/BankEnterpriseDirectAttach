@@ -35,7 +35,7 @@ namespace BEDA.CIB.Contracts.Requests
     public class XMPTRQ<T>
     {
         /// <summary>
-        /// 网银跟踪号	必回
+        /// 网银跟踪号 响应时必回， 请求时注意不要输入该值
         /// </summary>
         [XmlElement(Order = 0)]
         public string SRVRTID { get; set; }

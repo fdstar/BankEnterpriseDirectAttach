@@ -36,6 +36,7 @@ namespace BEDA.CIB.Contracts.Requests
         /// <summary>
         /// 查询账户代号，最长32位，必输
         /// </summary>
+        [XmlElement(Order = 0)]
         public string ACCTID { get; set; }
     }
 }

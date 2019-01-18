@@ -11,7 +11,7 @@ namespace BEDA.CIB.Contracts.Requests
     /// <summary>
     /// 集团账户成员交易明细查询请求主体
     /// </summary>
-    public class V1_CMSTMTQUERYTRNRQ : IRequest<V1_CMINNERQUERYTRNRS>
+    public class V1_CMSTMTQUERYTRNRQ : IRequest<V1_CMSTMTQUERYTRNRS>
     {
         /// <summary>
         /// 集团账户成员交易明细查询

@@ -42,6 +42,11 @@ namespace BEDA.CIB.Samples
             //ASYNBATCHTRSFRTRNRQSample();
             #endregion
 
+            #region 3.7	集团服务
+            //XPMTTRNRQSimple();
+            CMSTMTQUERYTRNRQSimple();
+            #endregion
+
             Console.ReadLine();
         }
 
@@ -813,6 +818,75 @@ namespace BEDA.CIB.Samples
             {
                 var rList = rs.SECURITIES_MSGSRSV1.ASYNBATCHTRSFRTRNRS.RSBODY.XFERINFOTEXT.GetList();
             }
+        }
+        #endregion
+
+        #region 3.7	集团服务
+        /// <summary>
+        /// 3.7.1	集团支付
+        /// </summary>
+        public static void XPMTTRNRQSimple()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.7.1", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_XPMTTRNRQ, V1_XPMTTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_XPMTTRNRQ
+            {
+                XPMTTRNRQ = new XPMTTRNRQ
+                {
+                    TRNUID = tid,
+                    XMPTRQ = new XMPTRQ<XPMTTRN_FUNDACCT>
+                    {
+                        FUNDACCT = new XPMTTRN_FUNDACCT
+                        {
+                            ACCTID = mainAccountId,
+                            XPMTTYPE = 0,
+                        },
+                        XFERINFO = new XFERINFO
+                        {
+                            ACCTFROM = new ACCTFROM
+                            {
+                                ACCTID = mainAccountId,
+                            },
+                            ACCTTO = GetACCTTO(3),
+                            TRNAMT = 7.7m,
+                            PURPOSE = "集团支付",
+                            DTDUE = DateTime.Now,
+                        }
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.7.2	成员交易明细查询
+        /// </summary>
+        public static void CMSTMTQUERYTRNRQSimple()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.7.1", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_CMSTMTQUERYTRNRQ, V1_CMSTMTQUERYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_CMSTMTQUERYTRNRQ
+            {
+                CMSTMTQUERYTRNRQ = new CMSTMTQUERYTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new CMSTMTQUERYTRN_RQBODY
+                    {
+                        FUNDACCT = new RQACCT
+                        {
+                            ACCTID = mainAccountId
+                        },
+                        MBRACCT = new RQACCT
+                        {
+                            ACCTID = "117010100100050880"
+                        },
+                        DTEND = DateTime.Now.AddDays(-1),
+                        DTSTART = DateTime.Now.AddDays(-2)
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
         }
         #endregion
     }

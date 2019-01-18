@@ -10,17 +10,17 @@ namespace BEDA.CIB.Contracts.Responses
     /// <summary>
     /// 集团账户成员交易明细查询响应主体
     /// </summary>
-    public class V1_CMINNERQUERYTRNRS : IResponse
+    public class V1_CMSTMTQUERYTRNRS : IResponse
     {
         /// <summary>
         /// 集团账户成员交易明细查询响应
         /// </summary>
-        public CMINNERQUERYTRNRS CMINNERQUERYTRNRS { get; set; }
+        public CMSTMTQUERYTRNRS CMSTMTQUERYTRNRS { get; set; }
     }
     /// <summary>
     /// 集团账户成员交易明细查询响应
     /// </summary>
-    public class CMINNERQUERYTRNRS : BIZRSBASE
+    public class CMSTMTQUERYTRNRS : BIZRSBASE
     {
         /// <summary>
         /// 集团账户成员交易明细查询响应内容
@@ -82,6 +82,11 @@ namespace BEDA.CIB.Contracts.Responses
                     return time;
                 }
                 return null;
+            }
+            set
+            {
+                this.DTACCT = value?.ToString("yyyy-MM-dd");
+                this.TMACCT = value?.ToString("HHmmss");
             }
         }
         /// <summary>
