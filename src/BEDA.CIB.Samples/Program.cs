@@ -44,7 +44,9 @@ namespace BEDA.CIB.Samples
 
             #region 3.7	集团服务
             //XPMTTRNRQSimple();
-            CMSTMTQUERYTRNRQSimple();
+            //CMSTMTQUERYTRNRQSimple();
+            //CMMBRQUERYTRNRQSimple();
+            CMHISBLNCTRNRQSimple();
             #endregion
 
             Console.ReadLine();
@@ -882,6 +884,60 @@ namespace BEDA.CIB.Samples
                         },
                         DTEND = DateTime.Now.AddDays(-1),
                         DTSTART = DateTime.Now.AddDays(-2)
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.7.3	成员账户查询
+        /// </summary>
+        public static void CMMBRQUERYTRNRQSimple()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.7.3", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_CMMBRQUERYTRNRQ, V1_CMMBRQUERYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_CMMBRQUERYTRNRQ
+            {
+                CMMBRQUERYTRNRQ = new CMMBRQUERYTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new CMMBRQUERYTRN_RQBODY
+                    {
+                        FUNDACCT = new RQACCT
+                        {
+                            ACCTID = mainAccountId
+                        }
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.7.4	历史留存金额查询
+        /// </summary>
+        public static void CMHISBLNCTRNRQSimple()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.7.4", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_CMHISBLNCTRNRQ, V1_CMHISBLNCTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_CMHISBLNCTRNRQ
+            {
+                CMHISBLNCTRNRQ = new CMHISBLNCTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new CMHISBLNCTRN_RQBODY
+                    {
+                        FUNDACCT = new RQACCT
+                        {
+                            ACCTID = mainAccountId
+                        },
+                        MBRACCT = new RQACCT
+                        {
+                            ACCTID = "117010100100050880"
+                        },
+                        DTEND = DateTime.Now.AddDays(-1),
+                        DTSTART = DateTime.Now.AddMonths(-11),
                     }
                 }
             };
