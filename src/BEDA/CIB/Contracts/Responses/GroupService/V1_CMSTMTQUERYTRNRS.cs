@@ -77,7 +77,7 @@ namespace BEDA.CIB.Contracts.Responses
         {
             get
             {
-                if(DateTime.TryParseExact(DTACCT+ TMACCT, "yyyy-MM-ddHHmmss", CultureInfo.CurrentCulture, DateTimeStyles.None, out DateTime time))
+                if (DateTime.TryParseExact(DTACCT + TMACCT, new string[] { "yyyy-MM-dd", "yyyy-MM-ddHHmmss" }, CultureInfo.CurrentCulture, DateTimeStyles.None, out DateTime time))
                 {
                     return time;
                 }

@@ -48,6 +48,8 @@ namespace BEDA.CIB.Samples
             //CMMBRQUERYTRNRQSimple();
             //CMHISBLNCTRNRQSimple();
             //CMINNERQUERYTRNRQSimple();
+            //CMTRANSDETAILTRNRQSimple();
+            //CMMEMSTMTQUERYTRNRQSimple();
             #endregion
 
             Console.ReadLine();
@@ -967,6 +969,55 @@ namespace BEDA.CIB.Samples
                         {
                             ACCTID = mainAccountId
                         },
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.7.6	归集调拨查询
+        /// </summary>
+        public static void CMTRANSDETAILTRNRQSimple()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.7.6", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_CMTRANSDETAILTRNRQ, V1_CMTRANSDETAILTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_CMTRANSDETAILTRNRQ
+            {
+                CMTRANSDETAILTRNRQ = new CMTRANSDETAILTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new CMTRANSDETAILTRN_RQBODY
+                    {
+                        ACCTID = "117010100100050880",
+                        DTEND = DateTime.Now.AddDays(-1),
+                        DTSTART = DateTime.Now.AddDays(-5)
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.7.7	查询成员外部收支明细
+        /// </summary>
+        public static void CMMEMSTMTQUERYTRNRQSimple()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.7.7", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_CMMEMSTMTQUERYTRNRQ, V1_CMMEMSTMTQUERYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_CMMEMSTMTQUERYTRNRQ
+            {
+                CMMEMSTMTQUERYTRNRQ = new CMMEMSTMTQUERYTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new CMMEMSTMTQUERYTRN_RQBODY
+                    {
+                        MBRACCT = new RQACCT
+                        {
+                            ACCTID = "117010100100050880"
+                        },
+                        DTEND = DateTime.Now.AddDays(-1),
+                        DTSTART = DateTime.Now.AddDays(-5)
                     }
                 }
             };
