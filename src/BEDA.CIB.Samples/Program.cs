@@ -50,6 +50,7 @@ namespace BEDA.CIB.Samples
             //CMINNERQUERYTRNRQSimple();
             //CMTRANSDETAILTRNRQSimple();
             //CMMEMSTMTQUERYTRNRQSimple();
+            //CMAVBLQUOTATRNRQSimple();
             #endregion
 
             Console.ReadLine();
@@ -1018,6 +1019,31 @@ namespace BEDA.CIB.Samples
                         },
                         DTEND = DateTime.Now.AddDays(-1),
                         DTSTART = DateTime.Now.AddDays(-5)
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.7.8	账户可用额度查询
+        /// </summary>
+        public static void CMAVBLQUOTATRNRQSimple()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.7.8", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_CMAVBLQUOTATRNRQ, V1_CMAVBLQUOTATRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_CMAVBLQUOTATRNRQ
+            {
+                CMAVBLQUOTATRNRQ = new CMAVBLQUOTATRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new CMAVBLQUOTATRN_RQBODY
+                    {
+                        FUNDACCT = new RQACCT
+                        {
+                            ACCTID = mainAccountId
+                        },
+                        ACCTID = "117010100100050880"
                     }
                 }
             };

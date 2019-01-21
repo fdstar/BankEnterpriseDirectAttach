@@ -10,28 +10,28 @@ using System.Xml.Serialization;
 namespace BEDA.CIB.Contracts.Requests
 {
     /// <summary>
-    /// 历史留存金额查询请求主体
+    /// 集团服务历史留存金额查询请求主体
     /// </summary>
     public class V1_CMHISBLNCTRNRQ : IRequest<V1_CMHISBLNCTRNRS>
     {
         /// <summary>
-        /// 历史留存金额查询请求主体
+        /// 集团服务历史留存金额查询请求主体
         /// </summary>
         public CMHISBLNCTRNRQ CMHISBLNCTRNRQ { get; set; }
     }
     /// <summary>
-    /// 历史留存金额查询请求主体
+    /// 集团服务历史留存金额查询请求主体
     /// </summary>
     public class CMHISBLNCTRNRQ : BIZRQBASE
     {
         /// <summary>
-        /// 历史留存金额查询内容
+        /// 集团服务历史留存金额查询内容
         /// </summary>
         [XmlElement(Order = 1)]
         public CMHISBLNCTRN_RQBODY RQBODY { get; set; }
     }
     /// <summary>
-    /// 历史留存金额查询内容
+    /// 集团服务历史留存金额查询内容
     /// </summary>
     public class CMHISBLNCTRN_RQBODY
     {
