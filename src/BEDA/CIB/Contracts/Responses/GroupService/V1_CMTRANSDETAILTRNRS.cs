@@ -102,7 +102,7 @@ namespace BEDA.CIB.Contracts.Responses
             set
             {
                 this.DTACCT = value?.ToString("yyyy-MM-dd");
-                this.TMACCT = value?.ToString("HHmmss");
+                this.TMACCT = value?.ToString("HH:mm:ss");
             }
         }
     }
