@@ -42,6 +42,12 @@ namespace BEDA.CIB.Samples
             //ASYNBATCHTRSFRTRNRQSample();
             #endregion
 
+            #region 3.6	虚拟子账户
+            //VSASIGNTRNRQSample();
+            VSABATCHOPENTRNRQSample();
+            //VSASUBACCTINFOTRNRQSample();
+            #endregion
+
             #region 3.7	集团服务
             //XPMTTRNRQSimple();
             //CMSTMTQUERYTRNRQSimple();
@@ -824,6 +830,97 @@ namespace BEDA.CIB.Samples
             {
                 var rList = rs.SECURITIES_MSGSRSV1.ASYNBATCHTRSFRTRNRS.RSBODY.XFERINFOTEXT.GetList();
             }
+        }
+        #endregion
+
+        #region 3.6	虚拟子账户
+        /// <summary>
+        /// 3.6.1	虚拟主账户签约解约
+        /// </summary>
+        public static void VSASIGNTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.6.1", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_VSASIGNTRNRQ, V1_VSASIGNTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_VSASIGNTRNRQ
+            {
+                VSASIGNTRNRQ = new VSASIGNTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new VSASIGNTRN_RQBODY
+                    {
+                        MAINACCT = mainAccountId,
+                        SIGNFLG = "Y"
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.6.2	虚拟子账户批量开户（最多20笔）
+        /// </summary>
+        public static void VSABATCHOPENTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.6.2", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_VSABATCHOPENTRNRQ, V1_VSABATCHOPENTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_VSABATCHOPENTRNRQ
+            {
+                VSABATCHOPENTRNRQ = new VSABATCHOPENTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new VSABATCHOPENTRN_RQBODY
+                    {
+                        MAINACCT = mainAccountId,
+                        List = new List<VSAOPENINFORQ>
+                        {
+                             new VSAOPENINFORQ{
+                                 SUBACCT ="980000",
+                                 SUBNAME ="虚拟子账户1",
+                                 BUDGETQUOTA =1000.0m,
+                                 BUDGETCYCLE =6,
+                                 BUDGETIDENT =1,
+                                 RATEPOINTFLTVAL =0.0m,
+                                 RATESCALEFLTVAL =0.0m,
+                             },
+                             new VSAOPENINFORQ{
+                                 SUBACCT ="980001",
+                                 SUBNAME ="虚拟子账户2",
+                                 BUDGETQUOTA =20.0m,
+                                 BUDGETCYCLE =3,
+                                 BUDGETIDENT =0,
+                                 RATEPOINTFLTVAL =0.0m,
+                                 RATESCALEFLTVAL =0.0m,
+                                 FIRADJINTSDATE = DateTime.Now,
+                             }
+                        }
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.6.3	虚拟子账户信息查询
+        /// </summary>
+        public static void VSASUBACCTINFOTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.6.3", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_VSASUBACCTINFOTRNRQ, V1_VSASUBACCTINFOTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_VSASUBACCTINFOTRNRQ
+            {
+                VSASUBACCTINFOTRNRQ = new VSASUBACCTINFOTRNRQ
+                {
+                    TRNUID = tid,
+                    INQUIRYINFO = new INQUIRYINFO
+                    {
+                        MAINACCT = mainAccountId,
+                        PATTERN = "1",
+                        SUBACCT = "010003"
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
         }
         #endregion
 

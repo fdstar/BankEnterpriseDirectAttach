@@ -51,7 +51,7 @@ namespace BEDA.CIB.Contracts.Responses
         /// <summary>
         /// 3.6.2虚拟子账户批量开户响应集合
         /// </summary>
-        [XmlElement("VSAOPENINFO", Order = 2)]
+        [XmlElement("VSAOPENINFO", Order = 3)]
         public List<VSAOPENINFORS> List { get; set; }
     }
     /// <summary>

@@ -69,22 +69,22 @@ namespace BEDA.CIB.Contracts.Responses
         /// 子账户利率
         /// </summary>
         [XmlElement(Order = 3)]
-        public decimal RATE { get; set; }
+        public decimal? RATE { get; set; }
         /// <summary>
         /// 子账户余额
         /// </summary>
         [XmlElement(Order = 4)]
-        public decimal BALANCE { get; set; }
+        public decimal? BALANCE { get; set; }
         /// <summary>
         /// 子账户累计积数
         /// </summary>
         [XmlElement(Order = 5)]
-        public decimal SUMMED { get; set; }
+        public decimal? SUMMED { get; set; }
         /// <summary>
         /// 子账户利息
         /// </summary>
         [XmlElement(Order = 6)]
-        public decimal INTEREST { get; set; }
+        public decimal? INTEREST { get; set; }
         /// <summary>
         /// 子账户状态
         /// </summary>
@@ -127,13 +127,43 @@ namespace BEDA.CIB.Contracts.Responses
         /// <summary>
         /// 利率比例浮动值 查询模式为1时返回
         /// </summary>
-        [XmlElement(Order = 10)]
+        [XmlIgnore]
         public decimal? RATESCALEFLTVAL { get; set; }
+        /// <summary>
+        /// 利率比例浮动值，对应<see cref="RATESCALEFLTVAL"/> 查询模式为1时返回
+        /// </summary>
+        [XmlElement("RATESCALEFLTVAL", Order = 10)]
+        public string RATESCALEFLTVALStr
+        {
+            get
+            {
+                return this.RATESCALEFLTVAL?.ToString();
+            }
+            set
+            {
+                this.RATESCALEFLTVAL = value.TryConvert<decimal>();
+            }
+        }
         /// <summary>
         /// 利率点数浮动值 查询模式为1时返回
         /// </summary>
-        [XmlElement(Order = 11)]
+        [XmlIgnore]
         public decimal? RATEPOINTFLTVAL { get; set; }
+        /// <summary>
+        /// 利率比例浮动值，对应<see cref="RATEPOINTFLTVAL"/> 查询模式为1时返回
+        /// </summary>
+        [XmlElement("RATEPOINTFLTVAL", Order = 11)]
+        public string RATEPOINTFLTVALStr
+        {
+            get
+            {
+                return this.RATEPOINTFLTVAL?.ToString();
+            }
+            set
+            {
+                this.RATEPOINTFLTVAL = value.TryConvert<decimal>();
+            }
+        }
         /// <summary>
         /// 执行利率 查询模式为1时返回
         /// </summary>
