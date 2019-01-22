@@ -8,30 +8,30 @@ using System.Xml.Serialization;
 namespace BEDA.CIB.Contracts.Responses
 {
     /// <summary>
-    /// 3.5.7银期互转响应主体
+    /// 3.5.11期权现货资金查询响应主体
     /// </summary>
-    public class V1_BFEEXCHANGETRNRS : IResponse
+    public class V1_QUERYOPTIONSPOTTRNRS : IResponse
     {
         /// <summary>
-        /// 3.5.7银期互转响应主体
+        /// 3.5.11期权现货资金查询响应主体
         /// </summary>
-        public BFEEXCHANGETRNRS BFEEXCHANGETRNRS { get; set; }
+        public QUERYOPTIONSPOTTRNRS QUERYOPTIONSPOTTRNRS { get; set; }
     }
     /// <summary>
-    /// 3.5.7银期互转响应主体
+    /// 3.5.11期权现货资金查询响应主体
     /// </summary>
-    public class BFEEXCHANGETRNRS : BIZRSBASE
+    public class QUERYOPTIONSPOTTRNRS : BIZRSBASE
     {
         /// <summary>
-        /// 3.5.7银期互转响应内容
+        /// 3.5.11期权现货资金查询响应内容
         /// </summary>
         [XmlElement(Order = 2)]
-        public BFEEXCHANGETRN_RSBODY RSBODY { get; set; }
+        public QUERYOPTIONSPOTTRN_RSBODY RSBODY { get; set; }
     }
     /// <summary>
-    /// 3.5.7银期互转响应内容
+    /// 3.5.11期权现货资金查询响应内容
     /// </summary>
-    public class BFEEXCHANGETRN_RSBODY
+    public class QUERYOPTIONSPOTTRN_RSBODY
     {
         /// <summary>
         /// 查询账户代号，最长32位
@@ -54,14 +54,9 @@ namespace BEDA.CIB.Contracts.Responses
         [XmlElement(Order = 3)]
         public string FUNDBRANCHNO { get; set; }
         /// <summary>
-        /// 转账金额
+        /// 资金账户余额
         /// </summary>
         [XmlElement(Order = 4)]
-        public decimal TRANSFERAMT { get; set; }
-        /// <summary>
-        /// 指令处理状态	必回
-        /// </summary>
-        [XmlElement(Order = 5)]
-        public XFERPRCSTS XFERPRCSTS { get; set; }
+        public decimal FUNDAMT { get; set; }
     }
 }

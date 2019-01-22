@@ -8,30 +8,30 @@ using System.Xml.Serialization;
 namespace BEDA.CIB.Contracts.Responses
 {
     /// <summary>
-    /// 3.5.7银期互转响应主体
+    /// 3.5.10期权现货互转响应主体
     /// </summary>
-    public class V1_BFEEXCHANGETRNRS : IResponse
+    public class V1_CREATEOPTIONSPOTTRNRS : IResponse
     {
         /// <summary>
-        /// 3.5.7银期互转响应主体
+        /// 3.5.10期权现货互转响应主体
         /// </summary>
-        public BFEEXCHANGETRNRS BFEEXCHANGETRNRS { get; set; }
+        public CREATEOPTIONSPOTTRNRS CREATEOPTIONSPOTTRNRS { get; set; }
     }
     /// <summary>
-    /// 3.5.7银期互转响应主体
+    /// 3.5.10期权现货互转响应主体
     /// </summary>
-    public class BFEEXCHANGETRNRS : BIZRSBASE
+    public class CREATEOPTIONSPOTTRNRS : BIZRSBASE
     {
         /// <summary>
-        /// 3.5.7银期互转响应内容
+        /// 3.5.10期权现货互转响应内容
         /// </summary>
         [XmlElement(Order = 2)]
-        public BFEEXCHANGETRN_RSBODY RSBODY { get; set; }
+        public CREATEOPTIONSPOTTRN_RSBODY RSBODY { get; set; }
     }
     /// <summary>
-    /// 3.5.7银期互转响应内容
+    /// 3.5.10期权现货互转响应内容
     /// </summary>
-    public class BFEEXCHANGETRN_RSBODY
+    public class CREATEOPTIONSPOTTRN_RSBODY
     {
         /// <summary>
         /// 查询账户代号，最长32位
