@@ -6,10 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="CIB\Contracts\Requests\VirtualSubaccount\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="RestSharp" Version="106.6.5" />
   </ItemGroup>
   <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
