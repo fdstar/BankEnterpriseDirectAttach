@@ -10,6 +10,7 @@ namespace BEDA.CIB.Samples
     {
         static void Main(string[] args)
         {
+            //为了方便调试，所有具体的业务请求方法故意不提取公共部分
             #region 3.2	登录消息
             //LoginSample();
             #endregion
@@ -63,7 +64,6 @@ namespace BEDA.CIB.Samples
             //CMAVBLQUOTATRNRQSimple();
             #endregion
 
-
             #region 3.8	理财产品投资
             //FPPURCHTRNRQSample();
             //FPREDMTRNRQSample();
@@ -73,6 +73,10 @@ namespace BEDA.CIB.Samples
             //FPCUSTTRNRQSample();
             //FPAGMTSIGNTRNRQSample();
             //FPAGMTSTATUSTRNRQSample();
+            #endregion
+
+            #region 3.9	电子商业汇票系统
+            EBSTMTQUERYTRNRQSample();
             #endregion
 
             Console.ReadLine();
@@ -1458,6 +1462,34 @@ namespace BEDA.CIB.Samples
                     {
                         ACCTID = mainAccountId,
                         PRODNO = "F01SJYH1",
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        #endregion
+
+        #region 3.9	电子商业汇票系统
+        /// <summary>
+        /// 3.9.1.1 票据交易明细查询
+        /// </summary>
+        public static void EBSTMTQUERYTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.9.1.1", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_EBSTMTQUERYTRNRQ, V1_EBSTMTQUERYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_EBSTMTQUERYTRNRQ
+            {
+                EBSTMTQUERYTRNRQ = new EBSTMTQUERYTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new EBSTMTQUERYTRN_RQBODY
+                    {
+                        ACCTID = mainAccountId,
+                        BUSINESSTYPE = "99",
+                        OPERTYPE = "04",
+                        DTSTART = DateTime.Now.AddMonths(-3),
+                        DTEND = DateTime.Now.AddDays(-4)
                     }
                 }
             };

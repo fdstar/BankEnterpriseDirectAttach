@@ -66,21 +66,22 @@ namespace BEDA.Utils
         /// <returns></returns>
         public static T Deserialize<T>(this string xml, bool throwException = false)
         {
-            using (StringReader sr = new StringReader(xml))
+            try
             {
-                XmlSerializer serializer = new XmlSerializer(typeof(T));
-                try
+                using (StringReader sr = new StringReader(xml))
                 {
+                    XmlSerializer serializer = new XmlSerializer(typeof(T));
+
                     return (T)serializer.Deserialize(sr);
                 }
-                catch
+            }
+            catch
 #if DEBUG
                 (Exception ex)
 #endif
-                {
-                    if (throwException) throw;
-                    return default(T);
-                }
+            {
+                if (throwException) throw;
+                return default(T);
             }
         }
     }
