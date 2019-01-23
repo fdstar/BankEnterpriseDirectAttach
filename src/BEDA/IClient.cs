@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RestSharp;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,10 @@ namespace BEDA
     /// <typeparam name="TRs">服务端响应实体泛型</typeparam>
     public interface IClient<TRq, TRs>
     {
+        /// <summary>
+        /// <see cref="RestSharp.RestClient"/>
+        /// </summary>
+        IRestClient RestClient { get; }
         /// <summary>
         /// 发起业务请求
         /// </summary>

@@ -15,7 +15,6 @@ namespace BEDA.CIB
     /// </summary>
     public class CIBClient : ICIBClient
     {
-        private IRestClient _client;
 #if NETSTANDARD2_0
         static CIBClient()
         {
@@ -39,12 +38,15 @@ namespace BEDA.CIB
         public CIBClient(string host, int port, string scheme = "http", string encoding = "gb2312")
         {
             var url = string.Format("{0}://{1}:{2}", scheme, host, port);
-            this._client = new RestClient(url)
+            this.RestClient = new RestClient(url)
             {
                 Encoding = Encoding.GetEncoding(encoding)
             };
         }
-
+        /// <summary>
+        /// <see cref="RestSharp.RestClient"/>
+        /// </summary>
+        public IRestClient RestClient { get; private set; }
         /// <summary>
         /// 发起业务请求
         /// </summary>
@@ -94,7 +96,7 @@ namespace BEDA.CIB
             where TRs : FOXRS
         {
             var restRequest = this.GetRestRequest(rq);
-            var restResponse = this._client.Execute(restRequest);
+            var restResponse = this.RestClient.Execute(restRequest);
             return this.GetResponse<TRs>(restResponse);
         }
         private async Task<TRs> ExecuteInnerAsync<TRq, TRs>(TRq rq)
@@ -102,7 +104,7 @@ namespace BEDA.CIB
             where TRs : FOXRS
         {
             var restRequest = this.GetRestRequest(rq);
-            var restResponse = await this._client.ExecuteTaskAsync(restRequest).ConfigureAwait(false);
+            var restResponse = await this.RestClient.ExecuteTaskAsync(restRequest).ConfigureAwait(false);
             return this.GetResponse<TRs>(restResponse);
         }
         private IRestRequest GetRestRequest<TRq>(TRq request)

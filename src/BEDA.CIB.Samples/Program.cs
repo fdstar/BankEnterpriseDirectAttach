@@ -49,7 +49,7 @@ namespace BEDA.CIB.Samples
             //VSAALLOTTRNRQSample();
             //VATTRNRQSample();
             //VATSTMTTRNRQSample();
-            VSAINTRSFTRNRQSample();
+            //VSAINTRSFTRNRQSample();
             #endregion
 
             #region 3.7	集团服务
@@ -61,6 +61,18 @@ namespace BEDA.CIB.Samples
             //CMTRANSDETAILTRNRQSimple();
             //CMMEMSTMTQUERYTRNRQSimple();
             //CMAVBLQUOTATRNRQSimple();
+            #endregion
+
+
+            #region 3.8	理财产品投资
+            //FPPURCHTRNRQSample();
+            //FPREDMTRNRQSample();
+            //FPPRODTRNRQSample();
+            //FPAGMTTRNRQSample();
+            //FPASSETSTRNRQSample();
+            //FPCUSTTRNRQSample();
+            //FPAGMTSIGNTRNRQSample();
+            //FPAGMTSTATUSTRNRQSample();
             #endregion
 
             Console.ReadLine();
@@ -1258,6 +1270,194 @@ namespace BEDA.CIB.Samples
                             ACCTID = mainAccountId
                         },
                         ACCTID = "117010100100050880"
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        #endregion
+
+        #region 3.8	理财产品投资
+        /// <summary>
+        /// 3.8.1	认购/申购/撤销购买
+        /// </summary>
+        public static void FPPURCHTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.8.1", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_FPPURCHTRNRQ, V1_FPPURCHTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_FPPURCHTRNRQ
+            {
+                FPPURCHTRNRQ = new FPPURCHTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new FPPURCHTRN_RQBODY
+                    {
+                        PRODNO = "F01SJYH1",
+                        ACCTID = mainAccountId,
+                        MOBILE = "15100006666",
+                        ADDR = "福建",
+                        TRNAMT = 1000.0m,
+                        TRNTYPE = 0,
+                        ZIP = "353000"
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.8.2	赎回/撤销赎回功能
+        /// </summary>
+        public static void FPREDMTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.8.2", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_FPREDMTRNRQ, V1_FPREDMTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_FPREDMTRNRQ
+            {
+                FPREDMTRNRQ = new FPREDMTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new FPREDMTRN_RQBODY
+                    {
+                        PRODNO = "F01SJYH1",
+                        ACCTID = mainAccountId,
+                        TRNTYPE = 0,
+                        REDMAMT = 30.0m,
+                        ACCEPTNO = "1170120000000395"
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.8.3	理财产品信息查询
+        /// </summary>
+        public static void FPPRODTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.8.3", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_FPPRODTRNRQ, V1_FPPRODTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_FPPRODTRNRQ
+            {
+                FPPRODTRNRQ = new FPPRODTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new FPPRODTRN_RQBODY
+                    {
+                         PAGE=2
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.8.4	理财产品说明书及协议查询
+        /// </summary>
+        public static void FPAGMTTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.8.4", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_FPAGMTTRNRQ, V1_FPAGMTTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_FPAGMTTRNRQ
+            {
+                FPAGMTTRNRQ = new FPAGMTTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new FPAGMTTRN_RQBODY
+                    {
+                        PRODNO = "F01SJYH1",
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.8.5	客户理财资产信息查询
+        /// </summary>
+        public static void FPASSETSTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.8.5", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_FPASSETSTRNRQ, V1_FPASSETSTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_FPASSETSTRNRQ
+            {
+                FPASSETSTRNRQ = new FPASSETSTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new FPASSETSTRN_RQBODY
+                    {
+                        TRNTYPE = 2,
+                        ACCTID = mainAccountId,
+                        DTSTART = new DateTime(2018,5,10),
+                        DTEND = new DateTime(2018, 6, 5)
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.8.6	客户信息查询
+        /// </summary>
+        public static void FPCUSTTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.8.6", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_FPCUSTTRNRQ, V1_FPCUSTTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_FPCUSTTRNRQ
+            {
+                FPCUSTTRNRQ = new FPCUSTTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new RQACCT
+                    {
+                        ACCTID = mainAccountId
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.8.7	理财产品签约-解约请求
+        /// </summary>
+        public static void FPAGMTSIGNTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.8.7", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_FPAGMTSIGNTRNRQ, V1_FPAGMTSIGNTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_FPAGMTSIGNTRNRQ
+            {
+                FPAGMTSIGNTRNRQ = new FPAGMTSIGNTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new FPAGMTSIGNTRN_RQBODY
+                    {
+                        ACCTID = mainAccountId,
+                        PRODNO = "F01SJYH1",
+                        AGRM = "CIBLCCP184",
+                        SIGNFLG = "Y"
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.8.8	理财产品签约状态查询请求
+        /// </summary>
+        public static void FPAGMTSTATUSTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.8.8", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_FPAGMTSTATUSTRNRQ, V1_FPAGMTSTATUSTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_FPAGMTSTATUSTRNRQ
+            {
+                FPAGMTSTATUSTRNRQ = new FPAGMTSTATUSTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new FPAGMTSTATUSTRN_RQBODY
+                    {
+                        ACCTID = mainAccountId,
+                        PRODNO = "F01SJYH1",
                     }
                 }
             };
