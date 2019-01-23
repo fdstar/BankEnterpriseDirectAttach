@@ -76,7 +76,15 @@ namespace BEDA.CIB.Samples
             #endregion
 
             #region 3.9	电子商业汇票系统
-            EBSTMTQUERYTRNRQSample();
+            //EBSTMTQUERYTRNRQSample();
+            #endregion
+
+            #region 3.10	跨行账户管理
+            //CRSACCTREGTRNRQSample();
+            //CRSAGRMQTRNRQSample();
+            //CRSBLNCQUERYTRNRQSample();
+            //CRSSTMTTRNRQSample();
+            //CRSGATHERTRNRQSample();
             #endregion
 
             Console.ReadLine();
@@ -1490,6 +1498,140 @@ namespace BEDA.CIB.Samples
                         OPERTYPE = "04",
                         DTSTART = DateTime.Now.AddMonths(-3),
                         DTEND = DateTime.Now.AddDays(-4)
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        #endregion
+
+        #region 3.10	跨行账户管理
+        /// <summary>
+        /// 3.10.1	他行账户登记
+        /// </summary>
+        public static void CRSACCTREGTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.10.1", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_CRSACCTREGTRNRQ, V1_CRSACCTREGTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_CRSACCTREGTRNRQ
+            {
+                CRSACCTREGTRNRQ = new CRSACCTREGTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new CRSACCTREGTRN_RQBODY
+                    {
+                        OPERTYPE = "ADD",
+                        AGRMTYPE = 1,
+                        INTERACCTID = "201204231170102",
+                        AGRM = "20120423002",
+                        OPERACCTID = mainAccountId,
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.10.2	他行账户协议查询
+        /// </summary>
+        public static void CRSAGRMQTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.10.2", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_CRSAGRMQTRNRQ, V1_CRSAGRMQTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_CRSAGRMQTRNRQ
+            {
+                CRSAGRMQTRNRQ = new CRSAGRMQTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new CRSAGRMQTRN_RQBODY
+                    {
+                        ACCTID = mainAccountId,
+                        AGRMTYPE = 1
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.10.3	他行账户余额查询
+        /// </summary>
+        public static void CRSBLNCQUERYTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.10.3", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_CRSBLNCQUERYTRNRQ, V1_CRSBLNCQUERYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_CRSBLNCQUERYTRNRQ
+            {
+                CRSBLNCQUERYTRNRQ = new CRSBLNCQUERYTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new CRSBLNCQUERYTRN_RQBODY
+                    {
+                        QUERYCOND = new CRSBLNCQUERYTRN_QUERYCOND
+                        {
+                            AGRM = "20120423002",
+                            OPERACCTID = mainAccountId,
+                        },
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.10.4	他行账户明细查询
+        /// </summary>
+        public static void CRSSTMTTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.10.4", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_CRSSTMTTRNRQ, V1_CRSSTMTTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_CRSSTMTTRNRQ
+            {
+                CRSSTMTTRNRQ = new CRSSTMTTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new CRSSTMTTRN_RQBODY
+                    {
+                        QUERYCOND = new CRSSTMTTRN_QUERYCOND
+                        {
+                            AGRM = "20120423002",
+                            OPERACCTID = mainAccountId,
+                            DTSTART = DateTime.Now.AddDays(-5),
+                            DTEND = DateTime.Now.AddDays(-1)
+                        },
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.10.5	他行账户收款
+        /// </summary>
+        public static void CRSGATHERTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.10.4", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_CRSGATHERTRNRQ, V1_CRSGATHERTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_CRSGATHERTRNRQ
+            {
+                CRSGATHERTRNRQ = new CRSGATHERTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new CRSGATHERTRN_RQBODY
+                    {
+                        ACCTFROM = new RQACCT
+                        {
+                            ACCTID = "201204231170101"
+                        },
+                        ACCTTO = new RQACCT
+                        {
+                            ACCTID = mainAccountId
+                        },
+                        AGRM = "20120423002",
+                        BUSINESSTYPE = "00100",
+                        PURPOSE = "他行账户收款",
+                        TRNAMT = 5.7m,
                     }
                 }
             };

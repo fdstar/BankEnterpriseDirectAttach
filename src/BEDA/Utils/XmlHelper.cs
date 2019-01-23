@@ -71,7 +71,6 @@ namespace BEDA.Utils
                 using (StringReader sr = new StringReader(xml))
                 {
                     XmlSerializer serializer = new XmlSerializer(typeof(T));
-
                     return (T)serializer.Deserialize(sr);
                 }
             }
