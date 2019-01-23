@@ -44,8 +44,12 @@ namespace BEDA.CIB.Samples
 
             #region 3.6	虚拟子账户
             //VSASIGNTRNRQSample();
-            VSABATCHOPENTRNRQSample();
+            //VSABATCHOPENTRNRQSample();
             //VSASUBACCTINFOTRNRQSample();
+            //VSAALLOTTRNRQSample();
+            //VATTRNRQSample();
+            //VATSTMTTRNRQSample();
+            VSAINTRSFTRNRQSample();
             #endregion
 
             #region 3.7	集团服务
@@ -911,11 +915,124 @@ namespace BEDA.CIB.Samples
                 VSASUBACCTINFOTRNRQ = new VSASUBACCTINFOTRNRQ
                 {
                     TRNUID = tid,
-                    INQUIRYINFO = new INQUIRYINFO
+                    INQUIRYINFO = new VSASUBACCTINFOTRN_INQUIRYINFO
                     {
                         MAINACCT = mainAccountId,
                         PATTERN = "1",
                         SUBACCT = "010003"
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.6.4	虚拟子账户利息分配
+        /// </summary>
+        public static void VSAALLOTTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.6.4", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_VSAALLOTTRNRQ, V1_VSAALLOTTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_VSAALLOTTRNRQ
+            {
+                VSAALLOTTRNRQ = new VSAALLOTTRNRQ
+                {
+                    TRNUID = tid,
+                    INQUIRYINFO = new VSAALLOTTRN_INQUIRYINFO
+                    {
+                        MAINACCT = mainAccountId,
+                        PATTERN = "1",
+                        SUBACCT = "0003"
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.6.5	虚拟子帐户对外支付
+        /// </summary>
+        public static void VATTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.6.5", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_VATTRNRQ, V1_VATTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_VATTRNRQ
+            {
+                VATTRNRQ = new VATTRNRQ
+                {
+                    TRNUID = tid,
+                    VATRQ = new VATRQ
+                    {
+                        MAINACCT = mainAccountId,
+                        SUBACCT = "010003",
+                        XFERINFO = new XFERINFO
+                        {
+                            ACCTFROM = new ACCTFROM
+                            {
+                                ACCTID = mainAccountId,
+                                NAME = mainAccountName
+                            },
+                            ACCTTO = GetACCTTO(3),
+                            PURPOSE = "虚拟子帐户对外支付",
+                            TRNAMT = 0.77m,
+                        }
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.6.6	虚拟子账户余额及交易明细查询
+        /// </summary>
+        public static void VATSTMTTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.6.6", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_VATSTMTTRNRQ, V1_VATSTMTTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_VATSTMTTRNRQ
+            {
+                VATSTMTTRNRQ = new VATSTMTTRNRQ
+                {
+                    TRNUID = tid,
+                    VATSTMTRQ = new VATSTMTRQ
+                    {
+                        MAINACCT = mainAccountId,
+                        SUBACCT = "010003",
+                        ACCTFROM = new ACCTFROM
+                        {
+                            ACCTID = mainAccountId
+                        },
+                        INCTRAN = new VATSTMTRQ_INCTRAN
+                        {
+                            DTEND = DateTime.Now,
+                            DTSTART = DateTime.Now,
+                            PAGE = 1,
+                        }
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.6.7	虚拟子账户内部转账
+        /// </summary>
+        public static void VSAINTRSFTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.6.7", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_VSAINTRSFTRNRQ, V1_VSAINTRSFTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_VSAINTRSFTRNRQ
+            {
+                VSAINTRSFTRNRQ = new VSAINTRSFTRNRQ
+                {
+                    TRNUID = tid,
+                    VSAINTRSFRQ = new VSAINTRSFRQ
+                    {
+                        MAINACCT = mainAccountId,
+                        SUBACCT = "010003",
+                        TOSUBACCT = "010004",
+                        PURPOSE = "虚拟子账户内部转账",
+                        TRNAMT = 3.97m,
                     }
                 }
             };

@@ -27,12 +27,12 @@ namespace BEDA.CIB.Contracts.Requests
         /// 3.6.3虚拟子账户信息查询请求内容
         /// </summary>
         [XmlElement(Order = 1)]
-        public INQUIRYINFO INQUIRYINFO { get; set; }
+        public VSASUBACCTINFOTRN_INQUIRYINFO INQUIRYINFO { get; set; }
     }
     /// <summary>
     /// 3.6.3虚拟子账户信息查询请求内容
     /// </summary>
-    public class INQUIRYINFO
+    public class VSASUBACCTINFOTRN_INQUIRYINFO
     {
         /// <summary>
         /// 18位主账户	必输
