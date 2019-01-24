@@ -9,17 +9,17 @@ using System.Xml.Serialization;
 namespace BEDA.CIB.Contracts.Requests
 {
     /// <summary>
-    /// 异步批量支付 (最多100笔，不采用工作流) 请求主体
+    /// 3.4.12异步批量支付 (最多100笔，不采用工作流) 请求主体
     /// </summary>
     public class V1_ASYNBATCHTRSFRTRNRQ : IRequest<V1_ASYNBATCHTRSFRTRNRS>
     {
         /// <summary>
-        /// 异步批量支付 (最多100笔，不采用工作流) 
+        /// 3.4.12异步批量支付 (最多100笔，不采用工作流) 
         /// </summary>
         public ASYNBATCHTRSFRTRNRQ ASYNBATCHTRSFRTRNRQ { get; set; }
     }
     /// <summary>
-    /// 异步批量支付 (最多100笔，不采用工作流) 
+    /// 3.4.12异步批量支付 (最多100笔，不采用工作流) 
     /// </summary>
     public class ASYNBATCHTRSFRTRNRQ : BIZRQBASE
     {
@@ -30,7 +30,7 @@ namespace BEDA.CIB.Contracts.Requests
         public ASYNBATCHTRSFRTRN_RQBODY RQBODY { get; set; }
     }
     /// <summary>
-    /// 异步批量支付请求
+    /// 3.4.12异步批量支付请求
     /// </summary>
     public class ASYNBATCHTRSFRTRN_RQBODY: ASYNBATCHTRSFRTRN
     {

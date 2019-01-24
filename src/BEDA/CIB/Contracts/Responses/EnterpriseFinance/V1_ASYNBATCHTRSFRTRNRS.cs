@@ -7,28 +7,28 @@ using System.Xml.Serialization;
 namespace BEDA.CIB.Contracts.Responses
 {
     /// <summary>
-    /// 异步批量支付 (最多100笔，不采用工作流) 响应主体
+    /// 3.4.12异步批量支付 (最多100笔，不采用工作流) 响应主体
     /// </summary>
     public class V1_ASYNBATCHTRSFRTRNRS : IResponse
     {
         /// <summary>
-        /// 异步批量支付 (最多100笔，不采用工作流) 响应
+        /// 3.4.12异步批量支付 (最多100笔，不采用工作流) 响应
         /// </summary>
         public ASYNBATCHTRSFRTRNRS ASYNBATCHTRSFRTRNRS { get; set; }
     }
     /// <summary>
-    /// 异步批量支付 (最多100笔，不采用工作流) 响应
+    /// 3.4.12异步批量支付 (最多100笔，不采用工作流) 响应
     /// </summary>
     public class ASYNBATCHTRSFRTRNRS : BIZRSBASE
     {
         /// <summary>
-        /// 异步批量支付 (最多100笔，不采用工作流) 响应内容
+        /// 3.4.12异步批量支付 (最多100笔，不采用工作流) 响应内容
         /// </summary>
         [XmlElement(Order = 2)]
         public ASYNBATCHTRSFRTRN_RSBODY RSBODY { get; set; }
     }
     /// <summary>
-    /// 异步批量支付 (最多100笔，不采用工作流) 响应内容
+    /// 3.4.12异步批量支付 (最多100笔，不采用工作流) 响应内容
     /// </summary>
     public class ASYNBATCHTRSFRTRN_RSBODY : Requests.ASYNBATCHTRSFRTRN
     {
@@ -44,7 +44,7 @@ namespace BEDA.CIB.Contracts.Responses
         public XFERPRCSTS XFERPRCSTS { get; set; }
     }
     /// <summary>
-    /// 收款处理列表
+    /// 3.4.12收款处理列表
     /// </summary>
     [XmlRoot("XFERINFOTEXT")]
     public class RS_XFERINFOTEXT : Requests.XFERINFOTEXT<PayResult>

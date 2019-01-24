@@ -94,6 +94,11 @@ namespace BEDA.CIB.Samples
             //CCCALL2CURRTRNRQSample();
             #endregion
 
+            #region 3.13	扩展功能
+            //BATCHTRNRQSample();
+            //BPAYOFFTRNRQSample();
+            #endregion
+
             Console.ReadLine();
         }
 
@@ -1733,6 +1738,88 @@ namespace BEDA.CIB.Samples
                         ACCTID = "117010100200489949",
                         TRNAMT = 100.0m,
                         ACTIONTYPE = 6,
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        #endregion
+
+        #region 3.13	扩展功能
+        /// <summary>
+        /// 3.13.1	批量汇款指令提交（暂不推荐）
+        /// </summary>
+        public static void BATCHTRNRQSample()
+        {
+            //因为此处功能与3.4	企业财务室中的批量支付功能类似，且属于不推荐功能，所以txt文本组织方式此处不进行封装
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.13.1", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_BATCHTRNRQ, V1_BATCHTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_BATCHTRNRQ
+            {
+                BATCHTRNRQ = new BATCHTRNRQ
+                {
+                    TRNUID = tid,
+                    CLTCOOKIE = "1234",
+                    BATCHRQ = new BATCHRQ
+                    {
+                        BATCHINFO = new BATCHINFO
+                        {
+                            ACCTFROM = new ACCTFROM
+                            {
+                                ACCTID = mainAccountId,
+                            },
+                            BIZTYPE = 0,
+                            TITLE = "批量汇款指令提交（暂不推荐）",
+                            ATTACHMENT = new ATTACHMENT
+                            {
+                                DIGEST = new DIGEST
+                                {
+                                    VALUE = "123112313131321132",
+                                },
+                                FILENAME = "no.txt"
+                            }
+                        }
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.13.2	批量工资指令提交（暂不推荐）
+        /// </summary>
+        public static void BPAYOFFTRNRQSample()
+        {
+            //因为此处功能与3.4	企业财务室中的工资发放功能类似，且属于不推荐功能，所以txt文本组织方式此处不进行封装
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.13.2", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_BPAYOFFTRNRQ, V1_BPAYOFFTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_BPAYOFFTRNRQ
+            {
+                BPAYOFFTRNRQ = new BPAYOFFTRNRQ
+                {
+                    TRNUID = tid,
+                    CLTCOOKIE = "1234",
+                    BPAYOFFRQ = new BPAYOFFRQ
+                    {
+                        BPAYOFFINFO = new BPAYOFFINFO
+                        {
+                            ACCTFROM = new ACCTFROM
+                            {
+                                ACCTID = mainAccountId,
+                            },
+                            DESCRIPTION = "006",
+                            TITLE = "批量工资指令提交（暂不推荐）",
+                            ATTACHMENT = new ATTACHMENT
+                            {
+                                DIGEST = new DIGEST
+                                {
+                                    VALUE = "123112313131321132",
+                                },
+                                FILENAME = "no.txt"
+                            },
+                            REMARK = "工资发放",
+                        }
                     }
                 }
             };

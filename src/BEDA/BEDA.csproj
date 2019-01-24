@@ -11,9 +11,5 @@
   <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
     <PackageReference Include="System.Text.Encoding.CodePages" Version="4.5.1" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="CIB\Contracts\Requests\Extension\" />
-    <Folder Include="CIB\Contracts\Responses\Extension\" />
-  </ItemGroup>
 
 </Project>
