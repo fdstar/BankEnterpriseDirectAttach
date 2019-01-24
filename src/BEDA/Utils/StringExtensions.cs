@@ -14,39 +14,45 @@ namespace BEDA.Utils
         /// <summary>
         /// 按单字节字符串向左填充长度
         /// </summary>
-        /// <param name="input"></param>
-        /// <param name="length"></param>
-        /// <param name="paddingChar"></param>
+        /// <param name="input">字符串</param>
+        /// <param name="totalWidth">要填充到的最大长度</param>
+        /// <param name="paddingChar">填充字符串（单字符）</param>
+        /// <param name="multibyteLength">每个非单字符实际对应几个ASC字符，默认2，即一个字符等于二个ASC字符</param>
         /// <returns></returns>
-        public static string PadLeftWhileDouble(this string input, int length, char paddingChar = '\0')
+        public static string PadLeftWhileDouble(this string input, int totalWidth, char paddingChar = '\0', int multibyteLength = 2)
         {
-            var singleLength = GetSingleLength(input);
-            return input.PadLeft(length - singleLength + input.Length, paddingChar);
+            var singleLength = GetSingleLength(input, multibyteLength);
+            return input.PadLeft(totalWidth - singleLength + input.Length, paddingChar);
         }
+
         /// <summary>
         /// 获取字符串对应的单字节长度
         /// </summary>
-        /// <param name="input"></param>
+        /// <param name="input">字符串</param>
+        /// <param name="multibyteLength">每个非单字符实际对应几个ASC字符，默认2，即一个字符等于二个ASC字符</param>
         /// <returns></returns>
-        public static int GetSingleLength(this string input)
+        public static int GetSingleLength(this string input, int multibyteLength = 2)
         {
-            if (string.IsNullOrEmpty(input))
+            if (input == null)
             {
                 throw new ArgumentNullException();
             }
-            return Regex.Replace(input, @"[^\x00-\xff]", "aa").Length;//计算得到该字符串对应单字节字符串的长度
+            var repStr = new string(Enumerable.Repeat('a', multibyteLength).ToArray());
+            return Regex.Replace(input, @"[^\x00-\xff]", repStr).Length;//计算得到该字符串对应单字节字符串的长度
         }
+
         /// <summary>
         /// 按单字节字符串向右填充长度
         /// </summary>
-        /// <param name="input"></param>
-        /// <param name="length"></param>
-        /// <param name="paddingChar"></param>
+        /// <param name="input">字符串</param>
+        /// <param name="totalWidth">要填充到的最大长度</param>
+        /// <param name="paddingChar">填充字符串（单字符）</param>
+        /// <param name="multibyteLength">每个非单字符实际对应几个ASC字符，默认2，即一个字符等于二个ASC字符</param>
         /// <returns></returns>
-        public static string PadRightWhileDouble(this string input, int length, char paddingChar = '\0')
+        public static string PadRightWhileDouble(this string input, int totalWidth, char paddingChar = '\0', int multibyteLength = 2)
         {
-            var singleLength = GetSingleLength(input);
-            return input.PadRight(length - singleLength + input.Length, paddingChar);
+            var singleLength = GetSingleLength(input, multibyteLength);
+            return input.PadRight(totalWidth - singleLength + input.Length, paddingChar);
         }
     }
 }
