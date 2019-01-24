@@ -87,6 +87,13 @@ namespace BEDA.CIB.Samples
             //CRSGATHERTRNRQSample();
             #endregion
 
+            #region 3.12	定活互转
+            //DEMAND2TIMETRNRQSample();
+            //TIME2DEMANDTRNRQSample();
+            //CCCURR2CALLTRNRQSample();
+            //CCCALL2CURRTRNRQSample();
+            #endregion
+
             Console.ReadLine();
         }
 
@@ -1611,7 +1618,7 @@ namespace BEDA.CIB.Samples
         /// </summary>
         public static void CRSGATHERTRNRQSample()
         {
-            string tid = string.Format("{0:yyyyMMddHHmmss}_3.10.4", DateTime.Now);
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.10.5", DateTime.Now);
             var rq = GetRequest<FOXRQ<V1_CRSGATHERTRNRQ, V1_CRSGATHERTRNRS>>();
             rq.SECURITIES_MSGSRQV1 = new V1_CRSGATHERTRNRQ
             {
@@ -1632,6 +1639,100 @@ namespace BEDA.CIB.Samples
                         BUSINESSTYPE = "00100",
                         PURPOSE = "他行账户收款",
                         TRNAMT = 5.7m,
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        #endregion
+
+        #region 3.12	定活互转
+        /// <summary>
+        /// 3.12.1	活期转定期
+        /// </summary>
+        public static void DEMAND2TIMETRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.12.1", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_DEMAND2TIMETRNRQ, V1_FINANCINGTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_DEMAND2TIMETRNRQ
+            {
+                DEMAND2TIMETRNRQ = new DEMAND2TIMETRNRQ
+                {
+                    TRNUID = tid,
+                    DEMAND2TIMEINFO = new DEMAND2TIMEINFO
+                    {
+                        AMOUNT = 10200.0m,
+                        CONTFLAG = 2,
+                        DEMANDACCT = mainAccountId,
+                        TERM = "M06",
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.12.2	定期转活期
+        /// </summary>
+        public static void TIME2DEMANDTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.12.2", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_TIME2DEMANDTRNRQ, V1_FINANCINGTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_TIME2DEMANDTRNRQ
+            {
+                TIME2DEMANDTRNRQ = new TIME2DEMANDTRNRQ
+                {
+                    TRNUID = tid,
+                    TIME2DEMANDINFO = new TIME2DEMANDINFO
+                    {
+                        TIMEACCT = mainAccountId
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.12.3	活期转通知
+        /// </summary>
+        public static void CCCURR2CALLTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.12.3", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_CCCURR2CALLTRNRQ, V1_CCCURR2CALLTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_CCCURR2CALLTRNRQ
+            {
+                CCCURR2CALLTRNRQ = new CCCURR2CALLTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new CCCURR2CALLTRN_RQBODY
+                    {
+                        ACCTID = mainAccountId,
+                        TRNAMT = 500010.0m,
+                        TERM = "D07",
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.12.4	通知转活期
+        /// </summary>
+        public static void CCCALL2CURRTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.12.3", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_CCCALL2CURRTRNRQ, V1_CCCALL2CURRTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_CCCALL2CURRTRNRQ
+            {
+                CCCALL2CURRTRNRQ = new CCCALL2CURRTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new CCCALL2CURRTRN_RQBODY
+                    {
+                        ACCTID = "117010100200489949",
+                        TRNAMT = 100.0m,
+                        ACTIONTYPE = 6,
                     }
                 }
             };

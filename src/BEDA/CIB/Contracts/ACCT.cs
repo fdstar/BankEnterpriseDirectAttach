@@ -23,6 +23,17 @@ namespace BEDA.CIB.Contracts
         public string NAME { get; set; }
     }
     /// <summary>
+    /// 账户信息（含金额）
+    /// </summary>
+    public class ACCTAMT : ACCT
+    {
+        /// <summary>
+        /// 账户余额，，decimal(15,2)，即整数位最长13位，小数位2位
+        /// </summary>
+        [XmlElement(Order = 2)]
+        public decimal BALAMT { get; set; }
+    }
+    /// <summary>
     /// 付款人账户
     /// </summary>
     public class ACCTFROM : ACCT
