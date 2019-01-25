@@ -101,6 +101,8 @@ namespace BEDA.CIB.Samples
             //HISBALQUERYTRNRQSample();
             //ELECAPPLYTRNRQSample();
             //HWKSUMUPTRNRQSample();
+            //INQSTATETRNRQSample();
+            //CHINAMOBILETAXQUERYTRNRQSample();
             #endregion
 
             Console.ReadLine();
@@ -418,8 +420,10 @@ namespace BEDA.CIB.Samples
                                 NAME = mainAccountName
                             },
                             ACCTTO = GetACCTTO(3),
-                            PURPOSE = "转账",
-                            TRNAMT = 1.77m,
+                            PURPOSE = "转账目的",
+                            TRNAMT = 3.77m,
+                             DTDUE = DateTime.Now,
+                              MEMO="转账备注",
                         }
                     }
                 }
@@ -493,7 +497,7 @@ namespace BEDA.CIB.Samples
                     CLTCOOKIE = "123",
                     XFERINQRQ = new XFERINQRQ
                     {
-                        CLIENTREF = "20190117114159_3.4.1"
+                        CLIENTREF = "20190125145132_3.4.1"
                     }
                 }
             };
@@ -1913,6 +1917,50 @@ namespace BEDA.CIB.Samples
                                 }
                             }
                         }
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.13.6	支付指令核心处理结果查询
+        /// </summary>
+        public static void INQSTATETRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.13.6", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_INQSTATETRNRQ, V1_INQSTATETRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_INQSTATETRNRQ
+            {
+                INQSTATETRNRQ = new INQSTATETRNRQ
+                {
+                    TRNUID = tid,
+                    INQSTATECOND = new INQSTATECOND
+                    {
+                        CLIENTREF = "20190125145132_3.4.1"
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.13.7	扣税流水查询
+        /// </summary>
+        public static void CHINAMOBILETAXQUERYTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.13.6", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_CHINAMOBILETAXQUERYTRNRQ, V1_CHINAMOBILETAXQUERYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_CHINAMOBILETAXQUERYTRNRQ
+            {
+                CHINAMOBILETAXQUERYTRNRQ = new CHINAMOBILETAXQUERYTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new CHINAMOBILETAXQUERYTRN_RQBODY
+                    {
+                        ACCTID = mainAccountId,
+                        DTSTART = DateTime.Now.AddDays(-5),
+                        DTEND = DateTime.Now.AddDays(-1),
                     }
                 }
             };
