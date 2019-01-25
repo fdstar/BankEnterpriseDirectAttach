@@ -10,33 +10,33 @@ using System.Xml.Serialization;
 namespace BEDA.CIB.Contracts.Requests
 {
     /// <summary>
-    /// 3.6.6虚拟子账户余额及交易明细查询请求主体
+    /// 3.6.6虚拟子账户余额(3.14.4代理支付)及交易明细查询请求主体
     /// </summary>
     public class V1_VATSTMTTRNRQ : IRequest<V1_VATSTMTTRNRS>
     {
         /// <summary>
-        /// 3.6.6虚拟子账户余额及交易明细查询请求主体
+        /// 3.6.6虚拟子账户余额(3.14.4代理支付)及交易明细查询请求主体
         /// </summary>
         public VATSTMTTRNRQ VATSTMTTRNRQ { get; set; }
     }
     /// <summary>
-    /// 3.6.6虚拟子账户余额及交易明细查询请求主体
+    /// 3.6.6虚拟子账户余额(3.14.4代理支付)及交易明细查询请求主体
     /// </summary>
     public class VATSTMTTRNRQ : BIZRQBASE
     {
         /// <summary>
-        /// 3.6.6虚拟子账户余额及交易明细查询请求内容
+        /// 3.6.6虚拟子账户余额(3.14.4代理支付)及交易明细查询请求内容
         /// </summary>
         [XmlElement(Order = 1)]
         public VATSTMTRQ VATSTMTRQ { get; set; }
     }
     /// <summary>
-    /// 3.6.6虚拟子账户余额及交易明细查询请求内容
+    /// 3.6.6虚拟子账户余额(3.14.4代理支付)及交易明细查询请求内容
     /// </summary>
     public class VATSTMTRQ
     {
         /// <summary>
-        /// 支付类型：1－虚拟子账户对外支付	必输
+        /// 支付类型：1－虚拟子账户对外支付 0－代理支付流水查询，2-实体主账户流水查询 默认 1－虚拟子账户对外支付 必输
         /// </summary>
         [XmlElement(Order = 0)]
         public int VATTYPE { get; set; } = 1;
@@ -51,14 +51,20 @@ namespace BEDA.CIB.Contracts.Requests
         [XmlElement(Order = 2)]
         public string SUBACCT { get; set; }
         /// <summary>
-        /// 付款账户信息	必输
+        /// <see cref="VATTYPE"/>为1-虚拟子账户对外支付时此处不应输入值
+        /// 借贷方向：0-借（往账），1-贷（来账），2-全部，不输时查询全部 非必输
         /// </summary>
         [XmlElement(Order = 3)]
+        public string TRNTYPE { get; set; }
+        /// <summary>
+        /// 付款账户信息	必输
+        /// </summary>
+        [XmlElement(Order = 4)]
         public ACCTFROM ACCTFROM { get; set; }
         /// <summary>
         /// 包含交易流水（未指定起止时间，表示查余额；若指定起止时间，那么：1）开始时间=结束时间；2）开始时间早于结束时间，并且结束时间不为当天。建议查询指定某一天的流水，避免网络传输带来的超时）。日期信息未填写，表示只查询企业内部账户余额。	非必输
         /// </summary>
-        [XmlElement(Order = 4)]
+        [XmlElement(Order = 5)]
         public VATSTMTRQ_INCTRAN INCTRAN { get; set; }
     }
     /// <summary>

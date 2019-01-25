@@ -52,5 +52,10 @@ namespace BEDA.CIB.Contracts.Responses
         /// </summary>
         [XmlElement(Order = 2)]
         public XFERPRCSTS XFERPRCSTS { get; set; }
+        /// <summary>
+        /// 客户端转账流水号，最长30位
+        /// </summary>
+        [XmlElement(Order = 3)]
+        public string CLIENTREF { get; set; }
     }
 }

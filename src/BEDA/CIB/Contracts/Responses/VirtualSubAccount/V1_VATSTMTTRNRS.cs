@@ -8,33 +8,33 @@ using System.Xml.Serialization;
 namespace BEDA.CIB.Contracts.Responses
 {
     /// <summary>
-    /// 3.6.6虚拟子账户余额及交易明细查询响应主体
+    /// 3.6.6虚拟子账户余额(3.14.4代理支付)及交易明细查询响应主体
     /// </summary>
     public class V1_VATSTMTTRNRS : IResponse
     {
         /// <summary>
-        /// 3.6.6虚拟子账户余额及交易明细查询响应主体
+        /// 3.6.6虚拟子账户余额(3.14.4代理支付)及交易明细查询响应主体
         /// </summary>
         public VATSTMTTRNRS VATSTMTTRNRS { get; set; }
     }
     /// <summary>
-    /// 3.6.6虚拟子账户余额及交易明细查询响应主体
+    /// 3.6.6虚拟子账户余额(3.14.4代理支付)及交易明细查询响应主体
     /// </summary>
     public class VATSTMTTRNRS : BIZRSBASE
     {
         /// <summary>
-        /// 3.6.6虚拟子账户余额及交易明细查询响应内容
+        /// 3.6.6虚拟子账户余额(3.14.4代理支付)及交易明细查询响应内容
         /// </summary>
         [XmlElement(Order = 2)]
         public VATSTMTRS VATSTMTRS { get; set; }
     }
     /// <summary>
-    /// 3.6.6虚拟子账户余额及交易明细查询响应内容
+    /// 3.6.6虚拟子账户余额(3.14.4代理支付)及交易明细查询响应内容
     /// </summary>
     public class VATSTMTRS
     {
         /// <summary>
-        /// 支付类型：1－虚拟子账户对外支付
+        /// 支付类型：1－虚拟子账户对外支付 0－代理支付流水查询，2-实体主账户流水查询
         /// </summary>
         [XmlElement(Order = 0)]
         public int VATTYPE { get; set; } = 1;

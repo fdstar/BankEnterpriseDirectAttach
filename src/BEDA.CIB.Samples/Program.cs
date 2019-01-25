@@ -105,6 +105,10 @@ namespace BEDA.CIB.Samples
             //CHINAMOBILETAXQUERYTRNRQSample();
             #endregion
 
+            #region 3.14	财务公司代理支付
+            //VAPMTTRNRQSample();
+            #endregion
+
             Console.ReadLine();
         }
 
@@ -1028,6 +1032,7 @@ namespace BEDA.CIB.Samples
         }
         /// <summary>
         /// 3.6.6	虚拟子账户余额及交易明细查询
+        /// 3.14.4	代理支付余额及交易明细查询
         /// </summary>
         public static void VATSTMTTRNRQSample()
         {
@@ -1042,9 +1047,11 @@ namespace BEDA.CIB.Samples
                     {
                         MAINACCT = mainAccountId,
                         SUBACCT = "010003",
+                        VATTYPE = 0,
                         ACCTFROM = new ACCTFROM
                         {
-                            ACCTID = mainAccountId
+                            //ACCTID = mainAccountId
+                            ACCTID = "00-10-0001-1",
                         },
                         INCTRAN = new VATSTMTRQ_INCTRAN
                         {
@@ -1949,7 +1956,7 @@ namespace BEDA.CIB.Samples
         /// </summary>
         public static void CHINAMOBILETAXQUERYTRNRQSample()
         {
-            string tid = string.Format("{0:yyyyMMddHHmmss}_3.13.6", DateTime.Now);
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.13.7", DateTime.Now);
             var rq = GetRequest<FOXRQ<V1_CHINAMOBILETAXQUERYTRNRQ, V1_CHINAMOBILETAXQUERYTRNRS>>();
             rq.SECURITIES_MSGSRQV1 = new V1_CHINAMOBILETAXQUERYTRNRQ
             {
@@ -1961,6 +1968,43 @@ namespace BEDA.CIB.Samples
                         ACCTID = mainAccountId,
                         DTSTART = DateTime.Now.AddDays(-5),
                         DTEND = DateTime.Now.AddDays(-1),
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        #endregion
+
+        #region 3.14	财务公司代理支付
+        /// <summary>
+        /// 3.14.1	实体主账户绑定的代理支付
+        /// 3.14.2	虚拟子账户绑定的代理支付
+        /// 3.14.3	虚拟子账户绑定的代理支付（内部账号第8位跟第11位必须为“-”）
+        /// </summary>
+        public static void VAPMTTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.14.1", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_VAPMTTRNRQ, V1_VAPMTTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_VAPMTTRNRQ
+            {
+                VAPMTTRNRQ = new VAPMTTRNRQ
+                {
+                    TRNUID = tid,
+                    VAXFERRQ = new VAXFERRQ
+                    {
+                        XFERINFO = new XFERINFO
+                        {
+                            ACCTFROM = new ACCTFROM
+                            {
+                                ACCTID = "00-10-0001-1",
+                            },
+                            ACCTTO = GetACCTTO(3),
+                            PURPOSE = "财务公司代理支付",
+                            TRNAMT = 3.14m,
+                            DTDUE = DateTime.Now,
+                            MEMO = "财务公司代理支付备注",
+                        }
                     }
                 }
             };

@@ -26,7 +26,7 @@ namespace BEDA.CIB.Contracts.Requests
         /// <summary>
         /// 查询条件	必输
         /// </summary>
-        [XmlElement(Order = 0)]
+        [XmlElement(Order = 1)]
         public INQSTATECOND INQSTATECOND { get; set; }
     }
     /// <summary>

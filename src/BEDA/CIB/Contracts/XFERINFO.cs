@@ -13,7 +13,7 @@ namespace BEDA.CIB.Contracts
     public class XFERINFO
     {
         /// <summary>
-        /// 服务器该笔交易的唯一标识,作为请求时切勿输入
+        /// 服务器该笔交易的唯一标识，且部分API才有此返回值,作为请求时切勿输入
         /// </summary>
         [XmlElement(Order = 0)]
         public string SRVRID { get; set; }
