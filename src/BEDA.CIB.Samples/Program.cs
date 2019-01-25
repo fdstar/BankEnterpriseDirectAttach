@@ -3,6 +3,7 @@ using BEDA.CIB.Contracts.Requests;
 using BEDA.CIB.Contracts.Responses;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BEDA.CIB.Samples
 {
@@ -97,6 +98,9 @@ namespace BEDA.CIB.Samples
             #region 3.13	扩展功能
             //BATCHTRNRQSample();
             //BPAYOFFTRNRQSample();
+            //HISBALQUERYTRNRQSample();
+            //ELECAPPLYTRNRQSample();
+            //HWKSUMUPTRNRQSample();
             #endregion
 
             Console.ReadLine();
@@ -1819,6 +1823,95 @@ namespace BEDA.CIB.Samples
                                 FILENAME = "no.txt"
                             },
                             REMARK = "工资发放",
+                        }
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.13.3	历史余额查询
+        /// </summary>
+        public static void HISBALQUERYTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.13.3", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_HISBALQUERYTRNRQ, V1_HISBALQUERYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_HISBALQUERYTRNRQ
+            {
+                HISBALQUERYTRNRQ = new HISBALQUERYTRNRQ
+                {
+                    TRNUID = tid,
+                    CLTCOOKIE = "1234",
+                    HISBALQUERYRQ = new HISBALQUERYRQ
+                    {
+                        HISBALQUERYINFO = new HISBALQUERYINFO
+                        {
+                            ACCTID = mainAccountId,
+                            DTSTART = DateTime.Now.AddMonths(-5),
+                            DTEND = DateTime.Now.AddDays(-2),
+                        }
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.13.4	预约提现和电子渠道类客户申请
+        /// </summary>
+        public static void ELECAPPLYTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.13.4", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_ELECAPPLYTRNRQ, V1_ELECAPPLYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_ELECAPPLYTRNRQ
+            {
+                ELECAPPLYTRNRQ = new ELECAPPLYTRNRQ
+                {
+                    TRNUID = tid,
+                    CLTCOOKIE = "1234",
+                    ELECAPPLYRQ = new ELECAPPLYRQ
+                    {
+                        ELECAPPLYINFO = new ELECAPPLYINFO
+                        {
+                            ACCTID = mainAccountId,
+                            ACCTNAME = mainAccountName,
+                            AMOUNT = 20.0m,
+                            NOTYPEDESCRIPT = "预约提现",
+                            PURPOSE = "预约提现和电子渠道类客户申请",
+                            BUSINESSSTORY = "预约提现业务",
+
+                        }
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.13.5	手动归集
+        /// </summary>
+        public static void HWKSUMUPTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.13.5", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_HWKSUMUPTRNRQ, V1_HWKSUMUPTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_HWKSUMUPTRNRQ
+            {
+                HWKSUMUPTRNRQ = new HWKSUMUPTRNRQ
+                {
+                    TRNUID = tid,
+                    CLTCOOKIE = "1234",
+                    HWKSUMUPRQ = new HWKSUMUPRQ
+                    {
+                        HWKSUMUPINFO = new HWKSUMUPINFO
+                        {
+                            CENTERACCTID = mainAccountId,
+                            List = new List<MEMBERACCT>
+                            {
+                                new MEMBERACCT{
+                                     ACCTID="117010100100306538"
+                                }
+                            }
                         }
                     }
                 }
