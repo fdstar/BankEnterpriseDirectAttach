@@ -115,6 +115,10 @@ namespace BEDA.CIB.Samples
             //MRCHORDERTRNRQSample();
             #endregion
 
+            #region 3.16	收付直通车商户资金代付
+            //MAGENTPAYTRNRQSample();
+            #endregion
+
             Console.ReadLine();
         }
 
@@ -2061,6 +2065,42 @@ namespace BEDA.CIB.Samples
                     {
                         MRCHNO = "110001",
                         ORDERNO = "T20110823114328",
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        #endregion
+
+        #region 3.16	收付直通车商户资金代付
+        /// <summary>
+        /// 3.16.1	收付直通车资金代付及指令查询（不采用工作流）
+        /// </summary>
+        public static void MAGENTPAYTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.16.1", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_MAGENTPAYTRNRQ, V1_MAGENTPAYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_MAGENTPAYTRNRQ
+            {
+                MAGENTPAYTRNRQ = new MAGENTPAYTRNRQ
+                {
+                    TRNUID = tid,
+                    MAGENTPAYRQ = new MAGENTPAYRQ
+                    {
+                        MAGENTPAYINFO = new MAGENTPAYINFO
+                        {
+                            MRCHNO = "P0000016",
+                            ORDERNO = "fdg1ff3fdr1321321",
+                            MRCHNAME = "银企直联测试",
+                            ACCTFROM = new ACCT
+                            {
+                                ACCTID = mainAccountId,
+                            },
+                            ACCTTO = GetACCTTO(3),
+                            TRNAMT = 5.5m,
+                            PURPOSE = "收付直通车资金代付及指令查询（不采用工作流）",
+                        }
                     }
                 }
             };

@@ -83,6 +83,11 @@ namespace BEDA.CIB.Contracts
         /// </summary>
         [XmlElement(Order = 5)]
         public string COLLECT { get; set; }
+        /// <summary>
+        /// 收款账户类型：0－储蓄卡 1－信用卡 2-企业账户  注意只有在支付时才可以按需输入该值，否则会导致异常
+        /// </summary>
+        [XmlElement(Order = 6)]
+        public string ACCTTYPE { get; set; }
     }
     /// <summary>
     /// 关联账户信息
