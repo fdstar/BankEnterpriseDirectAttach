@@ -1,6 +1,7 @@
 ﻿using BEDA.CIB.Contracts;
 using BEDA.CIB.Contracts.Requests;
 using BEDA.CIB.Contracts.Responses;
+using BEDA.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -107,6 +108,11 @@ namespace BEDA.CIB.Samples
 
             #region 3.14	财务公司代理支付
             //VAPMTTRNRQSample();
+            #endregion
+
+            #region 3.15	电子商务
+            //MRCHREFUNDTRNRQSample();
+            //MRCHORDERTRNRQSample();
             #endregion
 
             Console.ReadLine();
@@ -2005,6 +2011,56 @@ namespace BEDA.CIB.Samples
                             DTDUE = DateTime.Now,
                             MEMO = "财务公司代理支付备注",
                         }
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        #endregion
+
+        #region 3.15	电子商务
+        /// <summary>
+        /// 3.15.1	商户单笔退款
+        /// </summary>
+        public static void MRCHREFUNDTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.15.1", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_MRCHREFUNDTRNRQ, V1_MRCHREFUNDTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_MRCHREFUNDTRNRQ
+            {
+                MRCHREFUNDTRNRQ = new MRCHREFUNDTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new MRCHREFUNDTRN_RQBODY
+                    {
+                        MEMO = "商户单笔退款备注",
+                        MRCHNO = "110012",
+                        ORDERNO = "T20120719104505",
+                        ORDERAMT = 60000.31m,
+                        REFUNDAMT = 1.1m
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.15.2	商户单笔订单查询
+        /// </summary>
+        public static void MRCHORDERTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.15.2", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_MRCHORDERTRNRQ, V1_MRCHORDERTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_MRCHORDERTRNRQ
+            {
+                MRCHORDERTRNRQ = new MRCHORDERTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new  MRCHORDERTRN_RQBODY
+                    {
+                        MRCHNO = "110001",
+                        ORDERNO = "T20110823114328",
                     }
                 }
             };
