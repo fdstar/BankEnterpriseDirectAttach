@@ -120,6 +120,17 @@ namespace BEDA.CIB.Samples
             //ASYNBATCHMRCHAGENTTRNRQSample();
             #endregion
 
+            #region 3.17	虚拟资金池
+            //DCPMGTTRNRQSample();
+            //DCPINTERESTADJUSTTRNRQSample();
+            //DCPINTRSTQUERYTRNRQSample();
+            //QUERYSIGNRELATIONTRNRQSample();
+            //MAINACCTPAYLIMITTRNRQSample();
+            //MEMACCTPROPCFGTRNRQSample();
+            //MAINACCTPROPQUERYTRNRQSample();
+            //MEMACCTPROPQUERYTRNRQSample();
+            #endregion
+
             Console.ReadLine();
         }
 
@@ -437,12 +448,13 @@ namespace BEDA.CIB.Samples
                             ACCTTO = GetACCTTO(3),
                             PURPOSE = "转账目的",
                             TRNAMT = 7.77m,
-                             DTDUE = DateTime.Now,
-                              MEMO="转账备注",
+                            DTDUE = DateTime.Now,
+                            MEMO = "转账备注",
                         }
                     }
                 }
             };
+            //rq.SECURITIES_MSGSRQV1.XFERTRNRQ.TRNUID = "20190129151451_3.4.1";
             var rs = client.Execute(rq);
             Console.WriteLine(rs?.ResponseContent);
         }
@@ -2158,6 +2170,194 @@ namespace BEDA.CIB.Samples
             {
                 var rList = rs.SECURITIES_MSGSRSV1.ASYNBATCHMRCHAGENTTRNRS.RSBODY.XFERINFOTEXT.GetList();
             }
+        }
+        #endregion
+
+        #region 3.17	虚拟资金池
+        /// <summary>
+        /// 3.17.1	活期与保证金互转
+        /// </summary>
+        public static void DCPMGTTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.17.1", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_DCPMGTTRNRQ, V1_DCPMGTTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_DCPMGTTRNRQ
+            {
+                DCPMGTTRNRQ = new DCPMGTTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new DCPMGTTRN_RQBODY
+                    {
+                        MEMACCT = "117010100100306538",
+                        MARGINACCT = mainAccountId,
+                        AMOUNT = 100.0m,
+                        BIZTYPE = 1,
+                        PURPOSE = "活期转担保",
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.17.2	内部计价利息分配
+        /// </summary>
+        public static void DCPINTERESTADJUSTTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.17.2", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_DCPINTERESTADJUSTTRNRQ, V1_DCPINTERESTADJUSTTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_DCPINTERESTADJUSTTRNRQ
+            {
+                DCPINTERESTADJUSTTRNRQ = new DCPINTERESTADJUSTTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new DCPINTERESTADJUSTTRN_RQBODY
+                    {
+                        MAINACCTNO = mainAccountId,
+                        MEMACCTNO = "117010100100306538",
+                        CURRFUND = 0.1m,
+                        CURRINTRST = 0.2m,
+                        CURRINTRSTRATE = 0.3m,
+                        ADJUSTDEMANDINTRST = 0.2m,
+                        TIMEFUND = 0.5m,
+                        TIMEINTRST = 0.6m,
+                        TIMEINTRSTRATE = 0.7m,
+                        ADJUSTTIMEINTRST = 0.6m
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.17.3	利息查询
+        /// </summary>
+        public static void DCPINTRSTQUERYTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.17.3", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_DCPINTRSTQUERYTRNRQ, V1_DCPINTRSTQUERYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_DCPINTRSTQUERYTRNRQ
+            {
+                DCPINTRSTQUERYTRNRQ = new DCPINTRSTQUERYTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new DCPINTRSTQUERYTRN_RQBODY
+                    {
+                        MAINACCT = mainAccountId,
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.17.4	资金池签约关系及余额查询
+        /// </summary>
+        public static void QUERYSIGNRELATIONTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.17.4", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_QUERYSIGNRELATIONTRNRQ, V1_QUERYSIGNRELATIONTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_QUERYSIGNRELATIONTRNRQ
+            {
+                QUERYSIGNRELATIONTRNRQ = new QUERYSIGNRELATIONTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new QUERYSIGNRELATIONTRN_RQBODY
+                    {
+                        ACCTID = mainAccountId,
+                        ACCTTYPE = 0,
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.17.5	主账户支付额度查询
+        /// </summary>
+        public static void MAINACCTPAYLIMITTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.17.5", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_MAINACCTPAYLIMITTRNRQ, V1_MAINACCTPAYLIMITTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_MAINACCTPAYLIMITTRNRQ
+            {
+                MAINACCTPAYLIMITTRNRQ = new MAINACCTPAYLIMITTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new MAINACCTPAYLIMITTRN_RQBODY
+                    {
+                        ACCTID = mainAccountId,
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.17.6	成员账户属性设置
+        /// </summary>
+        public static void MEMACCTPROPCFGTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.17.6", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_MEMACCTPROPCFGTRNRQ, V1_MEMACCTPROPCFGTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_MEMACCTPROPCFGTRNRQ
+            {
+                MEMACCTPROPCFGTRNRQ = new MEMACCTPROPCFGTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new MEMACCTPROPCFGTRN_RQBODY
+                    {
+                        ACCTNO = "117010100100306538",
+                        CURRINTRSTRATE = 0.5m,
+                        TIMEINTRSTRATE = 0.7m,
+                        CTRBTFACTOR = 1.0m
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.17.7	主账户属性查询
+        /// </summary>
+        public static void MAINACCTPROPQUERYTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.17.7", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_MAINACCTPROPQUERYTRNRQ, V1_MAINACCTPROPQUERYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_MAINACCTPROPQUERYTRNRQ
+            {
+                MAINACCTPROPQUERYTRNRQ = new MAINACCTPROPQUERYTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new MAINACCTPROPQUERYTRN_RQBODY
+                    {
+                        ACCTNO = mainAccountId,
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.17.8	成员账户属性查询
+        /// </summary>
+        public static void MEMACCTPROPQUERYTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.17.8", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_MEMACCTPROPQUERYTRNRQ, V1_MEMACCTPROPQUERYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_MEMACCTPROPQUERYTRNRQ
+            {
+                MEMACCTPROPQUERYTRNRQ = new MEMACCTPROPQUERYTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new MEMACCTPROPQUERYTRN_RQBODY
+                    {
+                        ACCTNO = "117010100100306538",
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
         }
         #endregion
     }
