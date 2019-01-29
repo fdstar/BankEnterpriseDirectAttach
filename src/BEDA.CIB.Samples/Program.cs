@@ -117,6 +117,7 @@ namespace BEDA.CIB.Samples
 
             #region 3.16	收付直通车商户资金代付
             //MAGENTPAYTRNRQSample();
+            //ASYNBATCHMRCHAGENTTRNRQSample();
             #endregion
 
             Console.ReadLine();
@@ -435,7 +436,7 @@ namespace BEDA.CIB.Samples
                             },
                             ACCTTO = GetACCTTO(3),
                             PURPOSE = "转账目的",
-                            TRNAMT = 3.77m,
+                            TRNAMT = 7.77m,
                              DTDUE = DateTime.Now,
                               MEMO="转账备注",
                         }
@@ -863,12 +864,12 @@ namespace BEDA.CIB.Samples
                     }
                 }
             };
-            var txt = new RQ_XFERINFOTEXT();
-            var list = new List<PayeeInfo>();
+            var txt = new ASYNBATCHTRSFRTRNRQ_XFERINFOTEXT();
+            var list = new List<PayeeInfo_3_4_12>();
             for (byte i = 0; i < 4; i++)
             {
                 var acct = GetACCTTO(i);
-                var info = new PayeeInfo
+                var info = new PayeeInfo_3_4_12
                 {
                     Account = acct.ACCTID,
                     Name = acct.NAME,
@@ -887,8 +888,7 @@ namespace BEDA.CIB.Samples
             //rq.SECURITIES_MSGSRQV1.ASYNBATCHTRSFRTRNRQ.TRNUID = "20190117200215_3.4.12";//直接测试历史记录
             var rs = client.Execute(rq);
             Console.WriteLine(rs?.ResponseContent);
-            if (rs?.SECURITIES_MSGSRSV1.ASYNBATCHTRSFRTRNRS.RSBODY.XFERPRCSTS.XFERPRCCODE == XFERPRCCODEEnum.PAYOUT
-                || rs?.SECURITIES_MSGSRSV1.ASYNBATCHTRSFRTRNRS.RSBODY.XFERPRCSTS.XFERPRCCODE == XFERPRCCODEEnum.PART_PAYOUT)
+            if (rs?.SECURITIES_MSGSRSV1.ASYNBATCHTRSFRTRNRS.RSBODY.XFERINFOTEXT != null)
             {
                 var rList = rs.SECURITIES_MSGSRSV1.ASYNBATCHTRSFRTRNRS.RSBODY.XFERINFOTEXT.GetList();
             }
@@ -2106,6 +2106,58 @@ namespace BEDA.CIB.Samples
             };
             var rs = client.Execute(rq);
             Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.16.2	收付直通车批量代付(最多100笔，不采用工作流)
+        /// </summary>
+        public static void ASYNBATCHMRCHAGENTTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.16.2", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_ASYNBATCHMRCHAGENTTRNRQ, V1_ASYNBATCHMRCHAGENTTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_ASYNBATCHMRCHAGENTTRNRQ
+            {
+                ASYNBATCHMRCHAGENTTRNRQ = new ASYNBATCHMRCHAGENTTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new ASYNBATCHMRCHAGENTTRN_RQBODY
+                    {
+                        ACCTFROM = new ACCTFROM
+                        {
+                            ACCTID = mainAccountId
+                        },
+                        MRCHNO = "Q0000482",
+                        PURPOSE = "收付直通车批量代付",
+                    }
+                }
+            };
+            var txt = new ASYNBATCHMRCHAGENTTRNRQ_XFERINFOTEXT();
+            var list = new List<PayeeInfo_3_16_2>();
+            for (byte i = 0; i < 4; i++)
+            {
+                var acct = GetACCTTO(i);
+                var info = new PayeeInfo_3_16_2
+                {
+                    AccountType = 0,
+                    //MerchantName="",
+                    OrderNo = "201606021qwengqiang00" + i,
+                    Account = acct.ACCTID,
+                    Name = acct.NAME,
+                    BankCode = "105100000017",
+                    BankName = string.IsNullOrWhiteSpace(acct.BANKDESC) ? "兴业银行" : acct.BANKDESC,
+                    Amount = i + 5.3m,
+                    Purpose = "收付直通车批量代付" + i,
+                };
+                list.Add(info);
+            }
+            txt.SetList(list);
+            rq.SECURITIES_MSGSRQV1.ASYNBATCHMRCHAGENTTRNRQ.RQBODY.XFERINFOTEXT = txt;
+            rq.SECURITIES_MSGSRQV1.ASYNBATCHMRCHAGENTTRNRQ.TRNUID = "20190129101024_3.16.2";
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+            if (rs?.SECURITIES_MSGSRSV1.ASYNBATCHMRCHAGENTTRNRS.RSBODY.XFERINFOTEXT != null)
+            {
+                var rList = rs.SECURITIES_MSGSRSV1.ASYNBATCHMRCHAGENTTRNRS.RSBODY.XFERINFOTEXT.GetList();
+            }
         }
         #endregion
     }

@@ -7,17 +7,17 @@ using System.Xml.Serialization;
 namespace BEDA.CIB.Contracts.Responses
 {
     /// <summary>
-    /// 转账对应请求的响应主体
+    /// 3.4.1转账对应请求的响应主体
     /// </summary>
     public class V1_XFERTRNRS : IResponse
     {
         /// <summary>
-        /// 转账对应请求的响应，可能包括同步的内容
+        /// 3.4.1转账对应请求的响应，可能包括同步的内容
         /// </summary>
         public XFERTRNRS XFERTRNRS { get; set; }
     }
     /// <summary>
-    /// 转账对应请求的响应，可能包括同步的内容
+    /// 3.4.1转账对应请求的响应，可能包括同步的内容
     /// </summary>
     public class XFERTRNRS : BIZRSBASE
     {
@@ -33,7 +33,7 @@ namespace BEDA.CIB.Contracts.Responses
         public XFERRS XFERRS { get; set; }
     }
     /// <summary>
-    /// 转账付出指令内容
+    /// 3.4.1转账付出指令内容
     /// </summary>
     public class XFERRS
     {

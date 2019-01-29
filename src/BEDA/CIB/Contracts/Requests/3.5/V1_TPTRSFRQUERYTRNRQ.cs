@@ -61,6 +61,11 @@ namespace BEDA.CIB.Contracts.Requests
         [XmlElement(Order = 11)]
         public int OPERTYPE { get; set; } = 1;
         /// <summary>
+        /// 查询对账单时的查询月份	非必输
+        /// </summary>
+        [XmlElement(Order = 12)]
+        public string MONTH { get; set; }
+        /// <summary>
         /// 起始日期YYYY-MM-DD	必输
         /// </summary>
         [XmlIgnore]
@@ -68,7 +73,7 @@ namespace BEDA.CIB.Contracts.Requests
         /// <summary>
         /// 起始日期YYYY-MM-DD ,对应<see cref="DTSTART"/>	必输
         /// </summary>
-        [XmlElement("DTSTART", Order = 12)]
+        [XmlElement("DTSTART", Order = 13)]
         public string DTSTARTStr
         {
             get
@@ -91,7 +96,7 @@ namespace BEDA.CIB.Contracts.Requests
         /// <summary>
         /// 截止日期YYYY-MM-DD ,对应<see cref="DTEND"/>	必输
         /// </summary>
-        [XmlElement("DTEND", Order = 13)]
+        [XmlElement("DTEND", Order = 14)]
         public string DTENDStr
         {
             get

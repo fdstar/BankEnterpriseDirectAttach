@@ -38,7 +38,7 @@ namespace BEDA.CIB.Contracts.Requests
         /// 批量收款人列表，最多100笔，注意请求时不需要填<see cref="ASYNBATCHTRSFRTRN.CHEQUENUM"/>
         /// </summary>
         [XmlElement("XFERINFOTEXT", Order = 9)]
-        public RQ_XFERINFOTEXT XFERINFOTEXT { get; set; }
+        public ASYNBATCHTRSFRTRNRQ_XFERINFOTEXT XFERINFOTEXT { get; set; }
     }
     /// <summary>
     /// 异步批量支付请求
@@ -129,7 +129,6 @@ namespace BEDA.CIB.Contracts.Requests
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public abstract class XFERINFOTEXT<T>
-        where T: PayeeInfo
     {
         /// <summary>
         /// 数量
@@ -138,9 +137,6 @@ namespace BEDA.CIB.Contracts.Requests
         public int Size { get; set; }
         /// <summary>
         /// 文本内容
-        /// 请求时 格式为  序号|收款账号|收款人名称|是否兴业银行|是否同城|收款银行行号|收款行名称|收款地址|金额|用途|备注|
-        /// 响应时 格式为  序号|收款账号|收款人名称|是否兴业银行|是否同城|收款银行行号|收款行名称|收款地址|金额|用途|备注|处理状态|处理结果信息|
-        /// 需保证明细中每个字段值不含‘|’，否则将引起系统解析异常
         /// </summary>
         [XmlText]
         public string Value { get; set; }
@@ -154,11 +150,42 @@ namespace BEDA.CIB.Contracts.Requests
         /// </summary>
         /// <returns></returns>
         public abstract IList<T> GetList();
+        /// <summary>
+        /// 替换字符串内的特定字符
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="fix">默认替换</param>
+        /// <param name="oldChar">要替换的字符，默认 '|'</param>
+        /// <param name="newChar">替换后的字符，默认 '\0'</param>
+        /// <returns></returns>
+        protected string ReplaceChar(object obj, bool fix = true, char oldChar = '|', char newChar = '\0')
+        {
+            string ret = string.Empty;
+            if (obj != null)
+            {
+                ret = obj.ToString();
+                if (fix)
+                {
+                    ret = ret.Replace(oldChar, newChar);
+                }
+            }
+            return ret;
+        }
+        /// <summary>
+        /// 获取移除特定字符后的字符串
+        /// </summary>
+        /// <param name="str"></param>
+        /// <param name="trimChars"></param>
+        /// <returns></returns>
+        protected string GetTrimedString(string str, params char[] trimChars)
+        {
+            return str.Trim(trimChars);
+        }
     }
     /// <summary>
-    /// 收款人信息
+    /// 3.4.12对应收款人信息
     /// </summary>
-    public class PayeeInfo
+    public class PayeeInfo_3_4_12
     {
         /// <summary>
         /// 收款账号  最长32位	必输
@@ -204,28 +231,31 @@ namespace BEDA.CIB.Contracts.Requests
     /// <summary>
     /// 批量收款人列表，最多100笔，SIZE为条数
     /// </summary>
-    public class RQ_XFERINFOTEXT: XFERINFOTEXT<PayeeInfo>
+    public class ASYNBATCHTRSFRTRNRQ_XFERINFOTEXT : XFERINFOTEXT<PayeeInfo_3_4_12>
     {
         /// <summary>
         /// 请求时不支持该方法
         /// </summary>
         /// <returns></returns>
-        public override IList<PayeeInfo> GetList()
+        public override IList<PayeeInfo_3_4_12> GetList()
         {
             throw new NotSupportedException();
         }
         /// <summary>
-        /// 设置收款人列表，转化为<see cref="XFERINFOTEXT{T}.Value"/>要求的格式
+        /// 设置收款人列表，转化为接口要求的格式
+        /// 请求时 格式为  序号|收款账号|收款人名称|是否兴业银行|是否同城|收款银行行号|收款行名称|收款地址|金额|用途|备注|
+        /// 响应时 格式为  序号|收款账号|收款人名称|是否兴业银行|是否同城|收款银行行号|收款行名称|收款地址|金额|用途|备注|处理状态|处理结果信息|
+        /// 需保证明细中每个字段值不含‘|’，否则将引起系统解析异常
         /// </summary>
         /// <param name="payees"></param>
-        public override void SetList(IEnumerable<PayeeInfo> payees)
+        public override void SetList(IEnumerable<PayeeInfo_3_4_12> payees)
         {
             if (payees != null && payees.Any())
             {
                 var tmp = new StringBuilder();
                 Action<object, bool> act = (o, b) =>
                 {
-                    tmp.Append(this.FixString(o, b));
+                    tmp.Append(this.ReplaceChar(o, b));
                     tmp.Append('|');
                 };
                 var idx = 1;
@@ -248,19 +278,6 @@ namespace BEDA.CIB.Contracts.Requests
                 this.Value = tmp.ToString();
                 this.Size = idx - 1;
             }
-        }
-        private string FixString(object obj, bool fix = true)
-        {
-            string ret = string.Empty;
-            if (obj != null)
-            {
-                ret = obj.ToString();
-                if (fix)
-                {
-                    ret = ret.Replace('|', '\0');
-                }
-            }
-            return ret;
         }
     }
 }

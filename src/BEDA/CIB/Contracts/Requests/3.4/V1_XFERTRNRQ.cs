@@ -8,17 +8,17 @@ using System.Xml.Serialization;
 namespace BEDA.CIB.Contracts.Requests
 {
     /// <summary>
-    /// 转账服务请求主体
+    /// 3.4.1转账服务请求主体
     /// </summary>
     public class V1_XFERTRNRQ : IRequest<V1_XFERTRNRS>
     {
         /// <summary>
-        /// 转账服务请求
+        /// 3.4.1转账服务请求
         /// </summary>
         public XFERTRNRQ XFERTRNRQ { get; set; }
     }
     /// <summary>
-    /// 转账服务请求
+    /// 3.4.1转账服务请求
     /// </summary>
     public class XFERTRNRQ : BIZRQBASE
     {
@@ -34,7 +34,7 @@ namespace BEDA.CIB.Contracts.Requests
         public XFERRQ XFERRQ { get; set; }
     }
     /// <summary>
-    /// 生成转账付出指令内容
+    /// 3.4.1生成转账付出指令内容
     /// </summary>
     public class XFERRQ
     {

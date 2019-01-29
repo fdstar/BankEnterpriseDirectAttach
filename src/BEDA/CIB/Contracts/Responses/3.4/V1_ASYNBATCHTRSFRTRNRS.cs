@@ -36,7 +36,7 @@ namespace BEDA.CIB.Contracts.Responses
         /// 批量收款人列表，最多100笔
         /// </summary>
         [XmlElement("XFERINFOTEXT", Order = 9)]
-        public RS_XFERINFOTEXT XFERINFOTEXT { get; set; }
+        public ASYNBATCHTRSFRTRNRS_XFERINFOTEXT XFERINFOTEXT { get; set; }
         /// <summary>
         /// 批量指令处理状态
         /// </summary>
@@ -47,39 +47,42 @@ namespace BEDA.CIB.Contracts.Responses
     /// 3.4.12收款处理列表
     /// </summary>
     [XmlRoot("XFERINFOTEXT")]
-    public class RS_XFERINFOTEXT : Requests.XFERINFOTEXT<PayResult>
+    public class ASYNBATCHTRSFRTRNRS_XFERINFOTEXT : Requests.XFERINFOTEXT<PayResult_3_4_12>
     {
         /// <summary>
-        /// 获取<see cref="Requests.XFERINFOTEXT{T}.Value"/>对应的数据集合
+        /// 获取接口格式对应的数据集合
+        /// 请求时 格式为  序号|收款账号|收款人名称|是否兴业银行|是否同城|收款银行行号|收款行名称|收款地址|金额|用途|备注|
+        /// 响应时 格式为  序号|收款账号|收款人名称|是否兴业银行|是否同城|收款银行行号|收款行名称|收款地址|金额|用途|备注|处理状态|处理结果信息|
+        /// 需保证明细中每个字段值不含‘|’，否则将引起系统解析异常
         /// </summary>
         /// <returns></returns>
-        public override IList<PayResult> GetList()
+        public override IList<PayResult_3_4_12> GetList()
         {
-            IList<PayResult> list = null;
+            IList<PayResult_3_4_12> list = null;
             if (this.Value != null && this.Value.Length > 10)
             {
                 var tmpArr = this.Value.Split('|');
                 int cols = 13;
                 if (tmpArr.Length >= cols)
                 {
-                    list = new List<PayResult>();
+                    list = new List<PayResult_3_4_12>();
                     for (var i = 0; i < tmpArr.Length / cols; i++)
                     {
-                        Enum.TryParse(this.GetString(tmpArr[i * cols + 11]), out XFERPRCCODEEnum status);
-                        var result = new PayResult
+                        Enum.TryParse(this.GetTrimedString(tmpArr[i * cols + 11]), out XFERPRCCODEEnum status);
+                        var result = new PayResult_3_4_12
                         {
-                            Account = this.GetString(tmpArr[i * cols + 1]),
-                            Name = this.GetString(tmpArr[i * cols + 2]),
-                            IsCIB = this.GetString(tmpArr[i * cols + 3])[0],
-                            IsSameCity = this.GetString(tmpArr[i * cols + 4])[0],
-                            BankCode = this.GetString(tmpArr[i * cols + 5]),
-                            BankName = this.GetString(tmpArr[i * cols + 6]),
-                            Address = this.GetString(tmpArr[i * cols + 7]),
-                            Amount = decimal.Parse(this.GetString(tmpArr[i * cols + 8])),
-                            Purpose = this.GetString(tmpArr[i * cols + 9]),
-                            Remark = this.GetString(tmpArr[i * cols + 10]),
+                            Account = this.GetTrimedString(tmpArr[i * cols + 1]),
+                            Name = this.GetTrimedString(tmpArr[i * cols + 2]),
+                            IsCIB = this.GetTrimedString(tmpArr[i * cols + 3])[0],
+                            IsSameCity = this.GetTrimedString(tmpArr[i * cols + 4])[0],
+                            BankCode = this.GetTrimedString(tmpArr[i * cols + 5]),
+                            BankName = this.GetTrimedString(tmpArr[i * cols + 6]),
+                            Address = this.GetTrimedString(tmpArr[i * cols + 7]),
+                            Amount = decimal.Parse(this.GetTrimedString(tmpArr[i * cols + 8])),
+                            Purpose = this.GetTrimedString(tmpArr[i * cols + 9]),
+                            Remark = this.GetTrimedString(tmpArr[i * cols + 10]),
                             Status = status,
-                            ResultMsg = this.GetString(tmpArr[i * cols + 12]),
+                            ResultMsg = this.GetTrimedString(tmpArr[i * cols + 12]),
                         };
                         list.Add(result);
                     }
@@ -87,15 +90,11 @@ namespace BEDA.CIB.Contracts.Responses
             }
             return list;
         }
-        private string GetString(string str)
-        {
-            return str.Trim();
-        }
         /// <summary>
         /// 响应时不支持该方法
         /// </summary>
         /// <param name="source"></param>
-        public override void SetList(IEnumerable<PayResult> source)
+        public override void SetList(IEnumerable<PayResult_3_4_12> source)
         {
             throw new NotSupportedException();
         }
@@ -103,7 +102,7 @@ namespace BEDA.CIB.Contracts.Responses
     /// <summary>
     /// 收款处理结果
     /// </summary>
-    public class PayResult : Requests.PayeeInfo
+    public class PayResult_3_4_12 : Requests.PayeeInfo_3_4_12
     {
         /// <summary>
         /// 最长30位	值为：
