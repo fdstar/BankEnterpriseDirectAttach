@@ -131,6 +131,10 @@ namespace BEDA.CIB.Samples
             //MEMACCTPROPQUERYTRNRQSample();
             #endregion
 
+            #region 3.18	跨境电商
+            //QUERYBULLETINTRNRQSample();
+            #endregion
+
             Console.ReadLine();
         }
 
@@ -2353,6 +2357,30 @@ namespace BEDA.CIB.Samples
                     RQBODY = new MEMACCTPROPQUERYTRN_RQBODY
                     {
                         ACCTNO = "117010100100306538",
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        #endregion
+
+        #region 3.18	跨境电商
+        /// <summary>
+        /// 3.18.1	汇率查询
+        /// </summary>
+        public static void QUERYBULLETINTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.18.1", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_QUERYBULLETINTRNRQ, V1_QUERYBULLETINTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_QUERYBULLETINTRNRQ
+            {
+                QUERYBULLETINTRNRQ = new QUERYBULLETINTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new QUERYBULLETINTRN_RQBODY
+                    {
+                        DATE = DateTime.Now.AddDays(-4)
                     }
                 }
             };
