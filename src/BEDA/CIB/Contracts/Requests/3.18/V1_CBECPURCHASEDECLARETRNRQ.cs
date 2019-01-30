@@ -9,30 +9,30 @@ using System.Xml.Serialization;
 namespace BEDA.CIB.Contracts.Requests
 {
     /// <summary>
-    /// 3.18.3跨境电商结汇还原报送请求主体
+    /// 3.18.4跨境电商购汇还原报送请求主体
     /// </summary>
-    public class V1_CBECSETTLEMENTDECLARETRNRQ : IRequest<V1_CBECSETTLEMENTDECLARETRNRS>
+    public class V1_CBECPURCHASEDECLARETRNRQ : IRequest<V1_CBECPURCHASEDECLARETRNRS>
     {
         /// <summary>
-        /// 3.18.3跨境电商结汇还原报送请求主体
+        /// 3.18.4跨境电商购汇还原报送请求主体
         /// </summary>
-        public CBECSETTLEMENTDECLARETRNRQ CBECSETTLEMENTDECLARETRNRQ { get; set; }
+        public CBECPURCHASEDECLARETRNRQ CBECPURCHASEDECLARETRNRQ { get; set; }
     }
     /// <summary>
-    /// 3.18.3跨境电商结汇还原报送请求主体
+    /// 3.18.4跨境电商购汇还原报送请求主体
     /// </summary>
-    public class CBECSETTLEMENTDECLARETRNRQ : BIZRQBASE
+    public class CBECPURCHASEDECLARETRNRQ : BIZRQBASE
     {
         /// <summary>
-        /// 3.18.3跨境电商结汇还原报送请求内容
+        /// 3.18.4跨境电商购汇还原报送请求内容
         /// </summary>
         [XmlElement(Order = 2)]
-        public CBECSETTLEMENTDECLARETRN_RQBODY RQBODY { get; set; }
+        public CBECPURCHASEDECLARETRN_RQBODY RQBODY { get; set; }
     }
     /// <summary>
-    /// 3.18.3跨境电商结汇还原报送请求内容
+    /// 3.18.4跨境电商购汇还原报送请求内容
     /// </summary>
-    public class CBECSETTLEMENTDECLARETRN_RQBODY
+    public class CBECPURCHASEDECLARETRN_RQBODY
     {
         /// <summary>
         /// 结售汇银行流水号	必输
@@ -81,20 +81,20 @@ namespace BEDA.CIB.Contracts.Requests
         {
             get
             {
-                return this.List?.Sum(c => c.SETTLEMENT_AMT) ?? 0;
+                return this.List?.Sum(c => c.PURCHASE_AMT) ?? 0;
             }
             set { }
         }
         /// <summary>
-        /// 3.18.3跨境电商结汇还原报送请求集合 可重复多次,不能超过100笔
+        /// 3.18.4跨境电商购汇还原报送请求集合 可重复多次,不能超过100笔
         /// </summary>
         [XmlElement("CONTENT", Order = 5)]
-        public List<CBECSETTLEMENTDECLARETRNRQ_CONTENT> List { get; set; }
+        public List<CBECPURCHASEDECLARETRNRQ_CONTENT> List { get; set; }
     }
     /// <summary>
-    /// 3.18.3跨境电商结汇还原报送请求明细
+    /// 3.18.4跨境电商购汇还原报送请求明细
     /// </summary>
-    public class CBECSETTLEMENTDECLARETRNRQ_CONTENT
+    public class CBECPURCHASEDECLARETRNRQ_CONTENT
     {
         /// <summary>
         /// 序号，从1开始递增	必输
@@ -136,56 +136,69 @@ namespace BEDA.CIB.Contracts.Requests
         [XmlElement(Order = 6)]
         public string PERSON_NAME { get; set; }
         /// <summary>
-        /// 结汇金额, 大于0	必输
+        /// 购汇金额, 大于0	必输
         /// </summary>
         [XmlElement(Order = 7)]
-        public decimal SETTLEMENT_AMT { get; set; }
+        public decimal PURCHASE_AMT { get; set; }
         /// <summary>
-        /// 结汇资金属性代码  必输，只能输入以下值:
-        /// 110	货物贸易
-        /// 121	运输
-        /// 122	旅游
-        /// 123	金融和保险服务
-        /// 124	专有权利使用费和特许费
-        /// 125	咨询服务
-        /// 126	其他服务
+        /// 购汇资金属性,只允许输入以下值： 必输
+        /// 310	    货物贸易
+        /// 321	    运输
+        /// 3221	自费出境学习
+        /// 3222	因私旅游
+        /// 3223	公务及商务出国
+        /// 3225	旅游项下其他
+        /// 323	    金融和保险服务
+        /// 324	    专有权利使用费和特许费
+        /// 325	    咨询服务
+        /// 326	    其他服务
         /// </summary>
         [XmlElement(Order = 8)]
         public int CAPITAL_PROP_CODE { get; set; }
         /// <summary>
-        /// 结汇资金形态，目前只支持02-汇入资金（包括外汇票据）,默认02  必输
-        /// 字典：
-        /// 01-外币现钞
-        /// 02-汇入资金（包括外汇票据）
-        /// 03-账户资金
-        /// 04-旅行支票
+        /// 购汇人民币账户	非必输
         /// </summary>
         [XmlElement(Order = 9)]
-        public string SALE_SETTLE_CODE { get; set; } = "02";
+        public string PURCHASE_CNY_ACCT_NO { get; set; }
         /// <summary>
-        /// 结汇人民币账户 	非必输
+        /// 个人外汇账户账号 “存入个人外汇账户金额”大于零时，该项不允许为空； 	非必输
         /// </summary>
         [XmlElement(Order = 10)]
-        public string SETTLEMENT_CNY_ACCT_NO { get; set; }
+        public string FCY_ACCT_NO { get; set; }
         /// <summary>
-        /// 个人外汇账户账号 结汇资金形态为“账户资金”时不允许为空 非必输
+        /// 购汇提钞金额, 大于等于0	必输
         /// </summary>
         [XmlElement(Order = 11)]
-        public string FCY_ACCT_NO { get; set; }
+        public decimal PURCHASE_CASH_AMT { get; set; }
+        /// <summary>
+        /// 汇出资金（包括外汇票据）金额, 等于购汇金额。	必输
+        /// </summary>
+        [XmlElement(Order = 12)]
+        public decimal PURCHASE_REMIT_AMT { get; set; }
+        /// <summary>
+        /// 存入个人外汇账户金额, 大于等于0	必输
+        /// </summary>
+        [XmlElement(Order = 13)]
+        public decimal FCY_ACCT_AMT { get; set; }
+        /// <summary>
+        /// 旅行支票金额,大于等于0	必输
+        /// </summary>
+        [XmlElement(Order = 14)]
+        public decimal TRIP_CHK_AMT { get; set; }
         /// <summary>
         /// 支付机构组织机构代码	必输
         /// </summary>
-        [XmlElement(Order = 12)]
+        [XmlElement(Order = 15)]
         public string PAY_ORG_CODE { get; set; }
         /// <summary>
         /// 外汇局批件号/备案表号/业务编号	非必输
         /// </summary>
-        [XmlElement(Order = 13)]
+        [XmlElement(Order = 16)]
         public string SAFE_BIZ_NO { get; set; }
         /// <summary>
         /// 备注 非必输
         /// </summary>
-        [XmlElement(Order = 14)]
+        [XmlElement(Order = 17)]
         public string MEMO { get; set; }
     }
 }
