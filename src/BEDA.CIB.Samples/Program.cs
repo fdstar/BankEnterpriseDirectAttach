@@ -452,13 +452,13 @@ namespace BEDA.CIB.Samples
                             ACCTTO = GetACCTTO(3),
                             PURPOSE = "转账目的",
                             TRNAMT = 7.77m,
-                            DTDUE = DateTime.Now,
-                            MEMO = "转账备注",
+                            //DTDUE = DateTime.Now,//如果需要网银审核，在该日期之后如果还未审核，则支付请求过期
+                            MEMO = "转账测试审核过期",
                         }
                     }
                 }
             };
-            //rq.SECURITIES_MSGSRQV1.XFERTRNRQ.TRNUID = "20190129151451_3.4.1";
+            //rq.SECURITIES_MSGSRQV1.XFERTRNRQ.TRNUID =  "20190130102306_3.4.1"; //过期 20190129151451_3.4.1
             var rs = client.Execute(rq);
             Console.WriteLine(rs?.ResponseContent);
         }
