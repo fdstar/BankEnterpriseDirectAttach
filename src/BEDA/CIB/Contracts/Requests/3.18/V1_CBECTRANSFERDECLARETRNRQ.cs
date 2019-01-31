@@ -96,12 +96,12 @@ namespace BEDA.CIB.Contracts.Requests
         /// 3.18.11跨境电商收付汇还原申报请求集合 申报明细，不能超过100
         /// </summary>
         [XmlElement("CONTENT", Order = 9)]
-        public List<CBECTRANSFERDECLARETRNRQ_CONTENT> List { get; set; }
+        public List<CBECTRANSFERDECLARETRN_CONTENT> List { get; set; }
     }
     /// <summary>
     /// 3.18.11跨境电商收付汇还原申报请求明细
     /// </summary>
-    public class CBECTRANSFERDECLARETRNRQ_CONTENT
+    public class CBECTRANSFERDECLARETRN_CONTENT
     {
         /// <summary>
         /// 序号，从1开始递增	必输
