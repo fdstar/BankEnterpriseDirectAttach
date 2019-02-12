@@ -64,7 +64,7 @@ namespace BEDA.CIB.Contracts.Requests
         /// 客户端期望的转账执行日期，格式：YYYY-MM-DD。目前只支持当日 必输
         /// </summary>
         [XmlIgnore]
-        public DateTime DTDUE { get; set; }
+        public DateTime DTDUE { get; set; } = DateTime.Now;
         /// <summary>
         /// 客户端期望的转账执行日期，格式：YYYY-MM-DD。目前只支持当日, 对应<see cref="DTDUE"/>	必输 
         /// </summary>
