@@ -70,12 +70,12 @@ namespace BEDA.CIB.Contracts.Requests
             }
         }
         /// <summary>
-        /// 业务日期查询范围 结束时间YYYY-MM-DD 非必输
+        /// 业务日期查询范围 结束时间YYYY-MM-DD 必输
         /// </summary>
         [XmlIgnore]
         public DateTime ENDDATE { get; set; }
         /// <summary>
-        /// 业务日期查询范围 结束时间YYYY-MM-DD, 对应<see cref="ENDDATE"/>	非必输 
+        /// 业务日期查询范围 结束时间YYYY-MM-DD, 对应<see cref="ENDDATE"/>	必输 
         /// </summary>
         [XmlElement("ENDDATE", Order = 3)]
         public string ENDDATEStr

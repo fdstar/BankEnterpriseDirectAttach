@@ -294,7 +294,7 @@ namespace BEDA.CIB.Contracts.Requests
         {
             get
             {
-                return doc.CreateCDataSection(this.GOODSDESC);
+                return _doc.CreateCDataSection(this.GOODSDESC);
             }
             set
             {
@@ -314,7 +314,7 @@ namespace BEDA.CIB.Contracts.Requests
         {
             get
             {
-                return doc.CreateCDataSection(this.DOCUMENTS);
+                return _doc.CreateCDataSection(this.DOCUMENTS);
             }
             set
             {
@@ -334,7 +334,7 @@ namespace BEDA.CIB.Contracts.Requests
         {
             get
             {
-                return doc.CreateCDataSection(this.ADDCONDITIONS);
+                return _doc.CreateCDataSection(this.ADDCONDITIONS);
             }
             set
             {
@@ -346,6 +346,6 @@ namespace BEDA.CIB.Contracts.Requests
         /// </summary>
         [XmlElement(Order = 39)]
         public string COMMENT { get; set; }
-        private XmlDocument doc = new XmlDocument();
+        private XmlDocument _doc = new XmlDocument();
     }
 }

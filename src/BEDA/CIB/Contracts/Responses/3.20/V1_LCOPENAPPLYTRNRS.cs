@@ -62,7 +62,7 @@ namespace BEDA.CIB.Contracts.Responses
         [XmlElement(Order = 4)]
         public decimal NOMINALAMT { get; set; }
         /// <summary>
-        /// Initial Code,5位兴业机构号，如果传空取客户所在的地区机构号(建议客户自己输)	非 必回
+        /// Initial Code,5位兴业机构号，如果传空取客户所在的地区机构号(建议客户自己输)	非必回
         /// </summary>
         [XmlElement(Order = 5)]
         public string INITIALCODE { get; set; }
@@ -90,12 +90,12 @@ namespace BEDA.CIB.Contracts.Responses
             }
         }
         /// <summary>
-        /// Latest Shipment Date, 日期yyyy-MM-dd	非 必回 
+        /// Latest Shipment Date, 日期yyyy-MM-dd	非必回 
         /// </summary>
         [XmlIgnore]
         public DateTime? LASTESTSHIPMENTDATE { get; set; }
         /// <summary>
-        /// Latest Shipment Date, 日期yyyy-MM-dd, 对应<see cref="LASTESTSHIPMENTDATE"/>	非 必回 
+        /// Latest Shipment Date, 日期yyyy-MM-dd, 对应<see cref="LASTESTSHIPMENTDATE"/>	非必回 
         /// </summary>
         [XmlElement("LASTESTSHIPMENTDATE", Order = 7)]
         public string LASTESTSHIPMENTDATEStr
@@ -185,12 +185,12 @@ namespace BEDA.CIB.Contracts.Responses
         [XmlElement(Order = 17)]
         public string CONFIRMINSTRCTION { get; set; }
         /// <summary>
-        /// Applicant Bank 长度：4*35	非 必回
+        /// Applicant Bank 长度：4*35	非必回
         /// </summary>
         [XmlElement(Order = 18)]
         public string APPLICANTBANK { get; set; }
         /// <summary>
-        /// 2nd advising bank 长度：4*35	非 必回
+        /// 2nd advising bank 长度：4*35	非必回
         /// </summary>
         [XmlElement(Order = 19)]
         public string ADVISINGBANK2ND { get; set; }
@@ -216,32 +216,32 @@ namespace BEDA.CIB.Contracts.Responses
         [XmlElement(Order = 21)]
         public string AVBLPYMTWAY { get; set; }
         /// <summary>
-        /// Drafts at 长度：3*35	非 必回
+        /// Drafts at 长度：3*35	非必回
         /// </summary>
         [XmlElement(Order = 22)]
         public string DRAFTESAT { get; set; }
         /// <summary>
-        /// Drawee 长度：4*35	非 必回
+        /// Drawee 长度：4*35	非必回
         /// </summary>
         [XmlElement(Order = 23)]
         public string DRAWEE { get; set; }
         /// <summary>
-        /// Def.Payment Details 长度：4*35	非 必回
+        /// Def.Payment Details 长度：4*35	非必回
         /// </summary>
         [XmlElement(Order = 24)]
         public string DEFPYMTDTL { get; set; }
         /// <summary>
-        /// Mixed Payment Details 长度：4*35	非 必回
+        /// Mixed Payment Details 长度：4*35	非必回
         /// </summary>
         [XmlElement(Order = 25)]
         public string MIXEDPYMTDTL { get; set; }
         /// <summary>
-        /// Presentation Period 长度：4*35	非 必回
+        /// Presentation Period 长度：4*35	非必回
         /// </summary>
         [XmlElement(Order = 26)]
         public string PRESENTATIONPERIOD { get; set; }
         /// <summary>
-        /// Details of Charges 长度：6*35	非 必回
+        /// Details of Charges 长度：6*35	非必回
         /// </summary>
         [XmlElement(Order = 27)]
         public string CHARGEDTL { get; set; }
@@ -251,41 +251,41 @@ namespace BEDA.CIB.Contracts.Responses
         [XmlElement(Order = 28)]
         public string COUNTRYCODE { get; set; }
         /// <summary>
-        /// Patial Shipment    非 必回
+        /// Patial Shipment    非必回
         /// N:NOT ALLOWED
         /// Y:ALLOWED
         /// </summary>
         [XmlElement(Order = 29)]
         public string PATIALSHIPMENT { get; set; }
         /// <summary>
-        /// Transshipment    非 必回
+        /// Transshipment    非必回
         /// N:NOT ALLOWED
         /// Y:ALLOWED
         /// </summary>
         [XmlElement(Order = 30)]
         public string TRANSSHIPMENT { get; set; }
         /// <summary>
-        /// Place of Taking in Charge/Dispatch from ,,,/Place of Receipt 长度：1*65	非 必回
+        /// Place of Taking in Charge/Dispatch from ,,,/Place of Receipt 长度：1*65	非必回
         /// </summary>
         [XmlElement(Order = 31)]
         public string DISPATCHPLACE { get; set; }
         /// <summary>
-        /// Port of loading/Airport of Departure 长度：1*65	非 必回
+        /// Port of loading/Airport of Departure 长度：1*65	非必回
         /// </summary>
         [XmlElement(Order = 32)]
         public string LOADPORT { get; set; }
         /// <summary>
-        /// Port of Discharge/Airport of Destination 长度：1*65	非 必回
+        /// Port of Discharge/Airport of Destination 长度：1*65	非必回
         /// </summary>
         [XmlElement(Order = 33)]
         public string DISCHARGEPORT { get; set; }
         /// <summary>
-        /// Place of Final Destination/For Transportation to …/Place of Delivery 长度：1*65	非 必回
+        /// Place of Final Destination/For Transportation to …/Place of Delivery 长度：1*65	非必回
         /// </summary>
         [XmlElement(Order = 34)]
         public string FINALDESTPLACE { get; set; }
         /// <summary>
-        /// Shipment period 长度：6*65	非 必回
+        /// Shipment period 长度：6*65	非必回
         /// </summary>
         [XmlElement(Order = 35)]
         public string SHIPMENTPERIOD { get; set; }
@@ -305,7 +305,7 @@ namespace BEDA.CIB.Contracts.Responses
         [XmlElement(Order = 38)]
         public string ADDCONDITIONS { get; set; }
         /// <summary>
-        /// 备注 允许中文 长度：6*35	非 必回
+        /// 备注 允许中文 长度：6*35	非必回
         /// </summary>
         [XmlElement(Order = 39)]
         public string COMMENT { get; set; }
