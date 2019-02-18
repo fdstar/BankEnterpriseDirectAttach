@@ -8,17 +8,17 @@ using System.Xml.Serialization;
 namespace BEDA.CIB.Contracts.Requests
 {
     /// <summary>
-    /// 活期账户信息查询请求主体
+    /// 3.3.1活期账户信息查询请求主体
     /// </summary>
     public class V1_CURRACCTQUERYTRNRQ : IRequest<V1_CURRACCTQUERYTRNRS>
     {
         /// <summary>
-        /// 活期账户信息查询
+        /// 3.3.1活期账户信息查询
         /// </summary>
         public CURRACCTQUERYTRNRQ CURRACCTQUERYTRNRQ { get; set; }
     }
     /// <summary>
-    /// 活期账户信息查询
+    /// 3.3.1活期账户信息查询
     /// </summary>
     public class CURRACCTQUERYTRNRQ : BIZRQBASE
     {

@@ -9,17 +9,17 @@ using System.Xml.Serialization;
 namespace BEDA.CIB.Contracts.Requests
 {
     /// <summary>
-    /// 交易概览请求主体
+    /// 3.3.10交易概览请求主体
     /// </summary>
     public class V1_TRADEOVERVIEWTRNRQ : IRequest<V1_TRADEOVERVIEWTRNRS>
     {
         /// <summary>
-        /// 交易概览
+        /// 3.3.10交易概览
         /// </summary>
         public TRADEOVERVIEWTRNRQ TRADEOVERVIEWTRNRQ { get; set; }
     }
     /// <summary>
-    /// 交易概览
+    /// 3.3.10交易概览
     /// </summary>
     public class TRADEOVERVIEWTRNRQ : BIZRQBASE
     {
@@ -30,7 +30,7 @@ namespace BEDA.CIB.Contracts.Requests
         public TRADEOVERVIEWTRN_RQBODY RQBODY { get; set; }
     }
     /// <summary>
-    /// 交易概览查询请求
+    /// 3.3.10交易概览查询请求
     /// </summary>
     public class TRADEOVERVIEWTRN_RQBODY
     {

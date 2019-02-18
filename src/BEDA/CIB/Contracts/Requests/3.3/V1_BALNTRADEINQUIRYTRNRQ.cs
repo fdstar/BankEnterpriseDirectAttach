@@ -9,17 +9,17 @@ using System.Xml.Serialization;
 namespace BEDA.CIB.Contracts.Requests
 {
     /// <summary>
-    /// 交易流水分页查询请求（返回包含虚拟子账户交易信息）请求主体
+    /// 3.3.7交易流水分页查询请求（返回包含虚拟子账户交易信息）请求主体
     /// </summary>
     public class V1_BALNTRADEINQUIRYTRNRQ : IRequest<V1_BALNTRADEINQUIRYTRNRS>
     {
         /// <summary>
-        /// 交易流水分页查询请求（返回包含虚拟子账户交易信息）
+        /// 3.3.7交易流水分页查询请求（返回包含虚拟子账户交易信息）
         /// </summary>
         public BALNTRADEINQUIRYTRNRQ BALNTRADEINQUIRYTRNRQ { get; set; }
     }
     /// <summary>
-    /// 交易流水分页查询请求（返回包含虚拟子账户交易信息）
+    /// 3.3.7交易流水分页查询请求（返回包含虚拟子账户交易信息）
     /// </summary>
     public class BALNTRADEINQUIRYTRNRQ : BIZRQBASE
     {
@@ -29,15 +29,15 @@ namespace BEDA.CIB.Contracts.Requests
         [XmlElement(Order = 1)]
         public string CLTCOOKIE { get; set; }
         /// <summary>
-        /// 查询主体
+        /// 3.3.7查询主体
         /// </summary>
         [XmlElement(Order = 2)]
-        public BALNTRADEIN_RQBODY RQBODY { get; set; }
+        public BALNTRADEINQUIRYTRN_RQBODY RQBODY { get; set; }
     }
     /// <summary>
-    /// 交易流水分页查询请求（返回包含虚拟子账户交易信息）
+    /// 3.3.7交易流水分页查询请求（返回包含虚拟子账户交易信息）
     /// </summary>
-    public class BALNTRADEIN_RQBODY
+    public class BALNTRADEINQUIRYTRN_RQBODY
     {
         /// <summary>
         /// 付款人账户，必输

@@ -8,30 +8,30 @@ using System.Xml.Serialization;
 namespace BEDA.CIB.Contracts.Responses
 {
     /// <summary>
-    /// 交易概览响应主体
+    /// 3.3.10交易概览响应主体
     /// </summary>
     public class V1_TRADEOVERVIEWTRNRS : IResponse
     {
         /// <summary>
-        /// 交易概览响应
+        /// 3.3.10交易概览响应
         /// </summary>
         public TRADEOVERVIEWTRNRS TRADEOVERVIEWTRNRS { get; set; }
     }
     /// <summary>
-    /// 交易概览响应
+    /// 3.3.10交易概览响应
     /// </summary>
     public class TRADEOVERVIEWTRNRS : BIZRSBASE
     {
         /// <summary>
-        /// 定期账户查询集合
+        /// 3.3.10交易概览查询结果集合
         /// </summary>
         [XmlElement(Order = 2)]
-        public TRADEOVERVIEWTRNRSBODY RSBODY { get; set; }
+        public TRADEOVERVIEWTRN_RSBODY RSBODY { get; set; }
     }
     /// <summary>
-    /// 交易概览查询结果集合
+    /// 3.3.10交易概览查询结果集合
     /// </summary>
-    public class TRADEOVERVIEWTRNRSBODY
+    public class TRADEOVERVIEWTRN_RSBODY
     {
         /// <summary>
         /// 是否还有下一页：Y－有,N－否
@@ -69,15 +69,15 @@ namespace BEDA.CIB.Contracts.Responses
         [XmlElement(Order = 5)]
         public decimal EXPENDAMT { get; set; }
         /// <summary>
-        /// 查询结果集合
+        /// 3.3.10查询结果集合
         /// </summary>
         [XmlElement("CONTENT", Order = 6)]
-        public List<TRADEOVERVIEWTRNCONTENT> List { get; set; }
+        public List<TRADEOVERVIEWTRN_CONTENT> List { get; set; }
     }
     /// <summary>
-    /// 交易概览查询结果明细
+    /// 3.3.10交易概览查询结果明细
     /// </summary>
-    public class TRADEOVERVIEWTRNCONTENT
+    public class TRADEOVERVIEWTRN_CONTENT
     {
         /// <summary>
         /// 柜员流水号

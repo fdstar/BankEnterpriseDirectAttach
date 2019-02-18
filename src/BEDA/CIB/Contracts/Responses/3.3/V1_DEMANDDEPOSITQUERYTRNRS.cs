@@ -8,30 +8,30 @@ using System.Xml.Serialization;
 namespace BEDA.CIB.Contracts.Responses
 {
     /// <summary>
-    /// 非定期存款信息查询响应主体
+    /// 3.3.4非定期存款信息查询响应主体
     /// </summary>
     public class V1_DEMANDDEPOSITQUERYTRNRS : IResponse
     {
         /// <summary>
-        /// 非定期存款信息查询
+        /// 3.3.4非定期存款信息查询
         /// </summary>
         public DEMANDDEPOSITQUERYTRNRS DEMANDDEPOSITQUERYTRNRS { get; set; }
     }
     /// <summary>
-    /// 非定期存款信息查询
+    /// 3.3.4非定期存款信息查询
     /// </summary>
     public class DEMANDDEPOSITQUERYTRNRS : BIZRSBASE
     {
         /// <summary>
-        /// 非定期存款账户信息，必回
+        /// 3.3.4非定期存款账户信息，必回
         /// </summary>
         [XmlElement(Order = 2)]
-        public DEMANDDEPOSITRSBODY RSBODY { get; set; }
+        public DEMANDDEPOSITQUERYTRN_RSBODY RSBODY { get; set; }
     }
     /// <summary>
-    /// 非定期存款信息查询结果
+    /// 3.3.4非定期存款信息查询结果
     /// </summary>
-    public class DEMANDDEPOSITRSBODY
+    public class DEMANDDEPOSITQUERYTRN_RSBODY
     {
         /// <summary>
         /// 开户行，长度60位，非必回

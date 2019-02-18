@@ -8,28 +8,28 @@ using System.Xml.Serialization;
 namespace BEDA.CIB.Contracts.Requests
 {
     /// <summary>
-    /// 批量托收或子账户托收明细查询请求主体
+    /// 3.4.7批量托收或子账户托收明细查询请求主体
     /// </summary>
     public class V1_FBBATCHSTMTTRNRQ : IRequest<V1_FBBATCHSTMTTRNRS>
     {
         /// <summary>
-        /// 批量托收或子账户托收明细查询
+        /// 3.4.7批量托收或子账户托收明细查询
         /// </summary>
         public FBBATCHSTMTTRNRQ FBBATCHSTMTTRNRQ { get; set; }
     }
     /// <summary>
-    /// 批量托收或子账户托收明细查询
+    /// 3.4.7批量托收或子账户托收明细查询
     /// </summary>
     public class FBBATCHSTMTTRNRQ : BIZRQBASE
     {
         /// <summary>
-        /// 批量托收或子账户托收明细查询内容
+        /// 3.4.7批量托收或子账户托收明细查询内容
         /// </summary>
         [XmlElement(Order = 1)]
         public FBBATCHSTMTTRN_RQBODY RQBODY { get; set; }
     }
     /// <summary>
-    /// 批量托收或子账户托收明细查询内容
+    /// 3.4.7批量托收或子账户托收明细查询内容
     /// </summary>
     public class FBBATCHSTMTTRN_RQBODY
     {

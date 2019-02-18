@@ -7,17 +7,17 @@ using System.Xml.Serialization;
 namespace BEDA.CIB.Contracts.Responses
 {
     /// <summary>
-    /// 工资发放服务请求对应的响应主体
+    /// 3.4.4工资发放服务请求对应的响应主体
     /// </summary>
     public class V1_RPAYOFFINQTRNRS : IResponse
     {
         /// <summary>
-        /// 工资发放服务请求对应的响应
+        /// 3.4.4工资发放服务请求对应的响应
         /// </summary>
         public RPAYOFFINQTRNRS RPAYOFFINQTRNRS { get; set; }
     }
     /// <summary>
-    /// 工资发放服务请求对应的响应
+    /// 3.4.4工资发放服务请求对应的响应
     /// </summary>
     public class RPAYOFFINQTRNRS : BIZRSBASE
     {

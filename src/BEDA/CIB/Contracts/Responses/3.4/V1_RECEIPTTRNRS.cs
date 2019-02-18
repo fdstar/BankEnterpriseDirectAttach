@@ -8,28 +8,28 @@ using System.Xml.Serialization;
 namespace BEDA.CIB.Contracts.Responses
 {
     /// <summary>
-    /// 指令回单查询响应主体
+    /// 3.4.9指令回单查询响应主体
     /// </summary>
     public class V1_RECEIPTTRNRS : IResponse
     {
         /// <summary>
-        /// 指令回单查询响应
+        /// 3.4.9指令回单查询响应
         /// </summary>
         public RECEIPTTRNRS RECEIPTTRNRS { get; set; }
     }
     /// <summary>
-    /// 指令回单查询响应
+    /// 3.4.9指令回单查询响应
     /// </summary>
     public class RECEIPTTRNRS : BIZRSBASE
     {
         /// <summary>
-        /// 指令回单查询响应内容
+        /// 3.4.9指令回单查询响应内容
         /// </summary>
         [XmlElement(Order = 2)]
         public RECEIPTTRN_RSBODY RSBODY { get; set; }
     }
     /// <summary>
-    /// 指令回单查询响应内容
+    /// 3.4.9指令回单查询响应内容
     /// </summary>
     public class RECEIPTTRN_RSBODY
     {
@@ -99,7 +99,7 @@ namespace BEDA.CIB.Contracts.Responses
         [XmlElement(Order = 9)]
         public string MEMO { get; set; }
         /// <summary>
-        /// 批量收款人列表，批量指令会有多条数据
+        /// 3.4.9批量收款人列表，批量指令会有多条数据
         /// </summary>
         [XmlElement("XFERINFO", Order = 10)]
         public List<RECEIPTTRN_XFERINFO> List { get; set; }
@@ -125,7 +125,7 @@ namespace BEDA.CIB.Contracts.Responses
         public XFERPRCSTS XFERPRCSTS { get; set; }
     }
     /// <summary>
-    /// 批量收款人信息
+    /// 3.4.9批量收款人信息
     /// </summary>
     public class RECEIPTTRN_XFERINFO
     {

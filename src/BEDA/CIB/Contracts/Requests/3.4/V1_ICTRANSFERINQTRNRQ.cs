@@ -8,17 +8,17 @@ using System.Xml.Serialization;
 namespace BEDA.CIB.Contracts.Requests
 {
     /// <summary>
-    /// 快速转账支付指令查询请求主体
+    /// 3.4.10.5快速转账支付指令查询请求主体
     /// </summary>
     public class V1_ICTRANSFERINQTRNRQ : IRequest<V1_ICTRANSFERINQTRNRS>
     {
         /// <summary>
-        /// 快速转账支付指令查询
+        /// 3.4.10.5快速转账支付指令查询
         /// </summary>
         public ICTRANSFERINQTRNRQ ICTRANSFERINQTRNRQ { get; set; }
     }
     /// <summary>
-    /// 快速转账支付指令查询
+    /// 3.4.10.5快速转账支付指令查询
     /// </summary>
     public class ICTRANSFERINQTRNRQ : BIZRQBASE
     {

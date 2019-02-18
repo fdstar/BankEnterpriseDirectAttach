@@ -8,28 +8,28 @@ using System.Xml.Serialization;
 namespace BEDA.CIB.Contracts.Requests
 {
     /// <summary>
-    /// 单笔托收、子账户托收、回款查询请求主体
+    /// 3.4.5单笔托收、子账户托收、回款查询请求主体
     /// </summary>
     public class V1_GATHERTRNRQ : IRequest<V1_GATHERTRNRS>
     {
         /// <summary>
-        /// 单笔托收、子账户托收、回款查询
+        /// 3.4.5单笔托收、子账户托收、回款查询
         /// </summary>
         public GATHERTRNRQ GATHERTRNRQ { get; set; }
     }
     /// <summary>
-    /// 提交托收请求
+    /// 3.4.5提交托收请求
     /// </summary>
     public class GATHERTRNRQ : BIZRQBASE
     {
         /// <summary>
-        /// 托收请求节点，如果没有此节点则为查询功能
+        /// 3.4.5托收请求节点，如果没有此节点则为查询功能
         /// </summary>
         [XmlElement(Order = 1)]
         public GATHERRQ GATHERRQ { get; set; }
     }
     /// <summary>
-    /// 托收请求节点，如果没有此节点则为查询功能
+    /// 3.4.5托收请求节点，如果没有此节点则为查询功能
     /// </summary>
     public class GATHERRQ
     {

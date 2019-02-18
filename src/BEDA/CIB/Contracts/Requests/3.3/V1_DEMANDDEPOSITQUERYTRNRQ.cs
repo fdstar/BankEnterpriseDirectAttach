@@ -8,17 +8,17 @@ using System.Xml.Serialization;
 namespace BEDA.CIB.Contracts.Requests
 {
     /// <summary>
-    /// 非定期存款信息查询请求主体
+    /// 3.3.4非定期存款信息查询请求主体
     /// </summary>
     public class V1_DEMANDDEPOSITQUERYTRNRQ : IRequest<V1_DEMANDDEPOSITQUERYTRNRS>
     {
         /// <summary>
-        /// 非定期存款信息查询
+        /// 3.3.4非定期存款信息查询
         /// </summary>
         public DEMANDDEPOSITQUERYTRNRQ DEMANDDEPOSITQUERYTRNRQ { get; set; }
     }
     /// <summary>
-    /// 非定期存款信息查询
+    /// 3.3.4非定期存款信息查询
     /// </summary>
     public class DEMANDDEPOSITQUERYTRNRQ : BIZRQBASE
     {

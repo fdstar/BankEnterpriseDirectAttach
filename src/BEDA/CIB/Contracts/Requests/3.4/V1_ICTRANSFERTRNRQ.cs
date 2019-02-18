@@ -8,22 +8,22 @@ using System.Xml.Serialization;
 namespace BEDA.CIB.Contracts.Requests
 {
     /// <summary>
-    /// 快速转账支付及其指令查询（不采用工作流）请求主体
+    /// 3.4.10.3快速转账支付及其指令查询（不采用工作流）请求主体
     /// </summary>
     public class V1_ICTRANSFERTRNRQ : IRequest<V1_ICTRANSFERTRNRS>
     {
         /// <summary>
-        /// 快速转账支付及其指令查询（不采用工作流）
+        /// 3.4.10.3快速转账支付及其指令查询（不采用工作流）
         /// </summary>
         public ICTRANSFERTRNRQ ICTRANSFERTRNRQ { get; set; }
     }
     /// <summary>
-    /// 快速转账支付及其指令查询（不采用工作流）
+    /// 3.4.10.3快速转账支付及其指令查询（不采用工作流）
     /// </summary>
     public class ICTRANSFERTRNRQ : BIZRQBASE
     {
         /// <summary>
-        /// 请求支付信息节点,如果不输则为查询客户端交易流水号（TRNUID）的交易情况，注意SRVRTID在请求时是不需要传递的
+        /// 3.4.10.3请求支付信息节点,如果不输则为查询客户端交易流水号（TRNUID）的交易情况，注意SRVRTID在请求时是不需要传递的
         /// </summary>
         [XmlElement("XMPTRQ", Order = 1)]
         public XMPTRQ<RQACCT> XMPTRQ { get; set; }

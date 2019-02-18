@@ -8,17 +8,17 @@ using System.Xml.Serialization;
 namespace BEDA.CIB.Contracts.Responses
 {
     /// <summary>
-    /// 账户交易流水文件查询响应主体
+    /// 3.3.9账户交易流水文件查询响应主体
     /// </summary>
     public class V1_FSTMTTRNRS : IResponse
     {
         /// <summary>
-        /// 账户交易流水文件查询响应
+        /// 3.3.9账户交易流水文件查询响应
         /// </summary>
         public FSTMTTRNRS FSTMTTRNRS { get; set; }
     }
     /// <summary>
-    /// 账户交易流水文件查询响应
+    /// 3.3.9账户交易流水文件查询响应
     /// </summary>
     public class FSTMTTRNRS : BIZRSBASE
     {
@@ -28,15 +28,15 @@ namespace BEDA.CIB.Contracts.Responses
         [XmlElement(Order = 2)]
         public string CLTCOOKIE { get; set; }
         /// <summary>
-        /// 流水响应内容
+        /// 3.3.9流水响应内容
         /// </summary>
         [XmlElement(Order = 3)]
-        public FSTMTTRNRS_SCUSTSTMTRS SCUSTSTMTRS { get; set; }
+        public FSTMTTRN_SCUSTSTMTRS SCUSTSTMTRS { get; set; }
     }
     /// <summary>
-    /// 流水响应内容
+    /// 3.3.9流水响应内容
     /// </summary>
-    public class FSTMTTRNRS_SCUSTSTMTRS
+    public class FSTMTTRN_SCUSTSTMTRS
     {
         /// <summary>
         /// 付款人账户，非必回
@@ -54,10 +54,10 @@ namespace BEDA.CIB.Contracts.Responses
         [XmlElement(Order = 2)]
         public string MORE { get; set; }
         /// <summary>
-        /// 账户交易流水文件定长明细
+        /// 3.3.9账户交易流水文件定长明细
         /// </summary>
         [XmlElement(Order = 3)]
-        public FSTMTTRNRS_TRANLIST TRANLIST { get; set; }
+        public FSTMTTRN_TRANLIST TRANLIST { get; set; }
         /// <summary>
         /// 活期账户余额，和下面可用余额基本一致，除非存在贷款户等业务上冻结或被控制的金额，总账才会比可用大。
         /// </summary>
@@ -70,10 +70,10 @@ namespace BEDA.CIB.Contracts.Responses
         public BALANCE AVAILBAL { get; set; }
     }
     /// <summary>
-    /// 账户交易流水文件定长明细
+    /// 3.3.9账户交易流水文件定长明细
     /// </summary>
     [XmlRoot("TRANLIST")]
-    public class FSTMTTRNRS_TRANLIST
+    public class FSTMTTRN_TRANLIST
     {
         private IList<TransactionDetail> _details;
         /// <summary>

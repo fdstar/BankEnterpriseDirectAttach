@@ -7,28 +7,28 @@ using System.Xml.Serialization;
 namespace BEDA.CIB.Contracts.Responses
 {
     /// <summary>
-    /// 批量托收或子账户托收明细查询响应主体
+    /// 3.4.7批量托收或子账户托收明细查询响应主体
     /// </summary>
     public class V1_FBBATCHSTMTTRNRS : IResponse
     {
         /// <summary>
-        /// 批量托收或子账户托收明细查询响应
+        /// 3.4.7批量托收或子账户托收明细查询响应
         /// </summary>
         public FBBATCHSTMTTRNRS FBBATCHSTMTTRNRS { get; set; }
     }
     /// <summary>
-    /// 批量托收或子账户托收明细查询响应
+    /// 3.4.7批量托收或子账户托收明细查询响应
     /// </summary>
     public class FBBATCHSTMTTRNRS : BIZRSBASE
     {
         /// <summary>
-        /// 批量托收或子账户托收明细查询响应内容
+        /// 3.4.7批量托收或子账户托收明细查询响应内容
         /// </summary>
         [XmlElement(Order = 2)]
         public FBBATCHSTMTTRN_RSBODY RSBODY { get; set; }
     }
     /// <summary>
-    /// 批量托收或子账户托收明细查询响应内容
+    /// 3.4.7批量托收或子账户托收明细查询响应内容
     /// </summary>
     public class FBBATCHSTMTTRN_RSBODY
     {
@@ -119,13 +119,13 @@ namespace BEDA.CIB.Contracts.Responses
         [XmlElement(Order = 15)]
         public string EXECINFO { get; set; }
         /// <summary>
-        /// 付款信息集合
+        /// 3.4.7付款信息集合
         /// </summary>
         [XmlElement("CONTENT", Order = 16)]
         public List<FBBATCHSTMTTRN_PAYINFO> List { get; set; }
     }
     /// <summary>
-    /// 付款信息
+    /// 3.4.7付款信息
     /// 此处<see cref="Requests.RQPAYINFO.BIZCODE0"/>和<see cref="Requests.RQPAYINFO.BIZCODE1"/>为必回
     /// 另外<see cref="Requests.RQPAYINFO.BIZCODE2"/>此处业务中不存在
     /// </summary>

@@ -27,7 +27,7 @@ namespace BEDA.CIB.Contracts.Responses
         [XmlElement(Order = 2)]
         public string CLTCOOKIE { get; set; }
         /// <summary>
-        /// 转账付出指令内容
+        /// 3.4.1转账付出指令内容
         /// </summary>
         [XmlElement(Order = 3)]
         public XFERRS XFERRS { get; set; }

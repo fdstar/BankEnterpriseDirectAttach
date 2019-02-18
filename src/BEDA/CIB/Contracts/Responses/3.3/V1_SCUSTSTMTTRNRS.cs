@@ -8,17 +8,17 @@ using System.Xml.Serialization;
 namespace BEDA.CIB.Contracts.Responses
 {
     /// <summary>
-    /// 交易流水分页查询响应主体
+    /// 3.3.6交易流水分页查询响应主体
     /// </summary>
     public class V1_SCUSTSTMTTRNRS : IResponse
     {
         /// <summary>
-        /// 交易流水分页查询响应，0-n， 对应请求的响应，可能包括同步的内容
+        /// 3.3.6交易流水分页查询响应，0-n， 对应请求的响应，可能包括同步的内容
         /// </summary>
         public SCUSTSTMTTRNRS SCUSTSTMTTRNRS { get; set; }
     }
     /// <summary>
-    /// 交易流水分页查询响应，0-n， 对应请求的响应，可能包括同步的内容
+    /// 3.3.6交易流水分页查询响应，0-n， 对应请求的响应，可能包括同步的内容
     /// </summary>
     public class SCUSTSTMTTRNRS : BIZRSBASE
     {
@@ -28,13 +28,13 @@ namespace BEDA.CIB.Contracts.Responses
         [XmlElement(Order = 3)]
         public string CLTCOOKIE { get; set; }
         /// <summary>
-        /// 响应内容
+        /// 3.3.6响应内容
         /// </summary>
         [XmlElement(Order = 4)]
         public SCUSTSTMTRS SCUSTSTMTRS { get; set; }
     }
     /// <summary>
-    /// 交易流水分页查询响应内容
+    /// 3.3.6交易流水分页查询响应内容
     /// </summary>
     public class SCUSTSTMTRS
     {

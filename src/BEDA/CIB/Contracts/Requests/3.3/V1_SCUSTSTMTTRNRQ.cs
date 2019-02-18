@@ -8,17 +8,17 @@ using System.Xml.Serialization;
 namespace BEDA.CIB.Contracts.Requests
 {
     /// <summary>
-    /// 账户余额和交易流水分页查询请求主体
+    /// 3.3.6账户余额和交易流水分页查询请求主体
     /// </summary>
     public class V1_SCUSTSTMTTRNRQ : IRequest<V1_SCUSTSTMTTRNRS>
     {
         /// <summary>
-        /// 账户余额和交易流水分页查询
+        /// 3.3.6账户余额和交易流水分页查询
         /// </summary>
         public SCUSTSTMTTRNRQ SCUSTSTMTTRNRQ { get; set; }
     }
     /// <summary>
-    /// 账户余额和交易流水分页查询
+    /// 3.3.6账户余额和交易流水分页查询
     /// </summary>
     public class SCUSTSTMTTRNRQ : BIZRQBASE
     {
@@ -28,15 +28,15 @@ namespace BEDA.CIB.Contracts.Requests
         [XmlElement(Order = 1)]
         public string CLTCOOKIE { get; set; }
         /// <summary>
-        /// 流水查询内容
+        /// 3.3.6流水查询内容
         /// </summary>
         [XmlElement(Order = 2)]
-        public SCUSTSTMTTRNRQ_SCUSTSTMTRQ SCUSTSTMTRQ { get; set; }
+        public SCUSTSTMTTRN_SCUSTSTMTRQ SCUSTSTMTRQ { get; set; }
     }
     /// <summary>
-    /// 流水查询内容
+    /// 3.3.6流水查询内容
     /// </summary>
-    public class SCUSTSTMTTRNRQ_SCUSTSTMTRQ
+    public class SCUSTSTMTTRN_SCUSTSTMTRQ
     {
         /// <summary>
         /// 版本号，可以为空或填入2.0

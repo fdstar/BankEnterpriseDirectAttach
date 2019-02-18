@@ -8,17 +8,17 @@ using System.Xml.Serialization;
 namespace BEDA.CIB.Contracts.Requests
 {
     /// <summary>
-    /// 付款查询交易请求主体
+    /// 3.4.2付款查询交易请求主体
     /// </summary>
     public class V1_XFERINQTRNRQ : IRequest<V1_XFERINQTRNRS>
     {
         /// <summary>
-        /// 付款查询请求交易
+        /// 3.4.2付款查询请求交易
         /// </summary>
         public XFERINQTRNRQ XFERINQTRNRQ { get; set; }
     }
     /// <summary>
-    /// 付款查询请求交易
+    /// 3.4.2付款查询请求交易
     /// </summary>
     public class XFERINQTRNRQ : BIZRQBASE
     {
@@ -28,7 +28,7 @@ namespace BEDA.CIB.Contracts.Requests
         [XmlElement(Order = 1)]
         public string CLTCOOKIE { get; set; }
         /// <summary>
-        /// 指令查询请求
+        /// 3.4.2指令查询请求
         /// </summary>
         [XmlElement(Order = 2)]
         public XFERINQRQ XFERINQRQ { get; set; }

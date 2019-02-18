@@ -9,17 +9,17 @@ using System.Xml.Serialization;
 namespace BEDA.CIB.Contracts.Requests
 {
     /// <summary>
-    /// 工资发放服务请求主体
+    /// 3.4.3工资发放服务请求主体
     /// </summary>
     public class V1_RPAYOFFTRNRQ : IRequest<V1_RPAYOFFTRNRS>
     {
         /// <summary>
-        /// 工资发放服务请求，实时代发（建议200笔以下）工资指令，最多支持300笔
+        /// 3.4.3工资发放服务请求，实时代发（建议200笔以下）工资指令，最多支持300笔
         /// </summary>
         public RPAYOFFTRNRQ RPAYOFFTRNRQ { get; set; }
     }
     /// <summary>
-    /// 工资发放服务请求，实时代发（建议200笔以下）工资指令，最多支持300笔
+    /// 3.4.3工资发放服务请求，实时代发（建议200笔以下）工资指令，最多支持300笔
     /// </summary>
     public class RPAYOFFTRNRQ : BIZRQBASE
     {
@@ -29,13 +29,13 @@ namespace BEDA.CIB.Contracts.Requests
         [XmlElement(Order = 1)]
         public string CLTCOOKIE { get; set; }
         /// <summary>
-        /// 生成工资指令请求 若该项为空，则查询对应客户流水号的实时工资指令状态 必输
+        /// 3.4.3生成工资指令请求 若该项为空，则查询对应客户流水号的实时工资指令状态 必输
         /// </summary>
         [XmlElement(Order = 2)]
         public RPAYOFFRQ RPAYOFFRQ { get; set; }
     }
     /// <summary>
-    /// 生成工资指令请求
+    /// 3.4.3生成工资指令请求
     /// </summary>
     public class RPAYOFFRQ
     {

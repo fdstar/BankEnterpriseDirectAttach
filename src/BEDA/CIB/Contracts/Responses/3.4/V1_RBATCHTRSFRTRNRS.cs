@@ -7,28 +7,28 @@ using System.Xml.Serialization;
 namespace BEDA.CIB.Contracts.Responses
 {
     /// <summary>
-    /// 实时批量支付与批量费用(最多100笔)响应主体
+    /// 3.4.8实时批量支付与批量费用(最多100笔)响应主体
     /// </summary>
     public class V1_RBATCHTRSFRTRNRS : IResponse
     {
         /// <summary>
-        /// 实时批量支付与批量费用(最多100笔)响应
+        /// 3.4.8实时批量支付与批量费用(最多100笔)响应
         /// </summary>
         public RBATCHTRSFRTRNRS RBATCHTRSFRTRNRS { get; set; }
     }
     /// <summary>
-    /// 实时批量支付与批量费用(最多100笔)响应
+    /// 3.4.8实时批量支付与批量费用(最多100笔)响应
     /// </summary>
     public class RBATCHTRSFRTRNRS : BIZRSBASE
     {
         /// <summary>
-        /// 实时批量支付与批量费用(最多100笔)响应内容
+        /// 3.4.8实时批量支付与批量费用(最多100笔)响应内容
         /// </summary>
         [XmlElement(Order = 2)]
         public RBATCHTRSFRTRN_RSBODY RSBODY { get; set; }
     }
     /// <summary>
-    /// 实时批量支付与批量费用(最多100笔)响应内容
+    /// 3.4.8实时批量支付与批量费用(最多100笔)响应内容
     /// </summary>
     public class RBATCHTRSFRTRN_RSBODY : Requests.RBATCHTRSFRTRN_RQBODY<RBATCHTRSFRTRNRS_XFERINFO>
     {
@@ -39,7 +39,7 @@ namespace BEDA.CIB.Contracts.Responses
         public XFERPRCSTS XFERPRCSTS { get; set; }
     }
     /// <summary>
-    /// 批量收款人信息
+    /// 3.4.8批量收款人信息
     /// </summary>
     public class RBATCHTRSFRTRNRS_XFERINFO : Requests.RBATCHTRSFRTRNRQ_XFERINFO
     {

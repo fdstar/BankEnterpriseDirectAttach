@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 namespace BEDA.CIB.Contracts.Responses
 {
     /// <summary>
-    /// 定期存款信息查询响应主体
+    /// 3.3.3定期存款信息查询响应主体
     /// </summary>
     public class V1_TIMEDEPOSITQUERYTRNRS : IResponse
     {
@@ -18,20 +18,20 @@ namespace BEDA.CIB.Contracts.Responses
         public TIMEDEPOSITQUERYTRNRS TIMEDEPOSITQUERYTRNRS { get; set; }
     }
     /// <summary>
-    /// 定期存款信息查询响应
+    /// 3.3.3定期存款信息查询响应
     /// </summary>
     public class TIMEDEPOSITQUERYTRNRS : BIZRSBASE
     {
         /// <summary>
-        /// 定期存款信息查询结果
+        /// 3.3.3定期存款信息查询结果
         /// </summary>
         [XmlElement(Order = 2)]
-        public TIMEDEPOSITRSBODY RSBODY { get; set; }
+        public TIMEDEPOSITQUERYTRN_RSBODY RSBODY { get; set; }
     }
     /// <summary>
-    /// 定期存款信息查询结果
+    /// 3.3.3定期存款信息查询结果
     /// </summary>
-    public class TIMEDEPOSITRSBODY
+    public class TIMEDEPOSITQUERYTRN_RSBODY
     {
         /// <summary>
         /// 开户行，长度60位，必回

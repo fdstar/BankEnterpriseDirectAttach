@@ -9,28 +9,28 @@ using System.Xml.Serialization;
 namespace BEDA.CIB.Contracts.Responses
 {
     /// <summary>
-    /// 单位定期一本通账户查询响应主体
+    /// 3.3.8单位定期一本通账户查询响应主体
     /// </summary>
     public class V1_FIRMTIMEQUERYTRNRS : IResponse
     {
         /// <summary>
-        /// 单位定期一本通账户查询响应
+        /// 3.3.8单位定期一本通账户查询响应
         /// </summary>
         public FIRMTIMEQUERYTRNRS FIRMTIMEQUERYTRNRS { get; set; }
     }
     /// <summary>
-    /// 单位定期一本通账户查询响应
+    /// 3.3.8单位定期一本通账户查询响应
     /// </summary>
     public class FIRMTIMEQUERYTRNRS : BIZRSBASE
     {
         /// <summary>
-        /// 非定期存款账户信息，必回
+        /// 3.3.8非定期存款账户信息，必回
         /// </summary>
         [XmlElement(Order = 2)]
         public FIRMTIMEQUERYTRN_RSBODY RSBODY { get; set; }
     }
     /// <summary>
-    /// 单位定期一本通账户查询结果集合
+    /// 3.3.8单位定期一本通账户查询结果集合
     /// </summary>
     public class FIRMTIMEQUERYTRN_RSBODY
     {
@@ -55,13 +55,13 @@ namespace BEDA.CIB.Contracts.Responses
         [XmlElement(Order = 2)]
         public decimal SUMAMT { get; set; }
         /// <summary>
-        /// 查询结果集合
+        /// 3.3.8查询结果集合
         /// </summary>
         [XmlElement("CONTENT", Order = 3)]
         public List<FIRMTIMEQUERYTRN_CONTENT> List { get; set; }
     }
     /// <summary>
-    /// 单位定期一本通账户查询结果明细
+    /// 3.3.8单位定期一本通账户查询结果明细
     /// </summary>
     public class FIRMTIMEQUERYTRN_CONTENT
     {

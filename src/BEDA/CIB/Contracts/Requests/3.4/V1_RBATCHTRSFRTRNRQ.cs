@@ -9,28 +9,28 @@ using System.Xml.Serialization;
 namespace BEDA.CIB.Contracts.Requests
 {
     /// <summary>
-    /// 实时批量支付与批量费用(最多100笔)请求主体
+    /// 3.4.8实时批量支付与批量费用(最多100笔)请求主体
     /// </summary>
     public class V1_RBATCHTRSFRTRNRQ : IRequest<V1_RBATCHTRSFRTRNRS>
     {
         /// <summary>
-        /// 实时批量支付与批量费用(最多100笔)
+        /// 3.4.8实时批量支付与批量费用(最多100笔)
         /// </summary>
         public RBATCHTRSFRTRNRQ RBATCHTRSFRTRNRQ { get; set; }
     }
     /// <summary>
-    /// 实时批量支付与批量费用(最多100笔)
+    /// 3.4.8实时批量支付与批量费用(最多100笔)
     /// </summary>
     public class RBATCHTRSFRTRNRQ : BIZRQBASE
     {
         /// <summary>
-        /// 实时批量支付与批量费用请求内容  如不传则为查询
+        /// 3.4.8实时批量支付与批量费用请求内容  如不传则为查询
         /// </summary>
         [XmlElement("RQBODY", Order = 1)]
         public RBATCHTRSFRTRN_RQBODY<RBATCHTRSFRTRNRQ_XFERINFO> RQBODY { get; set; }
     }
     /// <summary>
-    /// 实时批量支付与批量费用请求内容
+    /// 3.4.8实时批量支付与批量费用请求内容
     /// </summary>
     public class RBATCHTRSFRTRN_RQBODY<T>
         where T: RBATCHTRSFRTRNRQ_XFERINFO

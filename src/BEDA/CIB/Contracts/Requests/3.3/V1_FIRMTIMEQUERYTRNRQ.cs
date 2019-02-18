@@ -8,17 +8,17 @@ using System.Xml.Serialization;
 namespace BEDA.CIB.Contracts.Requests
 {
     /// <summary>
-    /// 单位定期一本通账户查询请求主体
+    /// 3.3.8单位定期一本通账户查询请求主体
     /// </summary>
     public class V1_FIRMTIMEQUERYTRNRQ : IRequest<V1_FIRMTIMEQUERYTRNRS>
     {
         /// <summary>
-        /// 单位定期一本通账户查询
+        /// 3.3.8单位定期一本通账户查询
         /// </summary>
         public FIRMTIMEQUERYTRNRQ FIRMTIMEQUERYTRNRQ { get; set; }
     }
     /// <summary>
-    /// 单位定期一本通账户查询
+    /// 3.3.8单位定期一本通账户查询
     /// </summary>
     public class FIRMTIMEQUERYTRNRQ : BIZRQBASE
     {

@@ -8,17 +8,17 @@ using System.Xml.Serialization;
 namespace BEDA.CIB.Contracts.Requests
 {
     /// <summary>
-    /// 定期账户查询请求主体
+    /// 3.3.2定期账户查询请求主体
     /// </summary>
     public class V1_TIMEQUERYTRNRQ : IRequest<V1_TIMEQUERYTRNRS>
     {
         /// <summary>
-        /// 定期账户查询
+        /// 3.3.2定期账户查询
         /// </summary>
         public TIMEQUERYTRNRQ TIMEQUERYTRNRQ { get; set; }
     }
     /// <summary>
-    /// 定期账户查询
+    /// 3.3.2定期账户查询
     /// </summary>
     public class TIMEQUERYTRNRQ : BIZRQBASE
     {

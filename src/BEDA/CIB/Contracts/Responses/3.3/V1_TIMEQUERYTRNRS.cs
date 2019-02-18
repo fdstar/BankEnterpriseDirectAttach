@@ -8,30 +8,30 @@ using System.Xml.Serialization;
 namespace BEDA.CIB.Contracts.Responses
 {
     /// <summary>
-    /// 定期账户查询响应主体
+    /// 3.3.2定期账户查询响应主体
     /// </summary>
     public class V1_TIMEQUERYTRNRS : IResponse
     {
         /// <summary>
-        /// 定期账户查询响应
+        /// 3.3.2定期账户查询响应
         /// </summary>
         public TIMEQUERYTRNRS TIMEQUERYTRNRS { get; set; }
     }
     /// <summary>
-    /// 定期账户查询响应
+    /// 3.3.2定期账户查询响应
     /// </summary>
     public class TIMEQUERYTRNRS : BIZRSBASE
     {
         /// <summary>
-        /// 定期账户查询集合
+        /// 3.3.2定期账户查询集合
         /// </summary>
         [XmlElement(Order = 2)]
-        public TIMERSBODY RSBODY { get; set; }
+        public TIMEQUERYTRN_RSBODY RSBODY { get; set; }
     }
     /// <summary>
-    /// 定期账户查询结果集合
+    /// 3.3.2定期账户查询结果集合
     /// </summary>
-    public class TIMERSBODY
+    public class TIMEQUERYTRN_RSBODY
     {
         /// <summary>
         /// 是否还有下一页：Y－有,N－否
@@ -42,12 +42,12 @@ namespace BEDA.CIB.Contracts.Responses
         /// 定期账户集合，非必回
         /// </summary>
         [XmlElement("CONTENT")]
-        public List<TIMECONTENT> List { get; set; }
+        public List<TIMEQUERYTRN_CONTENT> List { get; set; }
     }
     /// <summary>
-    /// 定期账户响应
+    /// 3.3.2定期账户响应
     /// </summary>
-    public class TIMECONTENT
+    public class TIMEQUERYTRN_CONTENT
     {
         /// <summary>
         /// 定期账号，长度18位

@@ -9,17 +9,17 @@ using System.Xml.Serialization;
 namespace BEDA.CIB.Contracts.Requests
 {
     /// <summary>
-    /// 账户交易流水文件查询请求主体
+    /// 3.3.9账户交易流水文件查询请求主体
     /// </summary>
     public class V1_FSTMTTRNRQ : IRequest<V1_FSTMTTRNRS>
     {
         /// <summary>
-        /// 账户交易流水文件查询
+        /// 3.3.9账户交易流水文件查询
         /// </summary>
         public FSTMTTRNRQ FSTMTTRNRQ { get; set; }
     }
     /// <summary>
-    /// 账户交易流水文件查询
+    /// 3.3.9账户交易流水文件查询
     /// </summary>
     public class FSTMTTRNRQ : BIZRQBASE
     {
@@ -29,15 +29,15 @@ namespace BEDA.CIB.Contracts.Requests
         [XmlElement(Order = 1)]
         public string CLTCOOKIE { get; set; }
         /// <summary>
-        /// 流水查询请求内容
+        /// 3.3.9流水查询请求内容
         /// </summary>
         [XmlElement(Order = 2)]
-        public FSTMTTRNRQ_SCUSTSTMTRQ SCUSTSTMTRQ { get; set; }
+        public FSTMTTRN_SCUSTSTMTRQ SCUSTSTMTRQ { get; set; }
     }
     /// <summary>
-    /// 流水查询内容
+    /// 3.3.9流水查询内容
     /// </summary>
-    public class FSTMTTRNRQ_SCUSTSTMTRQ
+    public class FSTMTTRN_SCUSTSTMTRQ
     {
         /// <summary>
         /// 付款人账户，必输
@@ -45,15 +45,15 @@ namespace BEDA.CIB.Contracts.Requests
         [XmlElement(Order = 0)]
         public ACCTFROM ACCTFROM { get; set; }
         /// <summary>
-        /// 流水查询条件
+        /// 3.3.9流水查询条件
         /// </summary>
         [XmlElement(Order = 1)]
-        public FSTMTTRNRQ_INCTRAN INCTRAN { get; set; }
+        public FSTMTTRN_INCTRAN INCTRAN { get; set; }
     }
     /// <summary>
-    /// 流水查询条件
+    /// 3.3.9流水查询条件
     /// </summary>
-    public class FSTMTTRNRQ_INCTRAN
+    public class FSTMTTRN_INCTRAN
     {
         /// <summary>
         /// 开始时间 格式：yyyy-MM-dd(必输)

@@ -8,17 +8,17 @@ using System.Xml.Serialization;
 namespace BEDA.CIB.Contracts.Responses
 {
     /// <summary>
-    /// 交易流水分页查询响应主体
+    /// 3.3.7交易流水分页查询响应主体
     /// </summary>
     public class V1_BALNTRADEINQUIRYTRNRS : IResponse
     {
         /// <summary>
-        /// 交易流水分页查询响应（返回包含虚拟子账户交易信息）
+        /// 3.3.7交易流水分页查询响应（返回包含虚拟子账户交易信息）
         /// </summary>
         public BALNTRADEINQUIRYTRNRS BALNTRADEINQUIRYTRNRS { get; set; }
     }
     /// <summary>
-    /// 交易流水分页查询响应（返回包含虚拟子账户交易信息）
+    /// 3.3.7交易流水分页查询响应（返回包含虚拟子账户交易信息）
     /// </summary>
     public class BALNTRADEINQUIRYTRNRS : BIZRSBASE
     {
@@ -28,15 +28,15 @@ namespace BEDA.CIB.Contracts.Responses
         [XmlElement(Order = 2)]
         public string CLTCOOKIE { get; set; }
         /// <summary>
-        /// 交易流水分页查询（返回包含虚拟子账户交易信息）
+        /// 3.3.7交易流水分页查询（返回包含虚拟子账户交易信息）
         /// </summary>
         [XmlElement(Order = 3)]
-        public BALNTRADEINRSBODY RSBODY { get; set; }
+        public BALNTRADEINQUIRYTRN_RSBODY RSBODY { get; set; }
     }
     /// <summary>
-    /// 交易流水分页查询结果（返回包含虚拟子账户交易信息）
+    /// 3.3.7交易流水分页查询结果（返回包含虚拟子账户交易信息）
     /// </summary>
-    public class BALNTRADEINRSBODY
+    public class BALNTRADEINQUIRYTRN_RSBODY
     {
         /// <summary>
         /// 是否还有下一页：Y－有,N－否
@@ -54,10 +54,10 @@ namespace BEDA.CIB.Contracts.Responses
         [XmlElement(Order = 1)]
         public ACCTFROM ACCTFROM { get; set; }
         /// <summary>
-        /// 查询结果集合
+        /// 3.3.7查询结果集合
         /// </summary>
         [XmlElement("CONTENT", Order = 2)]
-        public List<BALNTRADEINCONTENT> List { get; set; }
+        public List<BALNTRADEINQUIRYTRN_CONTENT> List { get; set; }
         /// <summary>
         /// 总账余额，和下面可用余额基本一致，除非存在贷款户等业务上冻结或被控制的金额，总账才会比可用大。
         /// </summary>
@@ -70,9 +70,9 @@ namespace BEDA.CIB.Contracts.Responses
         public BALANCE MAIN_AVAILBAL { get; set; }
     }
     /// <summary>
-    /// 账号余额和交易流水分页查询（返回增加虚拟子账户交易信息）明细
+    /// 3.3.7账号余额和交易流水分页查询（返回增加虚拟子账户交易信息）明细
     /// </summary>
-    public class BALNTRADEINCONTENT
+    public class BALNTRADEINQUIRYTRN_CONTENT
     {
         /// <summary>
         /// 起始日期，格式yyyy-MM-dd，必回

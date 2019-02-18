@@ -7,17 +7,17 @@ using System.Xml.Serialization;
 namespace BEDA.CIB.Contracts.Responses
 {
     /// <summary>
-    /// 活期账户信息查询响应主体
+    /// 3.3.1活期账户信息查询响应主体
     /// </summary>
     public class V1_CURRACCTQUERYTRNRS : IResponse
     {
         /// <summary>
-        /// 活期账户信息查询响应
+        /// 3.3.1活期账户信息查询响应
         /// </summary>
         public CURRACCTQUERYTRNRS CURRACCTQUERYTRNRS { get; set; }
     }
     /// <summary>
-    /// 活期账户信息查询响应
+    /// 3.3.1活期账户信息查询响应
     /// </summary>
     public class CURRACCTQUERYTRNRS : BIZRSBASE
     {
@@ -25,12 +25,12 @@ namespace BEDA.CIB.Contracts.Responses
         /// 账户信息，非必回
         /// </summary>
         [XmlElement(Order = 2)]
-        public CURRACCTRSBODY RSBODY { get; set; }
+        public CURRACCTQUERYTRN_RSBODY RSBODY { get; set; }
     }
     /// <summary>
-    /// 活期账户查询结果
+    /// 3.3.1活期账户查询结果
     /// </summary>
-    public class CURRACCTRSBODY
+    public class CURRACCTQUERYTRN_RSBODY
     {
         /// <summary>
         /// 查询账户代号，最长32位

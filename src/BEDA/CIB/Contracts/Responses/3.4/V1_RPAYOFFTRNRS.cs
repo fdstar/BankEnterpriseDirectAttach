@@ -8,17 +8,17 @@ using System.Xml.Serialization;
 namespace BEDA.CIB.Contracts.Responses
 {
     /// <summary>
-    /// 工资发放指令提交响应主体
+    /// 3.4.3工资发放指令提交响应主体
     /// </summary>
     public class V1_RPAYOFFTRNRS : IResponse
     {
         /// <summary>
-        /// 工资发放指令提交响应
+        /// 3.4.3工资发放指令提交响应
         /// </summary>
         public RPAYOFFTRNRS RPAYOFFTRNRS { get; set; }
     }
     /// <summary>
-    /// 工资发放指令提交响应
+    /// 3.4.3工资发放指令提交响应
     /// </summary>
     public class RPAYOFFTRNRS : BIZRSBASE
     {
@@ -28,7 +28,7 @@ namespace BEDA.CIB.Contracts.Responses
         [XmlElement(Order = 2)]
         public string CLTCOOKIE { get; set; }
         /// <summary>
-        /// 生成工资指令响应
+        /// 3.4.3生成工资指令响应
         /// </summary>
         [XmlElement(Order = 3)]
         public RPAYOFFRS RPAYOFFRS { get; set; }

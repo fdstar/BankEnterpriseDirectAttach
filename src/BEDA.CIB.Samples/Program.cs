@@ -298,7 +298,7 @@ namespace BEDA.CIB.Samples
                 {
                     TRNUID = tid,
                     CLTCOOKIE = "123",
-                    SCUSTSTMTRQ = new SCUSTSTMTTRNRQ_SCUSTSTMTRQ
+                    SCUSTSTMTRQ = new SCUSTSTMTTRN_SCUSTSTMTRQ
                     {
                         VERSION = "2.0",
                         ACCTFROM = new ACCTFROM
@@ -331,7 +331,7 @@ namespace BEDA.CIB.Samples
                 {
                     TRNUID = tid,
                     CLTCOOKIE = "123",
-                    RQBODY = new BALNTRADEIN_RQBODY
+                    RQBODY = new BALNTRADEINQUIRYTRN_RQBODY
                     {
                         ACCTFROM = new ACCTFROM
                         {
@@ -383,13 +383,13 @@ namespace BEDA.CIB.Samples
                 {
                     TRNUID = tid,
                     CLTCOOKIE = "123",
-                    SCUSTSTMTRQ = new FSTMTTRNRQ_SCUSTSTMTRQ
+                    SCUSTSTMTRQ = new FSTMTTRN_SCUSTSTMTRQ
                     {
                         ACCTFROM = new ACCTFROM
                         {
                             ACCTID = mainAccountId
                         },
-                        INCTRAN = new FSTMTTRNRQ_INCTRAN
+                        INCTRAN = new FSTMTTRN_INCTRAN
                         {
                             DTEND = DateTime.Now.AddDays(-1),
                             DTSTART = DateTime.Now.AddDays(-1),

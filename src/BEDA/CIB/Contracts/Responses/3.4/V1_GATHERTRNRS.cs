@@ -7,22 +7,22 @@ using System.Xml.Serialization;
 namespace BEDA.CIB.Contracts.Responses
 {
     /// <summary>
-    /// 单笔托收、子账户托收、回款查询响应主体
+    /// 3.4.5单笔托收、子账户托收、回款查询响应主体
     /// </summary>
     public class V1_GATHERTRNRS : IResponse
     {
         /// <summary>
-        /// 单笔托收、子账户托收、回款查询响应
+        /// 3.4.5单笔托收、子账户托收、回款查询响应
         /// </summary>
         public GATHERTRNRS GATHERTRNRS { get; set; }
     }
     /// <summary>
-    /// 单笔托收、子账户托收、回款查询响应
+    /// 3.4.5单笔托收、子账户托收、回款查询响应
     /// </summary>
     public class GATHERTRNRS : BIZRSBASE
     {
         /// <summary>
-        /// 提交返回节点，系统错误时没有此节点
+        /// 3.4.5提交返回节点，系统错误时没有此节点
         /// </summary>
         [XmlElement(Order = 2)]
         public GATHERRS GATHERRS { get; set; }

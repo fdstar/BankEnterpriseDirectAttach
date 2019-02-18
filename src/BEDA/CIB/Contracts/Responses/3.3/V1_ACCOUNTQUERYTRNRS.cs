@@ -8,30 +8,30 @@ using System.Xml.Serialization;
 namespace BEDA.CIB.Contracts.Responses
 {
     /// <summary>
-    /// 账户信息查询响应主体
+    /// 3.3.5账户信息查询响应主体
     /// </summary>
     public class V1_ACCOUNTQUERYTRNRS : IResponse
     {
         /// <summary>
-        /// 账户信息查询响应
+        /// 3.3.5账户信息查询响应
         /// </summary>
         public ACCOUNTQUERYTRNRS ACCOUNTQUERYTRNRS { get; set; }
     }
     /// <summary>
-    /// 账户信息查询响应
+    /// 3.3.5账户信息查询响应
     /// </summary>
     public class ACCOUNTQUERYTRNRS : BIZRSBASE
     {
         /// <summary>
-        /// 账户信息，必回
+        /// 3.3.5账户信息，必回
         /// </summary>
         [XmlElement(Order = 2)]
-        public ACCOUNTRSBODY RSBODY { get; set; }
+        public ACCOUNTQUERYTRN_RSBODY RSBODY { get; set; }
     }
     /// <summary>
-    /// 账户信息查询结果集合
+    /// 3.3.5账户信息查询结果集合
     /// </summary>
-    public class ACCOUNTRSBODY
+    public class ACCOUNTQUERYTRN_RSBODY
     {
         /// <summary>
         /// 查询账户代号，最长32位
