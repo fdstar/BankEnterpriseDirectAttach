@@ -253,7 +253,7 @@ namespace BEDA.CIB.Contracts.Responses
     public class ORGACCT
     {
         /// <summary>
-        /// 客户类型
+        /// 客户类型,4位,见附录3企业类型
         /// </summary>
         [XmlElement(Order = 0)]
         public string CUSTTYPE { get; set; }
