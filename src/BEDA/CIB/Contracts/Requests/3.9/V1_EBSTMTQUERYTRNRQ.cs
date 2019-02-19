@@ -160,12 +160,12 @@ namespace BEDA.CIB.Contracts.Requests
         /// 票据金额范围	非必输
         /// </summary>
         [XmlElement(Order = 7)]
-        public BILLAMT BILLAMT { get; set; }
+        public AMTRANGE BILLAMT { get; set; }
     }
     /// <summary>
     /// 票据金额范围
     /// </summary>
-    public class BILLAMT
+    public class AMTRANGE
     {
         /// <summary>
         /// 最小金额,17位(15整数位,2小数位)	非必输

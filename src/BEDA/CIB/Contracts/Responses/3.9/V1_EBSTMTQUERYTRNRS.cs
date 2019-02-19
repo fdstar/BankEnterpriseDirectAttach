@@ -169,12 +169,12 @@ namespace BEDA.CIB.Contracts.Responses
         /// 出票人信息
         /// </summary>
         [XmlElement(Order = 7)]
-        public ORGUSERINFO DRAWER { get; set; }
+        public ORGACCT DRAWER { get; set; }
         /// <summary>
         /// 承兑人信息
         /// </summary>
         [XmlElement(Order = 8)]
-        public ORGUSERINFO ACPTR { get; set; }
+        public ORGACCT ACPTR { get; set; }
         /// <summary>
         /// 发送方信息
         /// </summary>
@@ -250,7 +250,7 @@ namespace BEDA.CIB.Contracts.Responses
     /// <summary>
     /// 组织人员信息
     /// </summary>
-    public class ORGUSERINFO
+    public class ORGACCT
     {
         /// <summary>
         /// 客户类型
@@ -258,22 +258,22 @@ namespace BEDA.CIB.Contracts.Responses
         [XmlElement(Order = 0)]
         public string CUSTTYPE { get; set; }
         /// <summary>
-        /// 账户代号
+        /// 账户代号,最大32位
         /// </summary>
         [XmlElement(Order = 1)]
         public string ACCTID { get; set; }
         /// <summary>
-        /// 账户名称
+        /// 账户名称,最大60位
         /// </summary>
         [XmlElement(Order = 2)]
         public string NAME { get; set; }
         /// <summary>
-        /// 开户行行号
+        /// 开户行行号,最大12位
         /// </summary>
         [XmlElement(Order = 3)]
         public string BANKNUM { get; set; }
         /// <summary>
-        /// 组织机构代码
+        /// 组织机构代码,最小1位,最大10位
         /// </summary>
         [XmlElement(Order = 4)]
         public string ORGID { get; set; }
