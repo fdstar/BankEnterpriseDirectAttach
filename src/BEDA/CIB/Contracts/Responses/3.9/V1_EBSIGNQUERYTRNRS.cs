@@ -203,7 +203,7 @@ namespace BEDA.CIB.Contracts.Responses
         /// 回购日期范围
         /// </summary>
         [XmlElement(Order = 19)]
-        public Requests.DATERANGE REDMDATE { get; set; }
+        public DATERANGE REDMDATE { get; set; }
         /// <summary>
         /// 赎回利率,7位百分数不含百分号(2位整数,5位小数)
         /// </summary>

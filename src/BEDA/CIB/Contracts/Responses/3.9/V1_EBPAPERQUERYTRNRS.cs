@@ -33,17 +33,8 @@ namespace BEDA.CIB.Contracts.Responses
     /// 3.9.1.12电子商业汇票代保管纸质票据查询响应内容
     /// </summary>
     public class EBPAPERQUERYTRN_RSBODY
+        : PAGED_RSBODY<EBPAPERQUERYTRN_CONTENT>
     {
-        /// <summary>
-        /// MORE是否有下一页，Y有，N无
-        /// </summary>
-        [XmlAttribute]
-        public string MORE { get; set; }
-        /// <summary>
-        /// 3.9.1.12电子商业汇票代保管纸质票据查询响应集合
-        /// </summary>
-        [XmlElement("CONTENT", Order = 0)]
-        public List<EBPAPERQUERYTRN_CONTENT> List { get; set; }
     }
     /// <summary>
     /// 3.9.1.12电子商业汇票代保管纸质票据查询响应明细

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
@@ -104,5 +105,80 @@ namespace BEDA.CIB.Contracts
         /// </summary>
         [XmlElement(Order = 3)]
         public string BANKDESC { get; set; }
+    }
+    /// <summary>
+    /// 包含评级信息的账户信息
+    /// </summary>
+    public class CREDITACCT
+    {
+        /// <summary>
+        /// 客户类型，4位,见附录《电子票据汇票系统编码对照表-企业类型》
+        /// </summary>
+        [XmlElement(Order = 0)]
+        public string CUSTTYPE { get; set; }
+        /// <summary>
+        /// 账户代号,最大32位
+        /// </summary>
+        [XmlElement(Order = 1)]
+        public string ACCTID { get; set; }
+        /// <summary>
+        /// 账户名称,最大60位
+        /// </summary>
+        [XmlElement(Order = 2)]
+        public string NAME { get; set; }
+        /// <summary>
+        /// 开户行行号,最大12位
+        /// </summary>
+        [XmlElement(Order = 3)]
+        public string BANKNUM { get; set; }
+        /// <summary>
+        /// 开户行名称
+        /// </summary>
+        [XmlElement(Order = 4)]
+        public string BANKDESC { get; set; }
+        /// <summary>
+        /// 用户评级信息
+        /// </summary>
+        [XmlElement(Order = 5)]
+        public CREDITINFO CREDITINFO { get; set; }
+    }
+    /// <summary>
+    /// 评级信息
+    /// </summary>
+    public class CREDITINFO
+    {
+        /// <summary>
+        /// 信用级别,1-3
+        /// </summary>
+        [XmlElement(Order = 1)]
+        public string CRDLVL { get; set; }
+        /// <summary>
+        /// 评级机构,1-60
+        /// </summary>
+        [XmlElement(Order = 2)]
+        public string RTGAGNCY { get; set; }
+        /// <summary>
+        /// 评级到期日 YYYY-MM-DD
+        /// </summary>
+        [XmlIgnore]
+        public DateTime RTGDUEDATE { get; set; }
+        /// <summary>
+        /// 评级到期日 YYYY-MM-DD, 对应<see cref="RTGDUEDATE"/>
+        /// </summary>
+        [XmlElement("RTGDUEDATE", Order = 3)]
+        public string RTGDUEDATEStr
+        {
+            get
+            {
+                return this.RTGDUEDATE.ToString("yyyy-MM-dd");
+            }
+            set
+            {
+                if (DateTime.TryParseExact(value, "yyyy-MM-dd", CultureInfo.CurrentCulture, DateTimeStyles.None, out DateTime tmp))
+                {
+                    this.RTGDUEDATE = tmp;
+                }
+            }
+        }
     }
 }
