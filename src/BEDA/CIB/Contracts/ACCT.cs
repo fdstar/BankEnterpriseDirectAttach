@@ -107,6 +107,37 @@ namespace BEDA.CIB.Contracts
         public string BANKDESC { get; set; }
     }
     /// <summary>
+    /// 组织人员信息
+    /// </summary>
+    public class ORGACCT
+    {
+        /// <summary>
+        /// 客户类型,4位,见附录3企业类型
+        /// </summary>
+        [XmlElement(Order = 0)]
+        public string CUSTTYPE { get; set; }
+        /// <summary>
+        /// 账户代号,最大32位
+        /// </summary>
+        [XmlElement(Order = 1)]
+        public string ACCTID { get; set; }
+        /// <summary>
+        /// 账户名称,最大60位
+        /// </summary>
+        [XmlElement(Order = 2)]
+        public string NAME { get; set; }
+        /// <summary>
+        /// 开户行行号,最大12位
+        /// </summary>
+        [XmlElement(Order = 3)]
+        public string BANKNUM { get; set; }
+        /// <summary>
+        /// 组织机构代码,最小1位,最大10位
+        /// </summary>
+        [XmlElement(Order = 4)]
+        public string ORGID { get; set; }
+    }
+    /// <summary>
     /// 包含评级信息的账户信息
     /// </summary>
     public class CREDITACCT
