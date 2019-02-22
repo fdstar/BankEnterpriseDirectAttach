@@ -93,12 +93,12 @@ namespace BEDA.CIB.Contracts.Responses
         [XmlElement(Order = 6)]
         public string BILLSTATUS { get; set; }
         /// <summary>
-        /// 出票日期 YYYY-MM-DD 必输
+        /// 出票日期 YYYY-MM-DD 必回
         /// </summary>
         [XmlIgnore]
         public DateTime OUTDATE { get; set; }
         /// <summary>
-        /// 出票日期，格式yyyy-MM-dd ,对应<see cref="OUTDATE"/> 必输
+        /// 出票日期，格式yyyy-MM-dd ,对应<see cref="OUTDATE"/> 必回
         /// </summary>
         [XmlElement("OUTDATE", Order = 7)]
         public string OUTDATEStr
@@ -116,12 +116,12 @@ namespace BEDA.CIB.Contracts.Responses
             }
         }
         /// <summary>
-        /// 出票截止日期 YYYY-MM-DD 必输
+        /// 出票截止日期 YYYY-MM-DD 必回
         /// </summary>
         [XmlIgnore]
         public DateTime DUEDATE { get; set; }
         /// <summary>
-        /// 出票截止日期，格式yyyy-MM-dd ,对应<see cref="DUEDATE"/> 必输
+        /// 出票截止日期，格式yyyy-MM-dd ,对应<see cref="DUEDATE"/> 必回
         /// </summary>
         [XmlElement("DUEDATE", Order = 8)]
         public string DUEDATEStr
