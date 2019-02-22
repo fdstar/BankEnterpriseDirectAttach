@@ -14,12 +14,12 @@ namespace BEDA.CIB.Contracts
     public class DATERANGE
     {
         /// <summary>
-        /// 起始日期YYYY-MM-DD	非必输
+        /// 起始日期 YYYY-MM-DD	非必输
         /// </summary>
         [XmlIgnore]
         public DateTime? DTSTART { get; set; }
         /// <summary>
-        /// 起始日期YYYY-MM-DD ,对应<see cref="DTSTART"/> 非必输
+        /// 起始日期 YYYY-MM-DD ,对应<see cref="DTSTART"/> 非必输
         /// </summary>
         [XmlElement("DTSTART", Order = 3)]
         public string DTSTARTStr
@@ -34,12 +34,12 @@ namespace BEDA.CIB.Contracts
             }
         }
         /// <summary>
-        /// 终止日期YYYY-MM-DD	非必输
+        /// 终止日期 YYYY-MM-DD	非必输
         /// </summary>
         [XmlIgnore]
         public DateTime? DTEND { get; set; }
         /// <summary>
-        /// 终止日期YYYY-MM-DD ,对应<see cref="DTEND"/>	非必输
+        /// 终止日期 YYYY-MM-DD ,对应<see cref="DTEND"/>	非必输
         /// </summary>
         [XmlElement("DTEND", Order = 4)]
         public string DTENDStr
