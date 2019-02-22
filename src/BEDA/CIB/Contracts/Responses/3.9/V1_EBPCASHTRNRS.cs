@@ -8,36 +8,31 @@ using System.Xml.Serialization;
 namespace BEDA.CIB.Contracts.Responses
 {
     /// <summary>
-    /// 3.9.3.2电子商业汇票票据出池响应主体
+    /// 3.9.3.6电子商业汇票贴现申请响应主体
     /// </summary>
-    public class V1_EBPOUTPOOLTRNRS : IResponse
+    public class V1_EBPCASHTRNRS : IResponse
     {
         /// <summary>
-        /// 3.9.3.2电子商业汇票票据出池响应主体
+        /// 3.9.3.6电子商业汇票贴现申请响应主体
         /// </summary>
-        public EBPOUTPOOLTRNRS EBPOUTPOOLTRNRS { get; set; }
+        public EBPCASHTRNRS EBPCASHTRNRS { get; set; }
     }
     /// <summary>
-    /// 3.9.3.2电子商业汇票票据出池响应主体
+    /// 3.9.3.6电子商业汇票贴现申请响应主体
     /// </summary>
-    public class EBPOUTPOOLTRNRS : BIZRSBASE
+    public class EBPCASHTRNRS : BIZRSBASE
     {
         /// <summary>
-        /// 3.9.3.2电子商业汇票票据出池响应内容
+        /// 3.9.3.6电子商业汇票贴现申请响应内容
         /// </summary>
         [XmlElement(Order = 2)]
-        public EBPOUTPOOLTRN_RSBODY RSBODY { get; set; }
+        public EBPCASHTRN_RSBODY RSBODY { get; set; }
     }
     /// <summary>
-    /// 3.9.3.2电子商业汇票票据出池响应内容
+    /// 3.9.3.6电子商业汇票贴现申请响应内容
     /// </summary>
-    public class EBPOUTPOOLTRN_RSBODY
+    public class EBPCASHTRN_RSBODY
     {
-        /// <summary>
-        /// 出池方式 ，01-托管出池 02-质押出池	必回
-        /// </summary>
-        [XmlElement(Order = 2)]
-        public string OUTPOOLTYPE { get; set; }
         /// <summary>
         /// 票据总笔数	必回
         /// </summary>
@@ -49,10 +44,10 @@ namespace BEDA.CIB.Contracts.Responses
         [XmlElement(Order = 4)]
         public decimal TOTALAMT { get; set; }
         /// <summary>
-        /// 3.9.3.2电子商业汇票票据出池响应集合	必回
+        /// 3.9.3.6电子商业汇票贴现申请响应集合	必回
         /// </summary>
         [XmlElement("CONTENT", Order = 10)]
-        public List<Requests.EBPOUTPOOLTRN_CONTENT> List { get; set; }
+        public List<Requests.EBPCASHTRN_CONTENT> List { get; set; }
         /// <summary>
         /// 指令处理节点
         /// </summary>

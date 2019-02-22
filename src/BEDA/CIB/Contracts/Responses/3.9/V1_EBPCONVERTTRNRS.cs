@@ -8,36 +8,36 @@ using System.Xml.Serialization;
 namespace BEDA.CIB.Contracts.Responses
 {
     /// <summary>
-    /// 3.9.3.2电子商业汇票票据出池响应主体
+    /// 3.9.3.3电子商业汇票质押托管转换响应主体
     /// </summary>
-    public class V1_EBPOUTPOOLTRNRS : IResponse
+    public class V1_EBPCONVERTTRNRS : IResponse
     {
         /// <summary>
-        /// 3.9.3.2电子商业汇票票据出池响应主体
+        /// 3.9.3.3电子商业汇票质押托管转换响应主体
         /// </summary>
-        public EBPOUTPOOLTRNRS EBPOUTPOOLTRNRS { get; set; }
+        public EBPCONVERTTRNRS EBPCONVERTTRNRS { get; set; }
     }
     /// <summary>
-    /// 3.9.3.2电子商业汇票票据出池响应主体
+    /// 3.9.3.3电子商业汇票质押托管转换响应主体
     /// </summary>
-    public class EBPOUTPOOLTRNRS : BIZRSBASE
+    public class EBPCONVERTTRNRS : BIZRSBASE
     {
         /// <summary>
-        /// 3.9.3.2电子商业汇票票据出池响应内容
+        /// 3.9.3.3电子商业汇票质押托管转换响应内容
         /// </summary>
         [XmlElement(Order = 2)]
-        public EBPOUTPOOLTRN_RSBODY RSBODY { get; set; }
+        public EBPCONVERTTRN_RSBODY RSBODY { get; set; }
     }
     /// <summary>
-    /// 3.9.3.2电子商业汇票票据出池响应内容
+    /// 3.9.3.3电子商业汇票质押托管转换响应内容
     /// </summary>
-    public class EBPOUTPOOLTRN_RSBODY
+    public class EBPCONVERTTRN_RSBODY
     {
         /// <summary>
-        /// 出池方式 ，01-托管出池 02-质押出池	必回
+        /// 转换类型 ，0-质押转托管 1-托管转质押	必回
         /// </summary>
         [XmlElement(Order = 2)]
-        public string OUTPOOLTYPE { get; set; }
+        public string CONVERTTYPE { get; set; }
         /// <summary>
         /// 票据总笔数	必回
         /// </summary>
@@ -49,10 +49,10 @@ namespace BEDA.CIB.Contracts.Responses
         [XmlElement(Order = 4)]
         public decimal TOTALAMT { get; set; }
         /// <summary>
-        /// 3.9.3.2电子商业汇票票据出池响应集合	必回
+        /// 3.9.3.3电子商业汇票质押托管转换响应集合	必回
         /// </summary>
         [XmlElement("CONTENT", Order = 10)]
-        public List<Requests.EBPOUTPOOLTRN_CONTENT> List { get; set; }
+        public List<Requests.EBPCONVERTTRN_CONTENT> List { get; set; }
         /// <summary>
         /// 指令处理节点
         /// </summary>
