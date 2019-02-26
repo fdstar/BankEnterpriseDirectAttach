@@ -95,6 +95,8 @@ namespace BEDA.CIB.Samples
             //PMFUNDQUERYTRNRQSample();
             //PMMBRQUERYTRNRQSample();
             //PMDLVRYQUERYTRNRQSample();
+            //PMSTMTQUERYTRNRQSample();
+            //PMINVESTTRNRQSample();
             #endregion
 
             #region 3.12	定活互转
@@ -1804,6 +1806,53 @@ namespace BEDA.CIB.Samples
                     {
                         ACCTID = mainAccountId,
                         OPERDATE = DateTime.Now.AddDays(-1)
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.11.1.6 出入金明细查询
+        /// </summary>
+        public static void PMSTMTQUERYTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.11.1.6", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_PMSTMTQUERYTRNRQ, V1_PMSTMTQUERYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_PMSTMTQUERYTRNRQ
+            {
+                PMSTMTQUERYTRNRQ = new PMSTMTQUERYTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new PMSTMTQUERYTRN_RQBODY
+                    {
+                        ACCTID = mainAccountId,
+                        DTSTART = DateTime.Now.AddMonths(-1),
+                        DTEND = DateTime.Now.AddDays(-1)
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.11.2	入金申请
+        /// </summary>
+        public static void PMINVESTTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.11.2", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_PMINVESTTRNRQ, V1_PMINVESTTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_PMINVESTTRNRQ
+            {
+                PMINVESTTRNRQ = new PMINVESTTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new PMINVESTTRN_RQBODY
+                    {
+                        ACCTID = mainAccountId,
+                        TRNAMT = 5000.0m,
+                        CUSTNO = "87654322",
+                        MBRNO = "A01523501005411"
                     }
                 }
             };
