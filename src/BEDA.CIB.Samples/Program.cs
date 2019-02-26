@@ -97,6 +97,8 @@ namespace BEDA.CIB.Samples
             //PMDLVRYQUERYTRNRQSample();
             //PMSTMTQUERYTRNRQSample();
             //PMINVESTTRNRQSample();
+            //PMREFUNDTRNRQSample();
+            //PMDLVRYAPPLYTRNRQSample();
             #endregion
 
             #region 3.12	定活互转
@@ -1853,6 +1855,52 @@ namespace BEDA.CIB.Samples
                         TRNAMT = 5000.0m,
                         CUSTNO = "87654322",
                         MBRNO = "A01523501005411"
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.11.3	保证金划回申请
+        /// </summary>
+        public static void PMREFUNDTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.11.3", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_PMREFUNDTRNRQ, V1_PMREFUNDTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_PMREFUNDTRNRQ
+            {
+                PMREFUNDTRNRQ = new PMREFUNDTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new PMREFUNDTRN_RQBODY
+                    {
+                        ACCTID = mainAccountId,
+                        TRNAMT = 5000.0m,
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.11.4	实物提货申请
+        /// </summary>
+        public static void PMDLVRYAPPLYTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.11.4", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_PMDLVRYAPPLYTRNRQ, V1_PMDLVRYAPPLYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_PMDLVRYAPPLYTRNRQ
+            {
+                PMDLVRYAPPLYTRNRQ = new PMDLVRYAPPLYTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new PMDLVRYAPPLYTRN_RQBODY
+                    {
+                        ACCTID = mainAccountId,
+                        PRODNO = "202",
+                        PICKCNT = 3000,
+                        PICKPWD = "111111"
                     }
                 }
             };
