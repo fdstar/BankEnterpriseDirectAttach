@@ -212,4 +212,39 @@ namespace BEDA.CIB.Contracts
             }
         }
     }
+    /// <summary>
+    /// 银行账户信息
+    /// </summary>
+    public class BANKACCT : ACCT
+    {
+        /// <summary>
+        /// 开户日期 YYYY-MM-DD
+        /// </summary>
+        [XmlIgnore]
+        public DateTime? OPENDATE { get; set; }
+        /// <summary>
+        /// 开户日期 YYYY-MM-DD, 对应<see cref="OPENDATE"/>
+        /// </summary>
+        [XmlElement("OPENDATE", Order = 3)]
+        public string OPENDATEStr
+        {
+            get
+            {
+                return this.OPENDATE?.ToString("yyyy-MM-dd");
+            }
+            set
+            {
+                this.OPENDATE = null;
+                if (DateTime.TryParseExact(value, "yyyy-MM-dd", CultureInfo.CurrentCulture, DateTimeStyles.None, out DateTime tmp))
+                {
+                    this.OPENDATE = tmp;
+                }
+            }
+        }
+        /// <summary>
+        /// 开户行名称，最长60位
+        /// </summary>
+        [XmlElement(Order = 4)]
+        public string BANKDESC { get; set; }
+    }
 }

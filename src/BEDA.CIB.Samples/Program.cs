@@ -89,6 +89,11 @@ namespace BEDA.CIB.Samples
             //CRSGATHERTRNRQSample();
             #endregion
 
+            #region 3.11	贵金属交易
+            //PMCONTRQUERYTRNRQSample();
+            //PMINVNQUERYTRNRQSample();
+            #endregion
+
             #region 3.12	定活互转
             //DEMAND2TIMETRNRQSample();
             //TIME2DEMANDTRNRQSample();
@@ -142,7 +147,9 @@ namespace BEDA.CIB.Samples
         const long cid = 1100343164;
         const string uid = "qw1";
         const string pwd = "a1111111";//密码错误6次账号会被永久锁定无法解锁
-        static ICIBClient client = new CIBClient("127.0.0.1", 8007);
+        const string ip = "127.0.0.1";
+        const int port = 8007;
+        static ICIBClient client = new CIBClient(ip, port);
 
         const string mainAccountId = "117010100100000177";
         const string mainAccountName = "中国民族证券有限责任公司12";
@@ -1685,6 +1692,51 @@ namespace BEDA.CIB.Samples
                         BUSINESSTYPE = "00100",
                         PURPOSE = "他行账户收款",
                         TRNAMT = 5.7m,
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        #endregion
+
+        #region 3.11	贵金属交易
+        /// <summary>
+        /// 3.11.1.1 贵金属账户签约查询
+        /// </summary>
+        public static void PMCONTRQUERYTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.11.1.1", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_PMCONTRQUERYTRNRQ, V1_PMCONTRQUERYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_PMCONTRQUERYTRNRQ
+            {
+                PMCONTRQUERYTRNRQ = new PMCONTRQUERYTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new RQACCT
+                    {
+                        ACCTID = mainAccountId
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.11.1.2 贵金属库存查询
+        /// </summary>
+        public static void PMINVNQUERYTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.11.1.2", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_PMINVNQUERYTRNRQ, V1_PMINVNQUERYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_PMINVNQUERYTRNRQ
+            {
+                PMINVNQUERYTRNRQ = new PMINVNQUERYTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new PAGED_RQACCT
+                    {
+                        ACCTID = mainAccountId
                     }
                 }
             };
