@@ -92,6 +92,9 @@ namespace BEDA.CIB.Samples
             #region 3.11	贵金属交易
             //PMCONTRQUERYTRNRQSample();
             //PMINVNQUERYTRNRQSample();
+            //PMFUNDQUERYTRNRQSample();
+            //PMMBRQUERYTRNRQSample();
+            //PMDLVRYQUERYTRNRQSample();
             #endregion
 
             #region 3.12	定活互转
@@ -1737,6 +1740,70 @@ namespace BEDA.CIB.Samples
                     RQBODY = new PAGED_RQACCT
                     {
                         ACCTID = mainAccountId
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.11.1.3 贵金属交易资金查询
+        /// </summary>
+        public static void PMFUNDQUERYTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.11.1.3", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_PMFUNDQUERYTRNRQ, V1_PMFUNDQUERYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_PMFUNDQUERYTRNRQ
+            {
+                PMFUNDQUERYTRNRQ = new PMFUNDQUERYTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new RQACCT
+                    {
+                        ACCTID = mainAccountId
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.11.1.4 贵金属交易会员信息查询
+        /// </summary>
+        public static void PMMBRQUERYTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.11.1.4", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_PMMBRQUERYTRNRQ, V1_PMMBRQUERYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_PMMBRQUERYTRNRQ
+            {
+                PMMBRQUERYTRNRQ = new PMMBRQUERYTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new PAGED_RQACCT
+                    {
+                        ACCTID = mainAccountId
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.11.1.5 提货申请查询
+        /// </summary>
+        public static void PMDLVRYQUERYTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.11.1.5", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_PMDLVRYQUERYTRNRQ, V1_PMDLVRYQUERYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_PMDLVRYQUERYTRNRQ
+            {
+                PMDLVRYQUERYTRNRQ = new PMDLVRYQUERYTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new PMDLVRYQUERYTRN_RQBODY
+                    {
+                        ACCTID = mainAccountId,
+                        OPERDATE = DateTime.Now.AddDays(-1)
                     }
                 }
             };
