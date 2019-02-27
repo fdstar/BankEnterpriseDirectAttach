@@ -109,6 +109,9 @@ namespace BEDA.CIB.Samples
             //ICCONTRTRNRQSample();
             //ICAGMTTRNRQSample();
             //ICREGTRNRQSample();
+            //ICCANCELTRNRQSample();
+            //ICWITHDRAWALTRNRQSample();
+            //STRUCTPRODUCTTRNRQSample();
             #endregion
 
             #region 3.13	扩展功能
@@ -2058,6 +2061,70 @@ namespace BEDA.CIB.Samples
                     {
                         ACCTID = mainAccountId,
                         RETAINAMT = 100000
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.12.5.4 智能通知存款撤销
+        /// </summary>
+        public static void ICCANCELTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.12.5.4", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_ICCANCELTRNRQ, V1_ICCANCELTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_ICCANCELTRNRQ
+            {
+                ICCANCELTRNRQ = new ICCANCELTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new RQACCT
+                    {
+                        ACCTID = mainAccountId,
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.12.5.5 智能通知存款资金支取
+        /// </summary>
+        public static void ICWITHDRAWALTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.12.5.5", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_ICWITHDRAWALTRNRQ, V1_ICWITHDRAWALTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_ICWITHDRAWALTRNRQ
+            {
+                ICWITHDRAWALTRNRQ = new ICWITHDRAWALTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new ICWITHDRAWALTRN_RQBODY
+                    {
+                        ACCTID = "117010100200489949",
+                        TRNAMT = 100000
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.12.6.1 结构性存款产品信息查询
+        /// </summary>
+        public static void STRUCTPRODUCTTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.12.6.1", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_STRUCTPRODUCTTRNRQ, V1_STRUCTPRODUCTTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_STRUCTPRODUCTTRNRQ
+            {
+                STRUCTPRODUCTTRNRQ = new STRUCTPRODUCTTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new STRUCTPRODUCTTRN_RQBODY
+                    {
+                        DEMANDACCT = mainAccountId,
                     }
                 }
             };
