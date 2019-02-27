@@ -106,6 +106,9 @@ namespace BEDA.CIB.Samples
             //TIME2DEMANDTRNRQSample();
             //CCCURR2CALLTRNRQSample();
             //CCCALL2CURRTRNRQSample();
+            //ICCONTRTRNRQSample();
+            //ICAGMTTRNRQSample();
+            //ICREGTRNRQSample();
             #endregion
 
             #region 3.13	扩展功能
@@ -1983,7 +1986,7 @@ namespace BEDA.CIB.Samples
         /// </summary>
         public static void CCCALL2CURRTRNRQSample()
         {
-            string tid = string.Format("{0:yyyyMMddHHmmss}_3.12.3", DateTime.Now);
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.12.4", DateTime.Now);
             var rq = GetRequest<FOXRQ<V1_CCCALL2CURRTRNRQ, V1_CCCALL2CURRTRNRS>>();
             rq.SECURITIES_MSGSRQV1 = new V1_CCCALL2CURRTRNRQ
             {
@@ -1995,6 +1998,66 @@ namespace BEDA.CIB.Samples
                         ACCTID = "117010100200489949",
                         TRNAMT = 100.0m,
                         ACTIONTYPE = 6,
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.12.5.1 智能通知存款签约关系查询
+        /// </summary>
+        public static void ICCONTRTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.12.5.1", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_ICCONTRTRNRQ, V1_ICCONTRTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_ICCONTRTRNRQ
+            {
+                ICCONTRTRNRQ = new ICCONTRTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new RQACCT
+                    {
+                        ACCTID = mainAccountId,
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.12.5.2 智能通知存款协议查询
+        /// </summary>
+        public static void ICAGMTTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.12.5.2", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_ICAGMTTRNRQ, V1_ICAGMTTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_ICAGMTTRNRQ
+            {
+                ICAGMTTRNRQ = new ICAGMTTRNRQ
+                {
+                    TRNUID = tid,
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.12.5.3 智能通知存款登记
+        /// </summary>
+        public static void ICREGTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.12.5.3", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_ICREGTRNRQ, V1_ICREGTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_ICREGTRNRQ
+            {
+                ICREGTRNRQ = new ICREGTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new ICREGTRN_RQBODY
+                    {
+                        ACCTID = mainAccountId,
+                        RETAINAMT = 100000
                     }
                 }
             };
