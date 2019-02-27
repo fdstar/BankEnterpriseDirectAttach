@@ -112,6 +112,9 @@ namespace BEDA.CIB.Samples
             //ICCANCELTRNRQSample();
             //ICWITHDRAWALTRNRQSample();
             //STRUCTPRODUCTTRNRQSample();
+            //DEMANDTOSTRUCTTRNRQSample();
+            //DEMANDTOSTRUCTQUERYTRNRQSample();
+            //STRUCTACCOUNTTRNRQSample();
             #endregion
 
             #region 3.13	扩展功能
@@ -2123,6 +2126,72 @@ namespace BEDA.CIB.Samples
                 {
                     TRNUID = tid,
                     RQBODY = new STRUCTPRODUCTTRN_RQBODY
+                    {
+                        DEMANDACCT = mainAccountId,
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.12.6.2 结构性存款开户
+        /// </summary>
+        public static void DEMANDTOSTRUCTTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.12.6.2", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_DEMANDTOSTRUCTTRNRQ, V1_DEMANDTOSTRUCTTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_DEMANDTOSTRUCTTRNRQ
+            {
+                DEMANDTOSTRUCTTRNRQ = new DEMANDTOSTRUCTTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new DEMANDTOSTRUCTTRN_RQBODY
+                    {
+                        DEMANDACCT = mainAccountId,
+                        PRODUCTNO = "80040002",
+                        PRODUCTNAME = "总行标准30天封闭式",
+                        AMOUNT = 2000000
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.12.6.3 结构性存款开户交易结果查询
+        /// </summary>
+        public static void DEMANDTOSTRUCTQUERYTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.12.6.3", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_DEMANDTOSTRUCTQUERYTRNRQ, V1_DEMANDTOSTRUCTQUERYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_DEMANDTOSTRUCTQUERYTRNRQ
+            {
+                DEMANDTOSTRUCTQUERYTRNRQ = new DEMANDTOSTRUCTQUERYTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new DEMANDTOSTRUCTQUERYTRN_RQBODY
+                    {
+                         CLTREFNO= "20190227145923_3.12.6.2",
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.12.6.4 结构性存款账户信息查询
+        /// </summary>
+        public static void STRUCTACCOUNTTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.12.6.4", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_STRUCTACCOUNTTRNRQ, V1_STRUCTACCOUNTTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_STRUCTACCOUNTTRNRQ
+            {
+                STRUCTACCOUNTTRNRQ = new STRUCTACCOUNTTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new STRUCTACCOUNTTRN_RQBODY
                     {
                         DEMANDACCT = mainAccountId,
                     }
