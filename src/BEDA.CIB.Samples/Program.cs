@@ -117,6 +117,11 @@ namespace BEDA.CIB.Samples
             //STRUCTACCOUNTTRNRQSample();
             //STRUCTTODEMANDTRNRQSample();
             //STRUCTTODEMANDQUERYTRNRQSample();
+            //INTGNTTIMEINTCONSIGNTRNRQSample();
+            //INTGNTTIMEINTCONQUERYTRNRQSample();
+            //INTGNTTIMEINTCONMODIFYTRNRQSample();
+            //INTGNTTIMEINTCONUNCONTRNRQSample();
+            //CREATEINTELLIGENTTIMETRNRQSample();
             #endregion
 
             #region 3.13	扩展功能
@@ -2245,6 +2250,118 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.12.7.1 智能定期存款互联互通—签约
+        /// </summary>
+        public static void INTGNTTIMEINTCONSIGNTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.12.7.1", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_INTGNTTIMEINTCONSIGNTRNRQ, V1_INTGNTTIMEINTCONSIGNTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_INTGNTTIMEINTCONSIGNTRNRQ
+            {
+                INTGNTTIMEINTCONSIGNTRNRQ = new INTGNTTIMEINTCONSIGNTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new INTGNTTIMEINTCONSIGNTRN_RQBODY
+                    {
+                        DEMANDACCOUNTNO = mainAccountId,
+                        OPENAMOUNT = 10000000000
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.12.7.2 智能定期存款互联互通—签约账户查询
+        /// </summary>
+        public static void INTGNTTIMEINTCONQUERYTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.12.7.2", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_INTGNTTIMEINTCONQUERYTRNRQ, V1_INTGNTTIMEINTCONQUERYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_INTGNTTIMEINTCONQUERYTRNRQ
+            {
+                INTGNTTIMEINTCONQUERYTRNRQ = new INTGNTTIMEINTCONQUERYTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new INTGNTTIMEINTCONQUERYTRN_RQBODY
+                    {
+                        DEMANDACCOUNTNO = mainAccountId,
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.12.7.3 智能定期存款互联互通—修改/解约
+        /// </summary>
+        public static void INTGNTTIMEINTCONMODIFYTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.12.7.3", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_INTGNTTIMEINTCONMODIFYTRNRQ, V1_INTGNTTIMEINTCONMODIFYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_INTGNTTIMEINTCONMODIFYTRNRQ
+            {
+                INTGNTTIMEINTCONMODIFYTRNRQ = new INTGNTTIMEINTCONMODIFYTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new INTGNTTIMEINTCONMODIFYTRN_RQBODY
+                    {
+                        DEMANDACCOUNTNO = mainAccountId,
+                        ACTIONTYPE = 0,
+                        OBLIGATEAMOUNT = 10000000000
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.12.7.4 智能定期存款互联互通—关联/解关联
+        /// </summary>
+        public static void INTGNTTIMEINTCONUNCONTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.12.7.4", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_INTGNTTIMEINTCONUNCONTRNRQ, V1_INTGNTTIMEINTCONUNCONTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_INTGNTTIMEINTCONUNCONTRNRQ
+            {
+                INTGNTTIMEINTCONUNCONTRNRQ = new INTGNTTIMEINTCONUNCONTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new INTGNTTIMEINTCONUNCONTRN_RQBODY
+                    {
+                        DEMANDACCOUNTNO = mainAccountId,
+                        ACTIONTYPE = 0,
+                        OPENAMOUNT = 5000000,
+                        FIXEDACCOUNTNO = "117010100200490349",
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.12.7.5 智能定期存款—开户
+        /// </summary>
+        public static void CREATEINTELLIGENTTIMETRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.12.7.5", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_CREATEINTELLIGENTTIMETRNRQ, V1_CREATEINTELLIGENTTIMETRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_CREATEINTELLIGENTTIMETRNRQ
+            {
+                CREATEINTELLIGENTTIMETRNRQ = new CREATEINTELLIGENTTIMETRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new CREATEINTELLIGENTTIMETRN_RQBODY
+                    {
+                        DEMANDACCOUNTNO = mainAccountId,
+                        OPENAMOUNT = 5000000,
+                    }
+                }
+            };
+            var rs = client.Execute(rq);//117010100200490349
             Console.WriteLine(rs?.ResponseContent);
         }
         #endregion
