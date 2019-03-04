@@ -124,6 +124,9 @@ namespace BEDA.CIB.Samples
             //CREATEINTELLIGENTTIMETRNRQSample();
             //QUERYINTELLIGENTTIMETRNRQSample();
             //QUERYINTELLIGENTTIMEDETAILTRNRQSample();
+            //DRAWINTELLIGENTTIMETRNRQSample();
+            //TRADEAPASSDETAILTRNRQSample();
+            //TRADEAPASSTRNRQSample();
             #endregion
 
             #region 3.13	扩展功能
@@ -2404,6 +2407,71 @@ namespace BEDA.CIB.Samples
                         FIXEDACCOUNTNO = "117010100200490349",
                         STARTDATE = DateTime.Now.AddMonths(-5),
                         ENDDATE = DateTime.Now.AddDays(-1)
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.12.7.8 智能定期存款—资金支取
+        /// </summary>
+        public static void DRAWINTELLIGENTTIMETRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.12.7.8", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_DRAWINTELLIGENTTIMETRNRQ, V1_DRAWINTELLIGENTTIMETRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_DRAWINTELLIGENTTIMETRNRQ
+            {
+                DRAWINTELLIGENTTIMETRNRQ = new DRAWINTELLIGENTTIMETRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new DRAWINTELLIGENTTIMETRN_RQBODY
+                    {
+                        FIXEDACCOUNTNO = "117010100200490349",
+                        DEMANDACCOUNTNO = mainAccountId,
+                        AMOUNT = 11000,
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.12.8.1 一本帐及互联互通
+        /// </summary>
+        public static void TRADEAPASSDETAILTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.12.8.1", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_TRADEAPASSDETAILTRNRQ, V1_TRADEAPASSDETAILTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_TRADEAPASSDETAILTRNRQ
+            {
+                TRADEAPASSDETAILTRNRQ = new TRADEAPASSDETAILTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new PAGED_RQACCT
+                    {
+                        ACCTID = mainAccountId,
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.12.8.2 同业一本通及互联互通查询
+        /// </summary>
+        public static void TRADEAPASSTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.12.8.2", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_TRADEAPASSTRNRQ, V1_TRADEAPASSTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_TRADEAPASSTRNRQ
+            {
+                TRADEAPASSTRNRQ = new TRADEAPASSTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new PAGED_RQACCT
+                    {
+                        ACCTID = mainAccountId,
                     }
                 }
             };
