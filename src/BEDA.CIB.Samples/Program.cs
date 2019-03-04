@@ -122,6 +122,8 @@ namespace BEDA.CIB.Samples
             //INTGNTTIMEINTCONMODIFYTRNRQSample();
             //INTGNTTIMEINTCONUNCONTRNRQSample();
             //CREATEINTELLIGENTTIMETRNRQSample();
+            //QUERYINTELLIGENTTIMETRNRQSample();
+            //QUERYINTELLIGENTTIMEDETAILTRNRQSample();
             #endregion
 
             #region 3.13	扩展功能
@@ -2362,6 +2364,50 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);//117010100200490349
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.12.7.6 智能定期存款账户查询
+        /// </summary>
+        public static void QUERYINTELLIGENTTIMETRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.12.7.6", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_QUERYINTELLIGENTTIMETRNRQ, V1_QUERYINTELLIGENTTIMETRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_QUERYINTELLIGENTTIMETRNRQ
+            {
+                QUERYINTELLIGENTTIMETRNRQ = new QUERYINTELLIGENTTIMETRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new QUERYINTELLIGENTTIMETRN_RQBODY
+                    {
+                        DEMANDACCOUNTNO = mainAccountId,
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.12.7.7 智能定期存款—明细查询
+        /// </summary>
+        public static void QUERYINTELLIGENTTIMEDETAILTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.12.7.7", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_QUERYINTELLIGENTTIMEDETAILTRNRQ, V1_QUERYINTELLIGENTTIMEDETAILTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_QUERYINTELLIGENTTIMEDETAILTRNRQ
+            {
+                QUERYINTELLIGENTTIMEDETAILTRNRQ = new QUERYINTELLIGENTTIMEDETAILTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new QUERYINTELLIGENTTIMEDETAILTRN_RQBODY
+                    {
+                        FIXEDACCOUNTNO = "117010100200490349",
+                        STARTDATE = DateTime.Now.AddMonths(-5),
+                        ENDDATE = DateTime.Now.AddDays(-1)
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
             Console.WriteLine(rs?.ResponseContent);
         }
         #endregion
