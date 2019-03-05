@@ -56,7 +56,7 @@ namespace BEDA.CIB.Contracts.Requests
         /// 批件号	非必输
         /// </summary>
         [XmlElement(Order = 4)]
-        public string APPROVEDDOCNO { get; set; }
+        public string APPROVEDDOCNO { get; set; } = string.Empty;
         /// <summary>
         /// 结清状态 必输
         /// 0：未结清

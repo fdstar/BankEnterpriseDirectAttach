@@ -168,6 +168,23 @@ namespace BEDA.CIB.Samples
             //QUERYBULLETINTRNRQSample();
             #endregion
 
+            #region 3.19	跨境资金池
+            //CBCPALLOCATETRNRQSample();
+            //CBCPINTERESTADJUSTTRNRQSample();
+            //CBCPINTRSTQUERYTRNRQSample();
+            //CBCPEXCHNGTRNRQSample();
+            //CBCPEXCHNGTRADEQUERYTRNRQSample();
+            //CBCPTRANSFERTRNRQSample();
+            //CBCPMEMACCTQUERYTRNRQSample();
+            //CBCPMAINACCTQUERYTRNRQSample();
+            //CBCPTRADEDETAILQUERYTRNRQSample();
+            //CBCPMEMTRADEQUERYTRNRQSample();
+            //CBCPACCTCFGQUERYTRNRQSample();
+            //CBCPMEMALLOCATETRNRQSample();
+            //CBCPMAINTRSFRTRNRQSample();
+            //CBCPMAINTRADEQUERYTRNRQSample();
+            #endregion
+
             #region 3.20	信用证
             //LCOPENAPPLYTRNRQSample();
             //LCAMENDAPPLYTRNRQSample();
@@ -3097,6 +3114,380 @@ namespace BEDA.CIB.Samples
                     RQBODY = new QUERYBULLETINTRN_RQBODY
                     {
                         DATE = DateTime.Now.AddDays(-4)
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        #endregion
+
+        #region 3.19	跨境资金池
+        /// <summary>
+        /// 3.19.1	资金调拨
+        /// </summary>
+        public static void CBCPALLOCATETRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.19.1", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_CBCPALLOCATETRNRQ, V1_CBCPALLOCATETRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_CBCPALLOCATETRNRQ
+            {
+                CBCPALLOCATETRNRQ = new CBCPALLOCATETRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new CBCPALLOCATETRN_RQBODY
+                    {
+                        MAINACCTNO = mainAccountId,
+                        MEMACCTNO = "117010100100050880",
+                        ALLOCDIRECTION = 1,
+                        AMOUNT = 1000,
+                        CURRENCY = "01",
+                        PURPOSE = "资金调拨PURPOSE",
+                        MEMO = "资金调拨MEMO",
+                        DTDUE = DateTime.Now,
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.19.2	利息分配
+        /// </summary>
+        public static void CBCPINTERESTADJUSTTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.19.2", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_CBCPINTERESTADJUSTTRNRQ, V1_CBCPINTERESTADJUSTTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_CBCPINTERESTADJUSTTRNRQ
+            {
+                CBCPINTERESTADJUSTTRNRQ = new CBCPINTERESTADJUSTTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new CBCPINTERESTADJUSTTRN_RQBODY
+                    {
+                        MAINACCTNO = mainAccountId,
+                        MEMACCTNO = "117010100100050880",
+                        TOTALUPSCORE = 10000,
+                        UPRATIO = 9,
+                        ADJUSTUPINTEREST = 12,
+                        TOTALDOWNSCORE = 0,
+                        DOWNRATIO = 5,
+                        ADJUSTDOWNINTEREST = 0,
+                        CURRENCY = "01",
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.19.3	利息查询
+        /// </summary>
+        public static void CBCPINTRSTQUERYTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.19.3", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_CBCPINTRSTQUERYTRNRQ, V1_CBCPINTRSTQUERYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_CBCPINTRSTQUERYTRNRQ
+            {
+                CBCPINTRSTQUERYTRNRQ = new CBCPINTRSTQUERYTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new CBCPINTRSTQUERYTRN_RQBODY
+                    {
+                        ACCTNO = mainAccountId,
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.19.4	集中结汇
+        /// </summary>
+        public static void CBCPEXCHNGTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.19.4", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_CBCPEXCHNGTRNRQ, V1_CBCPEXCHNGTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_CBCPEXCHNGTRNRQ
+            {
+                CBCPEXCHNGTRNRQ = new CBCPEXCHNGTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new CBCPEXCHNGTRN_RQBODY
+                    {
+                        ACCTNO = mainAccountId,
+                        RMBACCTNO = "117010100100050880",
+                        RMBACCTNAME = "test",
+                        AMOUNT = 1000,
+                        CURRENCY = "14",
+                        EXCHNGTYPE = 0,
+                        EXCHNGCODE = "11001",
+                        TRANSNO = "121010",
+                        MEMO = "集中结汇MEMO",
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.19.5	集中结汇交易明细查询
+        /// </summary>
+        public static void CBCPEXCHNGTRADEQUERYTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.19.5", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_CBCPEXCHNGTRADEQUERYTRNRQ, V1_CBCPEXCHNGTRADEQUERYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_CBCPEXCHNGTRADEQUERYTRNRQ
+            {
+                CBCPEXCHNGTRADEQUERYTRNRQ = new CBCPEXCHNGTRADEQUERYTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new CBCPEXCHNGTRADEQUERYTRN_RQBODY
+                    {
+                        ACCTNO=mainAccountId,
+                        STARTDATE = DateTime.Now.AddMonths(-2),
+                        ENDDATE = DateTime.Now.AddDays(-1),
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.19.6	集中收付汇
+        /// </summary>
+        public static void CBCPTRANSFERTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.19.6", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_CBCPTRANSFERTRNRQ, V1_CBCPTRANSFERTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_CBCPTRANSFERTRNRQ
+            {
+                CBCPTRANSFERTRNRQ = new CBCPTRANSFERTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new CBCPTRANSFERTRN_RQBODY
+                    {
+                        REMITWAY = "T",
+                        REMITTYPE = "O",
+                        REMITTERTYPE = "C",
+                        REMITTERACCTNO = mainAccountId + "666666",
+                        TOACCTNO = "6222021202008454721",
+                        TOACCTBANE = "葛吉利",
+                        TOBANKCODE = "CITIUS33XXX",
+                        TOBANKNAME = "CITIBANK N.A.111 WALL STREET",
+                        CURRENTCY = "14",
+                        REMITAMOUNT = 1000,
+                        REMITMEMO = "集中收付汇REMITMEMO",
+                        COUNTRYCODE = "AGO",
+                        TRADECODE1 = "121010",
+                        CURRENCY1 = "",
+                        AMOUNT1 = 800,
+                        AMOUNT2 = 200,
+                        MEMO1 = "集中收付汇 MEMO1",
+                        SETTLE_WAY = "T",
+                        PAYTYPE = "O",
+                        ISBONDED = "N",
+                        CONTRATENO = "201609090005",
+                        BILLNO = "201609090005",
+                        APPLYNAME = "WENGQ",
+                        APPLYTEL = "15860003216",
+                        BEAREXPENSES = "SHA",
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.19.7	成员账号信息查询
+        /// </summary>
+        public static void CBCPMEMACCTQUERYTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.19.7", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_CBCPMEMACCTQUERYTRNRQ, V1_CBCPMEMACCTQUERYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_CBCPMEMACCTQUERYTRNRQ
+            {
+                CBCPMEMACCTQUERYTRNRQ = new CBCPMEMACCTQUERYTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new CBCPMEMACCTQUERYTRN_RQBODY
+                    {
+                        ACCTNO = mainAccountId,
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.19.8	国内主账户信息查询
+        /// </summary>
+        public static void CBCPMAINACCTQUERYTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.19.8", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_CBCPMAINACCTQUERYTRNRQ, V1_CBCPMAINACCTQUERYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_CBCPMAINACCTQUERYTRNRQ
+            {
+                CBCPMAINACCTQUERYTRNRQ = new CBCPMAINACCTQUERYTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new CBCPMAINACCTQUERYTRN_RQBODY
+                    {
+                        CURRENCY = "14"
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.19.9	账户交易明细查询
+        /// </summary>
+        public static void CBCPTRADEDETAILQUERYTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.19.9", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_CBCPTRADEDETAILQUERYTRNRQ, V1_CBCPTRADEDETAILQUERYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_CBCPTRADEDETAILQUERYTRNRQ
+            {
+                CBCPTRADEDETAILQUERYTRNRQ = new CBCPTRADEDETAILQUERYTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new CBCPTRADEDETAILQUERYTRN_RQBODY
+                    {
+                        TRADETYPE = 0,
+                        CURRENCY = "14",
+                        ACCTNO = mainAccountId,
+                        STARTDATE = DateTime.Now.AddMonths(-2),
+                        ENDDATE = DateTime.Now.AddDays(-1),
+                        DCDIRECTOR = 1,
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.19.10	成员单位子账号交易明细查询
+        /// </summary>
+        public static void CBCPMEMTRADEQUERYTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.19.10", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_CBCPMEMTRADEQUERYTRNRQ, V1_CBCPMEMTRADEQUERYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_CBCPMEMTRADEQUERYTRNRQ
+            {
+                CBCPMEMTRADEQUERYTRNRQ = new CBCPMEMTRADEQUERYTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new CBCPMEMTRADEQUERYTRN_RQBODY
+                    {
+                        TRADETYPE = 1,
+                        CURRENCY = "14",
+                        MAINACCTNO = mainAccountId,
+                        SEQNO = "000002",
+                        STARTDATE = DateTime.Now.AddMonths(-2),
+                        ENDDATE = DateTime.Now.AddDays(-1),
+                        DCDIRECTOR = 1,
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.19.11	账户资金池属性查询
+        /// </summary>
+        public static void CBCPACCTCFGQUERYTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.19.11", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_CBCPACCTCFGQUERYTRNRQ, V1_CBCPACCTCFGQUERYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_CBCPACCTCFGQUERYTRNRQ
+            {
+                CBCPACCTCFGQUERYTRNRQ = new CBCPACCTCFGQUERYTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new CBCPACCTCFGQUERYTRN_RQBODY
+                    {
+                        ACCTNO = mainAccountId,
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.19.12	国内成员资金调拨
+        /// </summary>
+        public static void CBCPMEMALLOCATETRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.19.12", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_CBCPMEMALLOCATETRNRQ, V1_CBCPMEMALLOCATETRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_CBCPMEMALLOCATETRNRQ
+            {
+                CBCPMEMALLOCATETRNRQ = new CBCPMEMALLOCATETRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new CBCPMEMALLOCATETRN_RQBODY
+                    {
+                        FROMACCTNO = mainAccountId + "000001",
+                        TOACCTNO = "117011400100093302000002",
+                        AMOUNT = 1000,
+                        PURPOSE = "国内成员资金调拨PURPOSE",
+                        MEMO = "国内成员资金调拨MEMO",
+                        DTDUE = DateTime.Now.Date,
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.19.13	国内、国际主账户互转
+        /// </summary>
+        public static void CBCPMAINTRSFRTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.19.13", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_CBCPMAINTRSFRTRNRQ, V1_CBCPMAINTRSFRTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_CBCPMAINTRSFRTRNRQ
+            {
+                CBCPMAINTRSFRTRNRQ = new CBCPMAINTRSFRTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new CBCPMAINTRSFRTRN_RQBODY
+                    {
+                        TRADETYPE = 1,
+                        CURRENCY = "14",
+                        AMOUNT = 1000,
+                        APPROVEDDOCNO = "20160906134900001",
+                        DEBTORNAME = "zwr",
+                        DEBTORCOUNTRYCODE = "CHN",
+                        CREDITORNAME = "zqr",
+                        CREDITORCOUNTRYCODE = "Z01",
+                        DTDUE = DateTime.Now.Date,
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.19.14	国内、国际主账户互转交易查询
+        /// </summary>
+        public static void CBCPMAINTRADEQUERYTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.19.14", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_CBCPMAINTRADEQUERYTRNRQ, V1_CBCPMAINTRADEQUERYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_CBCPMAINTRADEQUERYTRNRQ
+            {
+                CBCPMAINTRADEQUERYTRNRQ = new CBCPMAINTRADEQUERYTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new CBCPMAINTRADEQUERYTRN_RQBODY
+                    {
+                        QUERYTYPE = 1,
+                        MAINACCTNO = mainAccountId,
+                        SETTLESTATUS = 1,
+                        STARTDATE = DateTime.Now.AddMonths(-3),
+                        ENDDATE = DateTime.Now.AddDays(-1),
                     }
                 }
             };
