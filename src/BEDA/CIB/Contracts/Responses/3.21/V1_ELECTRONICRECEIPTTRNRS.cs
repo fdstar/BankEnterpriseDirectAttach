@@ -43,7 +43,7 @@ namespace BEDA.CIB.Contracts.Responses
         /// 回单创建时间 YYYY-MM-DD 必输
         /// </summary>
         [XmlIgnore]
-        public DateTime CRE_TIME { get; set; }
+        public DateTime? CRE_TIME { get; set; }
         /// <summary>
         /// 回单创建时间 YYYY-MM-DD, 对应<see cref="CRE_TIME"/>	必输 
         /// </summary>
@@ -52,10 +52,11 @@ namespace BEDA.CIB.Contracts.Responses
         {
             get
             {
-                return this.CRE_TIME.ToString("yyyy-MM-dd");
+                return this.CRE_TIME?.ToString("yyyy-MM-dd");
             }
             set
             {
+                this.CRE_TIME = null;
                 if (DateTime.TryParseExact(value, "yyyy-MM-dd", CultureInfo.CurrentCulture, DateTimeStyles.None, out DateTime tmp))
                 {
                     this.CRE_TIME = tmp;

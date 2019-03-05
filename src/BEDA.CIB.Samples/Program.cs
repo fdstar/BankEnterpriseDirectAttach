@@ -168,6 +168,16 @@ namespace BEDA.CIB.Samples
             //QUERYBULLETINTRNRQSample();
             #endregion
 
+            #region  3.21	电子回单
+            //ELECTRONICRECEIPTTRNRQSample();
+            //ASYNRECEIPTINFOTRNRQSample();
+            #endregion
+
+            #region 3.23	批量余额对账
+            //BATCHCHECKTRNRQSample();
+            //BATCHCHECKQUERYTRNRQSample();
+            #endregion
+
             Console.ReadLine();
         }
 
@@ -3074,6 +3084,98 @@ namespace BEDA.CIB.Samples
                     RQBODY = new QUERYBULLETINTRN_RQBODY
                     {
                         DATE = DateTime.Now.AddDays(-4)
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        #endregion
+
+        #region 3.21	电子回单
+        /// <summary>
+        /// 3.21.1	生成电子回单
+        /// </summary>
+        public static void ELECTRONICRECEIPTTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.21.1", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_ELECTRONICRECEIPTTRNRQ, V1_ELECTRONICRECEIPTTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_ELECTRONICRECEIPTTRNRQ
+            {
+                ELECTRONICRECEIPTTRNRQ = new ELECTRONICRECEIPTTRNRQ
+                {
+                    TRNUID = "20190305135650_3.21.1",//
+                    RQBODY = new ELECTRONICRECEIPTTRN_RQBODY
+                    {
+                        RECEIPT_TYPE = "01",
+                        ACCTID = mainAccountId,
+                        RECEIPTDATE = DateTime.Now.AddDays(-1)
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.21.2	同步电子回单
+        /// </summary>
+        public static void ASYNRECEIPTINFOTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.21.2", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_ASYNRECEIPTINFOTRNRQ, V1_ASYNRECEIPTINFOTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_ASYNRECEIPTINFOTRNRQ
+            {
+                ASYNRECEIPTINFOTRNRQ = new ASYNRECEIPTINFOTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new ASYNRECEIPTINFOTRN_RQBODY
+                    {
+                        CLT_REF_NO = "20190305135650_3.21.1"
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        #endregion
+
+        #region 3.23	批量余额对账
+        /// <summary>
+        /// 3.23.1	生成批量余额对账指令
+        /// </summary>
+        public static void BATCHCHECKTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.23.1", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_BATCHCHECKTRNRQ, V1_BATCHCHECKTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_BATCHCHECKTRNRQ
+            {
+                BATCHCHECKTRNRQ = new BATCHCHECKTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new BATCHCHECKTRN_RQBODY
+                    {
+                        RECONCILEDATE = "201902"
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.23.2	查询批量余额对账指令
+        /// </summary>
+        public static void BATCHCHECKQUERYTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.23.2", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_BATCHCHECKQUERYTRNRQ, V1_BATCHCHECKQUERYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_BATCHCHECKQUERYTRNRQ
+            {
+                BATCHCHECKQUERYTRNRQ = new BATCHCHECKQUERYTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new BATCHCHECKQUERYTRN_RQBODY
+                    {
+                         CLT_REF_NO = "20190305134728_3.23.1"
                     }
                 }
             };
