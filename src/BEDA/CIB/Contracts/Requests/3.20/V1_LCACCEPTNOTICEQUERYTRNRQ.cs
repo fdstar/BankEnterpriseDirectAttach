@@ -27,6 +27,12 @@ namespace BEDA.CIB.Contracts.Requests
         /// 3.20.8进口信用证承兑通知查询请求内容
         /// </summary>
         [XmlElement(Order = 2)]
-        public LCREJECTNOTICEQUERYTRN_RQBODY RQBODY { get; set; }
+        public LCACCEPTNOTICEQUERYTRN_RQBODY RQBODY { get; set; }
+    }
+    /// <summary>
+    /// 3.20.8进口信用证承兑通知查询请求内容
+    /// </summary>
+    public class LCACCEPTNOTICEQUERYTRN_RQBODY : LCREJECTNOTICEQUERYTRN_RQBODY
+    {
     }
 }

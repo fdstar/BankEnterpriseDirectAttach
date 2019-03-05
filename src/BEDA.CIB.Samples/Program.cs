@@ -168,6 +168,19 @@ namespace BEDA.CIB.Samples
             //QUERYBULLETINTRNRQSample();
             #endregion
 
+            #region 3.20	信用证
+            //LCOPENAPPLYTRNRQSample();
+            //LCAMENDAPPLYTRNRQSample();
+            //LCPAYAPPLYTRNRQSample();
+            //LCOPENNOTICEQUERYTRNRQSample();
+            //LCAMENDNOTICEQUERYTRNRQSample();
+            //LCLITDCKNOTICEQUERYTRNRQSample();
+            //LCREJECTNOTICEQUERYTRNRQSample();
+            //LCACCEPTNOTICEQUERYTRNRQSample();
+            //LCPAYNOTICEQUERYTRNRQSample();
+            //LCCOMENOTICEQUERYTRNRQSample();
+            #endregion
+
             #region  3.21	电子回单
             //ELECTRONICRECEIPTTRNRQSample();
             //ASYNRECEIPTINFOTRNRQSample();
@@ -3084,6 +3097,265 @@ namespace BEDA.CIB.Samples
                     RQBODY = new QUERYBULLETINTRN_RQBODY
                     {
                         DATE = DateTime.Now.AddDays(-4)
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        #endregion
+
+        #region 3.20	信用证
+        /// <summary>
+        /// 3.20.1	进口信用证开立
+        /// </summary>
+        public static void LCOPENAPPLYTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.20.1", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_LCOPENAPPLYTRNRQ, V1_LCOPENAPPLYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_LCOPENAPPLYTRNRQ
+            {
+                LCOPENAPPLYTRNRQ = new LCOPENAPPLYTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new LCOPENAPPLYTRN_RQBODY
+                    {
+                        LCFORMTYPE = "I",
+                        NOMINALAMTCURR = "CNY",
+                        NOMINALAMT = 5000,
+                        INITIALCODE = "11701",
+                        LCISSUEDDATE = DateTime.Now.AddDays(1),
+                        LCEXPIRYDATE = DateTime.Now.AddMonths(1),
+                        EXPIRYPLACE = "China",
+                        TENOR = "Usance",
+                        APPLICABLERULES = "UCP LATEST VERSION",
+                        CONTRACTNO = "CNO1234567890123",
+                        CONTRACTAMT = 10000,
+                        APPLICANT = "APPLICANT FUZHOU IMP. N EXP. CO.,LTD  QQQQQQQQQQQQQQQQQQQQQQ   TEL:0000-88888888   FAX:QQQQQQQQQQQQQQQQQQQQQQQQQ",
+                        ADVISINGBANK = "NOSCINBBCJB       BANK OF NOVA SCOTIA,COIMBATORE.",
+                        BENEFICIARY = "BENEFICIARY FUZHOU IMP. N EXP. CO.,LTD   QQQQQQQQQQQQQQQQQQQQQQ   TEL:0000-88888888   FAX:QQQQQQQQQQQQQQQQQQQQQQQQQ",
+                        CONFIRMINSTRCTION = "A",
+                        AVBLWITHBANK = "A",
+                        AVBLPYMTWAY = "A",
+                        COUNTRYCODE = "USA",
+                        PATIALSHIPMENT = "Y",
+                        TRANSSHIPMENT = "Y",
+                        GOODSDESC = "Goods car for BMWGoods car for BMWGoods car for BMWGoods car for BMWGoods car for BMWGoods car for BMWGoods car for BMWGoods car for BMWGoods car for BMWGoods car for BMWGoods car for BMWGoods car for BMWGoods car for BMWGoods car for BMWGoods car for BMWGoods car for BMWGoods car for BMWGoods car for BMWGoods car for BMWGoods car for BMWGoods car for BMWGoods car for BMWGoods car for BMWGoods car for BMWGoods car for BMW",
+                        DOCUMENTS = "Documents 1/INVOICE IN TRIPLICATE. 2/BILLS OF LADING IN 3 ORIGINALS AND 3 COPIES. 3/INSURANCE POLICY IN 2 ORIGINALS",
+                        ADDCONDITIONS = "additional conditions 1/COPIES NOT ALLOWED. 2/LATE SHIPMENT NOT ALLOWED.",
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.20.2	进口信用证修改
+        /// </summary>
+        public static void LCAMENDAPPLYTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.20.2", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_LCAMENDAPPLYTRNRQ, V1_LCAMENDAPPLYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_LCAMENDAPPLYTRNRQ
+            {
+                LCAMENDAPPLYTRNRQ = new LCAMENDAPPLYTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new LCAMENDAPPLYTRN_RQBODY
+                    {
+                        BRANCHNO = "11701",
+                        LCREFNO = "08101LC16000087F",
+                        APPLICANT = "APPLICANT FUZHOU IMP. N EXP. CO.,LTD   QQQQQQQQQQQQQQQQQQQQQQ     TEL:0000-88888888   FAX:QQQQQQQQQQQQQQQQQQQQQQQQQ",
+                        BENEFICIARY = "BENEFICIARY FUZHOU IMP. N EXP. CO.,LTD  QQQQQQQQQQQQQQQQQQQQQQ  TEL:0000-88888888  FAX:QQQQQQQQQQQQQQQQQQQQQQQQQ",
+                        APPLYDTL = "进口信用证修改申请",
+                        COMMENT = "进口信用证修改测试",
+                        APPLYDATE = DateTime.Now
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.20.3	进口信用证付款承兑拒付申请
+        /// </summary>
+        public static void LCPAYAPPLYTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.20.3", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_LCPAYAPPLYTRNRQ, V1_LCPAYAPPLYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_LCPAYAPPLYTRNRQ
+            {
+                LCPAYAPPLYTRNRQ = new LCPAYAPPLYTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new LCPAYAPPLYTRN_RQBODY
+                    {
+                        BRANCHNO = "11701",
+                        LCREFNO = "08101LC16000029C",
+                        BPREFNO = "08101IB16000022C",
+                        APPLICANT = "APPLICANT FUZHOU IMP. N EXP. CO.,LTD   QQQQQQQQQQQQQQQQQQQQQQ     TEL:0000-88888888   FAX:QQQQQQQQQQQQQQQQQQQQQQQQQ",
+                        BENEFICIARY = "BENEFICIARY FUZHOU IMP. N EXP. CO.,LTD  QQQQQQQQQQQQQQQQQQQQQQ  TEL:0000-88888888  FAX:QQQQQQQQQQQQQQQQQQQQQQQQQ",
+                        DOCAMT = 1000,
+                        ACTUALAMT = 1000,
+                        CONTRACTNO = "",
+                        LCBPPROCESS = 1,
+                        COMMENT = "进口信用证付款承兑拒付申请测试",
+                        APPLYDATE = DateTime.Now
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.20.4	进口信用证开立通知查询
+        /// </summary>
+        public static void LCOPENNOTICEQUERYTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.20.4", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_LCOPENNOTICEQUERYTRNRQ, V1_LCOPENNOTICEQUERYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_LCOPENNOTICEQUERYTRNRQ
+            {
+                LCOPENNOTICEQUERYTRNRQ = new LCOPENNOTICEQUERYTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new LCOPENNOTICEQUERYTRN_RQBODY
+                    {
+                        STARTDATE = DateTime.Now.AddMonths(-3),
+                        ENDDATE = DateTime.Now.AddDays(-1)
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.20.5	进口信用证修改通知查询
+        /// </summary>
+        public static void LCAMENDNOTICEQUERYTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.20.5", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_LCAMENDNOTICEQUERYTRNRQ, V1_LCAMENDNOTICEQUERYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_LCAMENDNOTICEQUERYTRNRQ
+            {
+                LCAMENDNOTICEQUERYTRNRQ = new LCAMENDNOTICEQUERYTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new LCAMENDNOTICEQUERYTRN_RQBODY
+                    {
+                        STARTDATE = DateTime.Now.AddMonths(-3),
+                        ENDDATE = DateTime.Now.AddDays(-1)
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.20.6	进口信用证到单通知查询
+        /// </summary>
+        public static void LCLITDCKNOTICEQUERYTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.20.6", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_LCLITDCKNOTICEQUERYTRNRQ, V1_LCLITDCKNOTICEQUERYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_LCLITDCKNOTICEQUERYTRNRQ
+            {
+                LCLITDCKNOTICEQUERYTRNRQ = new LCLITDCKNOTICEQUERYTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new LCAMENDNOTICEQUERYTRN_RQBODY
+                    {
+                        STARTDATE = DateTime.Now.AddMonths(-3),
+                        ENDDATE = DateTime.Now.AddDays(-1)
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.20.7	进口信用证拒付通知查询
+        /// </summary>
+        public static void LCREJECTNOTICEQUERYTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.20.7", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_LCREJECTNOTICEQUERYTRNRQ, V1_LCREJECTNOTICEQUERYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_LCREJECTNOTICEQUERYTRNRQ
+            {
+                LCREJECTNOTICEQUERYTRNRQ = new LCREJECTNOTICEQUERYTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new LCREJECTNOTICEQUERYTRN_RQBODY
+                    {
+                        STARTDATE = DateTime.Now.AddMonths(-3),
+                        ENDDATE = DateTime.Now.AddDays(-1)
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.20.8	进口信用证承兑通知查询
+        /// </summary>
+        public static void LCACCEPTNOTICEQUERYTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.20.8", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_LCACCEPTNOTICEQUERYTRNRQ, V1_LCACCEPTNOTICEQUERYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_LCACCEPTNOTICEQUERYTRNRQ
+            {
+                LCACCEPTNOTICEQUERYTRNRQ = new LCACCEPTNOTICEQUERYTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new LCACCEPTNOTICEQUERYTRN_RQBODY
+                    {
+                        STARTDATE = DateTime.Now.AddMonths(-3),
+                        ENDDATE = DateTime.Now.AddDays(-1)
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.20.9	进口信用证即期付款/远期付款通知查询
+        /// </summary>
+        public static void LCPAYNOTICEQUERYTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.20.9", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_LCPAYNOTICEQUERYTRNRQ, V1_LCPAYNOTICEQUERYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_LCPAYNOTICEQUERYTRNRQ
+            {
+                LCPAYNOTICEQUERYTRNRQ = new LCPAYNOTICEQUERYTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new LCPAYNOTICEQUERYTRN_RQBODY
+                    {
+                        QUERYTYPE = 1,
+                        STARTDATE = DateTime.Now.AddMonths(-3),
+                        ENDDATE = DateTime.Now.AddDays(-1)
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.20.10	出口信用证来证通知查询
+        /// </summary>
+        public static void LCCOMENOTICEQUERYTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.20.10", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_LCCOMENOTICEQUERYTRNRQ, V1_LCCOMENOTICEQUERYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_LCCOMENOTICEQUERYTRNRQ
+            {
+                LCCOMENOTICEQUERYTRNRQ = new LCCOMENOTICEQUERYTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new LCOPENNOTICEQUERYTRN_RQBODY
+                    {
+                        STARTDATE = DateTime.Now.AddMonths(-3),
+                        ENDDATE = DateTime.Now.AddDays(-1)
                     }
                 }
             };
