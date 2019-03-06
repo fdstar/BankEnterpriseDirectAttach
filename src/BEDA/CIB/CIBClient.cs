@@ -48,7 +48,7 @@ namespace BEDA.CIB
         /// </summary>
         public IRestClient RestClient { get; private set; }
         /// <summary>
-        /// 发起业务请求
+        /// 发起业务请求 注意必定返回响应内容
         /// </summary>
         /// <typeparam name="TRq"></typeparam>
         /// <typeparam name="TRs"></typeparam>
@@ -56,12 +56,12 @@ namespace BEDA.CIB
         /// <returns></returns>
         public FOXRS<TRs> Execute<TRq, TRs>(FOXRQ<TRq, TRs> request)
             where TRq : IRequest<TRs>
-            where TRs : IResponse
+            where TRs : IResponse, new()
         {
             return this.ExecuteInner<FOXRQ<TRq, TRs>, FOXRS<TRs>>(request);
         }
         /// <summary>
-        /// 发起业务请求
+        /// 发起业务请求 注意必定返回响应内容
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
@@ -70,7 +70,7 @@ namespace BEDA.CIB
             return this.ExecuteInner<FOXRQ, FOXRS>(request);
         }
         /// <summary>
-        /// 发起业务请求
+        /// 发起业务请求 注意必定返回响应内容
         /// </summary>
         /// <typeparam name="TRq"></typeparam>
         /// <typeparam name="TRs"></typeparam>
@@ -78,12 +78,12 @@ namespace BEDA.CIB
         /// <returns></returns>
         public async Task<FOXRS<TRs>> ExecuteAsync<TRq, TRs>(FOXRQ<TRq, TRs> request)
             where TRq : IRequest<TRs>
-            where TRs : IResponse
+            where TRs : IResponse, new()
         {
             return await this.ExecuteInnerAsync<FOXRQ<TRq, TRs>, FOXRS<TRs>>(request).ConfigureAwait(false);
         }
         /// <summary>
-        /// 发起业务请求
+        /// 发起业务请求 注意必定返回响应内容
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
@@ -93,7 +93,7 @@ namespace BEDA.CIB
         }
         private TRs ExecuteInner<TRq, TRs>(TRq rq)
             where TRq : FOXRQ
-            where TRs : FOXRS
+            where TRs : FOXRS, new()
         {
             var restRequest = this.GetRestRequest(rq);
             var restResponse = this.RestClient.Execute(restRequest);
@@ -101,7 +101,7 @@ namespace BEDA.CIB
         }
         private async Task<TRs> ExecuteInnerAsync<TRq, TRs>(TRq rq)
             where TRq : FOXRQ
-            where TRs : FOXRS
+            where TRs : FOXRS, new()
         {
             var restRequest = this.GetRestRequest(rq);
             var restResponse = await this.RestClient.ExecuteTaskAsync(restRequest).ConfigureAwait(false);
@@ -123,14 +123,15 @@ namespace BEDA.CIB
             return restRequest;
         }
         private TRs GetResponse<TRs>(IRestResponse response)
-            where TRs : FOXRS
+            where TRs : FOXRS, new()
         {
             response.SetResponseEncoding();
             var rs = XmlHelper.Deserialize<TRs>(response.Content);
-            if (rs != null)
+            if (rs == null)
             {
-                rs.ResponseContent = response.Content;
+                rs = new TRs();
             }
+            rs.ResponseContent = response.Content;
             return rs;
         }
     }

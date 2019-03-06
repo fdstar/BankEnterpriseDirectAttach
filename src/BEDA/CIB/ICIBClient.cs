@@ -14,7 +14,7 @@ namespace BEDA.CIB
     public interface ICIBClient : IClient<FOXRQ, FOXRS>
     {
         /// <summary>
-        /// 发起业务请求
+        /// 发起业务请求 注意必定返回响应内容
         /// </summary>
         /// <typeparam name="TRq"></typeparam>
         /// <typeparam name="TRs"></typeparam>
@@ -22,17 +22,17 @@ namespace BEDA.CIB
         /// <returns></returns>
         FOXRS<TRs> Execute<TRq, TRs>(FOXRQ<TRq, TRs> request)
             where TRq : IRequest<TRs>
-            where TRs : IResponse;
+            where TRs : IResponse, new();
 
         /// <summary>
-        /// 发起业务请求
+        /// 发起业务请求 注意必定返回响应内容
         /// </summary>
         /// <typeparam name="TRq"></typeparam>
         /// <typeparam name="TRs"></typeparam>
         /// <param name="request">请求实体</param>
-        /// <returns></returns>
+        /// <returns>必定返回响应内容</returns>
         Task<FOXRS<TRs>> ExecuteAsync<TRq, TRs>(FOXRQ<TRq, TRs> request)
             where TRq : IRequest<TRs>
-            where TRs : IResponse;
+            where TRs : IResponse, new();
     }
 }

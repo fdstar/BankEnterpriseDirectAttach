@@ -10,13 +10,24 @@ namespace BEDA.CIB.Contracts.Responses
     /// 响应实体
     /// </summary>
     [XmlRoot("FOX")]
-    public class FOXRS 
+    public class FOXRS
     {
         /// <summary>
         /// 服务端响应报文
         /// </summary>
         [XmlIgnore]
         public string ResponseContent { get; internal set; }
+        /// <summary>
+        /// 服务端是否成功响应，以及是否成功反序列化
+        /// </summary>
+        [XmlIgnore]
+        public bool ResponseSuccess
+        {
+            get
+            {
+                return this.SIGNONMSGSRSV1 != null;
+            }
+        }
         /// <summary>
         /// 登录消息响应实体
         /// </summary>
