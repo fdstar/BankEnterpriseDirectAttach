@@ -79,6 +79,44 @@ namespace BEDA.CIB.Samples
 
             #region 3.9	电子商业汇票系统
             //EBSTMTQUERYTRNRQSample();
+            //EBOPRNQUERYTRNRQSample();
+            //EBSIGNQUERYTRNRQSample();
+            //EBFACEQUERYTRNRQSample();
+            //EBBASEQUERYTRNRQSample();
+            //EBBACKQUERYTRNRQSample();
+            //EBCRDQUERYTRNRQSample();
+            //EBRECRQUERYTRNRQSample();
+            //EBBATCHSTATUSTRNRQSample();
+            //EBREALPAYTRNRQSample();
+            //EBPAYQUERYTRNRQSample();
+            //EBPAPERQUERYTRNRQSample();
+            //EBAUTOCLUEPAYQUERYTRNRQSample();
+
+            //EBDRAWTRNRQSample();
+            //EBGUARNTTRNRQSample();
+            //EBACPTTRNRQSample();
+            //EBCOLLTRNRQSample();
+            //EBCANCLTRNRQSample();
+            //EBENDRSTRNRQSample();
+            //EBDISCNTTRNRQSample();
+            //EBREDMTRNRQSample();
+            //EBIMPAWNTRNRQSample();
+            //EBIMPAWNCANCLTRNRQSample();
+            //EBCUEPAYTRNRQSample();
+            //EBRECRSTRNRQSample();
+            //EBDISCHGTRNRQSample();
+            //EBRECEDETRNRQSample();
+            //EBSIGNTRNRQSample();
+
+            //EBPINPOOLTRNRQSample();
+            //EBPOUTPOOLTRNRQSample();
+            //EBPCONVERTTRNRQSample();
+            //EBPOUTBILLTRNRQSample();
+            //EBPFINANCINGTRNRQSample();
+            //EBPCASHTRNRQSample();
+            //EBPBAILTRNRQSample();
+            //EBPBILLPOOLRESULTQUERYTRNRQSample();
+            EBPOPERATEBILLQUERYTRNRQSample();
             #endregion
 
             #region 3.10	跨行账户管理
@@ -226,7 +264,7 @@ namespace BEDA.CIB.Samples
         const long cid = 1100343164;
         const string uid = "qw1";
         const string pwd = "a1111111";//密码错误6次账号会被永久锁定无法解锁
-        const string ip = "127.0.0.1";
+        const string ip = /*"127.0.0.1"*/"139.196.136.170";
         const int port = 8007;
         static ICIBClient client = new CIBClient(ip, port);
 
@@ -260,7 +298,7 @@ namespace BEDA.CIB.Samples
         {
             var rq = GetRequest<FOXRQ>();
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         #endregion
 
@@ -284,7 +322,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.3.2	定期账户查询
@@ -306,7 +344,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.3.3	定期存款信息查询
@@ -327,7 +365,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.3.4	非定期存款信息查询
@@ -348,7 +386,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.3.5	账户信息查询
@@ -369,7 +407,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.3.6	账户余额和交易流水分页查询
@@ -402,7 +440,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.3.7	账号余额和交易流水分页查询（返回增加虚拟子账户交易信息）
@@ -433,7 +471,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.3.8	单位定期一本通账户查询
@@ -454,7 +492,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.3.9	账户交易流水文件查询
@@ -486,7 +524,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
             var list = rs.SECURITIES_MSGSRSV1.FSTMTTRNRS.SCUSTSTMTRS.TRANLIST.GetDetails();
         }
         /// <summary>
@@ -508,7 +546,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         #endregion
 
@@ -546,7 +584,7 @@ namespace BEDA.CIB.Samples
             };
             //rq.SECURITIES_MSGSRQV1.XFERTRNRQ.TRNUID =  "20190130102306_3.4.1"; //过期 20190129151451_3.4.1
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 获取转账账号 
@@ -619,7 +657,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.4.3	工资发放指令提交
@@ -662,7 +700,7 @@ namespace BEDA.CIB.Samples
                     TRNAMT = 2.2m
                 });
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.4.4	工资发放指令查询
@@ -684,7 +722,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.4.5	单笔托收、子账户托收、回款查询
@@ -730,7 +768,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.4.6	批量托收、批量子账户托收
@@ -791,7 +829,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.4.7	批量托收或子账户托收明细查询
@@ -814,7 +852,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.4.8	实时批量支付与批量费用(最多100笔)
@@ -871,7 +909,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.4.9	指令回单查询
@@ -889,7 +927,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.4.10	快速转账支付及其指令查询（不采用工作流）  3.4.10.3 快速转账支付ICTRANSFERTRNRQ
@@ -920,7 +958,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.4.10	快速转账支付及其指令查询（不采用工作流）3.4.10.5 支付指令查询ICTRANSFERINQTRNRQ请求
@@ -941,7 +979,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.4.12	异步批量支付 (最多100笔，不采用工作流)
@@ -989,8 +1027,8 @@ namespace BEDA.CIB.Samples
             rq.SECURITIES_MSGSRQV1.ASYNBATCHTRSFRTRNRQ.RQBODY.XFERINFOTEXT = txt;
             //rq.SECURITIES_MSGSRQV1.ASYNBATCHTRSFRTRNRQ.TRNUID = "20190117200215_3.4.12";//直接测试历史记录
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
-            if (rs?.SECURITIES_MSGSRSV1.ASYNBATCHTRSFRTRNRS.RSBODY.XFERINFOTEXT != null)
+            Console.WriteLine(rs.ResponseContent);
+            if (rs.SECURITIES_MSGSRSV1.ASYNBATCHTRSFRTRNRS.RSBODY.XFERINFOTEXT != null)
             {
                 var rList = rs.SECURITIES_MSGSRSV1.ASYNBATCHTRSFRTRNRS.RSBODY.XFERINFOTEXT.GetList();
             }
@@ -1018,7 +1056,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.6.2	虚拟子账户批量开户（最多20笔）
@@ -1061,7 +1099,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.6.3	虚拟子账户信息查询
@@ -1084,7 +1122,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.6.4	虚拟子账户利息分配
@@ -1107,7 +1145,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.6.5	虚拟子帐户对外支付
@@ -1140,7 +1178,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.6.6	虚拟子账户余额及交易明细查询
@@ -1175,7 +1213,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.6.7	虚拟子账户内部转账
@@ -1200,7 +1238,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         #endregion
 
@@ -1239,7 +1277,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.7.2	成员交易明细查询
@@ -1269,7 +1307,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.7.3	成员账户查询
@@ -1293,7 +1331,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.7.4	历史留存金额查询
@@ -1323,7 +1361,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.7.5	内部往来查询
@@ -1351,7 +1389,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.7.6	归集调拨查询
@@ -1374,7 +1412,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.7.7	查询成员外部收支明细
@@ -1400,7 +1438,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.7.8	账户可用额度查询
@@ -1425,7 +1463,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         #endregion
 
@@ -1455,7 +1493,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.8.2	赎回/撤销赎回功能
@@ -1480,7 +1518,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.8.3	理财产品信息查询
@@ -1501,7 +1539,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.8.4	理财产品说明书及协议查询
@@ -1522,7 +1560,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.8.5	客户理财资产信息查询
@@ -1546,7 +1584,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.8.6	客户信息查询
@@ -1567,7 +1605,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.8.7	理财产品签约-解约请求
@@ -1591,7 +1629,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.8.8	理财产品签约状态查询请求
@@ -1613,7 +1651,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         #endregion
 
@@ -1641,7 +1679,1099 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
+        }
+        /// <summary>
+        /// 3.9.1.2 可操作票据查询
+        /// </summary>
+        public static void EBOPRNQUERYTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.9.1.2", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_EBOPRNQUERYTRNRQ, V1_EBOPRNQUERYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_EBOPRNQUERYTRNRQ
+            {
+                EBOPRNQUERYTRNRQ = new EBOPRNQUERYTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new EBOPRNQUERYTRN_RQBODY
+                    {
+                        BUSINESSTYPE = "99",
+                        ACCTID = mainAccountId,
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs.ResponseContent);
+        }
+        /// <summary>
+        /// 3.9.1.3 待签收票据查询
+        /// </summary>
+        public static void EBSIGNQUERYTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.9.1.3", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_EBSIGNQUERYTRNRQ, V1_EBSIGNQUERYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_EBSIGNQUERYTRNRQ
+            {
+                EBSIGNQUERYTRNRQ = new EBSIGNQUERYTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new EBSIGNQUERYTRN_RQBODY
+                    {
+                        BUSINESSTYPE = "99",
+                        ACCTID = mainAccountId,
+                        BILLTYPE = "AC01",
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs.ResponseContent);
+        }
+        /// <summary>
+        /// 3.9.1.4 票据正面信息查询
+        /// </summary>
+        public static void EBFACEQUERYTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.9.1.4", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_EBFACEQUERYTRNRQ, V1_EBFACEQUERYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_EBFACEQUERYTRNRQ
+            {
+                EBFACEQUERYTRNRQ = new EBFACEQUERYTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new EBFACEQUERYTRN_RQBODY
+                    {
+                        BILLCODE= "100293847500000020120507154253",
+                        ACCTID = "117010101400120757",
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs.ResponseContent);
+        }
+        /// <summary>
+        /// 3.9.1.5 票据基本信息查询
+        /// </summary>
+        public static void EBBASEQUERYTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.9.1.5", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_EBBASEQUERYTRNRQ, V1_EBBASEQUERYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_EBBASEQUERYTRNRQ
+            {
+                EBBASEQUERYTRNRQ = new EBBASEQUERYTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new EBBASEQUERYTRN_RQBODY
+                    {
+                        ACCTID = "117010101400120757",
+                        BIZ = "99",
+                        BILLTYPE = "AC01",
+                        QUERYERTYPE = "01",
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs.ResponseContent);
+        }
+        /// <summary>
+        /// 3.9.1.6 票据流转信息查询
+        /// </summary>
+        public static void EBBACKQUERYTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.9.1.6", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_EBBACKQUERYTRNRQ, V1_EBBACKQUERYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_EBBACKQUERYTRNRQ
+            {
+                EBBACKQUERYTRNRQ = new EBBACKQUERYTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new EBBACKQUERYTRN_RQBODY
+                    {
+                        BILLCODE= "100293847500000020120507154253",
+                        ACCTID = "117010101400120757",
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs.ResponseContent);
+        }
+        /// <summary>
+        /// 3.9.1.7 支付信用信息查询
+        /// </summary>
+        public static void EBCRDQUERYTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.9.1.7", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_EBCRDQUERYTRNRQ, V1_EBCRDQUERYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_EBCRDQUERYTRNRQ
+            {
+                EBCRDQUERYTRNRQ = new EBCRDQUERYTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new EBCRDQUERYTRN_RQBODY
+                    {
+                        BILLCODE = "100293847500000020120507154253",
+                        BILLAMT = 2222,
+                        ACCTID = "117010101400120757",
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs.ResponseContent);
+        }
+        /// <summary>
+        /// 3.9.1.8 可追索人查询
+        /// </summary>
+        public static void EBRECRQUERYTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.9.1.8", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_EBRECRQUERYTRNRQ, V1_EBRECRQUERYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_EBRECRQUERYTRNRQ
+            {
+                EBRECRQUERYTRNRQ = new EBRECRQUERYTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new EBRECRQUERYTRN_RQBODY
+                    {
+                        BILLCODE = "100293847500000020120507154253",
+                        ACCTID = "117010101400120757",
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs.ResponseContent);
+        }
+        /// <summary>
+        /// 3.9.1.9 票据批量状态查询
+        /// </summary>
+        public static void EBBATCHSTATUSTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.9.1.9", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_EBBATCHSTATUSTRNRQ, V1_EBBATCHSTATUSTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_EBBATCHSTATUSTRNRQ
+            {
+                EBBATCHSTATUSTRNRQ = new EBBATCHSTATUSTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new EBBATCHSTATUSTRN_RQBODY
+                    {
+                        ACCTID = "117010101400120757",
+                        CLIENTREF= "20120412cx12",
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs.ResponseContent);
+        }
+        /// <summary>
+        /// 3.9.1.10 实付金额查询
+        /// </summary>
+        public static void EBREALPAYTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.9.1.10", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_EBREALPAYTRNRQ, V1_EBREALPAYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_EBREALPAYTRNRQ
+            {
+                EBREALPAYTRNRQ = new EBREALPAYTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new EBREALPAYTRN_RQBODY
+                    {
+                        ACCTID = "117010101400120757",
+                        List = new List<EBREALPAYTRNRQ_CONTENT>
+                        {
+                            new EBREALPAYTRNRQ_CONTENT
+                            {
+                                INDX=1,
+                                BILLTYPE="AC01",
+                                DISCNTTYPE="RM00",
+                                BILLAMT=1000,
+                                DTSTART=DateTime.Now,
+                                DTEND=DateTime.Now,
+                                INTRST=3.2m,
+                            }
+                        }
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs.ResponseContent);
+        }
+        /// <summary>
+        /// 3.9.1.11 待付款银票查询请求
+        /// </summary>
+        public static void EBPAYQUERYTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.9.1.11", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_EBPAYQUERYTRNRQ, V1_EBPAYQUERYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_EBPAYQUERYTRNRQ
+            {
+                EBPAYQUERYTRNRQ = new EBPAYQUERYTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new EBPAYQUERYTRN_RQBODY
+                    {
+                        KIND = 2,
+                        ACCTID = "117010101400120757",
+                        STATUS = "00",
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs.ResponseContent);
+        }
+        /// <summary>
+        /// 3.9.1.12 代保管纸质票据查询请求
+        /// </summary>
+        public static void EBPAPERQUERYTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.9.1.12", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_EBPAPERQUERYTRNRQ, V1_EBPAPERQUERYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_EBPAPERQUERYTRNRQ
+            {
+                EBPAPERQUERYTRNRQ = new EBPAPERQUERYTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new EBPAPERQUERYTRN_RQBODY
+                    {
+                        ACCTID = "117010101400120757",
+                        BIZ = 1,
+                        BILLTYPE = "AC01",
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs.ResponseContent);
+        }
+        /// <summary>
+        /// 3.9.1.13 自动提示付款结果查询
+        /// </summary>
+        public static void EBAUTOCLUEPAYQUERYTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.9.1.13", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_EBAUTOCLUEPAYQUERYTRNRQ, V1_EBAUTOCLUEPAYQUERYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_EBAUTOCLUEPAYQUERYTRNRQ
+            {
+                EBAUTOCLUEPAYQUERYTRNRQ = new EBAUTOCLUEPAYQUERYTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new EBAUTOCLUEPAYQUERYTRN_RQBODY
+                    {
+                        ACCTID = "117010101400120757",
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs.ResponseContent);
+        }
+
+
+        /// <summary>
+        /// 3.9.2.1 出票申请/出票信息登记
+        /// </summary>
+        public static void EBDRAWTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.9.2.1", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_EBDRAWTRNRQ, V1_EBDRAWTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_EBDRAWTRNRQ
+            {
+                EBDRAWTRNRQ = new EBDRAWTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new EBDRAWTRN_RQBODY
+                    {
+                        TYPE = "01",
+                        BILLTYPE = "AC01",
+                        DRAWACCTID = "117010101400120757",
+                        List = new List<EBDRAWTRN_CONTENT>
+                        {
+                            new EBDRAWTRN_CONTENT{
+                                INDX=1,
+                                BILLAMT=1000,
+                                DRAWDATE=DateTime.Now,
+                                DUEDATE=DateTime.Now.AddMonths(1),
+                                NEGTBL="EM00",
+                                ISCIB="Y",
+                                PAYEEACCT=new CORRELATEACCT{
+                                    ACCTID="117010101400120757",
+                                    NAME="test",
+                                    BANKNUM="309391000095",
+                                },
+                                ACACCT=new CORRELATEACCT{
+                                    ACCTID ="117010101400120757",
+                                    NAME ="test",
+                                    BANKNUM="309391000095",
+                                },
+                                ENTRSPAY="CC00",
+                            }
+                        }
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs.ResponseContent);
+        }
+        /// <summary>
+        /// 3.9.2.2 通用保证申请
+        /// </summary>
+        public static void EBGUARNTTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.9.2.2", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_EBGUARNTTRNRQ, V1_EBGUARNTTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_EBGUARNTTRNRQ
+            {
+                EBGUARNTTRNRQ = new EBGUARNTTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new EBGUARNTTRN_RQBODY
+                    {
+                        GUARNTTYPE = "02",
+                        APPDATE = DateTime.Now,
+                        APPACCTID = "117010101400120757",
+                        ISCIB = "Y",
+                        GUARNTRACCT = new CORRELATEACCT
+                        {
+                            ACCTID = "117010101400120757",
+                            NAME = "test",
+                            BANKNUM = "309391000095",
+                        },
+                        List = new List<EBGUARNTTRN_CONTENT>
+                        {
+                            new EBGUARNTTRN_CONTENT
+                            {
+                                INDX=1,
+                                BILLCODE="100293847500000020120507154253",
+                                BILLAMT=1000,
+                            }
+                        }
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs.ResponseContent);
+        }
+        /// <summary>
+        /// 3.9.2.3 提示承兑申请
+        /// </summary>
+        public static void EBACPTTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.9.2.3", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_EBACPTTRNRQ, V1_EBACPTTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_EBACPTTRNRQ
+            {
+                EBACPTTRNRQ = new EBACPTTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new EBACPTTRN_RQBODY
+                    {
+                        ACCTID = "117010101400120757",
+                        BILLTYPE = "AC01",
+                        List = new List<EBACPTTRN_CONTENT> {
+                            new EBACPTTRN_CONTENT{
+                                INDX=1,
+                                BILLCODE="100293847500000020120507154253",
+                                BILLAMT=100,
+                                ENTRSPAY="CC00",
+                            }
+                        }
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs.ResponseContent);
+        }
+        /// <summary>
+        /// 3.9.2.4 提示收票申请
+        /// </summary>
+        public static void EBCOLLTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.9.2.4", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_EBCOLLTRNRQ, V1_EBCOLLTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_EBCOLLTRNRQ
+            {
+                EBCOLLTRNRQ = new EBCOLLTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new EBCOLLTRN_RQBODY
+                    {
+                        ACCTID = "117010101400120757",
+                        BILLTYPE = "AC01",
+                        List = new List<EBCOLLTRN_CONTENT> {
+                            new EBCOLLTRN_CONTENT{
+                                INDX=1,
+                                BILLCODE="100293847500000020120507154253",
+                                BILLAMT=100,
+                            }
+                        }
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs.ResponseContent);
+        }
+        /// <summary>
+        /// 3.9.2.5 撤票申请
+        /// </summary>
+        public static void EBCANCLTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.9.2.5", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_EBCANCLTRNRQ, V1_EBCANCLTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_EBCANCLTRNRQ
+            {
+                EBCANCLTRNRQ = new EBCANCLTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new EBCANCLTRN_RQBODY
+                    {
+                        ACCTID = "117010101400120757",
+                        BILLTYPE = "AC01",
+                        List = new List<EBCANCLTRN_CONTENT> {
+                            new EBCANCLTRN_CONTENT{
+                                INDX=1,
+                                BILLCODE="100293847500000020120507154253",
+                                BILLAMT=100,
+                            }
+                        }
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs.ResponseContent);
+        }
+        /// <summary>
+        /// 3.9.2.6 背书转让申请
+        /// </summary>
+        public static void EBENDRSTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.9.2.6", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_EBENDRSTRNRQ, V1_EBENDRSTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_EBENDRSTRNRQ
+            {
+                EBENDRSTRNRQ = new EBENDRSTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new EBENDRSTRN_RQBODY
+                    {
+                        APPDATE = DateTime.Now,
+                        BILLTYPE = "AC01",
+                        ENDRSRACCTID = "117010101400120757",
+                        ENDRSEISCIB = "Y",
+                        ENDRSEACCT = new CORRELATEACCT
+                        {
+                            ACCTID = "117010101400120757",
+                            NAME = "test",
+                            BANKNUM = "309391000095",
+                        },
+                        NEGTBL = "EM00",
+                        List = new List<EBENDRSTRN_CONTENT> {
+                            new EBENDRSTRN_CONTENT{
+                                INDX=1,
+                                BILLCODE="100293847500000020120507154253",
+                                BILLAMT=100,
+                            }
+                        }
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs.ResponseContent);
+        }
+        /// <summary>
+        /// 3.9.2.7 贴现申请/转贴现申请/再贴现申请
+        /// </summary>
+        public static void EBDISCNTTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.9.2.7", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_EBDISCNTTRNRQ, V1_EBDISCNTTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_EBDISCNTTRNRQ
+            {
+                EBDISCNTTRNRQ = new EBDISCNTTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new EBDISCNTTRN_RQBODY
+                    {
+                        TRADETYPE="TT00",
+                        APPDATE = DateTime.Now,
+                        BILLTYPE = "AC01",
+                        ACCTFROM=new ACCT {
+                            ACCTID = "117010101400120757",
+                            NAME = "test",
+                        },
+                        ISCIB="Y",
+                        ACCTTO = new CORRELATEACCT
+                        {
+                            ACCTID = "117010101400120757",
+                            NAME = "test",
+                            BANKNUM = "309391000095",
+                        },
+                        DISCNTTYPE= "RM00",
+                        INTRSTRATE=11.2m,
+                        NEGTBL = "EM00",
+                        LQMODE= "SM00",
+                        List = new List<EBDISCNTTRN_CONTENT> {
+                            new EBDISCNTTRN_CONTENT{
+                                INDX=1,
+                                BILLCODE="100293847500000020120507154253",
+                                BILLAMT=100,
+                                REALPAY=100,
+                            }
+                        }
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs.ResponseContent);
+        }
+        /// <summary>
+        /// 3.9.2.8 贴现赎回/转贴现赎回
+        /// </summary>
+        public static void EBREDMTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.9.2.8", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_EBREDMTRNRQ, V1_EBREDMTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_EBREDMTRNRQ
+            {
+                EBREDMTRNRQ = new EBREDMTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new EBREDMTRN_RQBODY
+                    {
+                        APPDATE = DateTime.Now,
+                        APPACCTID= "117010101400120757",
+                        REDMTYPE= "DT00",
+                        INTRSTRATE=1.1m,
+                        BILLTYPE = "AC01",
+                        NEGTBL = "EM00",
+                        LQMODE = "SM00",
+                        List = new List<EBREDMTRN_CONTENT> {
+                            new EBREDMTRN_CONTENT{
+                                INDX=1,
+                                BILLCODE="100293847500000020120507154253",
+                                BILLAMT=100,
+                                REALPAY=100,
+                            }
+                        }
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs.ResponseContent);
+        }
+        /// <summary>
+        /// 3.9.2.9 质押申请
+        /// </summary>
+        public static void EBIMPAWNTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.9.2.9", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_EBIMPAWNTRNRQ, V1_EBIMPAWNTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_EBIMPAWNTRNRQ
+            {
+                EBIMPAWNTRNRQ = new EBIMPAWNTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new EBIMPAWNTRN_RQBODY
+                    {
+                        APPDATE = DateTime.Now,
+                        ACCTFROM=new RQACCT {
+                            ACCTID= "117010101400120757",
+                        },
+                        BILLTYPE = "AC01",
+                        ISCIB = "Y",
+                        ACCTTO = new CORRELATEACCT {
+                            ACCTID = "117010101400120757",
+                            NAME = "test",
+                            BANKNUM = "309391000095",
+                        },
+                        List = new List<EBIMPAWNTRN_CONTENT> {
+                            new EBIMPAWNTRN_CONTENT{
+                                INDX=1,
+                                BILLCODE="100293847500000020120507154253",
+                                BILLAMT=100,
+                            }
+                        }
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs.ResponseContent);
+        }
+        /// <summary>
+        /// 3.9.2.10 质押解除申请
+        /// </summary>
+        public static void EBIMPAWNCANCLTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.9.2.10", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_EBIMPAWNCANCLTRNRQ, V1_EBIMPAWNCANCLTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_EBIMPAWNCANCLTRNRQ
+            {
+                EBIMPAWNCANCLTRNRQ = new EBIMPAWNCANCLTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new EBIMPAWNCANCLTRN_RQBODY
+                    {
+                        APPDATE = DateTime.Now,
+                        ACCTID = "117010101400120757",
+                        BILLTYPE = "AC01",
+                        List = new List<EBIMPAWNCANCLTRN_CONTENT> {
+                            new EBIMPAWNCANCLTRN_CONTENT{
+                                INDX=1,
+                                BILLCODE="100293847500000020120507154253",
+                                BILLAMT=100,
+                            }
+                        }
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs.ResponseContent);
+        }
+        /// <summary>
+        /// 3.9.2.11 提示付款申请
+        /// </summary>
+        public static void EBCUEPAYTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.9.2.11", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_EBCUEPAYTRNRQ, V1_EBCUEPAYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_EBCUEPAYTRNRQ
+            {
+                EBCUEPAYTRNRQ = new EBCUEPAYTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new EBCUEPAYTRN_RQBODY
+                    {
+                        APPDATE = DateTime.Now,
+                        ACCTID = "117010101400120757",
+                        CUETYPE = "01",
+                        BILLTYPE = "AC01",
+                        LQMODE = "SM00",
+                        List = new List<EBCUEPAYTRN_CONTENT> {
+                            new EBCUEPAYTRN_CONTENT{
+                                INDX=1,
+                                BILLCODE="100293847500000020120507154253",
+                                BILLAMT=100,
+                                CUEAMT=100,
+                                AGENTFLAG="PP01",
+                            }
+                        }
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs.ResponseContent);
+        }
+        /// <summary>
+        /// 3.9.2.12 追索通知申请
+        /// </summary>
+        public static void EBRECRSTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.9.2.12", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_EBRECRSTRNRQ, V1_EBRECRSTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_EBRECRSTRNRQ
+            {
+                EBRECRSTRNRQ = new EBRECRSTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new EBRECRSTRN_RQBODY
+                    {
+                        APPDATE = DateTime.Now,
+                        ACCTFROM = new RQACCT
+                        {
+                            ACCTID = "117010101400120757",
+                        },
+                        RECRSTYPE = "RT00",
+                        RECRSAMT = 1000,
+                        ACCTTO = new ORGACCT
+                        {
+                            ACCTID = "0333",
+                            NAME = "上海中石化公司",
+                            BANKNUM = "999999999999",
+                            ORGID = "99999999-9"
+                        },
+                        INDX = 1,
+                        BILLCODE = "100293847500000020120507154253",
+                        BILLAMT = 100,
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs.ResponseContent);
+        }
+        /// <summary>
+        /// 3.9.2.13 同意清偿通知申请
+        /// </summary>
+        public static void EBDISCHGTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.9.2.13", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_EBDISCHGTRNRQ, V1_EBDISCHGTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_EBDISCHGTRNRQ
+            {
+                EBDISCHGTRNRQ = new EBDISCHGTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new EBDISCHGTRN_RQBODY
+                    {
+                        APPDATE = DateTime.Now,
+                        ACCTID = "117010101400120757",
+                        List = new List<EBDISCHGTRN_CONTENT> {
+                            new EBDISCHGTRN_CONTENT{
+                                INDX=1,
+                                BILLCODE="100293847500000020120507154253",
+                                BILLAMT=100,
+                                DISCHGAMT=100,
+                                BIZFLAG="9668",
+                            }
+                        }
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs.ResponseContent);
+        }
+        /// <summary>
+        /// 3.9.2.14 通用撤回请求
+        /// </summary>
+        public static void EBRECEDETRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.9.2.14", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_EBRECEDETRNRQ, V1_EBRECEDETRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_EBRECEDETRNRQ
+            {
+                EBRECEDETRNRQ = new EBRECEDETRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new EBRECEDETRN_RQBODY
+                    {
+                        ACCTID = "117010101400120757",
+                        List = new List<EBRECEDETRN_CONTENT> {
+                            new EBRECEDETRN_CONTENT{
+                                INDX=1,
+                                BILLCODE="100293847500000020120507154253",
+                                BILLAMT=100,
+                                BUSINESSTYPE="17",
+                                BIZFLAG="9668",
+                                SEQ="00000000000000037932",
+                                APPDATE= DateTime.Now
+                            }
+                        }
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs.ResponseContent);
+        }
+        /// <summary>
+        /// 3.9.2.15 通用签收/拒签请求
+        /// </summary>
+        public static void EBSIGNTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.9.2.15", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_EBSIGNTRNRQ, V1_EBSIGNTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_EBSIGNTRNRQ
+            {
+                EBSIGNTRNRQ = new EBSIGNTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new EBSIGNTRN_RQBODY
+                    {
+                        SIGNDATE=DateTime.Now,
+                        ACCTID = "117010101400120757",
+                        SIGNRSLT= "SU00",
+                        List = new List<EBSIGNTRN_CONTENT> {
+                            new EBSIGNTRN_CONTENT{
+                                INDX=1,
+                                BILLCODE="100293847500000020120507154253",
+                                BILLAMT=100,
+                                BUSINESSTYPE="17",
+                                ENTRSPAY="CC00",
+                                BIZFLAG="9668",
+                            }
+                        }
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs.ResponseContent);
+        }
+
+
+        /// <summary>
+        /// 3.9.3.1 票据入池
+        /// </summary>
+        public static void EBPINPOOLTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.9.3.1", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_EBPINPOOLTRNRQ, V1_EBPINPOOLTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_EBPINPOOLTRNRQ
+            {
+                EBPINPOOLTRNRQ = new EBPINPOOLTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new EBPINPOOLTRN_RQBODY
+                    {
+                        INPOOLTYPE = "01",
+                        List = new List<EBPINPOOLTRN_CONTENT> {
+                            new EBPINPOOLTRN_CONTENT{
+                                INDX=1,
+                                BILLCODE="201607220000000000000000000000",
+                                BILLAMT=100,
+                                BILLTYPE="AC01",
+                                OUTDATE= DateTime.Now,
+                                DUEDATE= DateTime.Now.AddDays(3),
+                                DRAWERNAME="zhengxh",
+                                DRAWERACCTNO="622908363000570115",
+                                DRAWERBANKNAME="bank01",
+                                DRAWERBANKCODE="bank01",
+                                PAYEENAME="zhengxh",
+                            }
+                        }
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs.ResponseContent);
+        }
+        /// <summary>
+        /// 3.9.3.2 票据出池
+        /// </summary>
+        public static void EBPOUTPOOLTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.9.3.2", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_EBPOUTPOOLTRNRQ, V1_EBPOUTPOOLTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_EBPOUTPOOLTRNRQ
+            {
+                EBPOUTPOOLTRNRQ = new EBPOUTPOOLTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new EBPOUTPOOLTRN_RQBODY
+                    {
+                        OUTPOOLTYPE = "01",
+                        List = new List<EBPOUTPOOLTRN_CONTENT> {
+                            new EBPOUTPOOLTRN_CONTENT{
+                                INDX=1,
+                                BIZNO="1223210000",
+                                BELONGORGNO="122321",
+                                BILLCODE="201607220000000000000000000000",
+                                BILLAMT=100,
+                                BILLTYPE="AC01",
+                                OUTDATE= DateTime.Now,
+                                DUEDATE= DateTime.Now.AddDays(3),
+                                DRAWERNAME="zhengxh",
+                                DRAWERACCTNO="622908363000570115",
+                                DRAWERBANKNAME="bank01",
+                                DRAWERBANKCODE="bank01",
+                                PAYEENAME="zhengxh",
+                                PAYEEACCTNO="622908363000570115",
+                                PAYEEBANKNAME="bank01",
+                                PAYEEBANKCODE="bank01",
+                            }
+                        }
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs.ResponseContent);
+        }
+        /// <summary>
+        /// 3.9.3.3 质押托管转换
+        /// </summary>
+        public static void EBPCONVERTTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.9.3.3", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_EBPCONVERTTRNRQ, V1_EBPCONVERTTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_EBPCONVERTTRNRQ
+            {
+                EBPCONVERTTRNRQ = new EBPCONVERTTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new EBPCONVERTTRN_RQBODY
+                    {
+                        CONVERTTYPE = 1,
+                        List = new List<EBPCONVERTTRN_CONTENT> {
+                            new EBPCONVERTTRN_CONTENT{
+                                INDX=1,
+                                BIZNO="1223210000",
+                                BELONGORGNO="122321",
+                                BILLCODE="201607220000000000000000000000",
+                                BILLAMT=100,
+                                BILLTYPE="AC01",
+                                OUTDATE= DateTime.Now,
+                                DUEDATE= DateTime.Now.AddDays(3),
+                                DRAWERNAME="zhengxh",
+                                DRAWERACCTNO="622908363000570115",
+                                DRAWERBANKNAME="bank01",
+                                DRAWERBANKCODE="bank01",
+                                PAYEENAME="zhengxh",
+                                PAYEEACCTNO="622908363000570115",
+                                PAYEEBANKNAME="bank01",
+                                PAYEEBANKCODE="bank01",
+                            }
+                        }
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs.ResponseContent);
+        }
+        /// <summary>
+        /// 3.9.3.4 出票申请
+        /// </summary>
+        public static void EBPOUTBILLTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.9.3.4", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_EBPOUTBILLTRNRQ, V1_EBPOUTBILLTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_EBPOUTBILLTRNRQ
+            {
+                EBPOUTBILLTRNRQ = new EBPOUTBILLTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new EBPOUTBILLTRN_RQBODY
+                    {
+                        List = new List<EBPOUTBILLTRN_CONTENT> {
+                            new EBPOUTBILLTRN_CONTENT{
+                                INDX=1,
+                                BILLAMT=100,
+                                BILLTYPE="AC01",
+                                OUTDATE= DateTime.Now,
+                                DUEDATE= DateTime.Now.AddDays(3),
+                                PAYEENAME="zhengxh",
+                                PAYEEACCTNO="622908363000570115",
+                                PAYEEBANKNAME="bank01",
+                                PAYEEBANKCODE="bank01",
+                            }
+                        }
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs.ResponseContent);
+        }
+        /// <summary>
+        /// 3.9.3.5 融资申请
+        /// </summary>
+        public static void EBPFINANCINGTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.9.3.5", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_EBPFINANCINGTRNRQ, V1_EBPFINANCINGTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_EBPFINANCINGTRNRQ
+            {
+                EBPFINANCINGTRNRQ = new EBPFINANCINGTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new EBPFINANCINGTRN_RQBODY
+                    {
+                        DUEDATE = DateTime.Now.AddMonths(3),
+                        FINANCINGTYPE = "01",
+                        LIMITUSETYPE = 1,
+                        FINANCINGAMT = 1000000,
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs.ResponseContent);
+        }
+        /// <summary>
+        /// 3.9.3.6 贴现申请
+        /// </summary>
+        public static void EBPCASHTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.9.3.6", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_EBPCASHTRNRQ, V1_EBPCASHTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_EBPCASHTRNRQ
+            {
+                EBPCASHTRNRQ = new EBPCASHTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new EBPCASHTRN_RQBODY
+                    {
+                        List = new List<EBPCASHTRN_CONTENT> {
+                            new EBPCASHTRN_CONTENT{
+                                INDX =1,
+                                BIZNO="1223210000",
+                                BELONGORGNO="122321",
+                                BILLCODE="201607220000000000000000000000",
+                                BILLAMT=100,
+                                BILLTYPE="AC01",
+                                OUTDATE= DateTime.Now,
+                                DUEDATE= DateTime.Now.AddDays(3),
+                                DRAWERNAME="zhengxh",
+                                DRAWERACCTNO="622908363000570115",
+                                DRAWERBANKNAME="bank01",
+                                DRAWERBANKCODE="bank01",
+                                PAYEENAME="zhengxh",
+                                PAYEEACCTNO="622908363000570115",
+                                PAYEEBANKNAME="bank01",
+                                PAYEEBANKCODE="bank01",
+                            }
+                        }
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs.ResponseContent);
+        }
+        /// <summary>
+        /// 3.9.3.7 保证金提取
+        /// </summary>
+        public static void EBPBAILTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.9.3.7", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_EBPBAILTRNRQ, V1_EBPBAILTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_EBPBAILTRNRQ
+            {
+                EBPBAILTRNRQ = new EBPBAILTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new EBPBAILTRN_RQBODY
+                    {
+                        DRAWAMT = 5000,
+                        BAILACCTNO = mainAccountId,
+                        TOACCTNO = mainAccountId,
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs.ResponseContent);
+        }
+        /// <summary>
+        /// 3.9.3.8 票据池处理结果查询
+        /// </summary>
+        public static void EBPBILLPOOLRESULTQUERYTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.9.3.8", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_EBPBILLPOOLRESULTQUERYTRNRQ, V1_EBPBILLPOOLRESULTQUERYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_EBPBILLPOOLRESULTQUERYTRNRQ
+            {
+                EBPBILLPOOLRESULTQUERYTRNRQ = new EBPBILLPOOLRESULTQUERYTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new EBPBILLPOOLRESULTQUERYTRN_RQBODY
+                    {
+                         RELATETRNUID= "20190306195953_3.9.3.7",
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs.ResponseContent);
+        }
+        /// <summary>
+        /// 3.9.3.9 票据池可操作票据查询
+        /// </summary>
+        public static void EBPOPERATEBILLQUERYTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.9.3.9", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_EBPOPERATEBILLQUERYTRNRQ, V1_EBPOPERATEBILLQUERYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_EBPOPERATEBILLQUERYTRNRQ
+            {
+                EBPOPERATEBILLQUERYTRNRQ = new EBPOPERATEBILLQUERYTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new EBPOPERATEBILLQUERYTRN_RQBODY
+                    {
+                        QUERYTYPE = "01",
+                        BILLTYPE = "AC02",
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs.ResponseContent);
         }
         #endregion
 
@@ -1669,7 +2799,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.10.2	他行账户协议查询
@@ -1691,7 +2821,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.10.3	他行账户余额查询
@@ -1716,7 +2846,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.10.4	他行账户明细查询
@@ -1743,7 +2873,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.10.5	他行账户收款
@@ -1775,7 +2905,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         #endregion
 
@@ -1799,7 +2929,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.11.1.2 贵金属库存查询
@@ -1820,7 +2950,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.11.1.3 贵金属交易资金查询
@@ -1841,7 +2971,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.11.1.4 贵金属交易会员信息查询
@@ -1862,7 +2992,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.11.1.5 提货申请查询
@@ -1884,7 +3014,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.11.1.6 出入金明细查询
@@ -1907,7 +3037,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.11.2	入金申请
@@ -1931,7 +3061,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.11.3	保证金划回申请
@@ -1953,7 +3083,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.11.4	实物提货申请
@@ -1977,7 +3107,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         #endregion
 
@@ -2004,7 +3134,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.12.2	定期转活期
@@ -2025,7 +3155,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.12.3	活期转通知
@@ -2048,7 +3178,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.12.4	通知转活期
@@ -2071,7 +3201,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.12.5.1 智能通知存款签约关系查询
@@ -2092,7 +3222,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.12.5.2 智能通知存款协议查询
@@ -2109,7 +3239,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.12.5.3 智能通知存款登记
@@ -2131,7 +3261,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.12.5.4 智能通知存款撤销
@@ -2152,7 +3282,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.12.5.5 智能通知存款资金支取
@@ -2174,7 +3304,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.12.6.1 结构性存款产品信息查询
@@ -2195,7 +3325,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.12.6.2 结构性存款开户
@@ -2219,7 +3349,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.12.6.3 结构性存款开户交易结果查询
@@ -2240,7 +3370,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.12.6.4 结构性存款账户信息查询
@@ -2261,7 +3391,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.12.6.5 结构性存款支取
@@ -2285,7 +3415,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.12.6.6 结构性存款支取交易结果查询
@@ -2306,7 +3436,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.12.7.1 智能定期存款互联互通—签约
@@ -2328,7 +3458,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.12.7.2 智能定期存款互联互通—签约账户查询
@@ -2349,7 +3479,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.12.7.3 智能定期存款互联互通—修改/解约
@@ -2372,7 +3502,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.12.7.4 智能定期存款互联互通—关联/解关联
@@ -2396,7 +3526,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.12.7.5 智能定期存款—开户
@@ -2418,7 +3548,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);//117010100200490349
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.12.7.6 智能定期存款账户查询
@@ -2439,7 +3569,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.12.7.7 智能定期存款—明细查询
@@ -2462,7 +3592,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.12.7.8 智能定期存款—资金支取
@@ -2485,7 +3615,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.12.8.1 一本帐及互联互通
@@ -2506,7 +3636,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.12.8.2 同业一本通及互联互通查询
@@ -2527,7 +3657,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         #endregion
 
@@ -2569,7 +3699,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.13.2	批量工资指令提交（暂不推荐）
@@ -2609,7 +3739,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.13.3	历史余额查询
@@ -2636,7 +3766,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.13.4	预约提现和电子渠道类客户申请
@@ -2667,7 +3797,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.13.5	手动归集
@@ -2698,7 +3828,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.13.6	支付指令核心处理结果查询
@@ -2719,7 +3849,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.13.7	扣税流水查询
@@ -2742,7 +3872,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         #endregion
 
@@ -2779,8 +3909,10 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
+
+        //3.14.4与3.6.6请求响应相同
         #endregion
 
         #region 3.15	电子商务
@@ -2807,7 +3939,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.15.2	商户单笔订单查询
@@ -2829,7 +3961,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         #endregion
 
@@ -2865,7 +3997,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.16.2	收付直通车批量代付(最多100笔，不采用工作流)
@@ -2913,8 +4045,8 @@ namespace BEDA.CIB.Samples
             rq.SECURITIES_MSGSRQV1.ASYNBATCHMRCHAGENTTRNRQ.RQBODY.XFERINFOTEXT = txt;
             rq.SECURITIES_MSGSRQV1.ASYNBATCHMRCHAGENTTRNRQ.TRNUID = "20190129101024_3.16.2";
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
-            if (rs?.SECURITIES_MSGSRSV1.ASYNBATCHMRCHAGENTTRNRS.RSBODY.XFERINFOTEXT != null)
+            Console.WriteLine(rs.ResponseContent);
+            if (rs.SECURITIES_MSGSRSV1.ASYNBATCHMRCHAGENTTRNRS.RSBODY.XFERINFOTEXT != null)
             {
                 var rList = rs.SECURITIES_MSGSRSV1.ASYNBATCHMRCHAGENTTRNRS.RSBODY.XFERINFOTEXT.GetList();
             }
@@ -2945,7 +4077,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.17.2	内部计价利息分配
@@ -2975,7 +4107,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.17.3	利息查询
@@ -2996,7 +4128,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.17.4	资金池签约关系及余额查询
@@ -3018,7 +4150,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.17.5	主账户支付额度查询
@@ -3039,7 +4171,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.17.6	成员账户属性设置
@@ -3063,7 +4195,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.17.7	主账户属性查询
@@ -3084,7 +4216,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.17.8	成员账户属性查询
@@ -3105,7 +4237,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         #endregion
 
@@ -3129,7 +4261,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.18.2	结/售汇
@@ -3157,7 +4289,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.18.3	结汇还原报送
@@ -3195,7 +4327,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.18.4	购汇还原报送
@@ -3236,7 +4368,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.18.5	结汇还原报送补录
@@ -3270,7 +4402,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.18.6	购汇还原报送补录
@@ -3307,7 +4439,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.18.7	结售汇还原报送查询
@@ -3329,7 +4461,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.18.8	付汇
@@ -3368,7 +4500,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.18.9	付汇通知查询
@@ -3390,7 +4522,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.18.10	收汇通知查询
@@ -3412,7 +4544,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.18.11	收付汇还原申报
@@ -3469,7 +4601,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         #endregion
 
@@ -3500,7 +4632,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.19.2	利息分配
@@ -3529,7 +4661,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.19.3	利息查询
@@ -3550,7 +4682,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.19.4	集中结汇
@@ -3579,7 +4711,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.19.5	集中结汇交易明细查询
@@ -3602,7 +4734,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.19.6	集中收付汇
@@ -3647,7 +4779,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.19.7	成员账号信息查询
@@ -3668,7 +4800,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.19.8	国内主账户信息查询
@@ -3689,7 +4821,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.19.9	账户交易明细查询
@@ -3715,7 +4847,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.19.10	成员单位子账号交易明细查询
@@ -3742,7 +4874,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.19.11	账户资金池属性查询
@@ -3763,7 +4895,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.19.12	国内成员资金调拨
@@ -3789,7 +4921,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.19.13	国内、国际主账户互转
@@ -3818,7 +4950,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.19.14	国内、国际主账户互转交易查询
@@ -3843,7 +4975,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         #endregion
 
@@ -3889,7 +5021,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.20.2	进口信用证修改
@@ -3916,7 +5048,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.20.3	进口信用证付款承兑拒付申请
@@ -3947,7 +5079,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.20.4	进口信用证开立通知查询
@@ -3969,7 +5101,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.20.5	进口信用证修改通知查询
@@ -3991,7 +5123,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.20.6	进口信用证到单通知查询
@@ -4013,7 +5145,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.20.7	进口信用证拒付通知查询
@@ -4035,7 +5167,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.20.8	进口信用证承兑通知查询
@@ -4057,7 +5189,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.20.9	进口信用证即期付款/远期付款通知查询
@@ -4080,7 +5212,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.20.10	出口信用证来证通知查询
@@ -4102,7 +5234,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         #endregion
 
@@ -4128,7 +5260,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.21.2	同步电子回单
@@ -4149,7 +5281,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         #endregion
 
@@ -4173,7 +5305,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         /// <summary>
         /// 3.23.2	查询批量余额对账指令
@@ -4194,7 +5326,7 @@ namespace BEDA.CIB.Samples
                 }
             };
             var rs = client.Execute(rq);
-            Console.WriteLine(rs?.ResponseContent);
+            Console.WriteLine(rs.ResponseContent);
         }
         #endregion
     }

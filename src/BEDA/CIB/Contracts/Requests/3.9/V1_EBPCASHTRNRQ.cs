@@ -24,6 +24,17 @@ namespace BEDA.CIB.Contracts.Requests
     public class EBPCASHTRNRQ : BIZRQBASE
     {
         /// <summary>
+        /// 3.9.3.6电子商业汇票贴现申请请求内容
+        /// </summary>
+        [XmlElement(Order = 2)]
+        public EBPCASHTRN_RQBODY RQBODY { get; set; }
+    }
+    /// <summary>
+    /// 3.9.3.6电子商业汇票贴现申请请求内容
+    /// </summary>
+    public class EBPCASHTRN_RQBODY
+    {
+        /// <summary>
         /// 票据总笔数,8位整数	必输
         /// </summary>
         [XmlElement(Order = 3)]

@@ -39,7 +39,7 @@ namespace BEDA.CIB.Contracts.Requests
         /// 转换类型 ，0-质押转托管 1-托管转质押	必输
         /// </summary>
         [XmlElement(Order = 2)]
-        public string CONVERTTYPE { get; set; }
+        public int CONVERTTYPE { get; set; }
         /// <summary>
         /// 票据总笔数,8位整数	必输
         /// </summary>

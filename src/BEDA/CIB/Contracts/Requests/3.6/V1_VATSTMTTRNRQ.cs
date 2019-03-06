@@ -41,7 +41,7 @@ namespace BEDA.CIB.Contracts.Requests
         [XmlElement(Order = 0)]
         public int VATTYPE { get; set; } = 1;
         /// <summary>
-        /// 实体扣款账户，最大18位	必输
+        /// 18位实体扣款账户，查询类型为0时非必输	非必输
         /// </summary>
         [XmlElement(Order = 1)]
         public string MAINACCT { get; set; }
