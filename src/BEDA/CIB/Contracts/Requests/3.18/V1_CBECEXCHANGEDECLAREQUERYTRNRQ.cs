@@ -44,20 +44,20 @@ namespace BEDA.CIB.Contracts.Requests
         /// 开始日期（格式为：YYYY-MM-DD，不能早于90天前，与结售汇银行流水号不能同时为空） 非必输
         /// </summary>
         [XmlIgnore]
-        public DateTime? BIGIN_DATE { get; set; }
+        public DateTime? BEGIN_DATE { get; set; }
         /// <summary>
-        /// 开始日期（格式为：YYYY-MM-DD，不能早于90天前，与结售汇银行流水号不能同时为空）, 对应<see cref="BIGIN_DATE"/>	非必输
+        /// 开始日期（格式为：YYYY-MM-DD，不能早于90天前，与结售汇银行流水号不能同时为空）, 对应<see cref="BEGIN_DATE"/>	非必输
         /// </summary>
-        [XmlElement("BIGIN_DATE", Order = 1)]
-        public string BIGIN_DATEStr
+        [XmlElement("BEGIN_DATE", Order = 1)]
+        public string BEGIN_DATEStr
         {
             get
             {
-                return this.BIGIN_DATE?.ToString("yyyy-MM-dd");
+                return this.BEGIN_DATE?.ToString("yyyy-MM-dd");
             }
             set
             {
-                this.BIGIN_DATE = value.TryConvert<DateTime>();
+                this.BEGIN_DATE = value.TryConvert<DateTime>();
             }
         }
         /// <summary>

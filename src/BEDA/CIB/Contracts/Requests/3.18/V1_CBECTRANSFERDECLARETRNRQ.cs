@@ -314,8 +314,8 @@ namespace BEDA.CIB.Contracts.Requests
         [XmlElement(Order = 16)]
         public string OTHER_ACCT_NO { get; set; }
         /// <summary>
-        /// 结算方式(字母必须大写) 必输
-        /// －信用证
+        /// 结算方式(字母必须大写)  必输
+        /// L－信用证
         /// G－保函
         /// C－托收
         /// T－电汇
@@ -450,8 +450,25 @@ namespace BEDA.CIB.Contracts.Requests
         /// 相应金额2  非必输
         /// 有交易编码2时必填 两个交易编码对应的金额之和必须等于收/付款金额
         /// </summary>
-        [XmlElement(Order = 28)]
-        public decimal AMOUNT_2 { get; set; }
+        [XmlIgnore]
+        public decimal? AMOUNT_2 { get; set; }
+        /// <summary>
+        /// 国外费用金额 对应<see cref="AMOUNT_2"/>  非必输
+        /// 数据类型为以下数据类型时选填，其他不填
+        /// DBA-涉外收入申报单
+        /// </summary>
+        [XmlElement("AMOUNT_2", Order = 28)]
+        public string AMOUNT_2Str
+        {
+            get
+            {
+                return this.AMOUNT_2?.ToString();
+            }
+            set
+            {
+                this.AMOUNT_2 = value.TryConvert<decimal>();
+            }
+        }
         /// <summary>
         /// 交易附言2	非必输
         /// /// </summary>

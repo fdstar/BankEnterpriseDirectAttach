@@ -26,7 +26,7 @@ namespace BEDA.CIB.Contracts.Responses
         /// 3.18.6跨境电商购汇还原报送补录响应内容
         /// </summary>
         [XmlElement(Order = 2)]
-        public CBECSETTLEMENTDECLAREREINTRN_RSBODY RSBODY { get; set; }
+        public CBECPURCHASEDECLAREREINTRN_RSBODY RSBODY { get; set; }
     }
     /// <summary>
     /// 3.18.6跨境电商购汇还原报送补录响应内容

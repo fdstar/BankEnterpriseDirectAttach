@@ -166,6 +166,17 @@ namespace BEDA.CIB.Samples
 
             #region 3.18	跨境电商
             //QUERYBULLETINTRNRQSample();
+            //CBECEXCHANGETRNRQSample();
+            //CBECSETTLEMENTDECLARETRNRQSample();
+            //CBECPURCHASEDECLARETRNRQSample();
+            //CBECSETTLEMENTDECLAREREINTRNRQSample();
+            //CBECPURCHASEDECLAREREINTRNRQSample();
+            //CBECPURCHASEDECLAREREINTRNRQSample();
+            //CBECEXCHANGEDECLAREQUERYTRNRQSample();
+            //CBECTRANSFERTRNRQSample();
+            //CBECPAYNOTICEQUERYTRNRQSample();
+            //CBECINNOTICEQUERYTRNRQSample();
+            //CBECTRANSFERDECLARETRNRQSample();
             #endregion
 
             #region 3.19	跨境资金池
@@ -3114,6 +3125,346 @@ namespace BEDA.CIB.Samples
                     RQBODY = new QUERYBULLETINTRN_RQBODY
                     {
                         DATE = DateTime.Now.AddDays(-4)
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.18.2	结/售汇
+        /// </summary>
+        public static void CBECEXCHANGETRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.18.2", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_CBECEXCHANGETRNRQ, V1_CBECEXCHANGETRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_CBECEXCHANGETRNRQ
+            {
+                CBECEXCHANGETRNRQ = new CBECEXCHANGETRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new CBECEXCHANGETRN_RQBODY
+                    {
+                        BIZTYPE = 0,
+                        FORCURRACCTNO = "117011174300000141",
+                        RMBACCTNO = mainAccountId,
+                        FORCURRAMT = 1000,
+                        EXCHANGECATEGORY = 0,
+                        TRANSCODE = "121010",
+                        EXCHANGECODE = "11005",
+                        MEMO = "结/售汇MEMO"
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.18.3	结汇还原报送
+        /// </summary>
+        public static void CBECSETTLEMENTDECLARETRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.18.3", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_CBECSETTLEMENTDECLARETRNRQ, V1_CBECSETTLEMENTDECLARETRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_CBECSETTLEMENTDECLARETRNRQ
+            {
+                CBECSETTLEMENTDECLARETRNRQ = new CBECSETTLEMENTDECLARETRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new CBECSETTLEMENTDECLARETRN_RQBODY
+                    {
+                        EXCHANGEBANKLSH = "201602269999DBFN",
+                        CURRENCY = "13",
+                        List = new List<CBECSETTLEMENTDECLARETRNRQ_CONTENT>
+                        {
+                            new CBECSETTLEMENTDECLARETRNRQ_CONTENT{
+                                SEQ=1,
+                                BRANCH_NO="11702",
+                                ID_TYPE=0,
+                                ID_CODE="350121198806272712",
+                                COUNTRY_CODE="156",
+                                PERSON_NAME="AMI",
+                                SETTLEMENT_AMT=500,
+                                CAPITAL_PROP_CODE=110,
+                                SALE_SETTLE_CODE="02",
+                                PAY_ORG_CODE="570028451",
+                                MEMO="结汇还原报送MEMO",
+                            }
+                        }
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.18.4	购汇还原报送
+        /// </summary>
+        public static void CBECPURCHASEDECLARETRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.18.4", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_CBECPURCHASEDECLARETRNRQ, V1_CBECPURCHASEDECLARETRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_CBECPURCHASEDECLARETRNRQ
+            {
+                CBECPURCHASEDECLARETRNRQ = new CBECPURCHASEDECLARETRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new CBECPURCHASEDECLARETRN_RQBODY
+                    {
+                        EXCHANGEBANKLSH = "201602269999DBFN",
+                        CURRENCY = "13",
+                        List = new List<CBECPURCHASEDECLARETRNRQ_CONTENT>
+                        {
+                            new CBECPURCHASEDECLARETRNRQ_CONTENT{
+                                SEQ=1,
+                                BRANCH_NO="11702",
+                                ID_TYPE=0,
+                                ID_CODE="350121198806272712",
+                                COUNTRY_CODE="156",
+                                PERSON_NAME="AMI",
+                                PURCHASE_AMT=500,
+                                CAPITAL_PROP_CODE=310,
+                                PURCHASE_CASH_AMT=100,
+                                PURCHASE_REMIT_AMT=500,
+                                FCY_ACCT_AMT=0,
+                                TRIP_CHK_AMT=300,
+                                PAY_ORG_CODE="570028451",
+                                MEMO="购汇还原报送MEMO",
+                            }
+                        }
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.18.5	结汇还原报送补录
+        /// </summary>
+        public static void CBECSETTLEMENTDECLAREREINTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.18.5", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_CBECSETTLEMENTDECLAREREINTRNRQ, V1_CBECSETTLEMENTDECLAREREINTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_CBECSETTLEMENTDECLAREREINTRNRQ
+            {
+                CBECSETTLEMENTDECLAREREINTRNRQ = new CBECSETTLEMENTDECLAREREINTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new CBECSETTLEMENTDECLAREREINTRN_RQBODY
+                    {
+                        EXCHANGEBANKLSH = "201602269999DBFN",
+                        BRANCH_NO = "11702",
+                        ID_TYPE = 0,
+                        ID_CODE = "350121198806272712",
+                        COUNTRY_CODE = "156",
+                        PERSON_NAME = "AMI",
+                        CURRENCY = "13",
+                        SETTLEMENT_AMT = 1000,
+                        CAPITAL_PROP_CODE = 110,
+                        SALE_SETTLE_CODE = "02",
+                        PAY_ORG_CODE = "570028451",
+                        DEAL_DATE = DateTime.Now,
+                        MEMO = "结汇还原报送补录MEMO",
+                        REIN_REASON_CODE = "01",
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.18.6	购汇还原报送补录
+        /// </summary>
+        public static void CBECPURCHASEDECLAREREINTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.18.6", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_CBECPURCHASEDECLAREREINTRNRQ, V1_CBECPURCHASEDECLAREREINTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_CBECPURCHASEDECLAREREINTRNRQ
+            {
+                CBECPURCHASEDECLAREREINTRNRQ = new CBECPURCHASEDECLAREREINTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new CBECPURCHASEDECLAREREINTRN_RQBODY
+                    {
+                        EXCHANGEBANKLSH = "201602269999DBFN",
+                        BRANCH_NO = "11702",
+                        ID_TYPE = 0,
+                        ID_CODE = "350121198806272712",
+                        COUNTRY_CODE = "156",
+                        PERSON_NAME = "AMI",
+                        CURRENCY = "13",
+                        PURCHASE_AMT = 1000,
+                        CAPITAL_PROP_CODE = 310,
+                        PURCHASE_CASH_AMT=100,
+                        PURCHASE_REMIT_AMT=1000,
+                        FCY_ACCT_AMT=0,
+                        TRIP_CHK_AMT=0,
+                        PAY_ORG_CODE = "570028451",
+                        DEAL_DATE = DateTime.Now,
+                        MEMO = "购汇还原报送补录MEMO",
+                        REIN_REASON_CODE = "01",
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.18.7	结售汇还原报送查询
+        /// </summary>
+        public static void CBECEXCHANGEDECLAREQUERYTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.18.7", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_CBECEXCHANGEDECLAREQUERYTRNRQ, V1_CBECEXCHANGEDECLAREQUERYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_CBECEXCHANGEDECLAREQUERYTRNRQ
+            {
+                CBECEXCHANGEDECLAREQUERYTRNRQ = new CBECEXCHANGEDECLAREQUERYTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new CBECEXCHANGEDECLAREQUERYTRN_RQBODY
+                    {
+                        BEGIN_DATE = DateTime.Now.AddDays(-80),
+                        DUE_DATE = DateTime.Now.AddDays(-1),
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.18.8	付汇
+        /// </summary>
+        public static void CBECTRANSFERTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.18.8", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_CBECTRANSFERTRNRQ, V1_CBECTRANSFERTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_CBECTRANSFERTRNRQ
+            {
+                CBECTRANSFERTRNRQ = new CBECTRANSFERTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new CBECTRANSFERTRN_RQBODY
+                    {
+                        BUSN_TYPE = "JZF",
+                        BRANCH_NO = "11701",
+                        CURRENCY = "27",
+                        REMIT_AMOUNT = 500,
+                        REMITTER_ACCT_NO = "117011400100081792",
+                        REMIT_CURRENCY = "14",
+                        REMITTER_NAME = "fuzhoukehu",
+                        PAYEE_ACCT_NO = "117012700100000650",
+                        PAYEE_NAME = "weng",
+                        COUNTRY_CODE = "ALB",
+                        PAYEE_BANK_ACCT_NO = "1100",
+                        PAYEE_BANK_CODE = "CITIUS33XXX",
+                        PAYEE_BANK_NAME = "CITIBANK N.A. 111 WALL STREET",
+                        BEAR_EXPENSES = "SHA",
+                        PAY_TYPE = "O",
+                        APPLY_TEL = "158600032S16",
+                        APPLY_NAME = "WENGQ",
+                        TRADE_CODE = "999999",
+                        TRADE_MEMO = "付汇 TRADE_MEMO",
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.18.9	付汇通知查询
+        /// </summary>
+        public static void CBECPAYNOTICEQUERYTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.18.9", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_CBECPAYNOTICEQUERYTRNRQ, V1_CBECPAYNOTICEQUERYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_CBECPAYNOTICEQUERYTRNRQ
+            {
+                CBECPAYNOTICEQUERYTRNRQ = new CBECPAYNOTICEQUERYTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new CBECPAYNOTICEQUERYTRN_RQBODY
+                    {
+                        BEGINDATE = DateTime.Now.AddDays(-80),
+                        ENDDATE = DateTime.Now.AddDays(-1),
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.18.10	收汇通知查询
+        /// </summary>
+        public static void CBECINNOTICEQUERYTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.18.10", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_CBECINNOTICEQUERYTRNRQ, V1_CBECINNOTICEQUERYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_CBECINNOTICEQUERYTRNRQ
+            {
+                CBECINNOTICEQUERYTRNRQ = new CBECINNOTICEQUERYTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new CBECINNOTICEQUERYTRN_RQBODY
+                    {
+                        BEGINDATE = DateTime.Now.AddDays(-80),
+                        ENDDATE = DateTime.Now.AddDays(-1),
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs?.ResponseContent);
+        }
+        /// <summary>
+        /// 3.18.11	收付汇还原申报
+        /// </summary>
+        public static void CBECTRANSFERDECLARETRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.18.11", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_CBECTRANSFERDECLARETRNRQ, V1_CBECTRANSFERDECLARETRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_CBECTRANSFERDECLARETRNRQ
+            {
+                CBECTRANSFERDECLARETRNRQ = new CBECTRANSFERDECLARETRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new CBECTRANSFERDECLARETRN_RQBODY
+                    {
+                        BATCH_NUM = "2",
+                        CURR_BATCH_SEQ = "1",
+                        FIRST_BATCH_REFNO = "wengq001",
+                        CURRENCY = "01",
+
+                        BRANCH_NO = "11701",
+                        BLNC_PYMT_NO = "3500000014001604220001",
+                        DATA_TYPE = "DBD",
+                        BACK_TRACKING = "N",
+                        List = new List<CBECTRANSFERDECLARETRN_CONTENT>
+                        {
+                            new CBECTRANSFERDECLARETRN_CONTENT{
+                                SEQ=1,
+                                PAYEE_TYPE="C",
+                                FIRM_CODE="87636234-2",
+                                PAYEE_NAME="ZONGXIN 新中",
+                                REMITTER_NAME="(JW)zhengxiaohai",
+                                REMIT_AMOUNT=1000,
+                                EXCHNG_RATE=0.23m,
+                                EXCHNG_AMT=1000,
+                                CASH_ACCT_NO="117011400100081792",
+                                SETTLE_WAY="L",
+                                RCPT_PYMT_TYPE="A",
+                                TRADE_CODE_1="121010",
+                                AMOUNT_1=800,
+                                MEMO_1="MEMO_1",
+                                TRADE_CODE_2="121020",
+                                AMOUNT_2=200,
+                                MEMO_2="MEMO_2",
+                                IS_BONDED="N",
+                                EXCHNG_TYPE="M",
+                                APPLY_NAME="WENG",
+                                APPLY_TEL="124578965",
+                                APPLY_DATE=DateTime.Now,
+                                TRADE_TYPE="M",
+                            }
+                        }
                     }
                 }
             };
