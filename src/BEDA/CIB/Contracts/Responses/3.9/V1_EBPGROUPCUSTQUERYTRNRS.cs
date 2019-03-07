@@ -132,7 +132,7 @@ namespace BEDA.CIB.Contracts.Responses
         /// 签约机构号	必回
         /// </summary>
         [XmlElement(Order = 4)]
-        public string MEMBERSIGNORGNO { get; set; }
+        public string MEMBERSIGNROGNO { get; set; }
         /// <summary>
         /// 签约机构名称	必回
         /// </summary>

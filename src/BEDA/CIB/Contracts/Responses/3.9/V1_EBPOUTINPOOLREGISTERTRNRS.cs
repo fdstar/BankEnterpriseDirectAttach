@@ -11,28 +11,28 @@ namespace BEDA.CIB.Contracts.Responses
     /// <summary>
     /// 3.9.3.15电子商业汇票出入池登记簿响应主体
     /// </summary>
-    public class V1_EBPOUTINPOOLYREGISTERTRNRS : IResponse
+    public class V1_EBPOUTINPOOLREGISTERTRNRS : IResponse
     {
         /// <summary>
         /// 3.9.3.15电子商业汇票出入池登记簿响应主体
         /// </summary>
-        public EBPOUTINPOOLYREGISTERTRNRS EBPOUTINPOOLYREGISTERTRNRS { get; set; }
+        public EBPOUTINPOOLREGISTERTRNRS EBPOUTINPOOLREGISTERTRNRS { get; set; }
     }
     /// <summary>
     /// 3.9.3.15电子商业汇票出入池登记簿响应主体
     /// </summary>
-    public class EBPOUTINPOOLYREGISTERTRNRS : BIZRSBASE
+    public class EBPOUTINPOOLREGISTERTRNRS : BIZRSBASE
     {
         /// <summary>
         /// 3.9.3.15电子商业汇票出入池登记簿响应内容
         /// </summary>
         [XmlElement(Order = 2)]
-        public EBPOUTINPOOLYREGISTERTRN_RSBODY RSBODY { get; set; }
+        public EBPOUTINPOOLREGISTERTRN_RSBODY RSBODY { get; set; }
     }
     /// <summary>
     /// 3.9.3.15电子商业汇票出入池登记簿响应内容
     /// </summary>
-    public class EBPOUTINPOOLYREGISTERTRN_RSBODY
+    public class EBPOUTINPOOLREGISTERTRN_RSBODY
     {
         /// <summary>
         /// MORE是否有下一页，Y有，N无
@@ -53,12 +53,12 @@ namespace BEDA.CIB.Contracts.Responses
         /// 3.9.3.15电子商业汇票出入池登记簿响应集合
         /// </summary>
         [XmlElement("CONTENT", Order = 10)]
-        public List<EBPOUTINPOOLYREGISTERTRN_CONTENT> List { get; set; }
+        public List<EBPOUTINPOOLREGISTERTRN_CONTENT> List { get; set; }
     }
     /// <summary>
     /// 3.9.3.15电子商业汇票出入池登记簿响应内容
     /// </summary>
-    public class EBPOUTINPOOLYREGISTERTRN_CONTENT
+    public class EBPOUTINPOOLREGISTERTRN_CONTENT
     {
         /// <summary>
         /// 业务类型，01-入池02-出池	必回

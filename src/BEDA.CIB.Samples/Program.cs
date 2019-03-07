@@ -116,7 +116,23 @@ namespace BEDA.CIB.Samples
             //EBPCASHTRNRQSample();
             //EBPBAILTRNRQSample();
             //EBPBILLPOOLRESULTQUERYTRNRQSample();
-            EBPOPERATEBILLQUERYTRNRQSample();
+            //EBPOPERATEBILLQUERYTRNRQSample();
+            //EBPCUSTSIGNINFOQUERYTRNRQSample();
+            //EBPGROUPCUSTQUERYTRNRQSample();
+            //EBPSINGLELIMITQUERYTRNRQSample();
+            //EBPGROUPLIMITQUERYTRNRQSample();
+            //EBPMEMBERLIMITQUERYTRNRQSample();
+            //EBPOUTINPOOLREGISTERTRNRQSample();
+            //EBPCONVERTREGISTERTRNRQSample();
+            //EBPOPENBILLREGISTERTRNRQSample();
+            //EBPCAPITALREGISTERTRNRQSample();
+            //EBPBAILREGISTERTRNRQSample();
+            //EBPINPOOLBILLREGISTERTRNRQSample();
+            //EBPCOLLECTIONREGISTERTRNRQSample();
+            //EBPMEMBERCREDITTRNRQSample();
+            //EBPMEMBERCREDITQUERYTRNRQSample();
+            //EBPCREDITRESULTQUERYTRNRQSample();
+            //EBPMEMBERCREDITAUDITTRNRQSample();
             #endregion
 
             #region 3.10	跨行账户管理
@@ -264,7 +280,7 @@ namespace BEDA.CIB.Samples
         const long cid = 1100343164;
         const string uid = "qw1";
         const string pwd = "a1111111";//密码错误6次账号会被永久锁定无法解锁
-        const string ip = /*"127.0.0.1"*/"139.196.136.170";
+        const string ip = "127.0.0.1";
         const int port = 8007;
         static ICIBClient client = new CIBClient(ip, port);
 
@@ -2722,7 +2738,7 @@ namespace BEDA.CIB.Samples
                     RQBODY = new EBPBAILTRN_RQBODY
                     {
                         DRAWAMT = 5000,
-                        BAILACCTNO = mainAccountId,
+                        BAILACCTNO = "117010100100389713",
                         TOACCTNO = mainAccountId,
                     }
                 }
@@ -2767,6 +2783,348 @@ namespace BEDA.CIB.Samples
                     {
                         QUERYTYPE = "01",
                         BILLTYPE = "AC02",
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs.ResponseContent);
+        }
+        /// <summary>
+        /// 3.9.3.10 客户签约信息查询
+        /// </summary>
+        public static void EBPCUSTSIGNINFOQUERYTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.9.3.10", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_EBPCUSTSIGNINFOQUERYTRNRQ, V1_EBPCUSTSIGNINFOQUERYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_EBPCUSTSIGNINFOQUERYTRNRQ
+            {
+                EBPCUSTSIGNINFOQUERYTRNRQ = new EBPCUSTSIGNINFOQUERYTRNRQ
+                {
+                    TRNUID = tid,
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs.ResponseContent);
+        }
+        /// <summary>
+        /// 3.9.3.11 集团关系查询
+        /// </summary>
+        public static void EBPGROUPCUSTQUERYTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.9.3.11", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_EBPGROUPCUSTQUERYTRNRQ, V1_EBPGROUPCUSTQUERYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_EBPGROUPCUSTQUERYTRNRQ
+            {
+                EBPGROUPCUSTQUERYTRNRQ = new EBPGROUPCUSTQUERYTRNRQ
+                {
+                    TRNUID = tid,
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs.ResponseContent);
+        }
+        /// <summary>
+        /// 3.9.3.12 单一客户票据池额度信息查询
+        /// </summary>
+        public static void EBPSINGLELIMITQUERYTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.9.3.12", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_EBPSINGLELIMITQUERYTRNRQ, V1_EBPSINGLELIMITQUERYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_EBPSINGLELIMITQUERYTRNRQ
+            {
+                EBPSINGLELIMITQUERYTRNRQ = new EBPSINGLELIMITQUERYTRNRQ
+                {
+                    TRNUID = tid,
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs.ResponseContent);
+        }
+        /// <summary>
+        /// 3.9.3.13 集团客户票据池额度查询
+        /// </summary>
+        public static void EBPGROUPLIMITQUERYTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.9.3.13", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_EBPGROUPLIMITQUERYTRNRQ, V1_EBPGROUPLIMITQUERYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_EBPGROUPLIMITQUERYTRNRQ
+            {
+                EBPGROUPLIMITQUERYTRNRQ = new EBPGROUPLIMITQUERYTRNRQ
+                {
+                    TRNUID = tid,
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs.ResponseContent);
+        }
+        /// <summary>
+        /// 3.9.3.14 成员单位票据池额度信息查询
+        /// </summary>
+        public static void EBPMEMBERLIMITQUERYTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.9.3.14", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_EBPMEMBERLIMITQUERYTRNRQ, V1_EBPMEMBERLIMITQUERYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_EBPMEMBERLIMITQUERYTRNRQ
+            {
+                EBPMEMBERLIMITQUERYTRNRQ = new EBPMEMBERLIMITQUERYTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new EBPMEMBERLIMITQUERYTRN_RQBODY
+                    {
+                         GROUPBILLPOOLNO= "JT1100343164",
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs.ResponseContent);
+        }
+        /// <summary>
+        /// 3.9.3.15 出入池登记簿
+        /// </summary>
+        public static void EBPOUTINPOOLREGISTERTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.9.3.15", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_EBPOUTINPOOLREGISTERTRNRQ, V1_EBPOUTINPOOLREGISTERTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_EBPOUTINPOOLREGISTERTRNRQ
+            {
+                EBPOUTINPOOLREGISTERTRNRQ = new EBPOUTINPOOLREGISTERTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new EBPOUTINPOOLREGISTERTRN_RQBODY
+                    {
+                        BEGINDATE = DateTime.Now.AddYears(-2),
+                        DUEDATE = DateTime.Now.AddYears(-1),
+                        BIZTYPE = "01",
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs.ResponseContent);
+        }
+        /// <summary>
+        /// 3.9.3.16 质押托管转换登记簿
+        /// </summary>
+        public static void EBPCONVERTREGISTERTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.9.3.16", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_EBPCONVERTREGISTERTRNRQ, V1_EBPCONVERTREGISTERTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_EBPCONVERTREGISTERTRNRQ
+            {
+                EBPCONVERTREGISTERTRNRQ = new EBPCONVERTREGISTERTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new EBPCONVERTREGISTERTRN_RQBODY
+                    {
+                        BEGINDATE = DateTime.Now.AddYears(-2),
+                        DUEDATE = DateTime.Now.AddYears(-1),
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs.ResponseContent);
+        }
+        /// <summary>
+        /// 3.9.3.17 开票明细业务登记簿
+        /// </summary>
+        public static void EBPOPENBILLREGISTERTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.9.3.17", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_EBPOPENBILLREGISTERTRNRQ, V1_EBPOPENBILLREGISTERTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_EBPOPENBILLREGISTERTRNRQ
+            {
+                EBPOPENBILLREGISTERTRNRQ = new EBPOPENBILLREGISTERTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new EBPOPENBILLREGISTERTRN_RQBODY
+                    {
+                        BEGINDATE = DateTime.Now.AddYears(-1),
+                        DUEDATE = DateTime.Now.AddDays(-1),
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs.ResponseContent);
+        }
+        /// <summary>
+        /// 3.9.3.18 资产业务登记薄
+        /// </summary>
+        public static void EBPCAPITALREGISTERTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.9.3.18", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_EBPCAPITALREGISTERTRNRQ, V1_EBPCAPITALREGISTERTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_EBPCAPITALREGISTERTRNRQ
+            {
+                EBPCAPITALREGISTERTRNRQ = new EBPCAPITALREGISTERTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new EBPCAPITALREGISTERTRN_RQBODY
+                    {
+                        BEGINDATE = DateTime.Now.AddYears(-1),
+                        DUEDATE = DateTime.Now.AddDays(-1),
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs.ResponseContent);
+        }
+        /// <summary>
+        /// 3.9.3.19 保证金交易登记薄
+        /// </summary>
+        public static void EBPBAILREGISTERTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.9.3.19", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_EBPBAILREGISTERTRNRQ, V1_EBPBAILREGISTERTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_EBPBAILREGISTERTRNRQ
+            {
+                EBPBAILREGISTERTRNRQ = new EBPBAILREGISTERTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new EBPBAILREGISTERTRN_RQBODY
+                    {
+                        BEGINDATE = DateTime.Now.AddYears(-1),
+                        DUEDATE = DateTime.Now.AddDays(-1),
+                        TRADEPERIOD = 1,
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs.ResponseContent);
+        }
+        /// <summary>
+        /// 3.9.3.20 在池票据登记簿
+        /// </summary>
+        public static void EBPINPOOLBILLREGISTERTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.9.3.20", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_EBPINPOOLBILLREGISTERTRNRQ, V1_EBPINPOOLBILLREGISTERTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_EBPINPOOLBILLREGISTERTRNRQ
+            {
+                EBPINPOOLBILLREGISTERTRNRQ = new EBPINPOOLBILLREGISTERTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new EBPINPOOLBILLREGISTERTRN_RQBODY
+                    {
+                        BEGINDATE = DateTime.Now.AddYears(-1),
+                        DUEDATE = DateTime.Now.AddDays(-1),
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs.ResponseContent);
+        }
+        /// <summary>
+        /// 3.9.3.21 票据池托收登记簿
+        /// </summary>
+        public static void EBPCOLLECTIONREGISTERTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.9.3.21", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_EBPCOLLECTIONREGISTERTRNRQ, V1_EBPCOLLECTIONREGISTERTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_EBPCOLLECTIONREGISTERTRNRQ
+            {
+                EBPCOLLECTIONREGISTERTRNRQ = new EBPCOLLECTIONREGISTERTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new EBPCOLLECTIONREGISTERTRN_RQBODY
+                    {
+                        BEGINDATE = DateTime.Now.AddYears(-3),
+                        DUEDATE = DateTime.Now.AddYears(-2),
+                        BILLMEDIUM = "1",
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs.ResponseContent);
+        }
+        /// <summary>
+        /// 3.9.3.22 成员单位用信申请
+        /// </summary>
+        public static void EBPMEMBERCREDITTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.9.3.22", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_EBPMEMBERCREDITTRNRQ, V1_EBPMEMBERCREDITTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_EBPMEMBERCREDITTRNRQ
+            {
+                EBPMEMBERCREDITTRNRQ = new EBPMEMBERCREDITTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new EBPMEMBERCREDITTRN_RQBODY
+                    {
+                        GROUPBILLPOOLNO = "JT1100343164",
+                        BIZTYPE = "04",
+                        LIMITTYPE = 1,
+                        APPLYAMT = 1200,
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs.ResponseContent);
+        }
+        /// <summary>
+        /// 3.9.3.23 成员用信审批查询（集团审批查询用）
+        /// </summary>
+        public static void EBPMEMBERCREDITQUERYTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.9.3.23", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_EBPMEMBERCREDITQUERYTRNRQ, V1_EBPMEMBERCREDITQUERYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_EBPMEMBERCREDITQUERYTRNRQ
+            {
+                EBPMEMBERCREDITQUERYTRNRQ = new EBPMEMBERCREDITQUERYTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new EBPMEMBERCREDITQUERYTRN_RQBODY
+                    {
+                        GROUPBILLPOOLNO = "JT1100343164",
+                        BIZTYPE = "04",
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs.ResponseContent);
+        }
+        /// <summary>
+        /// 3.9.3.24 用信处理结果查询
+        /// </summary>
+        public static void EBPCREDITRESULTQUERYTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.9.3.24", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_EBPCREDITRESULTQUERYTRNRQ, V1_EBPCREDITRESULTQUERYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_EBPCREDITRESULTQUERYTRNRQ
+            {
+                EBPCREDITRESULTQUERYTRNRQ = new EBPCREDITRESULTQUERYTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new EBPCREDITRESULTQUERYTRN_RQBODY
+                    {
+                        RELATETRNUID = "20190307104136_3.9.3.25"
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs.ResponseContent);
+        }
+        /// <summary>
+        /// 3.9.3.25 成员单位用信审批
+        /// </summary>
+        public static void EBPMEMBERCREDITAUDITTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.9.3.25", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_EBPMEMBERCREDITAUDITTRNRQ, V1_EBPMEMBERCREDITAUDITTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_EBPMEMBERCREDITAUDITTRNRQ
+            {
+                EBPMEMBERCREDITAUDITTRNRQ = new EBPMEMBERCREDITAUDITTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new EBPMEMBERCREDITAUDITTRN_RQBODY
+                    {
+                        GROUPBILLPOOLNO = "JT1100343164",
+                        MEMBERCID = "1100343164",
+                        MEMBERNAME = "中国民族证券有限责任公司",
+                        BIZTYPE = "04",
+                        APPLYNO = "900079439058",
+                        APPLYDATE = new DateTime(2019, 3, 7),
+                        APPLYAMT = 1200,
+                        AUDITRESULT = 1,
+                        AUDITMSG = "成员单位用信审批AUDITMSG",
                     }
                 }
             };

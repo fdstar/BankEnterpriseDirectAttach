@@ -12,7 +12,7 @@ namespace BEDA.CIB.Contracts.Requests
     /// <summary>
     /// 3.9.3.15电子商业汇票出入池登记簿请求主体
     /// </summary>
-    public class V1_EBPOUTINPOOLREGISTERTRNRQ : IRequest<V1_EBPOUTINPOOLYREGISTERTRNRS>
+    public class V1_EBPOUTINPOOLREGISTERTRNRQ : IRequest<V1_EBPOUTINPOOLREGISTERTRNRS>
     {
         /// <summary>
         /// 3.9.3.15电子商业汇票出入池登记簿请求主体
