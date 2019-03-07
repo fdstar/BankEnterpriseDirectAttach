@@ -216,7 +216,7 @@ namespace BEDA.CIB.Contracts.Requests
         [XmlElement(Order = 0)]
         public int INDX { get; set; }
         /// <summary>
-        /// 合同号，最大20位	必输
+        /// 合同号，最大60位	必输
         /// </summary>
         [XmlElement(Order = 1)]
         public string CONTRACTID { get; set; }

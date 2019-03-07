@@ -53,6 +53,7 @@ namespace BEDA.CIB.Samples
             //VATTRNRQSample();
             //VATSTMTTRNRQSample();
             //VSAINTRSFTRNRQSample();
+            VSACANCELTRNRQSample();
             #endregion
 
             #region 3.7	集团服务
@@ -1250,6 +1251,28 @@ namespace BEDA.CIB.Samples
                         TOSUBACCT = "010004",
                         PURPOSE = "虚拟子账户内部转账",
                         TRNAMT = 3.97m,
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs.ResponseContent);
+        }
+        /// <summary>
+        /// 3.6.8	虚拟子账户删除
+        /// </summary>
+        public static void VSACANCELTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.6.8", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_VSACANCELTRNRQ, V1_VSACANCELTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_VSACANCELTRNRQ
+            {
+                VSACANCELTRNRQ = new VSACANCELTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new VSACANCELTRN_RQBODY
+                    {
+                        MAINACCT = mainAccountId,
+                        SUBACCT = "010003",
                     }
                 }
             };

@@ -52,8 +52,13 @@ namespace BEDA.CIB.Contracts.Requests
         /// <summary>
         /// 查询账户代号，最长32位	必输
         /// </summary>
-        [XmlElement(Order = 10)]
+        [XmlElement(Order = 9)]
         public string ACCTID { get; set; }
+        /// <summary>
+        /// 资金台账户	非必输
+        /// </summary>
+        [XmlElement(Order = 10)]
+        public string STOCKACCT { get; set; }
         /// <summary>
         /// 资金台账密码，最长6位	必输
         /// </summary>

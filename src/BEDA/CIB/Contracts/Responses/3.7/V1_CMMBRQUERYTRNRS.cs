@@ -69,6 +69,8 @@ namespace BEDA.CIB.Contracts.Responses
         /// 5 定时定额管理(双向自动归集) 
         /// 6 多笔归集  
         /// 9 定时限额归集
+        /// 7 定时归集固定金额  
+        /// 8 日终归集日初还原
         /// </summary>
         [XmlElement(Order = 1)]
         public int TYPE { get; set; }
@@ -107,5 +109,15 @@ namespace BEDA.CIB.Contracts.Responses
         /// </summary>
         [XmlElement(Order = 8)]
         public int? PATTERN { get; set; }
+        /// <summary>
+        /// 取整方式：0 不取整；1按万取整；2 按十万取整；3 按百万取整；（TYPE-归集类型为7时必回）
+        /// </summary>
+        [XmlElement(Order = 9)]
+        public int? INTTYPE { get; set; }
+        /// <summary>
+        /// 上限金额
+        /// </summary>
+        [XmlElement(Order = 10)]
+        public decimal? LIMITAMT { get; set; }
     }
 }

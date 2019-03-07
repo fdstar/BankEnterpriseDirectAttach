@@ -49,5 +49,10 @@ namespace BEDA.CIB.Contracts.Requests
         /// </summary>
         [XmlElement(Order = 2)]
         public decimal TRNAMT { get; set; }
+        /// <summary>
+        /// 滚存标志：0-不滚存，1-滚存；不输默认为滚存	非必输
+        /// </summary>
+        [XmlElement(Order = 3)]
+        public string CONTFLAG { get; set; }
     }
 }
