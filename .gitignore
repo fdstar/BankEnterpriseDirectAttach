@@ -1,5 +1,3 @@
-/src/BEDA/obj
-/src/BEDA/bin
+/src/*/obj
+/src/*/bin
 /src/.vs
-/src/BEDA.CIB.Samples/bin
-/src/BEDA.CIB.Samples/obj

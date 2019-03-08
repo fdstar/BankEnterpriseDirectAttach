@@ -5,9 +5,8 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
-
   <ItemGroup>
-    <ProjectReference Include="..\BEDA\BEDA.csproj" />
+    <ProjectReference Include="..\BEDA.CIB\BEDA.CIB.csproj" />
   </ItemGroup>
 
 </Project>

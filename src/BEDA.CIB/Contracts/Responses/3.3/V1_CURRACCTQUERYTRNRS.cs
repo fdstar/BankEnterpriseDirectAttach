@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
@@ -73,10 +74,28 @@ namespace BEDA.CIB.Contracts.Responses
         [XmlElement(Order = 7)]
         public string CURRENCY { get; set; }
         /// <summary>
-        /// 开户日期 yyyy-MM-dd
+        /// 开户日期，yyyy-MM-dd
         /// </summary>
-        [XmlElement(Order = 8)]
-        public string OPENDAT { get; set; }
+        [XmlIgnore]
+        public DateTime OPENDAT { get; set; }
+        /// <summary>
+        /// 开户日期，yyyy-MM-dd ,对应<see cref="OPENDAT"/>
+        /// </summary>
+        [XmlElement("OPENDAT", Order = 8)]
+        public string OPENDATStr
+        {
+            get
+            {
+                return this.OPENDAT.ToString("yyyy-MM-dd");
+            }
+            set
+            {
+                if (DateTime.TryParseExact(value, "yyyy-MM-dd", CultureInfo.CurrentCulture, DateTimeStyles.None, out DateTime tmp))
+                {
+                    this.OPENDAT = tmp;
+                }
+            }
+        }
         /// <summary>
         /// 控制额度，decimal(17,2)，即整数最长15位，小数2位
         /// </summary>

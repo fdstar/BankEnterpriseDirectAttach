@@ -5,14 +5,11 @@
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
     <Version>0.1.0</Version>
     <Authors>DongFang</Authors>
-    <Product>银企直联</Product>
+    <Product>兴业银行银企直联</Product>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="RestSharp" Version="106.6.5" />
-  </ItemGroup>
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
-    <PackageReference Include="System.Text.Encoding.CodePages" Version="4.5.1" />
+    <ProjectReference Include="..\BEDA\BEDA.csproj" />
   </ItemGroup>
 
 </Project>
