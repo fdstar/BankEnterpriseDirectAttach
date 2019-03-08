@@ -32,7 +32,7 @@ namespace BEDA.CIB.Contracts.Requests
     /// <summary>
     /// 3.5.13证券交易类指令查询请求内容
     /// </summary>
-    public class QUERYTRADECOMMANDTRN_RQBODY : PAGED_RQACCT
+    public class QUERYTRADECOMMANDTRN_RQBODY
     {
         /// <summary>
         /// 客户交易流水号	必输

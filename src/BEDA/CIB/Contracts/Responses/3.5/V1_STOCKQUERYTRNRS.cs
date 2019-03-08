@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -94,6 +95,45 @@ namespace BEDA.CIB.Contracts.Responses
         /// 指令处理状态	必回
         /// </summary>
         [XmlElement(Order = 11)]
-        public XFERPRCSTS XFERPRCSTS { get; set; }
+        public STOCKQUERYTRN_XFERPRCSTS XFERPRCSTS { get; set; }
+        /// <summary>
+        /// 3.5.2证券资金清算汇划查询返回的指令处理状态，与其他地方不一样
+        /// </summary>
+        public class STOCKQUERYTRN_XFERPRCSTS
+        {
+            /// <summary>
+            /// 指令状态编码
+            /// </summary>
+            [XmlElement(Order = 0)]
+            public string XFERPRCCODE { get; set; }
+            /// <summary>
+            /// 指令处理时间 yyyy-MM-dd HH:mm:ss格式 如：2014-11-19 15:02:28
+            /// </summary>
+            [XmlIgnore]
+            public DateTime DTXFERPRC { get; set; }
+            /// <summary>
+            /// 服务端日期时间，yyyy-MM-dd HH:mm:ss ,对应<see cref="DTXFERPRC"/>
+            /// </summary>
+            [XmlElement("DTXFERPRC", Order = 1)]
+            public string DTXFERPRCStr
+            {
+                get
+                {
+                    return this.DTXFERPRC.ToString("yyyy-MM-dd HH:mm:ss");
+                }
+                set
+                {
+                    if (DateTime.TryParseExact(value, "yyyy-MM-dd HH:mm:ss", CultureInfo.CurrentCulture, DateTimeStyles.None, out DateTime tmp))
+                    {
+                        this.DTXFERPRC = tmp;
+                    }
+                }
+            }
+            /// <summary>
+            /// 指令处理信息（非必回）
+            /// </summary>
+            [XmlElement(Order = 2)]
+            public string MESSAGE { get; set; }
+        }
     }
 }

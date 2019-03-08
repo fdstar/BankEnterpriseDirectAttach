@@ -33,17 +33,8 @@ namespace BEDA.CIB.Contracts.Responses
     /// 3.5.5第三方存管交易查询响应内容
     /// </summary>
     public class TPTRSFRQUERYTRN_RSBODY
+        : PAGED_RSBODY<TPTRSFRQUERYTRN_CONTENT>
     {
-        /// <summary>
-        /// MORE是否有下一页，Y有，N无
-        /// </summary>
-        [XmlAttribute]
-        public string MORE { get; set; }
-        /// <summary>
-        /// 3.5.5第三方存管交易查询响应集合
-        /// </summary>
-        [XmlElement("CONTENT", Order = 0)]
-        public List<TPTRSFRQUERYTRN_CONTENT> List { get; set; }
     }
     /// <summary>
     /// 3.5.5第三方存管交易查询响应明细

@@ -45,6 +45,22 @@ namespace BEDA.CIB.Samples
             //ASYNBATCHTRSFRTRNRQSample();
             #endregion
 
+            #region 3.5	证券交易
+            //STOCKTRSFRTRNRQSample();
+            //STOCKQUERYTRNRQSample();
+            //TPCONTRTRNRQSample();
+            //TPFUNDEXCHANGETRNRQSample();
+            //TPTRSFRQUERYTRNRQSample();
+            //TPFUNDQUERYTRNRQSample();
+            //BFEEXCHANGETRNRQSample();
+            //QFUNDACCTINFOTRNRQSample();
+            //QBFDETAILTRNRQSample();
+            //CREATEOPTIONSPOTTRNRQSample();
+            //QUERYOPTIONSPOTTRNRQSample();
+            //OPTIONSPOTDETAILTRNRQSample();
+            //QUERYTRADECOMMANDTRNRQSample();
+            #endregion
+
             #region 3.6	虚拟子账户
             //VSASIGNTRNRQSample();
             //VSABATCHOPENTRNRQSample();
@@ -53,7 +69,7 @@ namespace BEDA.CIB.Samples
             //VATTRNRQSample();
             //VATSTMTTRNRQSample();
             //VSAINTRSFTRNRQSample();
-            VSACANCELTRNRQSample();
+            //VSACANCELTRNRQSample();
             #endregion
 
             #region 3.7	集团服务
@@ -1049,6 +1065,323 @@ namespace BEDA.CIB.Samples
             {
                 var rList = rs.SECURITIES_MSGSRSV1.ASYNBATCHTRSFRTRNRS.RSBODY.XFERINFOTEXT.GetList();
             }
+        }
+        #endregion
+
+        #region 3.5	证券交易
+        /// <summary>
+        /// 3.5.1	证券资金清算汇划
+        /// </summary>
+        public static void STOCKTRSFRTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.5.1", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_STOCKTRSFRTRNRQ, V1_STOCKTRSFRTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_STOCKTRSFRTRNRQ
+            {
+                STOCKTRSFRTRNRQ = new STOCKTRSFRTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new STOCKTRSFRTRN_RQBODY
+                    {
+                        ACCTFROM = new ACCT
+                        {
+                            ACCTID = mainAccountId,
+                        },
+                        ACCTTO = new RQACCT
+                        {
+                            ACCTID = "337010100100219872",
+                        },
+                        TRNAMT = 1000,
+                        SUMM = "B001999906WXFXCDABCD",
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs.ResponseContent);
+        }
+        /// <summary>
+        /// 3.5.2	证券资金清算汇划查询
+        /// </summary>
+        public static void STOCKQUERYTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.5.2", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_STOCKQUERYTRNRQ, V1_STOCKQUERYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_STOCKQUERYTRNRQ
+            {
+                STOCKQUERYTRNRQ = new STOCKQUERYTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new STOCKQUERYTRN_RQBODY
+                    {
+                        ACCTID = mainAccountId,
+                        CLIENTREF = "20190307191314_3.5.1",
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs.ResponseContent);
+        }
+        /// <summary>
+        /// 3.5.3	第三方存管签约查询
+        /// </summary>
+        public static void TPCONTRTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.5.3", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_TPCONTRTRNRQ, V1_TPCONTRTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_TPCONTRTRNRQ
+            {
+                TPCONTRTRNRQ = new TPCONTRTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new TPCONTRTRN_RQBODY
+                    {
+                        ACCTID = mainAccountId,
+                        TRUSTEETYPE= "BANK_TRUSTEE",
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs.ResponseContent);
+        }
+        /// <summary>
+        /// 3.5.4	第三方存管银证资金互转
+        /// </summary>
+        public static void TPFUNDEXCHANGETRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.5.4", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_TPFUNDEXCHANGETRNRQ, V1_TPFUNDEXCHANGETRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_TPFUNDEXCHANGETRNRQ
+            {
+                TPFUNDEXCHANGETRNRQ = new TPFUNDEXCHANGETRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new TPFUNDEXCHANGETRN_RQBODY
+                    {
+                        //VERSION = "2.0",
+                        //TRUSTEETYPE = "2",
+                        //STCOKBRANCHCODE = "10050000",
+                        ACCTID = mainAccountId,
+                        PWD = "111111",
+                        TRNTYPE = 0,
+                        TRNAMT = 1300,
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs.ResponseContent);
+        }
+        /// <summary>
+        /// 3.5.5	第三方存管交易查询
+        /// </summary>
+        public static void TPTRSFRQUERYTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.5.5", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_TPTRSFRQUERYTRNRQ, V1_TPTRSFRQUERYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_TPTRSFRQUERYTRNRQ
+            {
+                TPTRSFRQUERYTRNRQ = new TPTRSFRQUERYTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new TPTRSFRQUERYTRN_RQBODY
+                    {
+                        TRUSTEETYPE = "2",
+                        ACCTID = mainAccountId,
+                        OPERTYPE = 1,
+                        DTSTART = DateTime.Now.AddMonths(-6),
+                        DTEND = DateTime.Now.AddMonths(-3),
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs.ResponseContent);
+        }
+        /// <summary>
+        /// 3.5.6	第三方存管资金查询
+        /// </summary>
+        public static void TPFUNDQUERYTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.5.6", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_TPFUNDQUERYTRNRQ, V1_TPFUNDQUERYTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_TPFUNDQUERYTRNRQ
+            {
+                TPFUNDQUERYTRNRQ = new TPFUNDQUERYTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new TPFUNDQUERYTRN_RQBODY
+                    {
+                        //VERSION = "2.0",
+                        //TRUSTEETYPE = "2",
+                        //STCOKBRANCHCODE = "10050000",
+                        ACCTID = mainAccountId,
+                        PWD = "111111",
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs.ResponseContent);
+        }
+        /// <summary>
+        /// 3.5.7	银期互转
+        /// </summary>
+        public static void BFEEXCHANGETRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.5.7", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_BFEEXCHANGETRNRQ, V1_BFEEXCHANGETRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_BFEEXCHANGETRNRQ
+            {
+                BFEEXCHANGETRNRQ = new BFEEXCHANGETRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new BFEEXCHANGETRN_RQBODY
+                    {
+                        ACCTNO = mainAccountId,
+                        ACCTPWD = "111111",
+                        TRANSFERTYPE = 1,
+                        FUNDACCTNO = "2016011902",
+                        TRANSFERAMT = 110.5m,
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs.ResponseContent);
+        }
+        /// <summary>
+        /// 3.5.8	银期资金查询
+        /// </summary>
+        public static void QFUNDACCTINFOTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.5.8", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_QFUNDACCTINFOTRNRQ, V1_QFUNDACCTINFOTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_QFUNDACCTINFOTRNRQ
+            {
+                QFUNDACCTINFOTRNRQ = new QFUNDACCTINFOTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new QFUNDACCTINFOTRN_RQBODY
+                    {
+                        ACCTNO = mainAccountId,
+                        FUNDACCTNO = "2016011902",
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs.ResponseContent);
+        }
+        /// <summary>
+        /// 3.5.9	银期交易明细查询
+        /// </summary>
+        public static void QBFDETAILTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.5.9", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_QBFDETAILTRNRQ, V1_QBFDETAILTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_QBFDETAILTRNRQ
+            {
+                QBFDETAILTRNRQ = new QBFDETAILTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new QBFDETAILTRN_RQBODY
+                    {
+                        ACCTNO = mainAccountId,
+                        FUNDACCTNO = "2016011902",
+                        STARTDATE = DateTime.Now.AddDays(-360),
+                        ENDDATE = DateTime.Now.AddDays(-3),
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs.ResponseContent);
+        }
+        /// <summary>
+        /// 3.5.10	期权现货互转
+        /// </summary>
+        public static void CREATEOPTIONSPOTTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.5.10", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_CREATEOPTIONSPOTTRNRQ, V1_CREATEOPTIONSPOTTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_CREATEOPTIONSPOTTRNRQ
+            {
+                CREATEOPTIONSPOTTRNRQ = new CREATEOPTIONSPOTTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new CREATEOPTIONSPOTTRN_RQBODY
+                    {
+                        ACCTNO = mainAccountId,
+                        TRANSFERTYPE = 0,
+                        FUNDACCTNO = "2016011902",
+                        TRANSFERAMT = 100,
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs.ResponseContent);
+        }
+        /// <summary>
+        /// 3.5.11	期权现货资金查询
+        /// </summary>
+        public static void QUERYOPTIONSPOTTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.5.11", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_QUERYOPTIONSPOTTRNRQ, V1_QUERYOPTIONSPOTTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_QUERYOPTIONSPOTTRNRQ
+            {
+                QUERYOPTIONSPOTTRNRQ = new QUERYOPTIONSPOTTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new QUERYOPTIONSPOTTRN_RQBODY
+                    {
+                        ACCTNO = mainAccountId,
+                        FUNDACCTNO = "2016011902",
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs.ResponseContent);
+        }
+        /// <summary>
+        /// 3.5.12	期权现货交易明细查询
+        /// </summary>
+        public static void OPTIONSPOTDETAILTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.5.12", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_OPTIONSPOTDETAILTRNRQ, V1_OPTIONSPOTDETAILTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_OPTIONSPOTDETAILTRNRQ
+            {
+                OPTIONSPOTDETAILTRNRQ = new OPTIONSPOTDETAILTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new OPTIONSPOTDETAILTRN_RQBODY
+                    {
+                        ACCTNO = mainAccountId,
+                        FUNDACCTNO = "2016011902",
+                        STARTDATE = DateTime.Now.AddDays(-360),
+                        ENDDATE = DateTime.Now.AddDays(-3),
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs.ResponseContent);
+        }
+        /// <summary>
+        /// 3.5.13	证券交易类指令查询
+        /// </summary>
+        public static void QUERYTRADECOMMANDTRNRQSample()
+        {
+            string tid = string.Format("{0:yyyyMMddHHmmss}_3.5.13", DateTime.Now);
+            var rq = GetRequest<FOXRQ<V1_QUERYTRADECOMMANDTRNRQ, V1_QUERYTRADECOMMANDTRNRS>>();
+            rq.SECURITIES_MSGSRQV1 = new V1_QUERYTRADECOMMANDTRNRQ
+            {
+                QUERYTRADECOMMANDTRNRQ = new QUERYTRADECOMMANDTRNRQ
+                {
+                    TRNUID = tid,
+                    RQBODY = new QUERYTRADECOMMANDTRN_RQBODY
+                    {
+                        CLIENTREF = "20190307193528_3.5.4",
+                        BUSINESSTYPE = 0
+                    }
+                }
+            };
+            var rs = client.Execute(rq);
+            Console.WriteLine(rs.ResponseContent);
         }
         #endregion
 

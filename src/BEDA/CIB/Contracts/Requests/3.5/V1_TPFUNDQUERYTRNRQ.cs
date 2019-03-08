@@ -40,15 +40,15 @@ namespace BEDA.CIB.Contracts.Requests
         [XmlElement(Order = 0)]
         public string VERSION { get; set; }
         /// <summary>
-        /// 券商编号 	非必输，2.0版本时必输，或是进行融资融券、银衍互转是必输
-        /// </summary>
-        [XmlElement(Order = 1)]
-        public string STCOKBRANCHCODE { get; set; }
-        /// <summary>
         /// 非必输，默认普通存管 0-普通存管，1-融资融券 （不管版本号是否输入版本号，默认2.0）， 2-银衍互转 （不管版本号是否输入版本号，默认2.0） 	非必输，（当做融资融券、银衍互转是必输）
         /// </summary>
-        [XmlElement(Order = 2)]
+        [XmlElement(Order = 1)]
         public string TRUSTEETYPE { get; set; }
+        /// <summary>
+        /// 券商编号 	非必输，2.0版本时必输，或是进行融资融券、银衍互转是必输
+        /// </summary>
+        [XmlElement(Order = 2)]
+        public string STCOKBRANCHCODE { get; set; }
         /// <summary>
         /// 查询账户代号，最长32位	必输
         /// </summary>
