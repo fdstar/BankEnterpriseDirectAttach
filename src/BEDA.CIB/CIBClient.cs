@@ -16,7 +16,7 @@ namespace BEDA.CIB
     public class CIBClient : Client, ICIBClient
     {
         /// <summary>
-        /// 兴业银行调用构造
+        /// 兴业银行调用构造,默认调用127.0.0.1:8007
         /// </summary>
         public CIBClient()
             : this("127.0.0.1", 8007)
