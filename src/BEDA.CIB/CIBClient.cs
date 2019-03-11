@@ -13,14 +13,8 @@ namespace BEDA.CIB
     /// <summary>
     /// 兴业银行客户端
     /// </summary>
-    public class CIBClient : ICIBClient
+    public class CIBClient : Client, ICIBClient
     {
-#if NETSTANDARD2_0
-        static CIBClient()
-        {
-            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-        }
-#endif
         /// <summary>
         /// 兴业银行调用构造
         /// </summary>
@@ -36,17 +30,9 @@ namespace BEDA.CIB
         /// <param name="scheme">请求协议，默认http</param>
         /// <param name="encoding">数据编码方式，默认gb2312</param>
         public CIBClient(string host, int port, string scheme = "http", string encoding = "gb2312")
+            : base(host, port, scheme, encoding)
         {
-            var url = string.Format("{0}://{1}:{2}", scheme, host, port);
-            this.RestClient = new RestClient(url)
-            {
-                Encoding = Encoding.GetEncoding(encoding)
-            };
         }
-        /// <summary>
-        /// <see cref="RestSharp.RestClient"/>
-        /// </summary>
-        public IRestClient RestClient { get; private set; }
         /// <summary>
         /// 发起业务请求 注意必定返回响应内容
         /// </summary>

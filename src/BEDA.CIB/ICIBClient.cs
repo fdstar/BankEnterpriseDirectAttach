@@ -11,8 +11,20 @@ namespace BEDA.CIB
     /// <summary>
     /// 兴业银行客户端接口约定
     /// </summary>
-    public interface ICIBClient : IClient<FOXRQ, FOXRS>
+    public interface ICIBClient : IClient
     {
+        /// <summary>
+        /// 发起业务请求
+        /// </summary>
+        /// <param name="request">请求实体</param>
+        /// <returns>响应实体</returns>
+        FOXRS Execute(FOXRQ request);
+        /// <summary>
+        /// 发起业务请求
+        /// </summary>
+        /// <param name="request">请求实体</param>
+        /// <returns>响应实体</returns>
+        Task<FOXRS> ExecuteAsync(FOXRQ request);
         /// <summary>
         /// 发起业务请求 注意必定返回响应内容
         /// </summary>
