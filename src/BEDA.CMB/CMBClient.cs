@@ -12,7 +12,7 @@ using RestSharp;
 namespace BEDA.CMB
 {
     /// <summary>
-    /// 招商银行客户端
+    /// 招商银行客户端 具体接口说明见 https://u.ebank.cmbchina.com/CmbBank_GenShell/UI/Help/DCBank2/Main.aspx
     /// </summary>
     public class CMBClient : Client, ICMBClient
     {

@@ -11,7 +11,10 @@ namespace BEDA.CMB.Samples
         {
             #region 1.系统管理
             //RQ1_4Sample();
-            RQ1_5Sample();
+            //RQ1_5Sample();
+            //RQ1_6Sample();
+            //RQ1_8Sample();
+            //RQ1_9Sample();
             #endregion
 
             Console.ReadLine();
@@ -44,6 +47,63 @@ namespace BEDA.CMB.Samples
                 SDKSYINFX = new SDKSYINFX()
             };
             var rs = client.Execute<RQ1_5, RS1_5>(rq, loginName);
+            Console.WriteLine(rs.INFO.ResponseContent);
+        }
+        /// <summary>
+        /// 1.6.查询可经办业务模式
+        /// </summary>
+        public static void RQ1_6Sample()
+        {
+            var rq = new RQ1_6()
+            {
+                SDKMDLSTX = new SDKMDLSTX
+                {
+                     BUSCOD= "N03010"
+                }
+            };
+            var rs = client.Execute<RQ1_6, RS1_6>(rq, loginName);
+            Console.WriteLine(rs.INFO.ResponseContent);
+        }
+        /// <summary>
+        /// 1.8.查询历史通知
+        /// </summary>
+        public static void RQ1_8Sample()
+        {
+            var rq = new RQ1_8()
+            {
+                FBDLRHMGX = new FBDLRHMGX
+                {
+                    BGNDAT = DateTime.Now.AddDays(-7),
+                    ENDDAT = DateTime.Now,
+                    //MSGTYP = "NCBUSFIN"
+                    //NCBCHOPR 
+                    //NCDRTPAY  
+                    //NCCRTTRS
+                    //NCDBTTRS
+                    //NCBUSFIN
+                }
+            };
+            var rs = client.Execute<RQ1_8, RS1_8>(rq, loginName);
+            Console.WriteLine(rs.INFO.ResponseContent);
+        }
+        public static void RQ1_9Sample()
+        {
+            var rq = new RQ1_9()
+            {
+                DCHISMSGX = new DCHISMSGX
+                {
+                    BGNDAT = DateTime.Now.AddDays(-7),
+                    ENDDAT = DateTime.Now,
+                    RECNUM = "100"
+                    //MSGTYP = "NCBUSFIN"
+                    //NCBCHOPR 
+                    //NCDRTPAY  
+                    //NCCRTTRS
+                    //NCDBTTRS
+                    //NCBUSFIN
+                }
+            };
+            var rs = client.Execute<RQ1_9, RS1_9>(rq, loginName);
             Console.WriteLine(rs.INFO.ResponseContent);
         }
         #endregion
