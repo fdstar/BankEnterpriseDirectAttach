@@ -10,45 +10,41 @@ using System.Xml.Serialization;
 namespace BEDA.CMB.Contracts.Requests
 {
     /// <summary>
-    /// 2.3.查询账户交易信息请求主体
+    /// 2.5.查询账户历史余额请求主体
     /// </summary>
     [XmlRoot("CMBSDKPGK")]
-    public class RQ2_3 : CMBBase<RQINFO>, IRequest<RS2_3>
+    public class RQ2_5 : CMBBase<RQINFO>, IRequest<RS2_5>
     {
         /// <summary>
-        /// GetTransInfo
+        /// SDKNTQABINF
         /// </summary>
         /// <returns></returns>
-        public override string GetFUNNAM() => "GetTransInfo";
+        public override string GetFUNNAM() => "SDKNTQABINF";
         /// <summary>
-        /// 2.3.查询账户交易信息请求内容
+        /// 2.5.查询账户历史余额请求内容
         /// </summary>
-        public SDKTSINFX SDKTSINFX { get; set; }
+        public NTQABINFY NTQABINFY { get; set; }
     }
     /// <summary>
-    /// 2.3.查询账户交易信息请求内容
+    /// 2.5.查询账户历史余额请求内容
     /// </summary>
-    public class SDKTSINFX
+    public class NTQABINFY
     {
         /// <summary>
-        /// 分行号	N(2)	附录A.1   分行号和分行名称不能同时为空
+        /// 分行号	N(2)	附录A.1 
         /// </summary>
         public string BBKNBR { get; set; }
-        /// <summary>
-        /// 分行名称	Z(1,62)	附录A.1
-        /// </summary>
-        public string C_BBKNBR { get; set; }
         /// <summary>
         /// 账号	C(1,35)
         /// </summary>
         public string ACCNBR { get; set; }
         /// <summary>
-        /// 开始日期	D  开始日期和结束日期的间隔不能超过100天
+        /// 起始日期	D   开始日期与结束日期的间隔不能超过31天
         /// </summary>
         [XmlIgnore]
         public DateTime BGNDAT { get; set; }
         /// <summary>
-        /// 开始日期	D, 对应<see cref="BGNDAT"/>
+        /// 起始日期	D, 对应<see cref="BGNDAT"/>
         /// </summary>
         [XmlElement("BGNDAT")]
         public string BGNDATStr
@@ -66,7 +62,7 @@ namespace BEDA.CMB.Contracts.Requests
             }
         }
         /// <summary>
-        /// 结束日期	D  开始日期和结束日期的间隔不能超过100天
+        /// 结束日期	D   开始日期和结束日期必须早于当日
         /// </summary>
         [XmlIgnore]
         public DateTime ENDDAT { get; set; }
@@ -88,17 +84,5 @@ namespace BEDA.CMB.Contracts.Requests
                 }
             }
         }
-        /// <summary>
-        /// 最小金额	M   默认0.00
-        /// </summary>
-        public decimal? LOWAMT { get; set; }
-        /// <summary>
-        /// 最大金额	M   默认9999999999999.99
-        /// </summary>
-        public decimal? HGHAMT { get; set; }
-        /// <summary>
-        /// 借贷码	C(1)	C：收入 D：支出
-        /// </summary>
-        public string AMTCDR { get; set; }
     }
 }

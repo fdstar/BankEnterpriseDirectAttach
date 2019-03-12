@@ -24,6 +24,9 @@ namespace BEDA.CMB.Samples
             //RQ2_1Sample();
             //RQ2_2Sample();
             //RQ2_3Sample();
+            //RQ2_4Sample();
+            //RQ2_5Sample();
+            RQ2_6Sample();
             #endregion
 
             Console.ReadLine();
@@ -175,11 +178,61 @@ namespace BEDA.CMB.Samples
                 {
                     BBKNBR = "59",
                     ACCNBR = "591902896710201",
-                    BGNDAT = DateTime.Now.AddDays(-100),
-                    ENDDAT = DateTime.Now.AddDays(-1),
+                    BGNDAT = DateTime.Now.AddYears(-1).AddDays(-10),
+                    ENDDAT = DateTime.Now.AddYears(-1).AddDays(-1),
                 }
             };
             var rs = client.Execute<RQ2_3, RS2_3>(rq, loginName);
+            Console.WriteLine(rs.INFO.ResponseContent);
+        }
+        /// <summary>
+        /// 2.4.账户交易信息断点查询
+        /// </summary>
+        public static void RQ2_4Sample()
+        {
+            var rq = new RQ2_4()
+            {
+                SDKRBPTRSX = new SDKRBPTRSX
+                {
+                    BBKNBR = "59",
+                    ACCNBR = "591902896710201",
+                    TRSDAT = DateTime.Now.AddDays(-370),
+                }
+            };
+            var rs = client.Execute<RQ2_4, RS2_4>(rq, loginName);
+            Console.WriteLine(rs.INFO.ResponseContent);
+        }
+        /// <summary>
+        /// 2.5.查询账户历史余额
+        /// </summary>
+        public static void RQ2_5Sample()
+        {
+            var rq = new RQ2_5()
+            {
+                NTQABINFY = new NTQABINFY
+                {
+                    BBKNBR = "59",
+                    ACCNBR = "591902896710201",
+                    BGNDAT = DateTime.Now.AddYears(-1).AddDays(-30),
+                    ENDDAT = DateTime.Now.AddYears(-1).AddDays(-5)  
+                }
+            };
+            var rs = client.Execute<RQ2_5, RS2_5>(rq, loginName);
+            Console.WriteLine(rs.INFO.ResponseContent);
+        }
+        /// <summary>
+        /// 2.6.查询分行号信息
+        /// </summary>
+        public static void RQ2_6Sample()
+        {
+            var rq = new RQ2_6()
+            {
+                NTACCBBKY = new NTACCBBKY
+                {
+                    ACCNBR = ""
+                }
+            };
+            var rs = client.Execute<RQ2_6, RS2_6>(rq, loginName);
             Console.WriteLine(rs.INFO.ResponseContent);
         }
         #endregion
