@@ -28,6 +28,8 @@ namespace BEDA.CMB.Samples
             //RQ2_5Sample();
             //RQ2_6Sample();
             //RQ2_7Sample();
+            //RQ2_8Sample();
+            RQ2_9Sample();
             #endregion
 
             Console.ReadLine();
@@ -246,12 +248,52 @@ namespace BEDA.CMB.Samples
                 CSRRCFDFY0 = new CSRRCFDFY0
                 {
                     EACNBR = "591902896710201",
-                    BEGDAT = DateTime.Now.AddMonths(-14),
-                    ENDDAT = DateTime.Now.AddMonths(-13),
+                    BEGDAT = DateTime.Now.AddDays(-370),
+                    ENDDAT = DateTime.Now.AddDays(-369),
                     RRCFLG = 1,
                 }
             };
             var rs = client.Execute<RQ2_7, RS2_7>(rq, loginName);
+            Console.WriteLine(rs.INFO.ResponseContent);
+        }
+        /// <summary>
+        /// 2.8.查询电子回单信息（保存图片）
+        /// </summary>
+        public static void RQ2_8Sample()
+        {
+            var rq = new RQ2_8()
+            {
+                CSRRCFDFY0 = new CSRRCFDFY0
+                {
+                    EACNBR = "591902896710201",
+                    BEGDAT = DateTime.Now.AddDays(-370),
+                    ENDDAT = DateTime.Now.AddDays(-369),
+                    RRCFLG = 1,
+                }
+            };
+            var rs = client.Execute<RQ2_8, RS2_8>(rq, loginName);
+            Console.WriteLine(rs.INFO.ResponseContent);
+        }
+        /// <summary>
+        /// 2.9.批量查询余额
+        /// </summary>
+        public static void RQ2_9Sample()
+        {
+            var rq = new RQ2_9()
+            {
+                List = new List<NTQADINFX>
+                {
+                   new NTQADINFX{
+                        BBKNBR="59",
+                        ACCNBR="591902896732601",
+                   },
+                   new NTQADINFX{
+                       BBKNBR="59",
+                       ACCNBR ="591902896810104"
+                   }
+                }
+            };
+            var rs = client.Execute<RQ2_9, RS2_9>(rq, loginName);
             Console.WriteLine(rs.INFO.ResponseContent);
         }
         #endregion
