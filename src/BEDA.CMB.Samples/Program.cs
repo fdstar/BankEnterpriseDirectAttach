@@ -29,7 +29,12 @@ namespace BEDA.CMB.Samples
             //RQ2_6Sample();
             //RQ2_7Sample();
             //RQ2_8Sample();
-            RQ2_9Sample();
+            //RQ2_9Sample();
+            #endregion
+
+            #region 3.支付结算
+            //RQ3_3Sample();
+            //RQ3_4Sample();
             #endregion
 
             Console.ReadLine();
@@ -294,6 +299,35 @@ namespace BEDA.CMB.Samples
                 }
             };
             var rs = client.Execute<RQ2_9, RS2_9>(rq, loginName);
+            Console.WriteLine(rs.INFO.ResponseContent);
+        }
+        #endregion
+
+        #region 3.支付结算
+        /// <summary>
+        /// 3.3.支付结果列表查询
+        /// </summary>
+        public static void RQ3_3Sample()
+        {
+            var rq = new RQ3_3()
+            {
+                NTQRYSTNY1 = new NTQRYSTNY1
+                {
+                    BUSCOD = "N02030",
+                    BUSMOD = "00001",
+                    BGNDAT = DateTime.Now.AddDays(-380),
+                    ENDDAT = DateTime.Now.AddDays(-374)
+                }
+            };
+            var rs = client.Execute<RQ3_3, RS3_3>(rq, loginName);
+            Console.WriteLine(rs.INFO.ResponseContent);
+        }
+        public static void RQ3_4Sample()
+        {
+            var rq = new RQ3_4()
+            {
+            };
+            var rs = client.Execute<RQ3_4, RS3_4>(rq, loginName);
             Console.WriteLine(rs.INFO.ResponseContent);
         }
         #endregion
