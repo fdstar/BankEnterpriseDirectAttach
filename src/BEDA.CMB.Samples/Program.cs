@@ -35,6 +35,9 @@ namespace BEDA.CMB.Samples
             #region 3.支付结算
             //RQ3_3Sample();
             //RQ3_4Sample();
+            //RQ3_5Sample();
+            //RQ3_6Sample();
+            //RQ3_7Sample();
             #endregion
 
             Console.ReadLine();
@@ -45,6 +48,11 @@ namespace BEDA.CMB.Samples
         const string ip = "127.0.0.1";
         const int port = 8082;
         static ICMBClient client = new CMBClient(ip, port);
+        static string GetYURREF(string no)
+        {
+            var tmp = string.Format("{0:yyyyMMddHHmmss}_{1}", DateTime.Now, no);
+            return tmp;
+        }
         #endregion
 
         #region 1.系统管理
@@ -119,10 +127,10 @@ namespace BEDA.CMB.Samples
             {
                 DCHISMSGX = new DCHISMSGX
                 {
-                    BGNDAT = DateTime.Now.AddDays(-7),
+                    BGNDAT = DateTime.Now.AddDays(-100),
                     ENDDAT = DateTime.Now,
-                    RECNUM = "100"
-                    //MSGTYP = "NCBUSFIN"
+                    RECNUM = "100",
+                    MSGTYP = "NCBCHOPR"
                     //NCBCHOPR 
                     //NCDRTPAY  
                     //NCCRTTRS
@@ -322,12 +330,91 @@ namespace BEDA.CMB.Samples
             var rs = client.Execute<RQ3_3, RS3_3>(rq, loginName);
             Console.WriteLine(rs.INFO.ResponseContent);
         }
+        /// <summary>
+        /// 3.4.查询收方限制列表
+        /// </summary>
         public static void RQ3_4Sample()
         {
             var rq = new RQ3_4()
             {
             };
             var rs = client.Execute<RQ3_4, RS3_4>(rq, loginName);
+            Console.WriteLine(rs.INFO.ResponseContent);
+        }
+        /// <summary>
+        /// 3.5.查询批量支付经办结果
+        /// </summary>
+        public static void RQ3_5Sample()
+        {
+            var rq = new RQ3_5()
+            {
+                SDQPYRSTX = new SDQPYRSTX
+                {
+                    RSTSET= "Z1KJ37I3J4"
+                }
+            };
+            var rs = client.Execute<RQ3_5, RS3_5>(rq, loginName);
+            Console.WriteLine(rs.INFO.ResponseContent);
+        }
+        /// <summary>
+        /// 3.6.直接支付
+        /// </summary>
+        public static void RQ3_6Sample()
+        {
+            var rq = new RQ3_6()
+            {
+                SDKPAYRQX = new SDKPAYRQX
+                {
+                    BUSCOD = "N02031",
+                },
+                List = new List<DCOPDPAYX>
+                {
+                    new DCOPDPAYX
+                    {
+                        YURREF= GetYURREF("3.6"),
+                        DBTACC="591902896710201",
+                        DBTBBK="59",
+                        TRSAMT=101.5m,
+                        CCYNBR="10",
+                        STLCHN="N",
+                        NUSAGE="直接支付用途NUSAGE",
+                        BUSNAR="业务摘要BUSNAR",
+                        CRTACC="6225880230001175",
+                        CRTNAM="刘五",
+                        BNKFLG="Y",
+                    }
+                }
+            };
+            var rs = client.Execute<RQ3_6, RS3_6>(rq, loginName);//20190313194710_3.6
+            Console.WriteLine(rs.INFO.ResponseContent);
+        }
+        /// <summary>
+        /// 3.7.直接内转
+        /// </summary>
+        public static void RQ3_7Sample()
+        {
+            var rq = new RQ3_7()
+            {
+                SDKPAYRQX = new SDKPAYRQX
+                {
+                    BUSMOD= "00001"
+                },
+                List = new List<DCOPRTRFX>
+                {
+                    new DCOPRTRFX
+                    {
+                        YURREF= GetYURREF("3.7"),
+                        DBTACC="591902896710201",
+                        DBTBBK="59",
+                        TRSAMT=103.5m,
+                        CCYNBR="10",
+                        NUSAGE="直接内转用途NUSAGE",
+                        BUSNAR="直接内转业务摘要BUSNAR",
+                        CRTACC="591902896810104",
+                    }
+                }
+            };
+            var rs = client.Execute<RQ3_7, RS3_7>(rq, loginName);//20190313200139_3.7
             Console.WriteLine(rs.INFO.ResponseContent);
         }
         #endregion
