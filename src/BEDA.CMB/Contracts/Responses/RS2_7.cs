@@ -159,6 +159,51 @@ namespace BEDA.CMB.Contracts.Responses
         /// </summary>
         [XmlElement("SAINTLSBZ")]
         public List<SAINTLSBZ> SAINTLSBZList { get; set; }
+        /// <summary>
+        /// 2.7.查询电子回单信息响应集合    利息单明细打印输出接口
+        /// </summary>
+        [XmlElement("SAINTLSBZ0")]
+        public List<SAINTLSBZ0> SAINTLSBZ0List { get; set; }
+        /// <summary>
+        /// 2.7.查询电子回单信息响应集合    对公转账回单户名附加接口
+        /// </summary>
+        [XmlElement("CPRRCEANX1")]
+        public List<CPRRCEANX1> CPRRCEANX1List { get; set; }
+        /// <summary>
+        /// 2.7.查询电子回单信息响应集合    对公转账回单户名扩展接口
+        /// </summary>
+        [XmlElement("CPRRCEXTX1")]
+        public List<CPRRCEXTX1> CPRRCEXTX1List { get; set; }
+        /// <summary>
+        /// 2.7.查询电子回单信息响应集合    中间业务平台公司回单输出接口
+        /// </summary>
+        [XmlElement("MCMIDRRCZ")]
+        public List<MCMIDRRCZ> MCMIDRRCZList { get; set; }
+        /// <summary>
+        /// 2.7.查询电子回单信息响应集合    收款回单（网银互联）   付款回单（网银互联） 
+        /// </summary>
+        [XmlElement("NPTRFRCTX1")]
+        public List<NPTRFRCTX1> NPTRFRCTX1List { get; set; }
+        /// <summary>
+        /// 2.7.查询电子回单信息响应集合    企业银行通知转活期付款回单 
+        /// </summary>
+        [XmlElement("TDDRWVHCZ")]
+        public List<TDDRWVHCZ> TDDRWVHCZList { get; set; }
+        /// <summary>
+        /// 2.7.查询电子回单信息响应集合    企业银行通知转活期付款回单 
+        /// </summary>
+        [XmlElement("TDDRWVHCZ0")]
+        public List<TDDRWVHCZ0> TDDRWVHCZ0List { get; set; }
+        /// <summary>
+        /// 2.7.查询电子回单信息响应集合    企业银行定期转活期计息清单 
+        /// </summary>
+        [XmlElement("TDINTLSBZ")]
+        public List<TDINTLSBZ> TDINTLSBZList { get; set; }
+        /// <summary>
+        /// 2.7.查询电子回单信息响应集合    企业银行定期转活期计息清单 
+        /// </summary>
+        [XmlElement("TDINTLSBZ0")]
+        public List<TDINTLSBZ0> TDINTLSBZ0List { get; set; }
     }
     #region
     /// <summary>
@@ -3230,7 +3275,6 @@ namespace BEDA.CMB.Contracts.Responses
     public class SADRWVHBZ0 : SADPSVHBZ0
     {
     }
-    #endregion
     /// <summary>
     /// 2.7.查询电子回单信息响应内容    打印活期收款回单输出接口
     /// </summary>
@@ -3511,5 +3555,1447 @@ namespace BEDA.CMB.Contracts.Responses
     /// </summary>
     public class SAINTLSBZ
     {
+        /// <summary>
+        /// 打印实例号	C(13)
+        /// </summary>
+        public string ISTNBR { get; set; }
+        /// <summary>
+        /// 打印日期	D
+        /// </summary>
+        public string PRTDAT { get; set; }
+        /// <summary>
+        /// 打印时间	T
+        /// </summary>
+        public string PRTTIM { get; set; }
+        /// <summary>
+        /// 打印时间 由<see cref="PRTDAT"/>和<see cref="PRTTIM"/>组成
+        /// </summary>
+        [XmlIgnore]
+        public DateTime PrintTime
+        {
+            get
+            {
+                if (DateTime.TryParseExact(string.Format("{0}{1}", this.PRTDAT, this.PRTTIM),
+                   new string[] { "yyyyMMdd", "yyyyMMddHHmmss" }, CultureInfo.CurrentCulture, DateTimeStyles.None, out DateTime tmp))
+                {
+                    return tmp;
+                }
+                return DateTime.MinValue;
+            }
+        }
+        /// <summary>
+        /// 任务实例号	C(13)
+        /// </summary>
+        public string TSKNBR { get; set; }
+        /// <summary>
+        /// 任务编码	C(8)
+        /// </summary>
+        public string TSKCOD { get; set; }
+        /// <summary>
+        /// 开户机构	C(6)
+        /// </summary>
+        public string EACBRN { get; set; }
+        /// <summary>
+        /// 户口号	C(35)
+        /// </summary>
+        public string EACNBR { get; set; }
+        /// <summary>
+        /// 户口名称	Z(200)
+        /// </summary>
+        public string EACNAM { get; set; }
+        /// <summary>
+        /// 产品代码	C(8)
+        /// </summary>
+        public string PRDCOD { get; set; }
+        /// <summary>
+        /// 货币	C(2)
+        /// </summary>
+        public string CCYNBR { get; set; }
+        /// <summary>
+        /// 存期	C(6)
+        /// </summary>
+        public string TERDUR { get; set; }
+        /// <summary>
+        /// 历次扣税	M
+        /// </summary>
+        public decimal HISTAX { get; set; }
+        /// <summary>
+        /// 本次扣税	M
+        /// </summary>
+        public decimal CURTAX { get; set; }
+        /// <summary>
+        /// 总计税金	M
+        /// </summary>
+        public decimal ALLTAX { get; set; }
+        /// <summary>
+        /// 本金	M
+        /// </summary>
+        public decimal DRWAMT { get; set; }
+        /// <summary>
+        /// 税后利息	M
+        /// </summary>
+        public decimal TXDINT { get; set; }
+        /// <summary>
+        /// 税后本息合计	M
+        /// </summary>
+        public decimal TXDBAL { get; set; }
+        /// <summary>
+        /// 支取标志	C(1)
+        /// </summary>
+        public string WDPFLG { get; set; }
+        /// <summary>
+        /// 摘要	C(80)
+        /// </summary>
+        public string RMKLIN { get; set; }
+        /// <summary>
+        /// 交易机构	C(6)
+        /// </summary>
+        public string TRXBRN { get; set; }
+        /// <summary>
+        /// 交易日期	D
+        /// </summary>
+        public string TRXDAT { get; set; }
+        /// <summary>
+        /// 交易时间	T
+        /// </summary>
+        public string TRXTIM { get; set; }
+        /// <summary>
+        /// 交易时间 由<see cref="TRXDAT"/>和<see cref="TRXTIM"/>组成
+        /// </summary>
+        [XmlIgnore]
+        public DateTime TransactionTime
+        {
+            get
+            {
+                if (DateTime.TryParseExact(string.Format("{0}{1}", this.TRXDAT, this.TRXTIM),
+                   new string[] { "yyyyMMdd", "yyyyMMddHHmmss" }, CultureInfo.CurrentCulture, DateTimeStyles.None, out DateTime tmp))
+                {
+                    return tmp;
+                }
+                return DateTime.MinValue;
+            }
+        }
+        /// <summary>
+        /// 经办	C(6)
+        /// </summary>
+        public string OPRUSR { get; set; }
+        /// <summary>
+        /// 复核	C(6)
+        /// </summary>
+        public string CHKUSR { get; set; }
+        /// <summary>
+        /// 授权	C(6)
+        /// </summary>
+        public string AUTUSR { get; set; }
+        /// <summary>
+        /// 金额１	M
+        /// </summary>
+        public decimal EXTAM1 { get; set; }
+        /// <summary>
+        /// 金额２	M
+        /// </summary>
+        public decimal EXTAM2 { get; set; }
+        /// <summary>
+        /// 金额３	M
+        /// </summary>
+        public decimal EXTAM3 { get; set; }
+        /// <summary>
+        /// 描述１	C(20)
+        /// </summary>
+        public string EXTTX1 { get; set; }
+        /// <summary>
+        /// 描述２	C(20)
+        /// </summary>
+        public string EXTTX2 { get; set; }
+        /// <summary>
+        /// 描述３	C(20)
+        /// </summary>
+        public string EXTTX3 { get; set; }
+        /// <summary>
+        /// 摘要１	C(40)
+        /// </summary>
+        public string RMKLN1 { get; set; }
+        /// <summary>
+        /// 摘要２	C(40)
+        /// </summary>
+        public string RMKLN2 { get; set; }
+        /// <summary>
+        /// 摘要３	C(80)
+        /// </summary>
+        public string RMKLN3 { get; set; }
+        /// <summary>
+        /// 特殊码	C(80)
+        /// </summary>
+        public string SPLC80 { get; set; }
+    }
+    /// <summary>
+    /// 2.7.查询电子回单信息响应内容    利息单明细打印输出接口
+    /// </summary>
+    public class SAINTLSBZ0
+    {
+        /// <summary>
+        /// 打印实例号	C(13)
+        /// </summary>
+        public string ISTNBR { get; set; }
+        /// <summary>
+        /// 货币号	C(2)
+        /// </summary>
+        public string CCYNBR { get; set; }
+        /// <summary>
+        /// 钞汇户	C(1)
+        /// </summary>
+        public string CCYTYP { get; set; }
+        /// <summary>
+        /// 起息日	D
+        /// </summary>
+        [XmlIgnore]
+        public DateTime INTDAT { get; set; }
+        /// <summary>
+        /// 起息日	D, 对应<see cref="INTDAT"/>
+        /// </summary>
+        [XmlElement("INTDAT")]
+        public string INTDATStr
+        {
+            get
+            {
+                return this.INTDAT.ToString("yyyyMMdd");
+            }
+            set
+            {
+                if (DateTime.TryParseExact(value, "yyyyMMdd", CultureInfo.CurrentCulture, DateTimeStyles.None, out DateTime tmp))
+                {
+                    this.INTDAT = tmp;
+                }
+            }
+        }
+        /// <summary>
+        /// 止息日	D
+        /// </summary>
+        [XmlIgnore]
+        public DateTime EINDAT { get; set; }
+        /// <summary>
+        /// 止息日	D, 对应<see cref="EINDAT"/>
+        /// </summary>
+        [XmlElement("EINDAT")]
+        public string EINDATStr
+        {
+            get
+            {
+                return this.EINDAT.ToString("yyyyMMdd");
+            }
+            set
+            {
+                if (DateTime.TryParseExact(value, "yyyyMMdd", CultureInfo.CurrentCulture, DateTimeStyles.None, out DateTime tmp))
+                {
+                    this.EINDAT = tmp;
+                }
+            }
+        }
+        /// <summary>
+        /// 计息本金	M
+        /// </summary>
+        public decimal INTAMT { get; set; }
+        /// <summary>
+        /// 利率	F(11,7)
+        /// </summary>
+        public decimal INTRAT { get; set; }
+        /// <summary>
+        /// 利息金额	M
+        /// </summary>
+        public decimal INTRST { get; set; }
+        /// <summary>
+        /// 应税利息	M
+        /// </summary>
+        public decimal ITXINT { get; set; }
+        /// <summary>
+        /// 税率	F(5,2)
+        /// </summary>
+        public decimal TAXRAT { get; set; }
+        /// <summary>
+        /// 利息税金额	M
+        /// </summary>
+        public decimal ITXAMT { get; set; }
+        /// <summary>
+        /// 税后利息	M
+        /// </summary>
+        public decimal TXDINT { get; set; }
+        /// <summary>
+        /// 金额１	M
+        /// </summary>
+        public decimal EXTAM1 { get; set; }
+        /// <summary>
+        /// 金额２	M
+        /// </summary>
+        public decimal EXTAM2 { get; set; }
+        /// <summary>
+        /// 描述１	C(20)
+        /// </summary>
+        public string EXTTX1 { get; set; }
+        /// <summary>
+        /// 描述２	C(20)
+        /// </summary>
+        public string EXTTX2 { get; set; }
+        /// <summary>
+        /// 特殊码	C(80)
+        /// </summary>
+        public string SPLC80 { get; set; }
+    }
+    /// <summary>
+    /// 2.7.查询电子回单信息响应内容    对公转账回单户名附加接口
+    /// </summary>
+    public class CPRRCEANX1
+    {
+        /// <summary>
+        /// 收方户名	Z(122)
+        /// </summary>
+        public string RCVEAN { get; set; }
+        /// <summary>
+        /// 预留参考号	C(30)
+        /// </summary>
+        public string RSVNBR { get; set; }
+        /// <summary>
+        /// 预留位图	C(40)
+        /// </summary>
+        public string RSVMAP { get; set; }
+        /// <summary>
+        /// 预留金额	M
+        /// </summary>
+        public decimal RSVAMT { get; set; }
+        /// <summary>
+        /// 预留日期	D
+        /// </summary>
+        [XmlIgnore]
+        public DateTime RSVDAT { get; set; }
+        /// <summary>
+        /// 预留日期	D, 对应<see cref="RSVDAT"/>
+        /// </summary>
+        [XmlElement("RSVDAT")]
+        public string RSVDATStr
+        {
+            get
+            {
+                return this.RSVDAT.ToString("yyyyMMdd");
+            }
+            set
+            {
+                if (DateTime.TryParseExact(value, "yyyyMMdd", CultureInfo.CurrentCulture, DateTimeStyles.None, out DateTime tmp))
+                {
+                    this.RSVDAT = tmp;
+                }
+            }
+        }
+        /// <summary>
+        /// 预留备注	Z(200)
+        /// </summary>
+        public string RSVTXT { get; set; }
+        /// <summary>
+        /// 特殊码	C(80)	
+        /// </summary>
+        public string SPLC80 { get; set; }
+    }
+    /// <summary>
+    /// 2.7.查询电子回单信息响应内容    对公转账回单户名扩展接口
+    /// </summary>
+    public class CPRRCEXTX1
+    {
+        /// <summary>
+        /// 打印实例号	C(13)
+        /// </summary>
+        public string ISTNBR { get; set; }
+        /// <summary>
+        /// 付方户名	Z(200)
+        /// </summary>
+        public string SNDEAN { get; set; }
+        /// <summary>
+        /// 收方户名	Z(200)
+        /// </summary>
+        public string RCVEAN { get; set; }
+        /// <summary>
+        /// 备注	Z(200)
+        /// </summary>
+        public string NARTXT { get; set; }
+        /// <summary>
+        /// 预留参考号	C(30)
+        /// </summary>
+        public string RSVNBR { get; set; }
+        /// <summary>
+        /// 预留位图	C(30)
+        /// </summary>
+        public string RSVMAP { get; set; }
+        /// <summary>
+        /// 预留金额	M
+        /// </summary>
+        public decimal RSVAMT { get; set; }
+        /// <summary>
+        /// 预留日期	D
+        /// </summary>
+        [XmlIgnore]
+        public DateTime RSVDAT { get; set; }
+        /// <summary>
+        /// 预留日期	D, 对应<see cref="RSVDAT"/>
+        /// </summary>
+        [XmlElement("RSVDAT")]
+        public string RSVDATStr
+        {
+            get
+            {
+                return this.RSVDAT.ToString("yyyyMMdd");
+            }
+            set
+            {
+                if (DateTime.TryParseExact(value, "yyyyMMdd", CultureInfo.CurrentCulture, DateTimeStyles.None, out DateTime tmp))
+                {
+                    this.RSVDAT = tmp;
+                }
+            }
+        }
+        /// <summary>
+        /// 预留备注	Z(500)
+        /// </summary>
+        public string RSVNAR { get; set; }
+        /// <summary>
+        /// 特殊码	C(80)	
+        /// </summary>
+        public string SPLC80 { get; set; }
+    }
+    /// <summary>
+    /// 2.7.查询电子回单信息响应内容    中间业务平台公司回单输出接口
+    /// </summary>
+    public class MCMIDRRCZ
+    {
+        /// <summary>
+        /// 打印实例号	C(13)
+        /// </summary>
+        public string ISTNBR { get; set; }
+        /// <summary>
+        /// 交易日期	D
+        /// </summary>
+        [XmlIgnore]
+        public DateTime TRXDAT { get; set; }
+        /// <summary>
+        /// 交易日期	D, 对应<see cref="TRXDAT"/>
+        /// </summary>
+        [XmlElement("TRXDAT")]
+        public string TRXDATStr
+        {
+            get
+            {
+                return this.TRXDAT.ToString("yyyyMMdd");
+            }
+            set
+            {
+                if (DateTime.TryParseExact(value, "yyyyMMdd", CultureInfo.CurrentCulture, DateTimeStyles.None, out DateTime tmp))
+                {
+                    this.TRXDAT = tmp;
+                }
+            }
+        }
+        /// <summary>
+        /// 交易套号	C(15)
+        /// </summary>
+        public string TRXSET { get; set; }
+        /// <summary>
+        /// 交易流水	C(15)
+        /// </summary>
+        public string TRXNBR { get; set; }
+        /// <summary>
+        /// 交易金额	M
+        /// </summary>
+        public decimal TRXAMT { get; set; }
+        /// <summary>
+        /// 货币	C(2)
+        /// </summary>
+        public string CCYNBR { get; set; }
+        /// <summary>
+        /// 钞汇标志	C(1)
+        /// </summary>
+        public string CCYTYP { get; set; }
+        /// <summary>
+        /// 商户号	C(6)	
+        /// </summary>
+        public string CPRCNV { get; set; }
+        /// <summary>
+        /// 批次号	C(12)
+        /// </summary>
+        public string BTHNBR { get; set; }
+        /// <summary>
+        /// 中间业务参考号	C(26)
+        /// </summary>
+        public string REFNBR { get; set; }
+        /// <summary>
+        /// 忽略对账标志	C(1)
+        /// </summary>
+        public string CHKFLG { get; set; }
+        /// <summary>
+        /// 任务号	C(13)
+        /// </summary>
+        public string TSKNBR { get; set; }
+        /// <summary>
+        /// 转出户口	C(20)
+        /// </summary>
+        public string PAYEAC { get; set; }
+        /// <summary>
+        /// 转出户名	Z(62)
+        /// </summary>
+        public string PAYNAM { get; set; }
+        /// <summary>
+        /// 转出机构	C(6)
+        /// </summary>
+        public string PAYBRN { get; set; }
+        /// <summary>
+        /// 摘要码	C(4)
+        /// </summary>
+        public string TXTCOD { get; set; }
+        /// <summary>
+        /// 转入户口	C(20)
+        /// </summary>
+        public string RCVEAC { get; set; }
+        /// <summary>
+        /// 转入户名	Z(62)
+        /// </summary>
+        public string RCVNAM { get; set; }
+        /// <summary>
+        /// 转入机构	C(6)
+        /// </summary>
+        public string RCVBRN { get; set; }
+        /// <summary>
+        /// 客户摘要	Z(42)
+        /// </summary>
+        public string TXTCLT { get; set; }
+        /// <summary>
+        /// 银行摘要	Z(42)
+        /// </summary>
+        public string TXTBNK { get; set; }
+        /// <summary>
+        /// 商户名称	Z(80)
+        /// </summary>
+        public string CPRNAM { get; set; }
+        /// <summary>
+        /// 商户流水	C(32)
+        /// </summary>
+        public string CPRSEQ { get; set; }
+        /// <summary>
+        /// 商户客户编号	Z(32)
+        /// </summary>
+        public string CPRACT { get; set; }
+        /// <summary>
+        /// 特殊码100	C(100)
+        /// </summary>
+        public string SPL100 { get; set; }
+    }
+    /// <summary>
+    /// 2.7.查询电子回单信息响应内容    收款回单（网银互联）   付款回单（网银互联） 
+    /// </summary>
+    public class NPTRFRCTX1
+    {
+        /// <summary>
+        /// 打印实例号	C(13)
+        /// </summary>
+        public string ISTNBR { get; set; }
+        /// <summary>
+        /// 任务实例号	C(13)
+        /// </summary>
+        public string TSKNBR { get; set; }
+        /// <summary>
+        /// 交易日期	D
+        /// </summary>
+        [XmlIgnore]
+        public DateTime ISUDAT { get; set; }
+        /// <summary>
+        /// 交易日期	D, 对应<see cref="ISUDAT"/>
+        /// </summary>
+        [XmlElement("ISUDAT")]
+        public string ISUDATStr
+        {
+            get
+            {
+                return this.ISUDAT.ToString("yyyyMMdd");
+            }
+            set
+            {
+                if (DateTime.TryParseExact(value, "yyyyMMdd", CultureInfo.CurrentCulture, DateTimeStyles.None, out DateTime tmp))
+                {
+                    this.ISUDAT = tmp;
+                }
+            }
+        }
+        /// <summary>
+        /// 交易流水号	C(15)
+        /// </summary>
+        public string BUSNBR { get; set; }
+        /// <summary>
+        /// 业务类型	Z(30)
+        /// </summary>
+        public string TRSTYP { get; set; }
+        /// <summary>
+        /// 交易货币	C(2)
+        /// </summary>
+        public string CCYNBR { get; set; }
+        /// <summary>
+        /// 交易金额	M
+        /// </summary>
+        public decimal TRXAMT { get; set; }
+        /// <summary>
+        /// 业务参考号	C(35)
+        /// </summary>
+        public string TRSREF { get; set; }
+        /// <summary>
+        /// 收方帐号	C(35)
+        /// </summary>
+        public string RCVACC { get; set; }
+        /// <summary>
+        /// 收方名称	Z(100)
+        /// </summary>
+        public string RCVNAM { get; set; }
+        /// <summary>
+        /// 收方银行名称	Z(100)
+        /// </summary>
+        public string RCVBNK { get; set; }
+        /// <summary>
+        /// 付方帐号	C(35)
+        /// </summary>
+        public string SNDACC { get; set; }
+        /// <summary>
+        /// 付方名称	Z(100)
+        /// </summary>
+        public string SNDNAM { get; set; }
+        /// <summary>
+        /// 付方银行名称	Z(100)
+        /// </summary>
+        public string SNDBNK { get; set; }
+        /// <summary>
+        /// 摘要	Z(42)
+        /// </summary>
+        public string TRXTXT { get; set; }
+        /// <summary>
+        /// 附言	Z(235)
+        /// </summary>
+        public string RMKTXT { get; set; }
+        /// <summary>
+        /// 特殊码	C(100)
+        /// </summary>
+        public string SPL100 { get; set; }
+    }
+    /// <summary>
+    /// 2.7.查询电子回单信息响应内容    企业银行通知转活期付款回单
+    /// </summary>
+    public class TDDRWVHCZ
+    {
+        /// <summary>
+        /// 打印实例号	C(13)
+        /// </summary>
+        public string ISTNBR { get; set; }
+        /// <summary>
+        /// 打印日期	D
+        /// </summary>
+        [XmlIgnore]
+        public DateTime PRTDAT { get; set; }
+        /// <summary>
+        /// 打印日期	D, 对应<see cref="PRTDAT"/>
+        /// </summary>
+        [XmlElement("PRTDAT")]
+        public string PRTDATStr
+        {
+            get
+            {
+                return this.PRTDAT.ToString("yyyyMMdd");
+            }
+            set
+            {
+                if (DateTime.TryParseExact(value, "yyyyMMdd", CultureInfo.CurrentCulture, DateTimeStyles.None, out DateTime tmp))
+                {
+                    this.PRTDAT = tmp;
+                }
+            }
+        }
+        /// <summary>
+        /// 任务编码	C(8)
+        /// </summary>
+        public string TSKCOD { get; set; }
+        /// <summary>
+        /// 交易流水	C(13)
+        /// </summary>
+        public string TSKNBR { get; set; }
+        /// <summary>
+        /// 开户机构	C(6)
+        /// </summary>
+        public string OPNBRN { get; set; }
+        /// <summary>
+        /// 开户分行	C(6)
+        /// </summary>
+        public string OPNBBK { get; set; }
+        /// <summary>
+        /// 开户城市	C(6)
+        /// </summary>
+        public string OPNCTY { get; set; }
+        /// <summary>
+        /// 交易机构	C(6)
+        /// </summary>
+        public string TRXBRN { get; set; }
+        /// <summary>
+        /// 交易分行	C(6)
+        /// </summary>
+        public string TRXBBK { get; set; }
+        /// <summary>
+        /// 交易城市	C(6)
+        /// </summary>
+        public string TRXCTY { get; set; }
+        /// <summary>
+        /// 交易日期	D
+        /// </summary>
+        [XmlIgnore]
+        public DateTime TRXDAT { get; set; }
+        /// <summary>
+        /// 交易日期	D, 对应<see cref="TRXDAT"/>
+        /// </summary>
+        [XmlElement("TRXDAT")]
+        public string TRXDATStr
+        {
+            get
+            {
+                return this.TRXDAT.ToString("yyyyMMdd");
+            }
+            set
+            {
+                if (DateTime.TryParseExact(value, "yyyyMMdd", CultureInfo.CurrentCulture, DateTimeStyles.None, out DateTime tmp))
+                {
+                    this.TRXDAT = tmp;
+                }
+            }
+        }
+        /// <summary>
+        /// 经办	C(6)
+        /// </summary>
+        public string OPRUSR { get; set; }
+        /// <summary>
+        /// 复核	C(6)
+        /// </summary>
+        public string CHKUSR { get; set; }
+        /// <summary>
+        /// 授权	C(6)
+        /// </summary>
+        public string AUTUSR { get; set; }
+        /// <summary>
+        /// 定期凭证种类	C(1)
+        /// </summary>
+        public string PSBFG2 { get; set; }
+        /// <summary>
+        /// 凭证种类	C(4)
+        /// </summary>
+        public string PSBCD2 { get; set; }
+        /// <summary>
+        /// 凭证基本类别	C(2)
+        /// </summary>
+        public string PSBTY2 { get; set; }
+        /// <summary>
+        /// 凭证号码	C(20)
+        /// </summary>
+        public string PSBNB2 { get; set; }
+        /// <summary>
+        /// 户口号	C(35)
+        /// </summary>
+        public string EACNBR { get; set; }
+        /// <summary>
+        /// 定期序号	C(5)
+        /// </summary>
+        public string TDSSEQ { get; set; }
+        /// <summary>
+        /// 户口名称	C(200)
+        /// </summary>
+        public string EACNAM { get; set; }
+        /// <summary>
+        /// 证件类别	C(3)
+        /// </summary>
+        public string CTFTYP { get; set; }
+        /// <summary>
+        /// 证件号码	Z(30)
+        /// </summary>
+        public string CTFIDC { get; set; }
+        /// <summary>
+        /// 产品编码	C(8)
+        /// </summary>
+        public string PRDCOD { get; set; }
+        /// <summary>
+        /// 储蓄种类	C(8)
+        /// </summary>
+        public string PRDABR { get; set; }
+        /// <summary>
+        /// 存期	C(6)
+        /// </summary>
+        public string TERDUR { get; set; }
+        /// <summary>
+        /// 钞汇标志	C(1)
+        /// </summary>
+        public string CCYTYP { get; set; }
+        /// <summary>
+        /// 货币号	C(2)
+        /// </summary>
+        public string CCYNBR { get; set; }
+        /// <summary>
+        /// 金额	M
+        /// </summary>
+        public decimal OPNAMT { get; set; }
+        /// <summary>
+        /// 联机余额	M
+        /// </summary>
+        public decimal ONLBAL { get; set; }
+        /// <summary>
+        /// 开户日	D
+        /// </summary>
+        [XmlIgnore]
+        public DateTime OPNDAT { get; set; }
+        /// <summary>
+        /// 开户日	D, 对应<see cref="OPNDAT"/>
+        /// </summary>
+        [XmlElement("OPNDAT")]
+        public string OPNDATStr
+        {
+            get
+            {
+                return this.OPNDAT.ToString("yyyyMMdd");
+            }
+            set
+            {
+                if (DateTime.TryParseExact(value, "yyyyMMdd", CultureInfo.CurrentCulture, DateTimeStyles.None, out DateTime tmp))
+                {
+                    this.OPNDAT = tmp;
+                }
+            }
+        }
+        /// <summary>
+        /// 关户日	D
+        /// </summary>
+        [XmlIgnore]
+        public DateTime CLSDAT { get; set; }
+        /// <summary>
+        /// 关户日	D, 对应<see cref="CLSDAT"/>
+        /// </summary>
+        [XmlElement("CLSDAT")]
+        public string CLSDATStr
+        {
+            get
+            {
+                return this.CLSDAT.ToString("yyyyMMdd");
+            }
+            set
+            {
+                if (DateTime.TryParseExact(value, "yyyyMMdd", CultureInfo.CurrentCulture, DateTimeStyles.None, out DateTime tmp))
+                {
+                    this.CLSDAT = tmp;
+                }
+            }
+        }
+        /// <summary>
+        /// 起息日	D
+        /// </summary>
+        [XmlIgnore]
+        public DateTime INTDAT { get; set; }
+        /// <summary>
+        /// 起息日	D, 对应<see cref="INTDAT"/>
+        /// </summary>
+        [XmlElement("INTDAT")]
+        public string INTDATStr
+        {
+            get
+            {
+                return this.INTDAT.ToString("yyyyMMdd");
+            }
+            set
+            {
+                if (DateTime.TryParseExact(value, "yyyyMMdd", CultureInfo.CurrentCulture, DateTimeStyles.None, out DateTime tmp))
+                {
+                    this.INTDAT = tmp;
+                }
+            }
+        }
+        /// <summary>
+        /// 到期日	D
+        /// </summary>
+        [XmlIgnore]
+        public DateTime EXPDAT { get; set; }
+        /// <summary>
+        /// 到期日	D, 对应<see cref="EXPDAT"/>
+        /// </summary>
+        [XmlElement("EXPDAT")]
+        public string EXPDATStr
+        {
+            get
+            {
+                return this.EXPDAT.ToString("yyyyMMdd");
+            }
+            set
+            {
+                if (DateTime.TryParseExact(value, "yyyyMMdd", CultureInfo.CurrentCulture, DateTimeStyles.None, out DateTime tmp))
+                {
+                    this.EXPDAT = tmp;
+                }
+            }
+        }
+        /// <summary>
+        /// 止息日	D
+        /// </summary>
+        [XmlIgnore]
+        public DateTime EINDAT { get; set; }
+        /// <summary>
+        /// 止息日	D, 对应<see cref="EINDAT"/>
+        /// </summary>
+        [XmlElement("EINDAT")]
+        public string EINDATStr
+        {
+            get
+            {
+                return this.EINDAT.ToString("yyyyMMdd");
+            }
+            set
+            {
+                if (DateTime.TryParseExact(value, "yyyyMMdd", CultureInfo.CurrentCulture, DateTimeStyles.None, out DateTime tmp))
+                {
+                    this.EINDAT = tmp;
+                }
+            }
+        }
+        /// <summary>
+        /// 部提利率	F(11,7)
+        /// </summary>
+        public decimal PPPIVA { get; set; }
+        /// <summary>
+        /// 提前利率	F(11,7)
+        /// </summary>
+        public decimal PREIVA { get; set; }
+        /// <summary>
+        /// 到期利率	F(11,7)
+        /// </summary>
+        public decimal MTUIVA { get; set; }
+        /// <summary>
+        /// 超期利率	F(11,7)
+        /// </summary>
+        public decimal OVRIVA { get; set; }
+        /// <summary>
+        /// 支取标记	C(1)
+        /// </summary>
+        public string WDPFLG { get; set; }
+        /// <summary>
+        /// 业务类型	C(6)
+        /// </summary>
+        public string TRSKND { get; set; }
+        /// <summary>
+        /// 交易类型	C(6)
+        /// </summary>
+        public string TRSCTG { get; set; }
+        /// <summary>
+        /// 支取金额	M
+        /// </summary>
+        public decimal TRXAMT { get; set; }
+        /// <summary>
+        /// 利息金额	M
+        /// </summary>
+        public decimal INTAMT { get; set; }
+        /// <summary>
+        /// 利息税金额	M
+        /// </summary>
+        public decimal TAXAMT { get; set; }
+        /// <summary>
+        /// 计费货币号	C(2)
+        /// </summary>
+        public string FEECCY { get; set; }
+        /// <summary>
+        /// 应收费用金额	M
+        /// </summary>
+        public decimal FEEAMT { get; set; }
+        /// <summary>
+        /// 凭证验证标志	C(4)
+        /// </summary>
+        public string PSBVLD { get; set; }
+        /// <summary>
+        /// 定期凭证种类	C(1)
+        /// </summary>
+        public string PSBFLG { get; set; }
+        /// <summary>
+        /// 凭证种类	C(4)
+        /// </summary>
+        public string PSBCOD { get; set; }
+        /// <summary>
+        /// 凭证基本类别	C(2)
+        /// </summary>
+        public string PSBTYP { get; set; }
+        /// <summary>
+        /// 凭证号码	C(20)
+        /// </summary>
+        public string PSBNBR { get; set; }
+        /// <summary>
+        /// 是否通知	C(1)
+        /// </summary>
+        public string INFFLG { get; set; }
+        /// <summary>
+        /// 通知日期	D
+        /// </summary>
+        [XmlIgnore]
+        public DateTime INFDAT { get; set; }
+        /// <summary>
+        /// 通知日期	D, 对应<see cref="INFDAT"/>
+        /// </summary>
+        [XmlElement("INFDAT")]
+        public string INFDATStr
+        {
+            get
+            {
+                return this.INFDAT.ToString("yyyyMMdd");
+            }
+            set
+            {
+                if (DateTime.TryParseExact(value, "yyyyMMdd", CultureInfo.CurrentCulture, DateTimeStyles.None, out DateTime tmp))
+                {
+                    this.INFDAT = tmp;
+                }
+            }
+        }
+        /// <summary>
+        /// 通知序号	S(3,0)
+        /// </summary>
+        public string INFSEQ { get; set; }
+        /// <summary>
+        /// 通知到到期日	D
+        /// </summary>
+        [XmlIgnore]
+        public DateTime INEDAT { get; set; }
+        /// <summary>
+        /// 通知到到期日	D, 对应<see cref="INEDAT"/>
+        /// </summary>
+        [XmlElement("INEDAT")]
+        public string INEDATStr
+        {
+            get
+            {
+                return this.INEDAT.ToString("yyyyMMdd");
+            }
+            set
+            {
+                if (DateTime.TryParseExact(value, "yyyyMMdd", CultureInfo.CurrentCulture, DateTimeStyles.None, out DateTime tmp))
+                {
+                    this.INEDAT = tmp;
+                }
+            }
+        }
+        /// <summary>
+        /// 通知金额	M
+        /// </summary>
+        public decimal INFAMT { get; set; }
+        /// <summary>
+        /// 金额１	M
+        /// </summary>
+        public decimal EXTAM1 { get; set; }
+        /// <summary>
+        /// 金额２	M
+        /// </summary>
+        public decimal EXTAM2 { get; set; }
+        /// <summary>
+        /// 金额３	M
+        /// </summary>
+        public decimal EXTAM3 { get; set; }
+        /// <summary>
+        /// 描述１	C(20)
+        /// </summary>
+        public string EXTTX1 { get; set; }
+        /// <summary>
+        /// 描述２	C(20)
+        /// </summary>
+        public string EXTTX2 { get; set; }
+        /// <summary>
+        /// 描述３	C(20)
+        /// </summary>
+        public string EXTTX3 { get; set; }
+        /// <summary>
+        /// 摘要１	C(40)
+        /// </summary>
+        public string RMKLN1 { get; set; }
+        /// <summary>
+        /// 摘要２	C(40)
+        /// </summary>
+        public string RMKLN2 { get; set; }
+        /// <summary>
+        /// 摘要３	C(80)
+        /// </summary>
+        public string RMKLN3 { get; set; }
+    }
+    /// <summary>
+    /// 2.7.查询电子回单信息响应内容    企业银行通知转活期付款回单
+    /// </summary>
+    public class TDDRWVHCZ0
+    {
+        /// <summary>
+        /// 打印实例号	C(13)
+        /// </summary>
+        public string ISTNBR { get; set; }
+        /// <summary>
+        /// 客户名	Z(62)
+        /// </summary>
+        public string EACNAM { get; set; }
+        /// <summary>
+        /// 收款单号	C(35)
+        /// </summary>
+        public string EACNBR { get; set; }
+        /// <summary>
+        /// 钞汇户	C(1)
+        /// </summary>
+        public string CCYTYP { get; set; }
+        /// <summary>
+        /// 币种	C(2)
+        /// </summary>
+        public string CCYNBR { get; set; }
+        /// <summary>
+        /// 交易金额	M
+        /// </summary>
+        public decimal TRXAMT { get; set; }
+        /// <summary>
+        /// 金额１	M
+        /// </summary>
+        public decimal EXTAM1 { get; set; }
+        /// <summary>
+        /// 金额２	M
+        /// </summary>
+        public decimal EXTAM2 { get; set; }
+        /// <summary>
+        /// 描述１	C(20)
+        /// </summary>
+        public string EXTTX1 { get; set; }
+        /// <summary>
+        /// 描述２	C(20)
+        /// </summary>
+        public string EXTTX2 { get; set; }
+    }
+    #endregion
+    /// <summary>
+    /// 2.7.查询电子回单信息响应内容    企业银行定期转活期计息清单
+    /// </summary>
+    public class TDINTLSBZ
+    {
+        /// <summary>
+        /// 打印实例号	C(13)
+        /// </summary>
+        public string ISTNBR { get; set; }
+        /// <summary>
+        /// 打印日期	D
+        /// </summary>
+        public string PRTDAT { get; set; }
+        /// <summary>
+        /// 打印时间	T
+        /// </summary>
+        public string PRTTIM { get; set; }
+        /// <summary>
+        /// 打印时间 由<see cref="PRTDAT"/>和<see cref="PRTTIM"/>组成
+        /// </summary>
+        [XmlIgnore]
+        public DateTime PrintTime
+        {
+            get
+            {
+                if (DateTime.TryParseExact(string.Format("{0}{1}", this.PRTDAT, this.PRTTIM),
+                   new string[] { "yyyyMMdd", "yyyyMMddHHmmss" }, CultureInfo.CurrentCulture, DateTimeStyles.None, out DateTime tmp))
+                {
+                    return tmp;
+                }
+                return DateTime.MinValue;
+            }
+        }
+        /// <summary>
+        /// 任务实例号	C(13)
+        /// </summary>
+        public string TSKNBR { get; set; }
+        /// <summary>
+        /// 任务编码	C(8)
+        /// </summary>
+        public string TSKCOD { get; set; }
+        /// <summary>
+        /// 证件类别	C(3)
+        /// </summary>
+        public string CTFTYP { get; set; }
+        /// <summary>
+        /// 证件号码	Z(30)
+        /// </summary>
+        public string CTFIDC { get; set; }
+        /// <summary>
+        /// 开户机构	C(6)
+        /// </summary>
+        public string EACBRN { get; set; }
+        /// <summary>
+        /// 户口号	C(35)
+        /// </summary>
+        public string EACNBR { get; set; }
+        /// <summary>
+        /// 户口名称	Z(200)
+        /// </summary>
+        public string EACNAM { get; set; }
+        /// <summary>
+        /// 产品代码	C(8)
+        /// </summary>
+        public string PRDCOD { get; set; }
+        /// <summary>
+        /// 储蓄种类	C(8)
+        /// </summary>
+        public string PRDABR { get; set; }
+        /// <summary>
+        /// 定期序号	C(5)
+        /// </summary>
+        public string TDSSEQ { get; set; }
+        /// <summary>
+        /// 币种	C(2)
+        /// </summary>
+        public string CCYNBR { get; set; }
+        /// <summary>
+        /// 存期	C(6)
+        /// </summary>
+        public string TERDUR { get; set; }
+        /// <summary>
+        /// 户口名称	C(200)
+        /// </summary>
+        public string EACNA1 { get; set; }
+        /// <summary>
+        /// 证件类别	C(3)
+        /// </summary>
+        public string CTFTY1 { get; set; }
+        /// <summary>
+        /// 证件号码	Z(30)
+        /// </summary>
+        public string CTFID1 { get; set; }
+        /// <summary>
+        /// 户口号	C(35)
+        /// </summary>
+        public string EACNB1 { get; set; }
+        /// <summary>
+        /// 币种	C(2)
+        /// </summary>
+        public string CCYNB1 { get; set; }
+        /// <summary>
+        /// 产品代码	C(8)
+        /// </summary>
+        public string PRDCD1 { get; set; }
+        /// <summary>
+        /// 开户行	C(3)
+        /// </summary>
+        public string BBKNB1 { get; set; }
+        /// <summary>
+        /// 开户城市	C(6)
+        /// </summary>
+        public string CTYCD1 { get; set; }
+        /// <summary>
+        /// 开户机构	C(6)
+        /// </summary>
+        public string BRNNB1 { get; set; }
+        /// <summary>
+        /// 历次扣税	M
+        /// </summary>
+        public decimal HISTAX { get; set; }
+        /// <summary>
+        /// 本次扣税	M
+        /// </summary>
+        public decimal CURTAX { get; set; }
+        /// <summary>
+        /// 总计税金	M
+        /// </summary>
+        public decimal ALLTAX { get; set; }
+        /// <summary>
+        /// 本金	M
+        /// </summary>
+        public decimal DRWAMT { get; set; }
+        /// <summary>
+        /// 税后利息	M
+        /// </summary>
+        public decimal TXDINT { get; set; }
+        /// <summary>
+        /// 税后本息合计	M
+        /// </summary>
+        public decimal TXDBAL { get; set; }
+        /// <summary>
+        /// 支取标志	C(1)
+        /// </summary>
+        public string WDPFLG { get; set; }
+        /// <summary>
+        /// 摘要	C(80)
+        /// </summary>
+        public string RMKLIN { get; set; }
+        /// <summary>
+        /// 交易机构	C(6)
+        /// </summary>
+        public string TRXBRN { get; set; }
+        /// <summary>
+        /// 交易日期	D
+        /// </summary>
+        public string TRXDAT { get; set; }
+        /// <summary>
+        /// 交易时间	T
+        /// </summary>
+        public string TRXTIM { get; set; }
+        /// <summary>
+        /// 交易时间 由<see cref="TRXDAT"/>和<see cref="TRXTIM"/>组成
+        /// </summary>
+        [XmlIgnore]
+        public DateTime TransactionTime
+        {
+            get
+            {
+                if (DateTime.TryParseExact(string.Format("{0}{1}", this.TRXDAT, this.TRXTIM),
+                   new string[] { "yyyyMMdd", "yyyyMMddHHmmss" }, CultureInfo.CurrentCulture, DateTimeStyles.None, out DateTime tmp))
+                {
+                    return tmp;
+                }
+                return DateTime.MinValue;
+            }
+        }
+        /// <summary>
+        /// 经办	C(6)
+        /// </summary>
+        public string OPRUSR { get; set; }
+        /// <summary>
+        /// 复核	C(6)
+        /// </summary>
+        public string CHKUSR { get; set; }
+        /// <summary>
+        /// 授权	C(6)
+        /// </summary>
+        public string AUTUSR { get; set; }
+        /// <summary>
+        /// 金额１	M
+        /// </summary>
+        public decimal EXTAM1 { get; set; }
+        /// <summary>
+        /// 金额２	M
+        /// </summary>
+        public decimal EXTAM2 { get; set; }
+        /// <summary>
+        /// 金额３	M
+        /// </summary>
+        public decimal EXTAM3 { get; set; }
+        /// <summary>
+        /// 描述１	C(20)
+        /// </summary>
+        public string EXTTX1 { get; set; }
+        /// <summary>
+        /// 描述２	C(20)
+        /// </summary>
+        public string EXTTX2 { get; set; }
+        /// <summary>
+        /// 描述３	C(20)
+        /// </summary>
+        public string EXTTX3 { get; set; }
+        /// <summary>
+        /// 摘要１	C(40)
+        /// </summary>
+        public string RMKLN1 { get; set; }
+        /// <summary>
+        /// 摘要２	C(40)
+        /// </summary>
+        public string RMKLN2 { get; set; }
+        /// <summary>
+        /// 摘要３	C(80)
+        /// </summary>
+        public string RMKLN3 { get; set; }
+    }
+    /// <summary>
+    /// 2.7.查询电子回单信息响应内容    企业银行定期转活期计息清单
+    /// </summary>
+    public class TDINTLSBZ0
+    {
+        /// <summary>
+        /// 打印实例号	C(13)
+        /// </summary>
+        public string IstNbr { get; set; }
+        /// <summary>
+        /// 货币号	C(2)
+        /// </summary>
+        public string CcyNbr { get; set; }
+        /// <summary>
+        /// 钞汇户	C(1)
+        /// </summary>
+        public string CcyTyp { get; set; }
+        /// <summary>
+        /// 起息日	D
+        /// </summary>
+        [XmlIgnore]
+        public DateTime IntDat { get; set; }
+        /// <summary>
+        /// 起息日	D, 对应<see cref="IntDat"/>
+        /// </summary>
+        [XmlElement("IntDat")]
+        public string IntDatStr
+        {
+            get
+            {
+                return this.IntDat.ToString("yyyyMMdd");
+            }
+            set
+            {
+                if (DateTime.TryParseExact(value, "yyyyMMdd", CultureInfo.CurrentCulture, DateTimeStyles.None, out DateTime tmp))
+                {
+                    this.IntDat = tmp;
+                }
+            }
+        }
+        /// <summary>
+        /// 止息日	D
+        /// </summary>
+        [XmlIgnore]
+        public DateTime EinDat { get; set; }
+        /// <summary>
+        /// 止息日	D, 对应<see cref="EinDat"/>
+        /// </summary>
+        [XmlElement("EinDat")]
+        public string EinDatStr
+        {
+            get
+            {
+                return this.EinDat.ToString("yyyyMMdd");
+            }
+            set
+            {
+                if (DateTime.TryParseExact(value, "yyyyMMdd", CultureInfo.CurrentCulture, DateTimeStyles.None, out DateTime tmp))
+                {
+                    this.EinDat = tmp;
+                }
+            }
+        }
+        /// <summary>
+        /// 计息本金	M
+        /// </summary>
+        public decimal IntAmt { get; set; }
+        /// <summary>
+        /// 利率	F(11,7)
+        /// </summary>
+        public decimal IntRat { get; set; }
+        /// <summary>
+        /// 利息金额	M
+        /// </summary>
+        public decimal IntRst { get; set; }
+        /// <summary>
+        /// 应税利息	M
+        /// </summary>
+        public decimal ItxInt { get; set; }
+        /// <summary>
+        /// 税率	F(5,2)
+        /// </summary>
+        public decimal TaxRat { get; set; }
+        /// <summary>
+        /// 利息税金额	M
+        /// </summary>
+        public decimal ItxAmt { get; set; }
+        /// <summary>
+        /// 税后利息	M
+        /// </summary>
+        public decimal TxdInt { get; set; }
+        /// <summary>
+        /// 金额１	M
+        /// </summary>
+        public decimal ExtAm1 { get; set; }
+        /// <summary>
+        /// 金额２	M
+        /// </summary>
+        public decimal ExtAm2 { get; set; }
+        /// <summary>
+        /// 描述１	C(20)
+        /// </summary>
+        public string ExtTx1 { get; set; }
+        /// <summary>
+        /// 描述２	C(20)
+        /// </summary>
+        public string ExtTx2 { get; set; }
     }
 }

@@ -42,8 +42,8 @@ namespace BEDA.CMB.Contracts.Requests
         /// <summary>
         /// 起始日期	D, 对应<see cref="BEGDAT"/>
         /// </summary>
-        [XmlElement("BGNDAT")]
-        public string BGNDATStr
+        [XmlElement("BEGDAT")]
+        public string BEGDATStr
         {
             get
             {

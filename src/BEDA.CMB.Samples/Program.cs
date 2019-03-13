@@ -26,7 +26,8 @@ namespace BEDA.CMB.Samples
             //RQ2_3Sample();
             //RQ2_4Sample();
             //RQ2_5Sample();
-            RQ2_6Sample();
+            //RQ2_6Sample();
+            //RQ2_7Sample();
             #endregion
 
             Console.ReadLine();
@@ -137,8 +138,8 @@ namespace BEDA.CMB.Samples
             {
                 SDKACLSTX = new SDKACLSTX
                 {
-                     BUSCOD= "N02030",
-                     BUSMOD= "00001"
+                    BUSCOD = "N02030",
+                    BUSMOD = "00001"
                 }
             };
             var rs = client.Execute<RQ2_1, RS2_1>(rq, loginName);
@@ -214,7 +215,7 @@ namespace BEDA.CMB.Samples
                     BBKNBR = "59",
                     ACCNBR = "591902896710201",
                     BGNDAT = DateTime.Now.AddYears(-1).AddDays(-30),
-                    ENDDAT = DateTime.Now.AddYears(-1).AddDays(-5)  
+                    ENDDAT = DateTime.Now.AddYears(-1).AddDays(-5)
                 }
             };
             var rs = client.Execute<RQ2_5, RS2_5>(rq, loginName);
@@ -233,6 +234,24 @@ namespace BEDA.CMB.Samples
                 }
             };
             var rs = client.Execute<RQ2_6, RS2_6>(rq, loginName);
+            Console.WriteLine(rs.INFO.ResponseContent);
+        }
+        /// <summary>
+        /// 2.7.查询电子回单信息
+        /// </summary>
+        public static void RQ2_7Sample()
+        {
+            var rq = new RQ2_7()
+            {
+                CSRRCFDFY0 = new CSRRCFDFY0
+                {
+                    EACNBR = "591902896710201",
+                    BEGDAT = DateTime.Now.AddMonths(-14),
+                    ENDDAT = DateTime.Now.AddMonths(-13),
+                    RRCFLG = 1,
+                }
+            };
+            var rs = client.Execute<RQ2_7, RS2_7>(rq, loginName);
             Console.WriteLine(rs.INFO.ResponseContent);
         }
         #endregion
