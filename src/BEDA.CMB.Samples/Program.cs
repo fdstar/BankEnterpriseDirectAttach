@@ -38,6 +38,8 @@ namespace BEDA.CMB.Samples
             //RQ3_5Sample();
             //RQ3_6Sample();
             //RQ3_7Sample();
+            //RQ3_8Sample();
+            //RQ3_9Sample();
             #endregion
 
             Console.ReadLine();
@@ -415,6 +417,61 @@ namespace BEDA.CMB.Samples
                 }
             };
             var rs = client.Execute<RQ3_7, RS3_7>(rq, loginName);//20190313200139_3.7
+            Console.WriteLine(rs.INFO.ResponseContent);
+        }
+        /// <summary>
+        /// 3.8.支付经办（需要网银审批）
+        /// </summary>
+        public static void RQ3_8Sample()
+        {
+            var rq = new RQ3_8()
+            {
+                SDKPAYRQX = new SDKPAYRQX
+                {
+                    BUSCOD = "N02030",
+                     BUSMOD= "00001",
+                },
+                List = new List<DCPAYREQX>
+                {
+                    new DCPAYREQX
+                    {
+                        YURREF= GetYURREF("3.8"),
+                        DBTACC="591902896710201",
+                        DBTBBK="59",
+                        TRSAMT=101.5m,
+                        CCYNBR="10",
+                        STLCHN="N",
+                        NUSAGE="支付经办用途NUSAGE",
+                        BUSNAR="支付经办业务摘要BUSNAR",
+                        CRTACC="6225880230001175",
+                        CRTNAM="刘五",
+                        BNKFLG="Y",
+                        CRTPVC="重庆",
+                        CRTCTY="重庆",
+                    }
+                }
+            };
+            var rs = client.Execute<RQ3_8, RS3_8>(rq, loginName);//20190313202944_3.8
+            Console.WriteLine(rs.INFO.ResponseContent);
+        }
+        public static void RQ3_9Sample()
+        {
+            var rq = new RQ3_9()
+            {
+                List = new List<NTSTLINFX>
+                {
+                    new NTSTLINFX{
+                         REQNBR="0030103551"
+                    },
+                    new NTSTLINFX{
+                         REQNBR="0030103539"
+                    },
+                    new NTSTLINFX{
+                         REQNBR="0030103534"
+                    },
+                }
+            };
+            var rs = client.Execute<RQ3_9, RS3_9>(rq, loginName);
             Console.WriteLine(rs.INFO.ResponseContent);
         }
         #endregion
