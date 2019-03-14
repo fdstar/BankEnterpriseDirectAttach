@@ -11,10 +11,10 @@ namespace BEDA.CMB.Contracts.Requests
 {
     /// <summary>
     /// 3.1.支付、3.2.内部转账请求主体
-    /// 新用户或者用户升级，请使用直接支付接口做直接支付和直接集团支付，请使用3.7直接内转做内部转账
+    /// 新用户或者用户升级，请使用3.6直接支付接口做直接支付和直接集团支付，请使用3.7直接内转做内部转账
     /// </summary>
     [XmlRoot("CMBSDKPGK")]
-    [Obsolete("新用户或用户升级请使用3.6直接支付和3.7.直接内转")]
+    [Obsolete("新用户或用户升级请使用3.6直接支付、3.7.直接内转、3.8.支付经办")]
     public class RQ3_1 : CMBBase<RQINFO>, IRequest<RS3_1>
     {
         /// <summary>

@@ -40,6 +40,8 @@ namespace BEDA.CMB.Samples
             //RQ3_7Sample();
             //RQ3_8Sample();
             //RQ3_9Sample();
+            //RQ3_10Sample();
+            //RQ3_11Sample();
             #endregion
 
             Console.ReadLine();
@@ -472,6 +474,33 @@ namespace BEDA.CMB.Samples
                 }
             };
             var rs = client.Execute<RQ3_9, RS3_9>(rq, loginName);
+            Console.WriteLine(rs.INFO.ResponseContent);
+        }
+        /// <summary>
+        /// 3.10.跨境划拨额度查询
+        /// </summary>
+        public static void RQ3_10Sample()
+        {
+            var rq = new RQ3_10()
+            {
+                NTBUSMODY = new NTBUSMODY()
+            };
+            var rs = client.Execute<RQ3_10, RS3_10>(rq, loginName);
+            Console.WriteLine(rs.INFO.ResponseContent);
+        }
+        public static void RQ3_11Sample()
+        {
+            var rq = new RQ3_11()
+            {
+                NTQRYSTYX1 = new NTQRYSTYX1
+                {
+                    BUSCOD = "N02031",
+                    YURREF = "20190313194710_3.6",
+                    BGNDAT = new DateTime(2018, 03, 15),
+                    ENDDAT = new DateTime(2018, 03, 17)
+                }
+            };
+            var rs = client.Execute<RQ3_11, RS3_11>(rq, loginName);
             Console.WriteLine(rs.INFO.ResponseContent);
         }
         #endregion
