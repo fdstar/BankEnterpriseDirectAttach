@@ -22,6 +22,7 @@ namespace BEDA.CMB.Contracts.Requests
         public override string GetFUNNAM() => "NTCRBINQ";
         /// <summary>
         /// 3.10.跨境划拨额度查询请求内容
+        /// 注意此处只传递 BUSMOD 和 RSV50Z
         /// </summary>
         public NTBUSMODY NTBUSMODY { get; set; }
     }
@@ -39,5 +40,9 @@ namespace BEDA.CMB.Contracts.Requests
         /// 保留字段	C(50)
         /// </summary>
         public string RSV50Z { get; set; }
+        /// <summary>
+        /// 业务类型	C(6)     
+        /// </summary>
+        public string BUSCOD { get; set; }
     }
 }

@@ -22,6 +22,7 @@ namespace BEDA.CMB.Contracts.Requests
         public override string GetFUNNAM() => "NTAGCAPY";
         /// <summary>
         /// 4.7.大批量代发经办请求内容
+        /// 注意此处只传递 BUSMOD 
         /// </summary>
         public NTBUSMODY NTBUSMODY { get; set; }
         /// <summary>

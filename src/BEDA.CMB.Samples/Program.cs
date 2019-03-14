@@ -57,6 +57,12 @@ namespace BEDA.CMB.Samples
             //RQ4_10Sample();
             #endregion
 
+            #region 21.网银互联
+            //RQ21_1_1Sample();
+            //RQ21_1_2Sample();
+            //RQ21_1_3Sample();
+            #endregion
+
             Console.ReadLine();
         }
 
@@ -783,6 +789,61 @@ namespace BEDA.CMB.Samples
                 }
             };
             var rs = client.Execute<RQ4_10, RS4_10>(rq, loginName);
+            Console.WriteLine(rs.INFO.ResponseContent);
+        }
+        #endregion
+
+        #region 21.网银互联
+        /// <summary>
+        /// 21.1.1.查询业务经办业务控制信息
+        /// </summary>
+        public static void RQ21_1_1Sample()
+        {
+            var rq = new RQ21_1_1()
+            {
+                NTBUSMODY = new NTBUSMODY
+                {
+                    BUSCOD = "N31010",
+                    // N31010=网银贷记
+                    // N31011=网银借记
+                    // N31012 = 第三方贷记
+                    // N31013=跨行账户信息查询
+                }
+            };
+            var rs = client.Execute<RQ21_1_1, RS21_1_1>(rq, "外围1");
+            Console.WriteLine(rs.INFO.ResponseContent);
+        }
+        /// <summary>
+        /// 21.1.2.交易查询
+        /// </summary>
+        public static void RQ21_1_2Sample()
+        {
+            var rq = new RQ21_1_2()
+            {
+                NTQRYEBNY1 = new NTQRYEBNY1
+                {
+                    BUSCOD = "N31010",
+                    BUSMOD = "00001",
+                    BGNDAT = DateTime.Now.AddDays(-380),
+                    ENDDAT = DateTime.Now.AddDays(-374)
+                }
+            };
+            var rs = client.Execute<RQ21_1_2, RS21_1_2>(rq, "外围1");
+            Console.WriteLine(rs.INFO.ResponseContent);
+        }
+        /// <summary>
+        /// 21.1.3.业务交易明细查询
+        /// </summary>
+        public static void RQ21_1_3Sample()
+        {
+            var rq = new RQ21_1_3()
+            {
+                NTEBPINFX = new NTEBPINFX
+                {
+                    REQNBR = "0030091466"
+                }
+            };
+            var rs = client.Execute<RQ21_1_3, RS21_1_3>(rq, "外围1");
             Console.WriteLine(rs.INFO.ResponseContent);
         }
         #endregion
