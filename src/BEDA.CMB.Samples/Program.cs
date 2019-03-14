@@ -44,6 +44,12 @@ namespace BEDA.CMB.Samples
             //RQ3_11Sample();
             #endregion
 
+            #region 4.代发代扣
+            //RQ4_1Sample();
+            //RQ4_2Sample();
+            //RQ4_3Sample();
+            #endregion
+
             Console.ReadLine();
         }
 
@@ -501,6 +507,73 @@ namespace BEDA.CMB.Samples
                 }
             };
             var rs = client.Execute<RQ3_11, RS3_11>(rq, loginName);
+            Console.WriteLine(rs.INFO.ResponseContent);
+        }
+        #endregion
+
+        #region 4.代发代扣
+        /// <summary>
+        /// 4.1.查询交易代码
+        /// </summary>
+        public static void RQ4_1Sample()
+        {
+            var rq = new RQ4_1()
+            {
+                NTAGTLS2X = new NTAGTLS2X
+                {
+                    BUSCOD = "N03020",
+                    ACCNBR = "591902896710201",
+                }
+            };
+            var rs = client.Execute<RQ4_1, RS4_1>(rq, loginName);
+            Console.WriteLine(rs.INFO.ResponseContent);
+        }
+        /// <summary>
+        /// 4.2.直接代发代扣
+        /// </summary>
+        public static void RQ4_2Sample()
+        {
+            var rq = new RQ4_2()
+            {
+                SDKATSRQX = new SDKATSRQX
+                {
+                    BUSCOD = "N03020",
+                    BUSMOD = "00001",
+                    TRSTYP = "BYTF",
+                    DBTACC = "591902896710201",
+                    BBKNBR = "59",
+                    SUM = 102.5m,
+                    TOTAL = 1,
+                    YURREF = GetYURREF("4.2"),
+                    MEMO = "直接代发代扣MEMO代发",
+                },
+                List = new List<SDKATDRQX>
+                {
+                    new SDKATDRQX
+                    {
+                        ACCNBR="6225880280003345",
+                        CLTNAM="王二",
+                        TRSAMT=102.5m,
+                        BNKFLG="Y",
+                    }
+                }
+            };
+            var rs = client.Execute<RQ4_2, RS4_2>(rq, loginName);
+            Console.WriteLine(rs.INFO.ResponseContent);//REQNBR>0030103687</REQNBR
+        }
+        public static void RQ4_3Sample()
+        {
+            var rq = new RQ4_3()
+            {
+                NTAGCINNY1=new NTAGCINNY1
+                {
+                    BUSCOD = "N03020",
+                    BUSMOD = "00001",
+                    BGNDAT = new DateTime(2018, 3, 15),
+                    ENDDAT = new DateTime(2018, 3, 20),
+                }
+            };
+            var rs = client.Execute<RQ4_3, RS4_3>(rq, loginName);
             Console.WriteLine(rs.INFO.ResponseContent);
         }
         #endregion
