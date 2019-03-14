@@ -108,9 +108,9 @@ namespace BEDA.CMB.Contracts.Requests
         /// </summary>
         public string CCYMKT { get; set; }
         /// <summary>
-        /// 交易类型	C(4)	代发工资固定为“BYSA”
+        /// 交易类型	C(4)    见附录A.45     代发工资固定为“BYSA”
         /// </summary>
-        public string TRSTYP { get; set; } = "BYSA";
+        public string TRSTYP { get; set; }
         /// <summary>
         /// 用途	Z(42)
         /// </summary>
@@ -158,7 +158,7 @@ namespace BEDA.CMB.Contracts.Requests
         public string GRTFLG { get; set; }
     }
     /// <summary>
-    /// 4.2.直接代发代扣请求内容 支付明细
+    /// 4.6.大批量代发工资经办请求内容 支付明细
     /// </summary>
     public class NTAGCDTLY1
     {

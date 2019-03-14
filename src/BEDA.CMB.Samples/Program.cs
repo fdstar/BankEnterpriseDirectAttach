@@ -50,7 +50,11 @@ namespace BEDA.CMB.Samples
             //RQ4_3Sample();
             //RQ4_4Sample();
             //RQ4_5Sample();
-            RQ4_6Sample();
+            //RQ4_6Sample();
+            //RQ4_7Sample();
+            //RQ4_8Sample();
+            //RQ4_9Sample();
+            //RQ4_10Sample();
             #endregion
 
             Console.ReadLine();
@@ -564,6 +568,9 @@ namespace BEDA.CMB.Samples
             var rs = client.Execute<RQ4_2, RS4_2>(rq, loginName);
             Console.WriteLine(rs.INFO.ResponseContent);//REQNBR>0030103687</REQNBR
         }
+        /// <summary>
+        /// 4.3.查询交易概要信息
+        /// </summary>
         public static void RQ4_3Sample()
         {
             var rq = new RQ4_3()
@@ -629,6 +636,7 @@ namespace BEDA.CMB.Samples
                     TTLCNT = 1,
                     TTLNUM = 1,
                     CURAMT = 52.5m,
+                    TRSTYP = "BYSA",
                     CURCNT = 1,
                     CCYNBR = "10",
                     ACCNBR = "591902896710201",
@@ -653,6 +661,129 @@ namespace BEDA.CMB.Samples
             };
             var rs = client.Execute<RQ4_6, RS4_6>(rq, loginName);
             Console.WriteLine(rs.INFO.ResponseContent);//<REQNBR>0030103753</REQNBR>
+        }
+        /// <summary>
+        /// 4.7.大批量代发经办
+        /// </summary>
+        public static void RQ4_7Sample()
+        {
+            var rq = new RQ4_7()
+            {
+                NTBUSMODY = new NTBUSMODY
+                {
+                    BUSMOD = "00001"
+                },
+                NTAGCAGCX1 = new NTAGCAGCX1
+                {
+                    BEGTAG = "Y",
+                    ENDTAG = "Y",
+                    TTLAMT = 152.5m,
+                    TTLCNT = 1,
+                    TTLNUM = 1,
+                    CURAMT = 152.5m,
+                    TRSTYP = "BYTF",
+                    CURCNT = 1,
+                    CCYNBR = "10",
+                    ACCNBR = "591902896710201",
+                    BBKNBR = "59",
+                    CCYMKT = "0",
+                    NUSAGE = "代发劳务收入NUSAGE",
+                    YURREF = GetYURREF("4.7"),
+                    //ExpectedTime = DateTime.Now.AddYears(-1),
+                },
+                List = new List<NTAGCDTLY1>
+                {
+                    new NTAGCDTLY1
+                    {
+                        TRXSEQ=1,
+                        ACCNBR="6225880280003345",
+                        ACCNAM="王二",
+                        TRSAMT=152.5m,
+                        BNKFLG="Y",
+                        TRSDSP="王二代发劳务收入"
+                    }
+                }
+            };
+            var rs = client.Execute<RQ4_7, RS4_7>(rq, loginName);
+            Console.WriteLine(rs.INFO.ResponseContent);//<REQNBR>0030103771</REQNBR>
+        }
+        /// <summary>
+        /// 4.8.大批量代扣经办
+        /// </summary>
+        public static void RQ4_8Sample()
+        {
+            var rq = new RQ4_8()
+            {
+                NTBUSMODY = new NTBUSMODY
+                {
+                    BUSMOD = "00001"
+                },
+                NTAGCAGCX1 = new NTAGCAGCX1
+                {
+                    BEGTAG = "Y",
+                    ENDTAG = "Y",
+                    TTLAMT = 32.5m,
+                    TTLCNT = 1,
+                    TTLNUM = 1,
+                    CURAMT = 32.5m,
+                    TRSTYP = "AYTL",
+                    CURCNT = 1,
+                    CCYNBR = "10",
+                    ACCNBR = "755915704910503",
+                    BBKNBR = "75",
+                    CCYMKT = "0",
+                    NUSAGE = "代扣电话费NUSAGE",
+                    YURREF = GetYURREF("4.8"),
+                    //ExpectedTime = DateTime.Now.AddYears(-1),
+                },
+                List = new List<NTAGCDTLY1>
+                {
+                    new NTAGCDTLY1
+                    {
+                        TRXSEQ=1,
+                        ACCNBR="6225880230001175",
+                        ACCNAM="刘    五",
+                        TRSAMT=32.5m,
+                        BNKFLG="Y",
+                        TRSDSP="刘    五代扣电话费"
+                    }
+                }
+            };
+            var rs = client.Execute<RQ4_8, RS4_8>(rq, "银企直连测试用户143");
+            Console.WriteLine(rs.INFO.ResponseContent);//<REQNBR>0030103780</REQNBR>
+        }
+        /// <summary>
+        /// 4.9.查询大批量代发代扣明细信息
+        /// </summary>
+        public static void RQ4_9Sample()
+        {
+            var rq = new RQ4_9()
+            {
+                NTAGDINFY1=new NTAGDINFY1
+                {
+                    REQNBR = "0030103780"
+                }
+            };
+            var rs = client.Execute<RQ4_9, RS4_9>(rq, "银企直连测试用户143");
+            Console.WriteLine(rs.INFO.ResponseContent);
+        }
+        /// <summary>
+        /// 4.10.代发结果列表查询-按业务参考号
+        /// </summary>
+        public static void RQ4_10Sample()
+        {
+            var rq = new RQ4_10()
+            {
+                NTAGCINYX1 = new NTAGCINYX1
+                {
+                    BUSCOD = "N03010",
+                    YURREF = "20190314142125_4.6",
+                    BGNDAT = new DateTime(2018, 3, 15),
+                    ENDDAT = new DateTime(2018, 3, 20),
+                }
+            };
+            var rs = client.Execute<RQ4_10, RS4_10>(rq, loginName);
+            Console.WriteLine(rs.INFO.ResponseContent);
         }
         #endregion
     }
