@@ -48,6 +48,9 @@ namespace BEDA.CMB.Samples
             //RQ4_1Sample();
             //RQ4_2Sample();
             //RQ4_3Sample();
+            //RQ4_4Sample();
+            //RQ4_5Sample();
+            RQ4_6Sample();
             #endregion
 
             Console.ReadLine();
@@ -575,6 +578,81 @@ namespace BEDA.CMB.Samples
             };
             var rs = client.Execute<RQ4_3, RS4_3>(rq, loginName);
             Console.WriteLine(rs.INFO.ResponseContent);
+        }
+        /// <summary>
+        /// 4.4.查询交易明细信息
+        /// </summary>
+        public static void RQ4_4Sample()
+        {
+            var rq = new RQ4_4()
+            {
+                SDKATDQYX = new SDKATDQYX
+                {
+                    REQNBR = "0030103687"
+                }
+            };
+            var rs = client.Execute<RQ4_4, RS4_4>(rq, loginName);
+            Console.WriteLine(rs.INFO.ResponseContent);
+        }
+        /// <summary>
+        /// 4.5.代发工资额度查询
+        /// </summary>
+        public static void RQ4_5Sample()
+        {
+            var rq = new RQ4_5()
+            {
+                NTAGCLMTX1 = new NTAGCLMTX1
+                {
+                    ACCNBR = "591902896710201",
+                    BBKNBR = "59"
+                }
+            };
+            var rs = client.Execute<RQ4_5, RS4_5>(rq, loginName);
+            Console.WriteLine(rs.INFO.ResponseContent);
+        }
+        /// <summary>
+        /// 4.6.大批量代发工资经办
+        /// </summary>
+        public static void RQ4_6Sample()
+        {
+            var rq = new RQ4_6()
+            {
+                NTBUSMODY = new NTBUSMODY
+                {
+                    BUSMOD = "00001"
+                },
+                NTAGCAGCX1 = new NTAGCAGCX1
+                {
+                    BEGTAG = "Y",
+                    ENDTAG = "Y",
+                    TTLAMT = 52.5m,
+                    TTLCNT = 1,
+                    TTLNUM = 1,
+                    CURAMT = 52.5m,
+                    CURCNT = 1,
+                    CCYNBR = "10",
+                    ACCNBR = "591902896710201",
+                    BBKNBR = "59",
+                    CCYMKT = "0",
+                    NUSAGE = "大批量代发工资经办NUSAGE",
+                    YURREF = GetYURREF("4.6"),
+                    //ExpectedTime = DateTime.Now.AddYears(-1),
+                },
+                List = new List<NTAGCDTLY1>
+                {
+                    new NTAGCDTLY1
+                    {
+                        TRXSEQ=1,
+                        ACCNBR="6225880280003345",
+                        ACCNAM="王二",
+                        TRSAMT=52.5m,
+                        BNKFLG="Y",
+                        TRSDSP="王二代发工资"
+                    }
+                }
+            };
+            var rs = client.Execute<RQ4_6, RS4_6>(rq, loginName);
+            Console.WriteLine(rs.INFO.ResponseContent);//<REQNBR>0030103753</REQNBR>
         }
         #endregion
     }

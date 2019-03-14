@@ -56,6 +56,7 @@ namespace BEDA.CMB.Contracts.Requests
             {
                 return this.ExpectedTime?.ToString("yyyyMMdd");
             }
+            set { }
         }
         /// <summary>
         /// 期望时间	T   默认为‘000000’
@@ -67,6 +68,7 @@ namespace BEDA.CMB.Contracts.Requests
             {
                 return this.ExpectedTime?.ToString("HHmmss");
             }
+            set { }
         }
         /// <summary>
         /// 付方帐号	N（35）	
