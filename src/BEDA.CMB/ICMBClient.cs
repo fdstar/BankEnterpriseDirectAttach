@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace BEDA.CMB
 {
     /// <summary>
-    /// 招商银行客户端接口约定
+    /// 招商银行客户端接口约定  具体接口说明见 https://u.ebank.cmbchina.com/CmbBank_GenShell/UI/Help/DCBank2/Main.aspx
     /// </summary>
     public interface ICMBClient : IClient
     {

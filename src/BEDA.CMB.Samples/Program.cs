@@ -61,6 +61,9 @@ namespace BEDA.CMB.Samples
             //RQ21_1_1Sample();
             //RQ21_1_2Sample();
             //RQ21_1_3Sample();
+            //RQ21_1_4Sample();
+            //RQ21_1_5Sample();
+            //RQ21_1_6Sample();
             #endregion
 
             Console.ReadLine();
@@ -844,6 +847,55 @@ namespace BEDA.CMB.Samples
                 }
             };
             var rs = client.Execute<RQ21_1_3, RS21_1_3>(rq, "外围1");
+            Console.WriteLine(rs.INFO.ResponseContent);
+        }
+        /// <summary>
+        /// 21.1.4.取企业银行处理结果
+        /// </summary>
+        public static void RQ21_1_4Sample()
+        {
+            var rq = new RQ21_1_4()
+            {
+                NTRTVSTSX=new NTRTVSTSX
+                {
+                    REQNBR = "0030091466"
+                }
+            };
+            var rs = client.Execute<RQ21_1_4, RS21_1_4>(rq, "外围1");
+            Console.WriteLine(rs.INFO.ResponseContent);
+        }
+        /// <summary>
+        /// 21.1.5.业务总揽查询
+        /// </summary>
+        public static void RQ21_1_5Sample()
+        {
+            var rq = new RQ21_1_5()
+            {
+                NTQNPEBPY = new NTQNPEBPY
+                {
+                    QRYACC = "755914749110111",
+                    TRXDIR = "O",
+                    MSGNBR = "101",
+                    BGNDAT = DateTime.Now.AddDays(-380),
+                    ENDDAT = DateTime.Now.AddDays(-360)
+                }
+            };
+            var rs = client.Execute<RQ21_1_5, RS21_1_5>(rq, "外围1");
+            Console.WriteLine(rs.INFO.ResponseContent);
+        }
+        public static void RQ21_1_6Sample()
+        {
+            var rq = new RQ21_1_6()
+            {
+                NTQRYEBYX1 = new NTQRYEBYX1
+                {
+                    BUSCOD = "N31010",
+                    YURREF = "APP83429820190219155056",
+                    BGNDAT = DateTime.Now.AddDays(-380),
+                    ENDDAT = DateTime.Now.AddDays(-374)
+                }
+            };
+            var rs = client.Execute<RQ21_1_6, RS21_1_6>(rq, "外围1");
             Console.WriteLine(rs.INFO.ResponseContent);
         }
         #endregion
