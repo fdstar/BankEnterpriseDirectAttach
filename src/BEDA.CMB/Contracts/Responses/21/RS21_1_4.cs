@@ -35,7 +35,7 @@ namespace BEDA.CMB.Contracts.Responses
     public class NTOPRRTNZ
     {
         /// <summary>
-        /// 流水号       	C(10)
+        /// 流水号       	C(10)	
         /// </summary>
         public string SQRNBR { get; set; }
         /// <summary>
@@ -43,7 +43,7 @@ namespace BEDA.CMB.Contracts.Responses
         /// </summary>
         public string REQNBR { get; set; }
         /// <summary>
-        /// 请求状态     	C(3)
+        /// 请求状态     	C(3)    附录A.5
         /// </summary>
         public string REQSTS { get; set; }
         /// <summary>
@@ -55,7 +55,7 @@ namespace BEDA.CMB.Contracts.Responses
         /// </summary>
         public string OPRALS { get; set; }
         /// <summary>
-        /// 业务处理结果 	C(1)
+        /// 业务处理结果 	C(1)    附录 A.6
         /// </summary>
         public string RTNFLG { get; set; }
         /// <summary>
