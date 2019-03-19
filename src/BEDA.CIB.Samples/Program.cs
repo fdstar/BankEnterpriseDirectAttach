@@ -5,6 +5,7 @@ using BEDA.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace BEDA.CIB.Samples
 {
@@ -290,8 +291,54 @@ namespace BEDA.CIB.Samples
             //BATCHCHECKQUERYTRNRQSample();
             #endregion
 
+            #region 业务使用Demo
+            //TransactionHelperSample();
+            #endregion
+
             Console.ReadLine();
         }
+
+        #region 业务使用Demo
+        public static void TransactionHelperSample()
+        {
+            var helper = new CIBTransactionHelper(cid, uid, pwd, ip, port, new CustCIBTransactionPurposeBuilder());
+            var transList = helper.GetTransactionRecords(mainAccountId, new DateTime(2019, 3, 19), new DateTime(2019, 3, 19));
+            var changeDic = helper.GetServiceChargesMapping(transList);
+
+            var refundList = helper.GetRefundRecords(mainAccountId, new DateTime(2019, 3, 19), new DateTime(2019, 3, 19));
+#if DEBUG
+            if (refundList.Count == 0)
+            {
+                //为方便测试，手工增加一条退票记录
+                //fkb_190319140625534  H00100201903190004631399460000
+                refundList.Add(new STMTTRN
+                {
+                    DTACCT = new DateTime(2019, 3, 19),
+                    BUSINESSTYPE = CIBTransactionHelper.RefundBusinessType,
+                    HXJYLSBH = "K00100201903190004631399460000",//假编号
+                    MEMO = "H00100201903190004631399460000",
+                    SUMMNAME = "汇出退回",
+                    SUMMDESC = "汇出退回解付",
+                    PURPOSE = "账号户名不符",
+                });
+            }
+#endif
+            //如果你已经通过GetTransactionRecords获取并持久化了手续费及HXJYLSBH
+            //那么下面Mappding这步就可以忽略，转为直接查本地数据库
+            var refundDic = helper.GetRefundMapping(refundList, mainAccountId, transList);
+        }
+        private class CustCIBTransactionPurposeBuilder : CIBTransactionPurposeBuilder
+        {
+            public override bool IsCorrectPurpose(string purpose)
+            {
+                if (!string.IsNullOrWhiteSpace(purpose))
+                {
+                    return Regex.IsMatch(purpose, @"^fkb_\d{15}$");
+                }
+                return false;
+            }
+        }
+        #endregion
 
         #region 基础数据
         const long cid = 1100343164;
@@ -607,8 +654,8 @@ namespace BEDA.CIB.Samples
                                 NAME = mainAccountName
                             },
                             ACCTTO = GetACCTTO(3),
-                            PURPOSE = "转账目的",
-                            TRNAMT = 7.77m,
+                            PURPOSE = string.Format("fkb_{0:yyMMddHHmmssfff}", DateTime.Now),
+                            TRNAMT =  7.77m,
                             //DTDUE = DateTime.Now,//如果需要网银审核，在该日期之后如果还未审核，则支付请求过期
                             MEMO = "转账测试审核过期",
                         }
