@@ -325,6 +325,9 @@ namespace BEDA.CIB.Samples
 #endif
             //如果你已经通过GetTransactionRecords获取并持久化了手续费及HXJYLSBH
             //那么下面Mappding这步就可以忽略，转为直接查本地数据库
+            helper.RefundDayDiff = 2;
+            //人行退票实际允许的范围是3个工作日，极端情况下会出现7个工作日
+            //所以此处虽然兴业银行说是只要查2天范围，但此处还是允许自定义日期范围
             var refundDic = helper.GetRefundMapping(refundList, mainAccountId, transList);
         }
         private class CustCIBTransactionPurposeBuilder : CIBTransactionPurposeBuilder

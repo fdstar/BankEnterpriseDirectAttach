@@ -25,6 +25,9 @@ namespace BEDA.CIB.Samples
         /// 退票对应的BUSINESSTYPE
         /// </summary>
         public static string RefundBusinessType = "银行退票";
+        /// <summary>
+        /// 手续费对应的BUSINESSTYPE
+        /// </summary>
         public static string ChargesBusinessType = "银行扣款";
         /// <summary>
         /// 构造函数
@@ -57,6 +60,10 @@ namespace BEDA.CIB.Samples
         /// 兴业银行银企直联客户端
         /// </summary>
         public ICIBClient Client { get; set; }
+        /// <summary>
+        /// 当退票时查询几天内的交易流水，默认按兴业银行文档设置为2天
+        /// </summary>
+        public int RefundDayDiff { get; set; } = 2;
         /// <summary>
         /// 生成一个用于查询的TRNUID，注意转账之类的业务切记不要采用此方法获取TRNUID
         /// </summary>
@@ -222,8 +229,10 @@ namespace BEDA.CIB.Samples
                 {
                     dt = timeList[i];
                 }
-                if (dtEnd.AddDays(1) == dt || dtEnd.AddDays(2) == dt || dtEnd == dt)
-                {//退票需要查询交易流水日期范围为交易当天或交易前一天
+                if (dt >= dtEnd && dt <= dtEnd.AddDays(this.RefundDayDiff))
+                {
+                    //退票需要查询交易流水日期范围为交易当天或交易前一天
+                    //所以如果出现跳日，比如03-19和03-21,也应该算是连续日期
                     dtEnd = dt;
                 }
                 else
