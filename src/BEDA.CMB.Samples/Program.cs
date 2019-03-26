@@ -883,6 +883,9 @@ namespace BEDA.CMB.Samples
             var rs = client.Execute<RQ21_1_5, RS21_1_5>(rq, "外围1");
             Console.WriteLine(rs.INFO.ResponseContent);
         }
+        /// <summary>
+        /// 21.1.6.新交易查询-按业务参考号
+        /// </summary>
         public static void RQ21_1_6Sample()
         {
             var rq = new RQ21_1_6()
