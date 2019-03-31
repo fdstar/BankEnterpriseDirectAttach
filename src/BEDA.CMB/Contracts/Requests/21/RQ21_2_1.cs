@@ -39,6 +39,10 @@ namespace BEDA.CMB.Contracts.Requests
         /// 业务模式	C(5)
         /// </summary>
         public string BUSMOD { get; set; }
+        /// <summary>
+        /// 业务模式名称	Z(200)
+        /// </summary>
+        public string MODALS { get; set; }
     }
     /// <summary>
     /// 21.2.1.网银贷记请求内容
