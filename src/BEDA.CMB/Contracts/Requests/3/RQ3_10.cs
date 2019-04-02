@@ -44,5 +44,9 @@ namespace BEDA.CMB.Contracts.Requests
         /// 业务类型	C(6)     
         /// </summary>
         public string BUSCOD { get; set; }
+        /// <summary>
+        /// 业务模式名称	Z(200)
+        /// </summary>
+        public string MODALS { get; set; }
     }
 }

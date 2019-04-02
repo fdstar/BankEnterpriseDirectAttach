@@ -197,9 +197,10 @@ namespace BEDA.CMB.Contracts.Responses
                     this.PERED2 = tmp;
                 }
             }
-        }/// <summary>
-         /// 协议生效日期	D   协议生效日期(含当天)
-         /// </summary>
+        }
+        /// <summary>
+        /// 协议生效日期	D   协议生效日期(含当天)
+        /// </summary>
         [XmlIgnore]
         public DateTime PTCSTD { get; set; }
         /// <summary>
