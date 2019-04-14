@@ -47,6 +47,10 @@ namespace BEDA.CMB.Contracts.Requests
         /// </summary>
         public string OPNBNK { get; set; }
         /// <summary>
+        /// 出票人客户号	C(10)   查询有权经办的客户编号查得
+        /// </summary>
+        public string OPNCLT { get; set; }
+        /// <summary>
         /// 出票人名称	Z(62)
         /// </summary>
         public string PAYNAM { get; set; }
@@ -58,6 +62,14 @@ namespace BEDA.CMB.Contracts.Requests
         /// 出票人分行号	C(2)
         /// </summary>
         public string PAYBBK { get; set; }
+        /// <summary>
+        /// 付款行全称	Z(62)   根据客户编号查询账号信息
+        /// </summary>
+        public string BNKNAM { get; set; }
+        /// <summary>
+        /// 付款行地址	Z(62)
+        /// </summary>
+        public string BNKADR { get; set; }
         /// <summary>
         /// 保证金比例	N(3)
         /// </summary>
