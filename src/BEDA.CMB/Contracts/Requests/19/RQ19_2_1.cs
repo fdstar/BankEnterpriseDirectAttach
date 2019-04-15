@@ -155,7 +155,7 @@ namespace BEDA.CMB.Contracts.Requests
         /// </summary>
         public string TKTSEQ { get; set; }
         /// <summary>
-        /// 经办类型	C(4)	银行承兑汇票：A.9 经办类型；
+        /// 经办类型	C(4)	银行承兑汇票：A.9 经办类型；商业承兑汇票：A.15 经办类型（商业承兑汇票）
         /// </summary>
         public string CODTPY { get; set; }
         /// <summary>
