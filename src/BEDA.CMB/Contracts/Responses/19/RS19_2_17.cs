@@ -539,6 +539,14 @@ namespace BEDA.CMB.Contracts.Responses
             }
         }
         /// <summary>
+        /// 质押合同号	C(10)
+        /// </summary>
+        public string CTTSEQ { get; set; }
+        /// <summary>
+        /// 质押用途	C(1)	E：综合额度 L：质押贷款 P：质押开票
+        /// </summary>
+        public string TRSAID { get; set; }
+        /// <summary>
         /// 质押比例	C(3)
         /// </summary>
         public string TRSINT { get; set; }
@@ -701,6 +709,10 @@ namespace BEDA.CMB.Contracts.Responses
         /// 收方行地址	Z(62)
         /// </summary>
         public string CRTADR { get; set; }
+        /// <summary>
+        /// 票据流水号	C(10)
+        /// </summary>
+        public string SEQNBR { get; set; }
     }
     /// <summary>
     /// 19.2.17.交易票据业务处理信息响应内容
@@ -760,6 +772,30 @@ namespace BEDA.CMB.Contracts.Responses
         /// 背书载要	Z(62)
         /// </summary>
         public string PAYDSP { get; set; }
+        /// <summary>
+        /// 经办日期	D
+        /// </summary>
+        [XmlIgnore]
+        public DateTime? TRSDTA { get; set; }
+        /// <summary>
+        /// 经办日期	D, 对应<see cref="TRSDTA"/>
+        /// </summary>
+        [XmlElement("TRSDTA")]
+        public string TRSDTAStr
+        {
+            get
+            {
+                return this.TRSDTA?.ToString("yyyyMMdd");
+            }
+            set
+            {
+                this.TRSDTA = null;
+                if (DateTime.TryParseExact(value, "yyyyMMdd", CultureInfo.CurrentCulture, DateTimeStyles.None, out DateTime tmp))
+                {
+                    this.TRSDTA = tmp;
+                }
+            }
+        }
     }
     /// <summary>
     /// 19.2.17.交易票据业务处理信息响应内容
