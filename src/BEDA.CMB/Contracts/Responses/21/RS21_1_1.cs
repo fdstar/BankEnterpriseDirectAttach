@@ -57,6 +57,10 @@ namespace BEDA.CMB.Contracts.Responses
         /// </summary>
         public string CHKSUM { get; set; }
         /// <summary>
+        /// 额度限制标志	C(1)
+        /// </summary>
+        public string LMTFLG { get; set; }
+        /// <summary>
         /// 保留字段 50	C(50)
         /// </summary>
         public string RSV50Z { get; set; }
