@@ -22,6 +22,7 @@ namespace BEDA.CMB.Contracts.Responses
         /// <summary>
         /// 8.6.1.查询可关联智能定期账号响应集合
         /// </summary>
+        [XmlElement("NTCMAFACZ1")]
         public List<NTCMAFACZ1> List { get; set; }
     }
     /// <summary>

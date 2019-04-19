@@ -22,6 +22,7 @@ namespace BEDA.CMB.Contracts.Responses
         /// <summary>
         /// 8.6.4.组合存款业务综合查询响应集合
         /// </summary>
+        [XmlElement("NTCMALSTZ1")]
         public List<NTCMALSTZ1> List { get; set; }
     }
     /// <summary>

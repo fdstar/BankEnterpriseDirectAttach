@@ -22,6 +22,7 @@ namespace BEDA.CMB.Contracts.Responses
         /// <summary>
         /// 8.5.9.查询可申请转网下智能定期账号响应集合
         /// </summary>
+        [XmlElement("NTFNCAPCZ")]
         public List<NTFNCAPCZ> List { get; set; }
     }
 }
