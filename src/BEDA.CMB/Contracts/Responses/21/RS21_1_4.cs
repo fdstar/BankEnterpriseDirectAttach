@@ -55,7 +55,7 @@ namespace BEDA.CMB.Contracts.Responses
         /// </summary>
         public string OPRALS { get; set; }
         /// <summary>
-        /// 业务处理结果 	C(1)    附录 A.6
+        /// 业务处理结果 	C(1)    附录 A.6  REQSTS=FIN时，RTNFLG才有意义
         /// </summary>
         public string RTNFLG { get; set; }
         /// <summary>
