@@ -62,5 +62,9 @@ namespace BEDA.CMB.Contracts.Responses
         /// 错误文本	Z(92)
         /// </summary>
         public string ERRTXT { get; set; }
+        /// <summary>
+        /// 保留字 30    	C(50)
+        /// </summary>
+        public string RSV30Z { get; set; }
     }
 }
