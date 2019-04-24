@@ -10,30 +10,30 @@ using System.Xml.Serialization;
 namespace BEDA.CMB.Contracts.Requests
 {
     /// <summary>
-    /// 12.6.5.支付机构查询结售汇申请项下子业务明细请求主体
+    /// 12.6.9.支付机构查询汇款类业务项下子业务明细请求主体
     /// </summary>
     [XmlRoot("CMBSDKPGK")]
-    public class RQ12_6_5 : CMBBase<RQINFO>, IRequest<RS12_6_5>
+    public class RQ12_6_9 : CMBBase<RQINFO>, IRequest<RS12_6_9>
     {
         /// <summary>
-        /// NTJSBQRT
+        /// NTPAYQRT
         /// </summary>
         /// <returns></returns>
-        public override string GetFUNNAM() => "NTJSBQRT";
+        public override string GetFUNNAM() => "NTPAYQRT";
         /// <summary>
-        /// 12.6.5.支付机构查询结售汇申请项下子业务明细请求内容
+        /// 12.6.9.支付机构查询汇款类业务项下子业务明细请求内容
         /// </summary>
-        public NTJSBQRTX NTJSBQRTX { get; set; }
+        public NTPAYQRTX NTPAYQRTX { get; set; }
     }
     /// <summary>
-    /// 12.6.5.支付机构查询结售汇申请项下子业务明细请求内容
+    /// 12.6.9.支付机构查询汇款类业务项下子业务明细请求内容
     /// </summary>
-    public class NTJSBQRTX
+    public class NTPAYQRTX
     {
         /// <summary>
-        /// 申请类型	C(4)    EXSL：结汇 EXBY：购汇
+        /// 业务种类	C(3)    	ORT：汇出汇款——外汇清分提供 IRT：汇入汇款——企业银行提供
         /// </summary>
-        public string JSHCOD { get; set; }
+        public string TRSTYP { get; set; }
         /// <summary>
         /// 批次号 流程实例号	C(10)
         /// </summary>
@@ -41,14 +41,10 @@ namespace BEDA.CMB.Contracts.Requests
         /// <summary>
         /// 母业务网上业务编号	C(30)
         /// </summary>
-        public string APPCNO { get; set; }
+        public string YURREF { get; set; }
         /// <summary>
         /// 轮次序号	N(6)
         /// </summary>
         public int LODSEQ { get; set; }
-        /// <summary>
-        /// 保留字      	 C(50)
-        /// </summary>
-        public string RSV50Z { get; set; }
     }
 }

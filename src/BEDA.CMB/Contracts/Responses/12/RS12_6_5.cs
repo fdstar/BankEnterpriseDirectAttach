@@ -44,9 +44,13 @@ namespace BEDA.CMB.Contracts.Responses
         /// </summary>
         public int LODCNT { get; set; }
         /// <summary>
-        /// 申请类型	C(4)    EXSL：结汇 EXBY：购汇
+        /// 申请类型	C(4)    EXSL：结汇 EXBY：购汇 EXST：实时结汇 EXBT：实时购汇
         /// </summary>
         public string JSHCOD { get; set; }
+        /// <summary>
+        /// 保留字    	 C(50)
+        /// </summary>
+        public string RSV50Z { get; set; }
     }
     /// <summary>
     /// 12.6.5.支付机构查询结售汇申请项下子业务明细响应内容
@@ -67,6 +71,11 @@ namespace BEDA.CMB.Contracts.Responses
         public string EVTSEQ { get; set; }
         /// <summary>
         /// 客户属性	C(2)
+        /// 02 金融机构
+        /// 03 中资机构
+        /// 04 外资机构
+        /// 05 居民个人
+        /// 06 非居民个人
         /// </summary>
         public string CLTPRO { get; set; }
         /// <summary>
@@ -74,7 +83,7 @@ namespace BEDA.CMB.Contracts.Responses
         /// </summary>
         public string EXRPRO { get; set; }
         /// <summary>
-        /// 居民标识	C(1)
+        /// 居民标识	C(1)    Y 境内个人 N 境外个人
         /// </summary>
         public string RESTYP { get; set; }
         /// <summary>
@@ -82,7 +91,7 @@ namespace BEDA.CMB.Contracts.Responses
         /// </summary>
         public string CNRCOD { get; set; }
         /// <summary>
-        /// 证件类型	C(3)
+        /// 证件类型	C(3)    P01 身份证 P18 港澳台来往大陆通行证 P31境外护照
         /// </summary>
         public string CIDTYP { get; set; }
         /// <summary>
@@ -106,7 +115,7 @@ namespace BEDA.CMB.Contracts.Responses
         /// </summary>
         public decimal TRSAMT { get; set; }
         /// <summary>
-        /// 资金形态	C(1)
+        /// 资金形态	C(1)    3 账户资金
         /// </summary>
         public string MNYFOM { get; set; }
         /// <summary>
@@ -152,6 +161,10 @@ namespace BEDA.CMB.Contracts.Responses
         /// 支付机构代码	C(20)
         /// </summary>
         public string PAYBCD { get; set; }
+        /// <summary>
+        /// 保留字	C (30)
+        /// </summary>
+        public string RSV30Z { get; set; }
     }
     /// <summary>
     /// 12.6.5.支付机构查询结售汇申请项下子业务明细响应内容
@@ -172,6 +185,10 @@ namespace BEDA.CMB.Contracts.Responses
         public string EVTSEQ { get; set; }
         /// <summary>
         /// 客户属性	C(2)
+        /// 02 金融机构
+        /// 03 中资机构
+        /// 04 外资机构
+        /// 05 居民个人
         /// </summary>
         public string CLTPRO { get; set; }
         /// <summary>
@@ -203,7 +220,7 @@ namespace BEDA.CMB.Contracts.Responses
         /// </summary>
         public decimal TRSAMT { get; set; }
         /// <summary>
-        /// 购汇方式	C(1)
+        /// 购汇方式	C(1)    6 存入个人外汇账户
         /// </summary>
         public string EXBMED { get; set; }
         /// <summary>
@@ -253,5 +270,9 @@ namespace BEDA.CMB.Contracts.Responses
         /// 支付机构代码	C(20)
         /// </summary>
         public string PAYBCD { get; set; }
+        /// <summary>
+        /// 保留字       	C(30)
+        /// </summary>
+        public string RSV30Z { get; set; }
     }
 }

@@ -9,37 +9,37 @@ using System.Xml.Serialization;
 namespace BEDA.CMB.Contracts.Responses
 {
     /// <summary>
-    /// 12.6.4.支付机构查询结售汇申请项下子业务上传批次列表响应主体
+    /// 12.6.8.支付机构查询汇款类业务项下子业务上传批次列表响应主体
     /// </summary>
     [XmlRoot("CMBSDKPGK")]
-    public class RS12_6_4 : CMBBase<RSINFO>, IResponse
+    public class RS12_6_8 : CMBBase<RSINFO>, IResponse
     {
         /// <summary>
-        /// NTJSHBLT
+        /// NTPAYQCL
         /// </summary>
         /// <returns></returns>
-        public override string GetFUNNAM() => "NTJSHBLT";
+        public override string GetFUNNAM() => "NTPAYQCL";
         /// <summary>
-        /// 12.6.4.支付机构查询结售汇申请项下子业务上传批次列表响应集合
+        /// 12.6.8.支付机构查询汇款类业务项下子业务上传批次列表响应集合
         /// </summary>
-        [XmlElement("NTJSHBLTZ")]
-        public List<NTJSHBLTZ> List { get; set; }
+        [XmlElement("NTPAYQCLZ")]
+        public List<NTPAYQCLZ> List { get; set; }
     }
     /// <summary>
-    /// 12.6.4.支付机构查询结售汇申请项下子业务上传批次列表响应内容
+    /// 12.6.8.支付机构查询汇款类业务项下子业务上传批次列表响应内容
     /// </summary>
-    public class NTJSHBLTZ
+    public class NTPAYQCLZ
     {
         /// <summary>
-        /// 申请类型	C(4)    EXSL：结汇 EXBY：购汇
+        /// 业务种类	C(3)    ORT：汇出汇款——外汇清分提供 IRT：汇入汇款——企业银行提供
         /// </summary>
-        public string JSHCOD { get; set; }
+        public string TRSTYP { get; set; }
         /// <summary>
         /// 客户号	C(10)
         /// </summary>
         public string CLTNBR { get; set; }
         /// <summary>
-        /// 流程实例号	C(10)
+        /// 批次号 网银实例号	C(10)
         /// </summary>
         public string REQNBR { get; set; }
         /// <summary>
@@ -47,13 +47,9 @@ namespace BEDA.CMB.Contracts.Responses
         /// </summary>
         public string TRSREF { get; set; }
         /// <summary>
-        /// 分行             	C (3) 	A.1 招行分行
-        /// </summary>
-        public string BBKNBR { get; set; }
-        /// <summary>
         /// 母业务网上业务编号	C(30)   客户填写的参考号
         /// </summary>
-        public string APPCNO { get; set; }
+        public string YURREF { get; set; }
         /// <summary>
         /// 机构	C(6)
         /// </summary>
@@ -145,15 +141,12 @@ namespace BEDA.CMB.Contracts.Responses
         /// S：已反馈母业务
         /// P：已补录（自动，手工）
         /// E：自动处理异常
+        /// G：母业务撤销
         /// </summary>
         public string PAYSTS { get; set; }
         /// <summary>
         /// 拒绝原因	Z(256)  客户撤销原因 银行核对不通过原因
         /// </summary>
         public string RTNRSN { get; set; }
-        /// <summary>
-        /// 保留字 C (30)
-        /// </summary>
-        public string RSV30Z { get; set; }
     }
 }
