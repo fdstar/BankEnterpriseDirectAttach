@@ -50,5 +50,9 @@ namespace BEDA.CMB.Contracts.Responses
         /// 客户关系编号	C(10)
         /// </summary>
         public string RELNBR { get; set; }
+        /// <summary>
+        /// 保留字 30  	C(30)
+        /// </summary>
+        public string RSV30Z { get; set; }
     }
 }
