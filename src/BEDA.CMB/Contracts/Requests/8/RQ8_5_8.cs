@@ -13,6 +13,7 @@ namespace BEDA.CMB.Contracts.Requests
     /// 8.5.8.智能定期存款协议查询请求主体
     /// </summary>
     [XmlRoot("CMBSDKPGK")]
+    [Obsolete("接口文档错误，响应部分参数需补全")]
     public class RQ8_5_8 : CMBBase<RQINFO>, IRequest<RS8_5_8>
     {
         /// <summary>

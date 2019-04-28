@@ -12,7 +12,6 @@ namespace BEDA.CMB.Contracts.Responses
     /// 8.5.8.智能定期存款协议查询响应主体
     /// </summary>
     [XmlRoot("CMBSDKPGK")]
-    [Obsolete("接口文档错误，此部分参数需补全")]
     public class RS8_5_8 : CMBBase<RSINFO>, IResponse
     {
         /// <summary>
