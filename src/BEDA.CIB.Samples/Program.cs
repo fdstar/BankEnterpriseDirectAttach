@@ -292,7 +292,7 @@ namespace BEDA.CIB.Samples
             #endregion
 
             #region 业务使用Demo
-            TransactionHelperSample();
+            //TransactionHelperSample();
             #endregion
 
             Console.ReadLine();
@@ -304,6 +304,39 @@ namespace BEDA.CIB.Samples
             var helper = new CIBTransactionHelper(cid, uid, pwd, ip, port, new CustCIBTransactionPurposeBuilder());
             var transList = helper.GetTransactionRecords(mainAccountId, new DateTime(2019, 3, 19), new DateTime(2019, 3, 19));
             var changeDic = helper.GetServiceChargesMapping(transList);
+
+            var rubricList = helper.GetRubricRecords(transList);
+#if DEBUG
+            if (rubricList.Count == 0)
+            {
+                var tmpTransList = new List<STMTTRN>();
+                //为方便测试，手工增加一条冲账记录及冲账流水
+                tmpTransList.Add(new STMTTRN
+                {
+                    DTACCT = new DateTime(2019, 3, 19),
+                    HXJYLSBH = "H00100201904280011321490470000",//假编号
+                    CHEQUENUM = "110340545",
+                    SUMMNAME = CIBTransactionHelper.RubricSummaryName,
+                    SUMMDESC = "隔日冲账",
+                    PURPOSE = "无收款行",
+                    TRNAMT=-15.54m,
+                });
+                tmpTransList.Add(new STMTTRN
+                {
+                    DTACCT = new DateTime(2019, 3, 19),
+                    HXJYLSBH = "H00100201904280011321490470000",//假编号
+                    CHEQUENUM = "",
+                    SUMMNAME = CIBTransactionHelper.RubricSummaryName,
+                    SUMMDESC = "隔日冲账",
+                    PURPOSE = "无收款行",
+                    TRNAMT = -0.60m,
+                });
+                rubricList = helper.GetRubricRecords(tmpTransList);
+            }
+#endif
+            //如果你已经通过GetTransactionRecords获取并持久化了手续费、HXJYLSBH及CHEQUENUM
+            //那么下面Mappding这步就可以忽略，转为直接查本地数据库
+            var rubricDic = helper.GetRubricMapping(rubricList, mainAccountId, rubricDayDiff: 3, transList: transList);
 
             var refundList = helper.GetRefundRecords(mainAccountId, new DateTime(2019, 3, 19), new DateTime(2019, 3, 19));
 #if DEBUG
@@ -324,10 +357,9 @@ namespace BEDA.CIB.Samples
 #endif
             //如果你已经通过GetTransactionRecords获取并持久化了手续费及HXJYLSBH
             //那么下面Mappding这步就可以忽略，转为直接查本地数据库
-            helper.RefundDayDiff = 2;
             //人行退票实际允许的范围是3个工作日，极端情况下会出现7个工作日
             //所以此处虽然兴业银行说是只要查2天范围，但此处还是允许自定义日期范围
-            var refundDic = helper.GetRefundMapping(refundList, mainAccountId, transList);
+            var refundDic = helper.GetRefundMapping(refundList, mainAccountId, refundDayDiff: 2, transList: transList);
         }
         private class CustCIBTransactionPurposeBuilder : CIBTransactionPurposeBuilder
         {
@@ -346,7 +378,7 @@ namespace BEDA.CIB.Samples
         const long cid = 1100343164;
         const string uid = "qw1";
         const string pwd = "a1111111";//密码错误6次账号会被永久锁定无法解锁
-        const string ip = /*"127.0.0.1"*/"139.196.136.170";
+        const string ip = "127.0.0.1";
         const int port = 8007;
         static ICIBClient client = new CIBClient(ip, port);
 

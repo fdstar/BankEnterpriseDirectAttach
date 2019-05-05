@@ -65,10 +65,6 @@ namespace BEDA.CIB.Samples
         /// </summary>
         public ICIBClient Client { get; set; }
         /// <summary>
-        /// 当退票时查询几天内的交易流水，默认按兴业银行文档设置为2天
-        /// </summary>
-        public int RefundDayDiff { get; set; } = 2;
-        /// <summary>
         /// 生成一个用于查询的TRNUID，注意转账之类的业务切记不要采用此方法获取TRNUID
         /// </summary>
         /// <param name="key"></param>
@@ -169,7 +165,7 @@ namespace BEDA.CIB.Samples
             return list;
         }
         /// <summary>
-        /// 获取交易记录（含手续费）
+        /// 获取交易记录（含手续费、冲账等）
         /// </summary>
         /// <param name="acctid"></param>
         /// <param name="dtStart"></param>
@@ -184,9 +180,10 @@ namespace BEDA.CIB.Samples
         /// </summary>
         /// <param name="refundList">退票流水</param>
         /// <param name="acctid">当前退票属于哪个账号</param>
+        /// <param name="refundDayDiff">若需自动查询交易流水时，查询几天内的交易流水，默认按兴业银行文档设置为2天</param>
         /// <param name="transList">交易流水，默认为null，代表按退票流水自动查询，如果不为null则与退票流水进行对比</param>
         /// <returns>Key为交易流水id，Tuple.Item1为交易流水，Tuple.Item2为退票流水</returns>
-        public IDictionary<string, Tuple<STMTTRN, STMTTRN>> GetRefundMapping(IList<STMTTRN> refundList, string acctid, IList<STMTTRN> transList = null)
+        public IDictionary<string, Tuple<STMTTRN, STMTTRN>> GetRefundMapping(IList<STMTTRN> refundList, string acctid, int refundDayDiff = 2, IList<STMTTRN> transList = null)
         {
             var dic = new Dictionary<string, Tuple<STMTTRN, STMTTRN>>();
             if (refundList != null && refundList.Count > 0)
@@ -196,7 +193,7 @@ namespace BEDA.CIB.Samples
                 {
                     if (transList == null || transList.Count == 0)
                     {//如果未传递交易流水，则自动按退票日期获取对应日期的所有交易流水
-                        transList = this.GetTransactionRecords(acctid, refundList);
+                        transList = this.GetTransactionRecords(acctid, refundList, refundDayDiff);
                     }
                     var query = from refund in refundList
                                 join trans in transList
@@ -208,12 +205,12 @@ namespace BEDA.CIB.Samples
             }
             return dic;
         }
-        private IList<STMTTRN> GetTransactionRecords(string acctid, IList<STMTTRN> refundList)
+        private IList<STMTTRN> GetTransactionRecords(string acctid, IList<STMTTRN> list, int dayDiff)
         {
             var transList = new List<STMTTRN>();
-            var timeList = refundList.Select(x => x.DTACCT.Date).Distinct().OrderBy(d => d).ToList();
-            //虽然底层查询时是拆分成按每日查询，但因为退票需要倒查两天的交易流水，所以将日期按连续性拆分成日期范围还是有必要的
-            var timeRange = this.GetTimeRange(timeList);
+            var timeList = list.Select(x => x.DTACCT.Date).Distinct().OrderBy(d => d).ToList();
+            //虽然底层查询时是拆分成按每日查询，但因为退票或冲账需要倒查N天的交易流水，所以将日期按连续性拆分成日期范围还是有必要的
+            var timeRange = this.GetTimeRange(timeList, dayDiff);
             foreach (var t in timeRange)
             {
                 var tmp = this.GetTransactionRecords(acctid, t.Item1.AddDays(-1), t.Item2);
@@ -221,7 +218,7 @@ namespace BEDA.CIB.Samples
             }
             return transList;
         }
-        private IList<Tuple<DateTime, DateTime>> GetTimeRange(IList<DateTime> timeList)
+        private IList<Tuple<DateTime, DateTime>> GetTimeRange(IList<DateTime> timeList, int dayDiff)
         {
             var timeRange = new List<Tuple<DateTime, DateTime>>();
             var dtStart = timeList[0];
@@ -233,7 +230,7 @@ namespace BEDA.CIB.Samples
                 {
                     dt = timeList[i];
                 }
-                if (dt >= dtEnd && dt <= dtEnd.AddDays(this.RefundDayDiff))
+                if (dt >= dtEnd && dt <= dtEnd.AddDays(dayDiff))
                 {
                     //退票需要查询交易流水日期范围为交易当天或交易前一天
                     //所以如果出现跳日，比如03-19和03-21,也应该算是连续日期
@@ -284,6 +281,60 @@ namespace BEDA.CIB.Samples
                         dic.Add(id, Tuple.Create(trans, charge));
                     }
                 }
+            }
+            return dic;
+        }
+        /// <summary>
+        /// 根据交易流水获取其内包含的冲账记录及冲账退回的手续费
+        /// </summary>
+        /// <param name="list">交易流水</param>
+        /// <returns>Tuple.Item1为冲账交易流水，需按其值<see cref="STMTTRN.CHEQUENUM"/>凭证代号与历史交易记录CHEQUENUM的进行比较，Tuple.Item2为冲账时退回的手续费</returns>
+        public IList<Tuple<STMTTRN, decimal>> GetRubricRecords(IList<STMTTRN> list)
+        {
+            var retList = new List<Tuple<STMTTRN, decimal>>();
+            if (list != null && list.Count > 0)
+            {
+                list = list.Where(x => x.SUMMNAME == RubricSummaryName).ToList();
+                if (list.Count > 0)
+                {
+                    var groups = list.GroupBy(x => x.HXJYLSBH);//冲账逻辑与退票本质无差别
+                    foreach (var g in groups)
+                    {
+                        var trans = g.FirstOrDefault(x => !string.IsNullOrWhiteSpace(x.CHEQUENUM));//凭证代号不为空代表冲账交易记录，为空代表冲账手续费
+                        if (trans == null)
+                        {
+                            continue;
+                        }
+                        var charge = g.FirstOrDefault(x => string.IsNullOrWhiteSpace(x.CHEQUENUM))?.TRNAMT ?? 0;//冲账退回的手续费
+                        retList.Add(Tuple.Create(trans, charge));
+                    }
+                }
+            }
+            return retList;
+        }
+        /// <summary>
+        /// 根据退票记录获取其对应的交易记录
+        /// </summary>
+        /// <param name="rubricList">冲账流水及冲账手续费</param>
+        /// <param name="acctid">当前冲账属于哪个账号</param>
+        /// <param name="rubricDayDiff">若需自动查询交易流水时，查询几天内的交易流水，默认设置为3天</param>
+        /// <param name="transList">交易流水，默认为null，代表按退票流水自动查询，如果不为null则与退票流水进行对比</param>
+        /// <returns>Key为交易流水id，Tuple.Item1为交易流水，Tuple.Item2为冲账流水，Tuple.Item3为冲账手续费</returns>
+        public IDictionary<string, Tuple<STMTTRN, STMTTRN, decimal>> GetRubricMapping(IList<Tuple<STMTTRN, decimal>> rubricList, string acctid, int rubricDayDiff = 3, IList<STMTTRN> transList = null)
+        {
+            var dic = new Dictionary<string, Tuple<STMTTRN, STMTTRN, decimal>>();
+            if (rubricList != null && rubricList.Count > 0)
+            {
+                if (transList == null || transList.Count == 0)
+                {//如果未传递交易流水，则自动按冲账日期获取对应日期的所有交易流水
+                    transList = this.GetTransactionRecords(acctid, rubricList.Select(x => x.Item1).ToList(), rubricDayDiff);
+                }
+                var query = from rubric in rubricList
+                            join trans in transList
+                            on rubric.Item1.CHEQUENUM equals trans.CHEQUENUM
+                            where trans.SUMMNAME == TransactionSummaryName
+                            select Tuple.Create(trans, rubric.Item1, rubric.Item2);
+                dic = query.ToDictionary(k => this._buider.GetIdFromPurpose(k.Item1.PURPOSE), v => v);
             }
             return dic;
         }
