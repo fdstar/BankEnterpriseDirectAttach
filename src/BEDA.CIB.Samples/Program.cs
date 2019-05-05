@@ -292,7 +292,7 @@ namespace BEDA.CIB.Samples
             #endregion
 
             #region 业务使用Demo
-            //TransactionHelperSample();
+            TransactionHelperSample();
             #endregion
 
             Console.ReadLine();
@@ -314,10 +314,9 @@ namespace BEDA.CIB.Samples
                 refundList.Add(new STMTTRN
                 {
                     DTACCT = new DateTime(2019, 3, 19),
-                    BUSINESSTYPE = CIBTransactionHelper.RefundBusinessType,
                     HXJYLSBH = "K00100201903190004631399460000",//假编号
                     MEMO = "H00100201903190004631399460000",
-                    SUMMNAME = "汇出退回",
+                    SUMMNAME = CIBTransactionHelper.RefundSummaryName,
                     SUMMDESC = "汇出退回解付",
                     PURPOSE = "账号户名不符",
                 });
@@ -347,7 +346,7 @@ namespace BEDA.CIB.Samples
         const long cid = 1100343164;
         const string uid = "qw1";
         const string pwd = "a1111111";//密码错误6次账号会被永久锁定无法解锁
-        const string ip = "127.0.0.1";
+        const string ip = /*"127.0.0.1"*/"139.196.136.170";
         const int port = 8007;
         static ICIBClient client = new CIBClient(ip, port);
 

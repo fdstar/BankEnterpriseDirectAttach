@@ -18,17 +18,21 @@ namespace BEDA.CIB.Samples
         private string _pwd;
         private ICIBTransactionPurposeBuilder _buider;
         /// <summary>
-        /// 转账对应的BUSINESSTYPE
+        /// 转账对应的SUMMNAME
         /// </summary>
-        public static string TransactionBusinessType = "网上汇款";
+        public static string TransactionSummaryName = "汇款";
         /// <summary>
-        /// 退票对应的BUSINESSTYPE
+        /// 退票对应的SUMMNAME
         /// </summary>
-        public static string RefundBusinessType = "银行退票";
+        public static string RefundSummaryName = "汇出退回";
         /// <summary>
-        /// 手续费对应的BUSINESSTYPE
+        /// 手续费对应的SUMMNAME
         /// </summary>
-        public static string ChargesBusinessType = "银行扣款";
+        public static string ChargesSummaryName = "收费";
+        /// <summary>
+        /// 冲账对账的SUMMNAME
+        /// </summary>
+        public static string RubricSummaryName = "冲账";
         /// <summary>
         /// 构造函数
         /// </summary>
@@ -187,7 +191,7 @@ namespace BEDA.CIB.Samples
             var dic = new Dictionary<string, Tuple<STMTTRN, STMTTRN>>();
             if (refundList != null && refundList.Count > 0)
             {
-                refundList = refundList.Where(x => x.BUSINESSTYPE == RefundBusinessType).OrderBy(x => x.DTACCT).ToList();
+                refundList = refundList.Where(x => x.SUMMNAME == RefundSummaryName).OrderBy(x => x.DTACCT).ToList();
                 if (refundList.Count > 0)
                 {
                     if (transList == null || transList.Count == 0)
@@ -197,7 +201,7 @@ namespace BEDA.CIB.Samples
                     var query = from refund in refundList
                                 join trans in transList
                                 on refund.MEMO equals trans.HXJYLSBH
-                                where trans.BUSINESSTYPE == TransactionBusinessType
+                                where trans.SUMMNAME == TransactionSummaryName
                                 select Tuple.Create(trans, refund);
                     dic = query.ToDictionary(k => this._buider.GetIdFromPurpose(k.Item1.PURPOSE), v => v);
                 }
@@ -255,8 +259,8 @@ namespace BEDA.CIB.Samples
             if (list != null && list.Count > 0)
             {
                 //此处判断PURPOSE是否是当前业务组织的PURPOSE
-                list = list.Where(x => (x.BUSINESSTYPE == TransactionBusinessType && this._buider.IsCorrectPurpose(x.PURPOSE))
-                || x.BUSINESSTYPE == ChargesBusinessType).ToList();
+                list = list.Where(x => (x.SUMMNAME == TransactionSummaryName && this._buider.IsCorrectPurpose(x.PURPOSE))
+                || x.SUMMNAME == ChargesSummaryName).ToList();
                 if (list.Count > 0)
                 {
                     var groups = list.GroupBy(x => x.HXJYLSBH);  // new { x.SRVRTID, x.DTACCT }
@@ -265,7 +269,7 @@ namespace BEDA.CIB.Samples
 #endif
                     foreach (var g in groups)
                     {
-                        var trans = g.FirstOrDefault(x => x.BUSINESSTYPE == TransactionBusinessType);
+                        var trans = g.FirstOrDefault(x => x.SUMMNAME == TransactionSummaryName);
                         if (trans == null)
                         {
                             continue;
@@ -276,7 +280,7 @@ namespace BEDA.CIB.Samples
                             continue;
                         }
                         //可能会无需手续费
-                        var charge = g.FirstOrDefault(x => x.BUSINESSTYPE == ChargesBusinessType)?.TRNAMT ?? 0;
+                        var charge = g.FirstOrDefault(x => x.SUMMNAME == ChargesSummaryName)?.TRNAMT ?? 0;
                         dic.Add(id, Tuple.Create(trans, charge));
                     }
                 }
