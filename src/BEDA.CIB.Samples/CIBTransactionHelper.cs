@@ -30,7 +30,7 @@ namespace BEDA.CIB.Samples
         /// </summary>
         public static string ChargesSummaryName = "收费";
         /// <summary>
-        /// 冲账对账的SUMMNAME
+        /// 冲账对应的SUMMNAME
         /// </summary>
         public static string RubricSummaryName = "冲账";
         /// <summary>
@@ -313,7 +313,7 @@ namespace BEDA.CIB.Samples
             return retList;
         }
         /// <summary>
-        /// 根据退票记录获取其对应的交易记录
+        /// 根据冲账记录获取其对应的交易记录
         /// </summary>
         /// <param name="rubricList">冲账流水及冲账手续费</param>
         /// <param name="acctid">当前冲账属于哪个账号</param>
