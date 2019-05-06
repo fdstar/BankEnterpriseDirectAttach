@@ -404,15 +404,15 @@ namespace BEDA.CMB.Contracts.Responses
         /// <summary>
         /// 日限额	F(17,2)
         /// </summary>
-        public decimal DAYMAX { get; set; }
+        public decimal? DAYMAX { get; set; }
         /// <summary>
         /// 日已用限额	F(17,2)
         /// </summary>
-        public decimal DAYUSE { get; set; }
+        public decimal? DAYUSE { get; set; }
         /// <summary>
         /// 日可用限额	F(17,2)
         /// </summary>
-        public decimal DAYOBL { get; set; }
+        public decimal? DAYOBL { get; set; }
         /// <summary>
         /// 限额一周期代码	C(1)    （年-Y；月-M ； 周-W ； 旬-T； 指定时间段-S）
         /// </summary>
@@ -433,11 +433,11 @@ namespace BEDA.CMB.Contracts.Responses
         /// <summary>
         /// 限额一周期限额	F(17,2)
         /// </summary>
-        public decimal PR1AMT { get; set; }
+        public decimal? PR1AMT { get; set; }
         /// <summary>
         /// 限额一本期已用限额	F(17,2)
         /// </summary>
-        public decimal PR1PAT { get; set; }
+        public decimal? PR1PAT { get; set; }
         /// <summary>
         /// 限额一本周期起始日	D
         /// </summary>
@@ -449,7 +449,7 @@ namespace BEDA.CMB.Contracts.Responses
         /// <summary>
         /// 限额一本期可用余额	F(17,2)
         /// </summary>
-        public decimal PR1OBL { get; set; }
+        public decimal? PR1OBL { get; set; }
         /// <summary>
         /// 限额二周期代码	C(1)
         /// </summary>
@@ -470,11 +470,11 @@ namespace BEDA.CMB.Contracts.Responses
         /// <summary>
         /// 限额二周期限额	F(17,2)
         /// </summary>
-        public decimal PR2AMT { get; set; }
+        public decimal? PR2AMT { get; set; }
         /// <summary>
         /// 限额二本期已用限额	F(17,2)
         /// </summary>
-        public decimal PR2PAT { get; set; }
+        public decimal? PR2PAT { get; set; }
         /// <summary>
         /// 限额二本周期起始日	D
         /// </summary>
@@ -486,7 +486,7 @@ namespace BEDA.CMB.Contracts.Responses
         /// <summary>
         /// 限额二本期可用余额	F(17,2)
         /// </summary>
-        public decimal PR2OBL { get; set; }
+        public decimal? PR2OBL { get; set; }
         /// <summary>
         /// 限额协议生效日期	D
         /// </summary>
