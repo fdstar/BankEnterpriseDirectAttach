@@ -56,7 +56,7 @@ namespace BEDA.CMB.Contracts.Requests
         /// </summary>
         public string CTLMAP { get; set; }
         /// <summary>
-        /// 单笔最大限额	F(17,2) 限额设置位图第二位为Y时必输
+        /// 单笔最大限额	F(17,2) 限额设置位图第一位为Y时必输
         /// </summary>
         public decimal? SGNMAX { get; set; }
         /// <summary>
