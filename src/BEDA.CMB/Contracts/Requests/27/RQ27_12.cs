@@ -80,7 +80,6 @@ namespace BEDA.CMB.Contracts.Requests
         public string PR1STR { get; set; }
         /// <summary>
         /// 限额一周期限额	F(17,2) 限额设置位图CTLMAP第3位为Y时不能为0;限额设置位图CTLMAP第3位为N时必须为0
-
         /// </summary>
         public decimal? PR1AMT { get; set; }
         /// <summary>
