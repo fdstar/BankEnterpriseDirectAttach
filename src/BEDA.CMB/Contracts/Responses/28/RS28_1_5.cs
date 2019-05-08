@@ -281,6 +281,10 @@ namespace BEDA.CMB.Contracts.Responses
     public class NTOPRDRXZ1
     {
         /// <summary>
+        /// 原交易套号	C(15)
+        /// </summary>
+        public string SETNBR { get; set; }
+        /// <summary>
         /// 原交易流水号	C(15)
         /// </summary>
         public string TRXNBR { get; set; }

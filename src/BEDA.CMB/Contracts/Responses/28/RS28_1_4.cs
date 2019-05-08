@@ -51,7 +51,7 @@ namespace BEDA.CMB.Contracts.Responses
         /// </summary>
         public string BUSMOD { get; set; }
         /// <summary>
-        /// 操作类型	C(4)	DUMA：新增虚拟户; DUMD：关闭虚拟户; DUPY：付款; DUMR：退款;
+        /// 操作类型	C(4)	DUMA：新增虚拟户; DUMD：关闭虚拟户; DUPY：付款; DUMR：退款; DDMI：内部转账
         /// </summary>
         public string OPRTYP { get; set; }
         /// <summary>
