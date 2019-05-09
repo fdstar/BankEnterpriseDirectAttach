@@ -10,50 +10,50 @@ using System.Xml.Serialization;
 namespace BEDA.CMB.Contracts.Requests
 {
     /// <summary>
-    /// 30.3.速汇易-直连交易批次查询请求主体
+    /// 31.2.内部户MT940业务综合查询请求主体
     /// </summary>
     [XmlRoot("CMBSDKPGK")]
-    public class RQ30_3 : CMBBase<RQINFO>, IRequest<RS30_3>
+    public class RQ31_2 : CMBBase<RQINFO>, IRequest<RS31_2>
     {
         /// <summary>
-        /// NTESPDTY
+        /// NTIAMQYD
         /// </summary>
         /// <returns></returns>
-        public override string GetFUNNAM() => "NTESPDTY";
+        public override string GetFUNNAM() => "NTIAMQYD";
         /// <summary>
-        /// 30.3.速汇易-直连交易批次查询请求内容
+        /// 31.2.内部户MT940业务综合查询请求内容
         /// </summary>
-        public NTESPDTYX NTESPDTYX { get; set; }
+        public NTIAMQYDY1 NTIAMQYDY1 { get; set; }
     }
     /// <summary>
-    /// 30.3.速汇易-直连交易批次查询请求内容
+    /// 31.2.内部户MT940业务综合查询请求内容
     /// </summary>
-    public class NTESPDTYX
+    public class NTIAMQYDY1
     {
         /// <summary>
         /// 业务模式 	C(5)
         /// </summary>
         public string BUSMOD { get; set; }
         /// <summary>
-        /// 起始日期 	D
+        /// 起始日期 	D   开始、结束日期查询间隔范围7天内
         /// </summary>
         [XmlIgnore]
-        public DateTime BGNDAT { get; set; }
+        public DateTime BEGDAT { get; set; }
         /// <summary>
-        /// 起始日期	D, 对应<see cref="BGNDAT"/>
+        /// 起始日期	D, 对应<see cref="BEGDAT"/>
         /// </summary>
-        [XmlElement("BGNDAT")]
-        public string BGNDATStr
+        [XmlElement("BEGDAT")]
+        public string BEGDATStr
         {
             get
             {
-                return this.BGNDAT.ToString("yyyyMMdd");
+                return this.BEGDAT.ToString("yyyyMMdd");
             }
             set
             {
                 if (DateTime.TryParseExact(value, "yyyyMMdd", CultureInfo.CurrentCulture, DateTimeStyles.None, out DateTime tmp))
                 {
-                    this.BGNDAT = tmp;
+                    this.BEGDAT = tmp;
                 }
             }
         }
@@ -80,9 +80,5 @@ namespace BEDA.CMB.Contracts.Requests
                 }
             }
         }
-        /// <summary>
-        /// 日期类型 	C(1)
-        /// </summary>
-        public string DATFLG { get; set; }
     }
 }
