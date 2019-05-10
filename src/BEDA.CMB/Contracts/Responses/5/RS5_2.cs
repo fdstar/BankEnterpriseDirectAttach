@@ -177,5 +177,13 @@ namespace BEDA.CMB.Contracts.Responses
         /// 特殊码	C(30)   开证成功之后才有值。第一位Y表示有电文
         /// </summary>
         public string RSV30Z { get; set; }
+        /// <summary>
+        /// 中介人代码 	C(20)  仅国际信用
+        /// </summary>
+        public string MIDIDT { get; set; }
+        /// <summary>
+        /// 离岸标志	C(1)  仅国际信用
+        /// </summary>
+        public string OSAFLG { get; set; }
     }
 }
