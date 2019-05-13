@@ -11,14 +11,14 @@ namespace BEDA.CMB.Samples
     {
         static void Part_03()
         {
-            //RQ3_3Sample();
-            //RQ3_4Sample();
+            //RQ3_3Sample(); //test
+            //RQ3_4Sample(); //test  但响应内容与API说明有差异
             //RQ3_5Sample();
-            //RQ3_6Sample();
-            //RQ3_7Sample();
-            //RQ3_8Sample();
-            //RQ3_9Sample();
-            //RQ3_10Sample();
+            //RQ3_6Sample(); //test
+            //RQ3_7Sample(); //test
+            //RQ3_8Sample(); //test
+            //RQ3_9Sample(); //test
+            //RQ3_10Sample(); //test
             //RQ3_11Sample();
         }
 
@@ -28,18 +28,24 @@ namespace BEDA.CMB.Samples
         /// </summary>
         public static void RQ3_3Sample()
         {
-            var rq = new RQ3_3()
+            for (var i = 0;i<100 ; i++)
             {
-                NTQRYSTNY1 = new NTQRYSTNY1
+                var rq = new RQ3_3()
                 {
-                    BUSCOD = "N02030",
-                    BUSMOD = "00001",
-                    BGNDAT = DateTime.Now.AddDays(-380),
-                    ENDDAT = DateTime.Now.AddDays(-374)
+                    NTQRYSTNY1 = new NTQRYSTNY1
+                    {
+                        BUSCOD = "N02030",
+                        BUSMOD = "00001",
+                        BGNDAT = DateTime.Now.AddDays(-i * 7 -180),
+                        ENDDAT = DateTime.Now.AddDays(-i * 7 + 6-180)
+                    }//<BGNDAT>20181024</BGNDAT><ENDDAT>20181030</ENDDAT>
+                };
+                var rs = client.Execute<RQ3_3, RS3_3>(rq, "银企直连专用集团1");
+                if (rs.List?.Count > 0)
+                {
+                    Console.WriteLine(rs.INFO.ResponseContent);
                 }
             };
-            var rs = client.Execute<RQ3_3, RS3_3>(rq, loginName);
-            Console.WriteLine(rs.INFO.ResponseContent);
         }
         /// <summary>
         /// 3.4.查询收方限制列表
@@ -49,7 +55,7 @@ namespace BEDA.CMB.Samples
             var rq = new RQ3_4()
             {
             };
-            var rs = client.Execute<RQ3_4, RS3_4>(rq, loginName);
+            var rs = client.Execute<RQ3_4, RS3_4>(rq, "银企直连专用集团1");
             Console.WriteLine(rs.INFO.ResponseContent);
         }
         /// <summary>
@@ -64,7 +70,7 @@ namespace BEDA.CMB.Samples
                     RSTSET = "Z1KJ37I3J4"
                 }
             };
-            var rs = client.Execute<RQ3_5, RS3_5>(rq, loginName);
+            var rs = client.Execute<RQ3_5, RS3_5>(rq, "银企直连专用集团1");
             Console.WriteLine(rs.INFO.ResponseContent);
         }
         /// <summary>
@@ -95,8 +101,8 @@ namespace BEDA.CMB.Samples
                         BNKFLG="Y",
                     }
                 }
-            };
-            var rs = client.Execute<RQ3_6, RS3_6>(rq, loginName);//20190313194710_3.6
+            };//测试环境支付结果为NTE，需要通过日期工具修改时间
+            var rs = client.Execute<RQ3_6, RS3_6>(rq, "银企直连专用集团1");//20190313194710_3.6
             Console.WriteLine(rs.INFO.ResponseContent);
         }
         /// <summary>
@@ -124,8 +130,8 @@ namespace BEDA.CMB.Samples
                         CRTACC="591902896810104",
                     }
                 }
-            };
-            var rs = client.Execute<RQ3_7, RS3_7>(rq, loginName);//20190313200139_3.7
+            };//测试环境支付结果为NTE，需要通过日期工具修改时间
+            var rs = client.Execute<RQ3_7, RS3_7>(rq, "银企直连专用集团1");//20190313200139_3.7
             Console.WriteLine(rs.INFO.ResponseContent);
         }
         /// <summary>
@@ -160,9 +166,12 @@ namespace BEDA.CMB.Samples
                     }
                 }
             };
-            var rs = client.Execute<RQ3_8, RS3_8>(rq, loginName);//20190313202944_3.8
+            var rs = client.Execute<RQ3_8, RS3_8>(rq, "银企直连专用集团1");//20190313202944_3.8
             Console.WriteLine(rs.INFO.ResponseContent);
         }
+        /// <summary>
+        /// 3.9.批量查询支付信息
+        /// </summary>
         public static void RQ3_9Sample()
         {
             var rq = new RQ3_9()
@@ -180,7 +189,7 @@ namespace BEDA.CMB.Samples
                     },
                 }
             };
-            var rs = client.Execute<RQ3_9, RS3_9>(rq, loginName);
+            var rs = client.Execute<RQ3_9, RS3_9>(rq, "银企直连专用集团1");
             Console.WriteLine(rs.INFO.ResponseContent);
         }
         /// <summary>
@@ -192,9 +201,12 @@ namespace BEDA.CMB.Samples
             {
                 NTBUSMODY = new NTBUSMODY()
             };
-            var rs = client.Execute<RQ3_10, RS3_10>(rq, loginName);
+            var rs = client.Execute<RQ3_10, RS3_10>(rq, "银企直连专用集团1");
             Console.WriteLine(rs.INFO.ResponseContent);
         }
+        /// <summary>
+        /// 3.11.支付结果列表查询-按业务参考号
+        /// </summary>
         public static void RQ3_11Sample()
         {
             var rq = new RQ3_11()
@@ -203,11 +215,11 @@ namespace BEDA.CMB.Samples
                 {
                     BUSCOD = "N02031",
                     YURREF = "20190313194710_3.6",
-                    BGNDAT = new DateTime(2018, 03, 15),
-                    ENDDAT = new DateTime(2018, 03, 17)
+                    BGNDAT = new DateTime(2018, 03, 16),
+                    ENDDAT = new DateTime(2018, 03, 22)
                 }
             };
-            var rs = client.Execute<RQ3_11, RS3_11>(rq, loginName);
+            var rs = client.Execute<RQ3_11, RS3_11>(rq, "银企直连专用集团1");
             Console.WriteLine(rs.INFO.ResponseContent);
         }
         #endregion

@@ -25,7 +25,7 @@ namespace BEDA.CMB.Samples
         public static void RQ1_4Sample()
         {
             var rq = new RQ1_4();
-            var rs = client.Execute<RQ1_4, RS1_4>(rq, loginName);
+            var rs = client.Execute<RQ1_4, RS1_4>(rq, "银企直连专用集团1");
             Console.WriteLine(rs.INFO.ResponseContent);
         }
         /// <summary>
@@ -37,7 +37,7 @@ namespace BEDA.CMB.Samples
             {
                 SDKSYINFX = new SDKSYINFX()
             };
-            var rs = client.Execute<RQ1_5, RS1_5>(rq, loginName);
+            var rs = client.Execute<RQ1_5, RS1_5>(rq, "银企直连专用集团1");
             Console.WriteLine(rs.INFO.ResponseContent);
         }
         /// <summary>
@@ -52,7 +52,7 @@ namespace BEDA.CMB.Samples
                     BUSCOD = "N02030"
                 }
             };
-            var rs = client.Execute<RQ1_6, RS1_6>(rq, loginName);
+            var rs = client.Execute<RQ1_6, RS1_6>(rq, "银企直连专用集团1");
             var txt = string.Join("\r", rs.List.Select(x => x.BUSMOD));
             Console.WriteLine(rs.INFO.ResponseContent);
         }
@@ -75,7 +75,7 @@ namespace BEDA.CMB.Samples
                     //NCBUSFIN
                 }
             };
-            var rs = client.Execute<RQ1_8, RS1_8>(rq, loginName);
+            var rs = client.Execute<RQ1_8, RS1_8>(rq, "银企直连专用集团1");
             var txt1 = string.Join("\r", rs.NCDRTPAYList?.Select(x => x.BBKNBR + "," + x.KEYVAL).Distinct());
             var txt2 = string.Join("\r", rs.NCCRTTRSList?.Select(x => x.BBKNBR + "," + x.ACCNBR).Distinct());
             var txt3 = string.Join("\r", rs.NCDBTTRSList?.Select(x => x.BBKNBR + "," + x.ACCNBR).Distinct());
@@ -101,7 +101,7 @@ namespace BEDA.CMB.Samples
                     //NCBUSFIN
                 }
             };
-            var rs = client.Execute<RQ1_9, RS1_9>(rq, loginName);
+            var rs = client.Execute<RQ1_9, RS1_9>(rq, "银企直连专用集团1");
             Console.WriteLine(rs.INFO.ResponseContent);
         }
         #endregion

@@ -30,7 +30,6 @@ namespace BEDA.CMB.Samples
         }
 
         #region 基础部分
-        const string loginName = "银企直连专用集团1";
         const string ip = "127.0.0.1";
         const int port = 8082;
         public static ICMBClient client = new CMBClient(ip, port);

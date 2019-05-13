@@ -37,7 +37,7 @@ namespace BEDA.CMB.Samples
                     ACCNBR = "591902896710201",
                 }
             };
-            var rs = client.Execute<RQ4_1, RS4_1>(rq, loginName);
+            var rs = client.Execute<RQ4_1, RS4_1>(rq, "银企直连专用集团1");
             Console.WriteLine(rs.INFO.ResponseContent);
         }
         /// <summary>
@@ -70,7 +70,7 @@ namespace BEDA.CMB.Samples
                     }
                 }
             };
-            var rs = client.Execute<RQ4_2, RS4_2>(rq, loginName);
+            var rs = client.Execute<RQ4_2, RS4_2>(rq, "银企直连专用集团1");
             Console.WriteLine(rs.INFO.ResponseContent);//REQNBR>0030103687</REQNBR
         }
         /// <summary>
@@ -88,7 +88,7 @@ namespace BEDA.CMB.Samples
                     ENDDAT = new DateTime(2018, 3, 20),
                 }
             };
-            var rs = client.Execute<RQ4_3, RS4_3>(rq, loginName);
+            var rs = client.Execute<RQ4_3, RS4_3>(rq, "银企直连专用集团1");
             Console.WriteLine(rs.INFO.ResponseContent);
         }
         /// <summary>
@@ -103,7 +103,7 @@ namespace BEDA.CMB.Samples
                     REQNBR = "0030103687"
                 }
             };
-            var rs = client.Execute<RQ4_4, RS4_4>(rq, loginName);
+            var rs = client.Execute<RQ4_4, RS4_4>(rq, "银企直连专用集团1");
             Console.WriteLine(rs.INFO.ResponseContent);
         }
         /// <summary>
@@ -119,7 +119,7 @@ namespace BEDA.CMB.Samples
                     BBKNBR = "59"
                 }
             };
-            var rs = client.Execute<RQ4_5, RS4_5>(rq, loginName);
+            var rs = client.Execute<RQ4_5, RS4_5>(rq, "银企直连专用集团1");
             Console.WriteLine(rs.INFO.ResponseContent);
         }
         /// <summary>
@@ -164,7 +164,7 @@ namespace BEDA.CMB.Samples
                     }
                 }
             };
-            var rs = client.Execute<RQ4_6, RS4_6>(rq, loginName);
+            var rs = client.Execute<RQ4_6, RS4_6>(rq, "银企直连专用集团1");
             Console.WriteLine(rs.INFO.ResponseContent);//<REQNBR>0030103753</REQNBR>
         }
         /// <summary>
@@ -209,7 +209,7 @@ namespace BEDA.CMB.Samples
                     }
                 }
             };
-            var rs = client.Execute<RQ4_7, RS4_7>(rq, loginName);
+            var rs = client.Execute<RQ4_7, RS4_7>(rq, "银企直连专用集团1");
             Console.WriteLine(rs.INFO.ResponseContent);//<REQNBR>0030103771</REQNBR>
         }
         /// <summary>
@@ -287,7 +287,7 @@ namespace BEDA.CMB.Samples
                     ENDDAT = new DateTime(2018, 3, 20),
                 }
             };
-            var rs = client.Execute<RQ4_10, RS4_10>(rq, loginName);
+            var rs = client.Execute<RQ4_10, RS4_10>(rq, "银企直连专用集团1");
             Console.WriteLine(rs.INFO.ResponseContent);
         }
         #endregion

@@ -36,7 +36,7 @@ namespace BEDA.CMB.Samples
                     BUSMOD = "00001"
                 }
             };
-            var rs = client.Execute<RQ2_1, RS2_1>(rq, loginName);
+            var rs = client.Execute<RQ2_1, RS2_1>(rq, "银企直连专用集团1");
             var txt = string.Join("\r", rs.List.Select(x => x.BBKNBR + "," + x.ACCNBR));
             Console.WriteLine(rs.INFO.ResponseContent);
         }
@@ -59,7 +59,7 @@ namespace BEDA.CMB.Samples
                    }
                 }
             };
-            var rs = client.Execute<RQ2_2, RS2_2>(rq, loginName);
+            var rs = client.Execute<RQ2_2, RS2_2>(rq, "银企直连专用集团1");
             Console.WriteLine(rs.INFO.ResponseContent);
         }
         /// <summary>
@@ -77,7 +77,7 @@ namespace BEDA.CMB.Samples
                     ENDDAT = DateTime.Now.AddYears(-1).AddDays(-1),
                 }
             };
-            var rs = client.Execute<RQ2_3, RS2_3>(rq, loginName);
+            var rs = client.Execute<RQ2_3, RS2_3>(rq, "银企直连专用集团1");
             Console.WriteLine(rs.INFO.ResponseContent);
         }
         /// <summary>
@@ -94,7 +94,7 @@ namespace BEDA.CMB.Samples
                     TRSDAT = DateTime.Now.AddDays(-370),
                 }
             };
-            var rs = client.Execute<RQ2_4, RS2_4>(rq, loginName);
+            var rs = client.Execute<RQ2_4, RS2_4>(rq, "银企直连专用集团1");
             Console.WriteLine(rs.INFO.ResponseContent);
         }
         /// <summary>
@@ -112,7 +112,7 @@ namespace BEDA.CMB.Samples
                     ENDDAT = DateTime.Now.AddYears(-1).AddDays(-5)
                 }
             };
-            var rs = client.Execute<RQ2_5, RS2_5>(rq, loginName);
+            var rs = client.Execute<RQ2_5, RS2_5>(rq, "银企直连专用集团1");
             Console.WriteLine(rs.INFO.ResponseContent);
         }
         /// <summary>
@@ -127,7 +127,7 @@ namespace BEDA.CMB.Samples
                     ACCNBR = ""
                 }
             };
-            var rs = client.Execute<RQ2_6, RS2_6>(rq, loginName);
+            var rs = client.Execute<RQ2_6, RS2_6>(rq, "银企直连专用集团1");
             Console.WriteLine(rs.INFO.ResponseContent);
         }
         /// <summary>
@@ -145,7 +145,7 @@ namespace BEDA.CMB.Samples
                     RRCFLG = 1,
                 }
             };
-            var rs = client.Execute<RQ2_7, RS2_7>(rq, loginName);
+            var rs = client.Execute<RQ2_7, RS2_7>(rq, "银企直连专用集团1");
             Console.WriteLine(rs.INFO.ResponseContent);
         }
         /// <summary>
@@ -163,7 +163,7 @@ namespace BEDA.CMB.Samples
                     RRCFLG = 1,
                 }
             };
-            var rs = client.Execute<RQ2_8, RS2_8>(rq, loginName);
+            var rs = client.Execute<RQ2_8, RS2_8>(rq, "银企直连专用集团1");
             Console.WriteLine(rs.INFO.ResponseContent);
         }
         /// <summary>
@@ -185,7 +185,7 @@ namespace BEDA.CMB.Samples
                    }
                 }
             };
-            var rs = client.Execute<RQ2_9, RS2_9>(rq, loginName);
+            var rs = client.Execute<RQ2_9, RS2_9>(rq, "银企直连专用集团1");
             Console.WriteLine(rs.INFO.ResponseContent);
         }
         #endregion
