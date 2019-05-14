@@ -11,16 +11,16 @@ namespace BEDA.CMB.Samples
     {
         static void Part_04()
         {
-            //RQ4_1Sample();
-            //RQ4_2Sample();
-            //RQ4_3Sample();
-            //RQ4_4Sample();
-            //RQ4_5Sample();
-            //RQ4_6Sample();
-            //RQ4_7Sample();
-            //RQ4_8Sample();
-            //RQ4_9Sample();
-            //RQ4_10Sample();
+            //RQ4_1Sample(); //test
+            //RQ4_2Sample(); //test
+            //RQ4_3Sample(); //test
+            //RQ4_4Sample(); //test
+            //RQ4_5Sample(); //test
+            //RQ4_6Sample(); //test
+            //RQ4_7Sample(); //test
+            //RQ4_8Sample(); //test
+            //RQ4_9Sample(); //test
+            //RQ4_10Sample(); //test
         }
 
         #region 4.代发代扣

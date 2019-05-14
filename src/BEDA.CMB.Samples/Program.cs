@@ -22,7 +22,8 @@ namespace BEDA.CMB.Samples
             Part_04();
 
 
-
+            //17.记账宝
+            Part_17();
             //21.网银互联
             Part_21();
 

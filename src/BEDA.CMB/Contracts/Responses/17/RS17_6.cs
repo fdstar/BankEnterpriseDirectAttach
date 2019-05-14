@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BEDA.Utils;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -64,7 +65,23 @@ namespace BEDA.CMB.Contracts.Responses
         /// <summary>
         /// 交易金额	M
         /// </summary>
+        [XmlIgnore]
         public decimal TRXAMT { get; set; }
+        /// <summary>
+        /// 交易金额	M, 对应<see cref="TRXAMT"/>
+        /// </summary>
+        [XmlElement("TRXAMT")]
+        public string TRXAMTStr
+        {
+            get
+            {
+                return this.TRXAMT.ToString();
+            }
+            set
+            {
+                this.TRXAMT = value.TryConvert<decimal>() ?? 0;
+            }
+        }
         /// <summary>
         /// 交易方向	C(1)
         /// </summary>
