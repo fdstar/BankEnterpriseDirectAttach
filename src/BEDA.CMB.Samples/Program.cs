@@ -21,9 +21,12 @@ namespace BEDA.CMB.Samples
             //4.代发代扣
             Part_04();
 
+            //11.代理清算
+            Part_11();
 
             //17.记账宝
             Part_17();
+
             //21.网银互联
             Part_21();
 
