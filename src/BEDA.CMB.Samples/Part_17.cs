@@ -34,6 +34,13 @@ namespace BEDA.CMB.Samples
             //RQ17_21Sample(); //test
             //RQ17_22Sample(); //test
             //RQ17_23Sample(); //test
+            //RQ17_24Sample(); //test
+            //RQ17_25Sample(); //test
+            //RQ17_26Sample(); //test
+            //RQ17_27Sample(); //test
+            //RQ17_28Sample(); //test
+            //RQ17_29Sample(); //test
+            //RQ17_30Sample(); //test
         }
 
         #region 17.记账宝
@@ -482,6 +489,134 @@ namespace BEDA.CMB.Samples
                 }
             };
             var rs = client.Execute<RQ17_23, RS17_23>(rq, "银企直连测试用户110");
+            Console.WriteLine(rs.INFO.ResponseContent);
+        }
+        /// <summary>
+        /// 17.24.查询虚拟户关联公司卡列表(续传)
+        /// </summary>
+        public static void RQ17_24Sample()
+        {
+            var rq = new RQ17_24()
+            {
+                NTDCDRLDX1 = new NTDCDRLDX1
+                {
+                    BBKNBR = "75",
+                    ACCNBR = "755915712310806",
+                    DMANBR = "8199991567",
+                }
+            };
+            var rs = client.Execute<RQ17_24, RS17_24>(rq, "银企直连测试用户110");
+            Console.WriteLine(rs.INFO.ResponseContent);
+        }
+        /// <summary>
+        /// 17.25.单笔设置公司卡关联付方账号
+        /// </summary>
+        public static void RQ17_25Sample()
+        {
+            var rq = new RQ17_25()
+            {
+                NTDMDRADX1 = new NTDMDRADX1
+                {
+                    BBKNBR = "75",
+                    ACCNBR = "755915712310806",
+                    DMANBR = "8199991567",
+                    CDSNBR = "6225985910200821",
+                    TLYOPR = "N",
+                    DBTACC= "755915712310806"
+                }
+            };
+            var rs = client.Execute<RQ17_25, RS17_25>(rq, "银企直连测试用户110");
+            Console.WriteLine(rs.INFO.ResponseContent);
+        }
+        /// <summary>
+        /// 17.26.单笔设置公司卡非关联付方账号的入账方式
+        /// </summary>
+        public static void RQ17_26Sample()
+        {
+            var rq = new RQ17_26()
+            {
+                NTDMDRMDX1 = new NTDMDRMDX1
+                {
+                    BBKNBR = "75",
+                    ACCNBR = "755915712310806",
+                    DMANBR = "8199991567",
+                    CDSNBR = "6225985910200821",
+                    TLYOPR = "N",
+                }
+            };
+            var rs = client.Execute<RQ17_26, RS17_26>(rq, "银企直连测试用户110");
+            Console.WriteLine(rs.INFO.ResponseContent);
+        }
+        /// <summary>
+        /// 17.27.删除公司卡关联付款方信息请求报文说明请求主体
+        /// </summary>
+        public static void RQ17_27Sample()
+        {
+            var rq = new RQ17_27()
+            {
+                NTDMDRDDX1 = new NTDMDRDDX1
+                {
+                    BBKNBR = "75",
+                    ACCNBR = "755915712310806",
+                    DMANBR = "8199991567",
+                    CDSNBR = "6225985910200821",
+                    DBTACC = "755915712310806",
+                }
+            };
+            var rs = client.Execute<RQ17_27, RS17_27>(rq, "银企直连测试用户110");
+            Console.WriteLine(rs.INFO.ResponseContent);
+        }
+        /// <summary>
+        /// 17.28.查询公司卡关联付款方信息
+        /// </summary>
+        public static void RQ17_28Sample()
+        {
+            var rq = new RQ17_28()
+            {
+                NTDMDRQDX1 = new NTDMDRQDX1
+                {
+                    BBKNBR = "75",
+                    ACCNBR = "755915712310806",
+                }
+            };
+            var rs = client.Execute<RQ17_28, RS17_28>(rq, "银企直连测试用户110");
+            Console.WriteLine(rs.INFO.ResponseContent);
+        }
+        /// <summary>
+        /// 17.29.查询所有虚拟户的某日余额
+        /// </summary>
+        public static void RQ17_29Sample()
+        {
+            var rq = new RQ17_29()
+            {
+                NTDMAHBDX1 = new NTDMAHBDX1
+                {
+                    BBKNBR = "75",
+                    ACCNBR = "755915712310806",
+                    QRYDAT= DateTime.Now.AddDays(-200),
+                    DMANBR= "1804240005",
+                }
+            };
+            var rs = client.Execute<RQ17_29, RS17_29>(rq, "银企直连测试用户110");
+            Console.WriteLine(rs.INFO.ResponseContent);
+        }
+        /// <summary>
+        /// 17.30.查询单个虚拟户的历史余额
+        /// </summary>
+        public static void RQ17_30Sample()
+        {
+            var rq = new RQ17_30()
+            {
+                NTDMAHADX1 = new NTDMAHADX1
+                {
+                    BBKNBR = "75",
+                    ACCNBR = "755915712310806",
+                    DMANBR = "1804240005",
+                    BEGDAT = DateTime.Now.AddMonths(-12),
+                    ENDDAT= DateTime.Now.AddMonths(-11),
+                }
+            };
+            var rs = client.Execute<RQ17_30, RS17_30>(rq, "银企直连测试用户110");
             Console.WriteLine(rs.INFO.ResponseContent);
         }
         #endregion
