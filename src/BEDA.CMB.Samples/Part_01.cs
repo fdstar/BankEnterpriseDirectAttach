@@ -65,9 +65,9 @@ namespace BEDA.CMB.Samples
             {
                 FBDLRHMGX = new FBDLRHMGX
                 {
-                    BGNDAT = DateTime.Now.AddDays(-7),
+                    BGNDAT = DateTime.Now.AddDays(-100),
                     ENDDAT = DateTime.Now,
-                    //MSGTYP = "NCBUSFIN"
+                    MSGTYP = "NCBUSFINY"
                     //NCBCHOPR 
                     //NCDRTPAY  
                     //NCCRTTRS
@@ -76,9 +76,17 @@ namespace BEDA.CMB.Samples
                 }
             };
             var rs = client.Execute<RQ1_8, RS1_8>(rq, "银企直连专用集团1");
-            var txt1 = string.Join("\r", rs.NCDRTPAYList?.Select(x => x.BBKNBR + "," + x.KEYVAL).Distinct());
-            var txt2 = string.Join("\r", rs.NCCRTTRSList?.Select(x => x.BBKNBR + "," + x.ACCNBR).Distinct());
-            var txt3 = string.Join("\r", rs.NCDBTTRSList?.Select(x => x.BBKNBR + "," + x.ACCNBR).Distinct());
+            var 批量支付和批量代理清算 = string.Join("\r", rs.NCBCHOPRList?.Select(x => x.FLWTYP + "," + x.FLWCOD + "," + x.MSGNBR + "," + x.RSTSET).Distinct());
+            /*
+N02031,00001,201905060000007094,ZZQKE4DFMC
+N02031,00001,201905070000007331,Z0JPY7DFL7
+N02031,00001,201905070000007373,Z0LKP7DFL9
+N02031,00001,201905070000007376,Z0LKX5DFL8
+N02031,00001,201905070000007377,Z0LKY1DFMB
+             */
+            var 直接支付结果通知 = string.Join("\r", rs.NCDRTPAYList?.Select(x => x.BBKNBR + "," + x.KEYVAL).Distinct());
+            var 到帐通知 = string.Join("\r", rs.NCCRTTRSList?.Select(x => x.BBKNBR + "," + x.ACCNBR).Distinct());
+            var 付款通知 = string.Join("\r", rs.NCDBTTRSList?.Select(x => x.BBKNBR + "," + x.ACCNBR).Distinct());
             Console.WriteLine(rs.INFO.ResponseContent);
         }
         /// <summary>
@@ -90,9 +98,9 @@ namespace BEDA.CMB.Samples
             {
                 DCHISMSGX = new DCHISMSGX
                 {
-                    BGNDAT = DateTime.Now.AddDays(-100),
-                    ENDDAT = DateTime.Now,
-                    RECNUM = "100",
+                    BGNDAT = DateTime.Now.AddMonths(-8),
+                    ENDDAT = DateTime.Now.AddMonths(-7),
+                    RECNUM = "500",
                     MSGTYP = "NCBCHOPR"
                     //NCBCHOPR 
                     //NCDRTPAY  

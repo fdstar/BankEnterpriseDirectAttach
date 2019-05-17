@@ -13,7 +13,7 @@ namespace BEDA.CMB.Samples
         {
             //RQ3_3Sample(); //test
             //RQ3_4Sample(); //test  但响应内容与API说明有差异
-            //RQ3_5Sample();
+            //RQ3_5Sample(); //test
             //RQ3_6Sample(); //test
             //RQ3_7Sample(); //test
             //RQ3_8Sample(); //test
@@ -86,7 +86,7 @@ YURREF	@KDd8l24818
             {
                 SDQPYRSTX = new SDQPYRSTX
                 {
-                    RSTSET = "Z1KJ37I3J4"
+                    RSTSET = "ZZQKE4DFMC"
                 }
             };
             var rs = client.Execute<RQ3_5, RS3_5>(rq, "银企直连专用集团1");
