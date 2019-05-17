@@ -15,10 +15,10 @@ namespace BEDA.CMB.Contracts.Responses
     public class RS3_11 : CMBBase<RSINFO>, IResponse
     {
         /// <summary>
-        /// NTQRYSTN
+        /// NTQRYSTY
         /// </summary>
         /// <returns></returns>
-        public override string GetFUNNAM() => "NTQRYSTN";
+        public override string GetFUNNAM() => "NTQRYSTY";
         /// <summary>
         /// 3.11.支付结果列表查询-按业务参考号响应集合
         /// </summary>

@@ -19,7 +19,7 @@ namespace BEDA.CMB.Samples
             //RQ3_8Sample(); //test
             //RQ3_9Sample(); //test
             //RQ3_10Sample(); //test
-            //RQ3_11Sample();
+            //RQ3_11Sample(); //test
         }
 
         #region 3.支付结算
@@ -36,8 +36,8 @@ namespace BEDA.CMB.Samples
                     {
                         BUSCOD = "N02030",
                         BUSMOD = "00001",
-                        BGNDAT = DateTime.Now.AddDays(-i * 7 -180),
-                        ENDDAT = DateTime.Now.AddDays(-i * 7 + 6-180)
+                        BGNDAT = DateTime.Now.AddDays(-i * 7 - 180),
+                        ENDDAT = DateTime.Now.AddDays(-i * 7 + 6 - 180),
                     }//<BGNDAT>20181024</BGNDAT><ENDDAT>20181030</ENDDAT>
                 };
                 var rs = client.Execute<RQ3_3, RS3_3>(rq, "银企直连专用集团1");
@@ -45,6 +45,25 @@ namespace BEDA.CMB.Samples
                 {
                     Console.WriteLine(rs.INFO.ResponseContent);
                 }
+                /*
+rs.List.Where(x=>x.REQSTS=="FIN"&& (x.RTNFLG=="S" || x.RTNFLG=="B"||x.RTNFLG=="T")).ToList()
+20181020
+
+REQNBR  0030184330
+YURREF	X020022019040315_0_01
+
+REQNBR	0030184162
+YURREF	X020022019040308_0_01
+
+20180412
+
+REQNBR	0030177005
+YURREF	X020022019040013_0_01
+
+20180411
+REQNBR	0030165610
+YURREF	@KDd8l24818
+                 */
             };
         }
         /// <summary>
@@ -213,10 +232,10 @@ namespace BEDA.CMB.Samples
             {
                 NTQRYSTYX1 = new NTQRYSTYX1
                 {
-                    BUSCOD = "N02031",
-                    YURREF = "20190313194710_3.6",
-                    BGNDAT = new DateTime(2018, 03, 16),
-                    ENDDAT = new DateTime(2018, 03, 22)
+                    BUSCOD = "N02030",
+                    YURREF = "X020022019040315_0_01",
+                    BGNDAT = new DateTime(2018, 10, 15),
+                    ENDDAT = new DateTime(2018, 10, 21)
                 }
             };
             var rs = client.Execute<RQ3_11, RS3_11>(rq, "银企直连专用集团1");
