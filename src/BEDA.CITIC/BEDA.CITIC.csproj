@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net452;netstandard2.0</TargetFrameworks>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
+    <Version>0.1.0</Version>
+    <Authors>DongFang</Authors>
+    <Product>中信银行银企直联</Product>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BEDA\BEDA.csproj" />
+  </ItemGroup>
+
+
+</Project>

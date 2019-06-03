@@ -33,10 +33,12 @@ namespace BEDA.Utils
             }
             using (MemoryStream stream = new MemoryStream())
             {
-                XmlWriterSettings xws = new XmlWriterSettings();
-                xws.Indent = true;
-                xws.OmitXmlDeclaration = !showDeclaration;
-                xws.Encoding = encoding;
+                XmlWriterSettings xws = new XmlWriterSettings
+                {
+                    Indent = true,
+                    OmitXmlDeclaration = !showDeclaration,
+                    Encoding = encoding
+                };
                 using (XmlWriter xtw = XmlWriter.Create(stream, xws))
                 {
                     XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
