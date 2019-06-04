@@ -12,13 +12,13 @@ namespace BEDA.CITIC.Contracts.Responses
     /// 余额查询响应内容
     /// </summary>
     [XmlRoot("stream")]
-    public class RS_DLBALQRY : RsBase<AccountBalance>
+    public class RS_DLBALQRY : RsBase<AccBal>
     {
     }
     /// <summary>
     /// 账户余额信息
     /// </summary>
-    public class AccountBalance
+    public class AccBal
     {
         /// <summary>
         /// 账户状态 char(7)

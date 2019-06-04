@@ -10,16 +10,16 @@ using System.Xml.Serialization;
 namespace BEDA.CITIC.Contracts.Requests
 {
     /// <summary>
-    /// 账户明细信息查询请求内容
+    /// 账户明细概要信息查询请求内容
     /// </summary>
     [XmlRoot("stream")]
-    public class RQ_DLTRNALL : RqBase<EmptyBody, RS_DLTRNALL>
+    public class RQ_DLTRNCOL : RqBase<EmptyBody, RS_DLTRNCOL>
     {
         /// <summary>
         /// 业务对应请求代码
         /// </summary>
         [XmlElement("action")]
-        public override string Action { get => "DLTRNALL"; set { } }
+        public override string Action { get => "DLTRNCOL"; set { } }
         /// <summary>
         /// 账号char(19)
         /// </summary>

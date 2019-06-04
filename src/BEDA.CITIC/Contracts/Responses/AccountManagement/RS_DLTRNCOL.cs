@@ -9,10 +9,10 @@ using System.Xml.Serialization;
 namespace BEDA.CITIC.Contracts.Responses
 {
     /// <summary>
-    /// 账户明细信息查询响应内容
+    /// 账户明细概要信息查询响应内容
     /// </summary>
     [XmlRoot("stream")]
-    public class RS_DLTRNALL : RsBase<AccTran>
+    public class RS_DLTRNCOL : RsBase<AccTranSummary>
     {
         /// <summary>
         /// 账号char(19)
@@ -41,46 +41,33 @@ namespace BEDA.CITIC.Contracts.Responses
         public int ReturnRecords { get; set; }
     }
     /// <summary>
-    /// 账户交易明细信息
+    /// 账户交易明细概要信息
     /// </summary>
-    public class AccTran
+    public class AccTranSummary
     {
         /// <summary>
-        /// 交易日期 char(8) 格式YYYYMMDD
-        /// </summary>
-        [XmlElement("tranDate")]
-        public string TranDate { get; set; }
-        /// <summary>
-        /// 交易时间 char(6) 格式hhmmss
-        /// </summary>
-        [XmlElement("tranTime")]
-        public string TranTime { get; set; }
-        /// <summary>
-        /// 交易时间 由<see cref="TranDate"/>和<see cref="TranTime"/>组成
+        /// 交易日期 char(8)
         /// </summary>
         [XmlIgnore]
-        public DateTime? TransactionTime
+        public DateTime TranDate { get; set; }
+        /// <summary>
+        /// 交易日期 char(8), 对应<see cref="TranDate"/>
+        /// </summary>
+        [XmlElement("tranDate")]
+        public string TranDateStr
         {
             get
             {
-                if (DateTime.TryParseExact(string.Format("{0}{1}", this.TranDate, this.TranTime),
-                   new string[] { "yyyyMMdd", "yyyyMMddHHmmss" }, CultureInfo.CurrentCulture, DateTimeStyles.None, out DateTime tmp))
+                return this.TranDate.ToString("yyyyMMdd");
+            }
+            set
+            {
+                if (DateTime.TryParseExact(value, "yyyyMMdd", CultureInfo.CurrentCulture, DateTimeStyles.None, out DateTime tmp))
                 {
-                    return tmp;
+                    this.TranDate = tmp;
                 }
-                return null;
             }
         }
-        /// <summary>
-        /// 柜员交易号 char(14)
-        /// </summary>
-        [XmlElement("tranNo")]
-        public string TranNo { get; set; }
-        /// <summary>
-        /// 总交易流水号 char(13)
-        /// </summary>
-        [XmlElement("sumTranNo")]
-        public string SumTranNo { get; set; }
         /// <summary>
         /// 交易金额 decimal(15,2)
         /// </summary>
@@ -102,73 +89,30 @@ namespace BEDA.CITIC.Contracts.Responses
         [XmlElement("oppAccountName")]
         public string OppAccountName { get; set; }
         /// <summary>
-        /// 对方开户行名 varchar(122)
-        /// </summary>
-        [XmlElement("oppOpenBankName")]
-        public string OppOpenBankName { get; set; }
-        /// <summary>
         /// 摘要 varchar(102)
         /// </summary>
         [XmlElement("abstract")]
         public string Abstract { get; set; }
         /// <summary>
-        /// 现转标识 0：现金；1：转帐 char(1)
+        /// 柜员交易号 char(14)
         /// </summary>
-        [XmlElement("cashTransferFlag")]
-        public string CashTransferFlag { get; set; }
+        [XmlElement("tranNo")]
+        public string TranNo { get; set; }
         /// <summary>
-        /// 网银制单员 char(20)
+        /// 总交易流水号 char(13)
         /// </summary>
-        [XmlElement("opId")]
-        public string OpId { get; set; }
+        [XmlElement("sumTranNo")]
+        public string SumTranNo { get; set; }
         /// <summary>
-        /// 制单员姓名 varchar(20)
+        /// 凭证种类 char(2)
         /// </summary>
-        [XmlElement("opName")]
-        public string OpName { get; set; }
+        [XmlElement("voucherType")]
+        public string VoucherType { get; set; }
         /// <summary>
-        /// 网银审核员char(20)
+        /// 凭证号varchar(20)
         /// </summary>
-        [XmlElement("ckId")]
-        public string CkId { get; set; }
-        /// <summary>
-        /// 审核员姓名varchar(20)
-        /// </summary>
-        [XmlElement("ckName")]
-        public string CkName { get; set; }
-        /// <summary>
-        /// 账户余额 decimal(15,2)
-        /// </summary>
-        [XmlElement("balance")]
-        public decimal Balance { get; set; }
-        /// <summary>
-        /// 起息日期 char(8)
-        /// </summary>
-        [XmlIgnore]
-        public DateTime ValueDate { get; set; }
-        /// <summary>
-        /// 起息日期 char(8), 对应<see cref="ValueDate"/>
-        /// </summary>
-        [XmlElement("valueDate")]
-        public string ValueDateStr
-        {
-            get
-            {
-                return this.ValueDate.ToString("yyyyMMdd");
-            }
-            set
-            {
-                if (DateTime.TryParseExact(value, "yyyyMMdd", CultureInfo.CurrentCulture, DateTimeStyles.None, out DateTime tmp))
-                {
-                    this.ValueDate = tmp;
-                }
-            }
-        }
-        /// <summary>
-        /// 主机交易码 varchar(7)
-        /// </summary>
-        [XmlElement("hostTranCode")]
-        public string HostTranCode { get; set; }
+        [XmlElement("voucherName")]
+        public string VoucherName { get; set; }
         /// <summary>
         /// 退汇日期 char(8)，格式YYYYMMDD
         /// </summary>
@@ -197,41 +141,6 @@ namespace BEDA.CITIC.Contracts.Responses
         /// </summary>
         [XmlElement("e3rtFlag")]
         public string E3rtFlag { get; set; }
-        /// <summary>
-        /// 付款原有金额decimal (15,2)，仅当查询账号为信银国际账号时返回
-        /// </summary>
-        [XmlElement("oriDebitAmt")]
-        public string OriDebitAmt { get; set; }
-        /// <summary>
-        /// 付款原有币种char(2) ，仅当查询账号为信银国际账号时返回
-        /// </summary>
-        [XmlElement("oriDebitCry")]
-        public string OriDebitCry { get; set; }
-        /// <summary>
-        /// 收款原有金额decimal(15,2) ，仅当查询账号为信银国际账号时返回
-        /// </summary>
-        [XmlElement("oriCreditAmt")]
-        public string OriCreditAmt { get; set; }
-        /// <summary>
-        /// 收款原有币种char(2) ，仅当查询账号为信银国际账号时返回
-        /// </summary>
-        [XmlElement("oriCreditCry")]
-        public string OriCreditCry { get; set; }
-        /// <summary>
-        /// 交易币种char(2) ，仅当查询账号为信银国际账号时返回
-        /// </summary>
-        [XmlElement("traCryType")]
-        public string TraCryType { get; set; }
-        /// <summary>
-        /// 信银国际交易参考号varchar(35) ，仅当查询账号为信银国际账号时返回
-        /// </summary>
-        [XmlElement("tranRefNo")]
-        public string TranRefNo { get; set; }
-        /// <summary>
-        /// 客户流水号char(20)，当查询账号为信银国际账号时返回
-        /// </summary>
-        [XmlElement("clientId")]
-        public string ClientId { get; set; }
         /// <summary>
         /// 对账编号char(20)，当客户上送controlFlag标签并且字段值为1时返回
         /// </summary>
@@ -271,5 +180,10 @@ namespace BEDA.CITIC.Contracts.Responses
         /// </summary>
         [XmlElement("rfTranNo")]
         public string RfTranNo { get; set; }
+        /// <summary>
+        /// 交易时间 char(6)，当客户上送controlFlag标签并且字段值为1时返回
+        /// </summary>
+        [XmlElement("tranTime")]
+        public string TranTime { get; set; }
     }
 }

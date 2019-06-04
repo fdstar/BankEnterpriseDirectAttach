@@ -10,14 +10,16 @@ namespace BEDA.CITIC.Contracts.Requests
     /// <summary>
     /// 中信银行请求基类
     /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public abstract class RqBase<T> : CITICBase<T>
+    /// <typeparam name="T">业务请求类型</typeparam>
+    /// <typeparam name="R">业务响应类型</typeparam>
+    public abstract class RqBase<T, R> : CITICBase<T>, IRequest<R>
+        where R : IResponse
     {
         /// <summary>
-        /// 对应请求代码
+        /// 业务对应请求代码
         /// </summary>
         [XmlElement("action")]
-        public string Action { get; set; }
+        public abstract string Action { get; set; }
         /// <summary>
         /// 登录名 char(30)
         /// </summary>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BEDA.CITIC.Contracts.Responses;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,13 +12,18 @@ namespace BEDA.CITIC.Contracts.Requests
     /// 余额查询请求内容
     /// </summary>
     [XmlRoot("stream")]
-    public class RQ_DLBALQRY : RqBase<AccountQuery>
+    public class RQ_DLBALQRY : RqBase<AccQue, RS_DLBALQRY>
     {
+        /// <summary>
+        /// 业务对应请求代码
+        /// </summary>
+        [XmlElement("action")]
+        public override string Action { get => "DLBALQRY"; set { } }
     }
     /// <summary>
     /// 账号信息
     /// </summary>
-    public class AccountQuery
+    public class AccQue
     {
         /// <summary>
         /// 账号char(19)
