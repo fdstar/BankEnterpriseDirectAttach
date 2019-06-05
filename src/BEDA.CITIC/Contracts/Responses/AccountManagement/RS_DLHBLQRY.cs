@@ -12,8 +12,13 @@ namespace BEDA.CITIC.Contracts.Responses
     /// 账户历史余额查询响应内容
     /// </summary>
     [XmlRoot("stream")]
-    public class RS_DLHBLQRY : RsBase<AccBalHistory>
+    public class RS_DLHBLQRY : RsBase
     {
+        /// <summary>
+        /// 中信银行集合列表
+        /// </summary>
+        [XmlElement("list")]
+        public CITICCollection<AccBalHistory> Collection { get; set; }
         /// <summary>
         /// 账号char(19)
         /// </summary>

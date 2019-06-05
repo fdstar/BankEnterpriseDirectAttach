@@ -13,7 +13,7 @@ namespace BEDA.CITIC.Contracts.Requests
     /// 他行交易明细信息查询请求内容
     /// </summary>
     [XmlRoot("stream")]
-    public class RQ_DLOACTDT : RqBase<EmptyBody, RS_DLOACTDT>
+    public class RQ_DLOACTDT : RqBase<RS_DLOACTDT>
     {
         /// <summary>
         /// 业务对应请求代码

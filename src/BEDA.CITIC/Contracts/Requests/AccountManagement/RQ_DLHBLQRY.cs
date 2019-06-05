@@ -13,7 +13,7 @@ namespace BEDA.CITIC.Contracts.Requests.AccountManagement
     /// 账户历史余额查询请求内容
     /// </summary>
     [XmlRoot("stream")]
-    public class RQ_DLHBLQRY : RqBase<EmptyBody, RS_DLHBLQRY>
+    public class RQ_DLHBLQRY : RqBase<RS_DLHBLQRY>
     {
         /// <summary>
         /// 业务对应请求代码

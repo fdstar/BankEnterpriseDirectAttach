@@ -12,8 +12,13 @@ namespace BEDA.CITIC.Contracts.Responses
     /// 他行交易明细信息查询响应内容
     /// </summary>
     [XmlRoot("stream")]
-    public class RS_DLOACTDT : RsBase<AccTranDetailFromOther>
+    public class RS_DLOACTDT : RsBase
     {
+        /// <summary>
+        /// 中信银行集合列表
+        /// </summary>
+        [XmlElement("list")]
+        public CITICCollection<AccTranDetailFromOther> Collection { get; set; }
         /// <summary>
         /// 总记录条数 int
         /// </summary>

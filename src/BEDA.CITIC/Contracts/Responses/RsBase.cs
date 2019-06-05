@@ -10,8 +10,7 @@ namespace BEDA.CITIC.Contracts.Responses
     /// <summary>
     /// 中信银行响应基类
     /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public abstract class RsBase<T> : CITICBase<T>, IResponse
+    public abstract class RsBase : IResponse
     {
         /// <summary>
         /// 交易状态 char(7)

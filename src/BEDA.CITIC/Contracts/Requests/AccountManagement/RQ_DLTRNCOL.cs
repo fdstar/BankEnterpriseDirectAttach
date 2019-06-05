@@ -13,7 +13,7 @@ namespace BEDA.CITIC.Contracts.Requests
     /// 账户明细概要信息查询请求内容
     /// </summary>
     [XmlRoot("stream")]
-    public class RQ_DLTRNCOL : RqBase<EmptyBody, RS_DLTRNCOL>
+    public class RQ_DLTRNCOL : RqBase<RS_DLTRNCOL>
     {
         /// <summary>
         /// 业务对应请求代码

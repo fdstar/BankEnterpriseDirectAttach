@@ -12,7 +12,7 @@ namespace BEDA.CITIC.Contracts.Responses
     /// 账户明细详细信息查询响应内容
     /// </summary>
     [XmlRoot("stream")]
-    public class RS_DLTRNDET : RsBase<EmptyBody>
+    public class RS_DLTRNDET : RsBase
     {
         /// <summary>
         /// 交易日期 char(8) 格式YYYYMMDD

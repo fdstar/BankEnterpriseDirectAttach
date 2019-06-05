@@ -49,28 +49,33 @@ namespace BEDA.CMB.Contracts.Requests
         /// </summary>
         public string YURREF { get; set; }
         /// <summary>
-        /// 期望日        	D
-        /// </summary>
-        public string EPTDAT { get; set; }
-        /// <summary>
-        /// 期望时间      	T
-        /// </summary>
-        public string EPTTIM { get; set; }
-        /// <summary>
-        /// 期望时间 由<see cref="EPTDAT"/>和<see cref="EPTTIM"/>组成
+        /// 期望日	D   默认为当前日期
         /// </summary>
         [XmlIgnore]
-        public DateTime? ExpectedTime
+        public DateTime? ExpectedTime { get; set; }
+        /// <summary>
+        /// 期望日	D   空表示当天
+        /// </summary>
+        [XmlElement("EPTDAT")]
+        public string EPTDATStr
         {
             get
             {
-                if (DateTime.TryParseExact(string.Format("{0}{1}", this.EPTDAT, this.EPTTIM),
-                   new string[] { "yyyyMMdd", "yyyyMMddHHmmss" }, CultureInfo.CurrentCulture, DateTimeStyles.None, out DateTime tmp))
-                {
-                    return tmp;
-                }
-                return null;
+                return this.ExpectedTime?.ToString("yyyyMMdd");
             }
+            set { }
+        }
+        /// <summary>
+        /// 期望时间	T   默认为‘000000’
+        /// </summary>
+        [XmlElement("EPTTIM")]
+        public string EPTTIMStr
+        {
+            get
+            {
+                return this.ExpectedTime?.ToString("HHmmss");
+            }
+            set { }
         }
         /// <summary>
         /// 汇款分行号	C(2)	附录A.1
