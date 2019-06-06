@@ -10,16 +10,16 @@ using System.Xml.Serialization;
 namespace BEDA.CITIC.Contracts.Requests
 {
     /// <summary>
-    /// 代理扣收个人款请求内容
+    /// 代理扣收企业款请求内容
     /// </summary>
     [XmlRoot("stream")]
-    public class RQ_DLAGENTF : RqBase<RS_DLAGENTF>
+    public class RQ_DLAGEPUB : RqBase<RS_DLAGEPUB>
     {
         /// <summary>
         /// 业务对应请求代码
         /// </summary>
         [XmlElement("action")]
-        public override string Action { get => "DLAGENTF"; set { } }
+        public override string Action { get => "DLAGEPUB"; set { } }
         /// <summary>
         /// 客户流水号 char(20)
         /// </summary>
@@ -90,31 +90,5 @@ namespace BEDA.CITIC.Contracts.Requests
         /// </summary>
         [XmlElement("list")]
         public CITICCollection<WithholdFunds> Collection { get; set; }
-    }
-    /// <summary>
-    /// 代理扣收款项
-    /// </summary>
-    public class WithholdFunds
-    {
-        /// <summary>
-        /// 付款账号，varchar(19)
-        /// </summary>
-        [XmlElement("payAccountNo")]
-        public string PayAccountNo { get; set; }
-        /// <summary>
-        /// 付款账户名称 varchar(122)
-        /// </summary>
-        [XmlElement("payAccountName")]
-        public string PayAccountName { get; set; }
-        /// <summary>
-        /// 金额 decimal(15,2)
-        /// </summary>
-        [XmlElement("tranAmount")]
-        public decimal TranAmount { get; set; }
-        /// <summary>
-        /// 摘要，可空 varchar(102)
-        /// </summary>
-        [XmlElement("abstract")]
-        public string Abstract { get; set; }
     }
 }

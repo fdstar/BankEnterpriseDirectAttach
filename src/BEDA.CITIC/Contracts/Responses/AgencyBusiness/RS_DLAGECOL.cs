@@ -19,12 +19,12 @@ namespace BEDA.CITIC.Contracts.Responses
         /// </summary>
         [XmlArray("list")]
         [XmlArrayItem("row")]
-        public List<WithholdPersonalFundsSummary> List { get; set; }
+        public List<WithholdSummary> List { get; set; }
     }
     /// <summary>
-    /// 代理扣收个人款汇总
+    /// 代理扣收款项汇总
     /// </summary>
-    public class WithholdPersonalFundsSummary
+    public class WithholdSummary
     {
         /// <summary>
         /// 收款账号 char(19)

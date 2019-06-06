@@ -9,10 +9,10 @@ using System.Xml.Serialization;
 namespace BEDA.CITIC.Contracts.Responses
 {
     /// <summary>
-    /// 代理扣收个人款明细查询响应内容
+    /// 代理扣收企业款明细查询响应内容
     /// </summary>
     [XmlRoot("stream")]
-    public class RS_DLAGEDET : RsBase
+    public class RS_DLAGEPDT : RsBase
     {
         /// <summary>
         /// 收款账号 varchar(19)
@@ -35,28 +35,18 @@ namespace BEDA.CITIC.Contracts.Responses
         /// </summary>
         [XmlArray("list")]
         [XmlArrayItem("row")]
-        public List<WithholdPersonalResult> List { get; set; }
+        public List<WithholdEnterpriseResult> List { get; set; }
     }
     /// <summary>
-    /// 代理扣收个人款明细
+    /// 代理扣收企业款明细
     /// </summary>
-    public class WithholdPersonalResult : Requests.WithholdFunds
+    public class WithholdEnterpriseResult : Requests.WithholdFunds
     {
-        /// <summary>
-        /// 支付方式 char(2) 01：系统内扣款；02：银联扣款
-        /// </summary>
-        [XmlElement("payType")]
-        public string PayType { get; set; }
         /// <summary>
         /// 付款账号开户行名称 varchar(122)
         /// </summary>
         [XmlElement("payAccBankNm")]
         public string PayAccBankNm { get; set; }
-        /// <summary>
-        /// 账单号 varchar(12)
-        /// </summary>
-        [XmlElement("billNo")]
-        public string BillNo { get; set; }
         /// <summary>
         /// 币种 char(2)
         /// </summary>
