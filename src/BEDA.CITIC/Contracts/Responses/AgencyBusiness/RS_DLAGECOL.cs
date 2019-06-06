@@ -9,48 +9,48 @@ using System.Xml.Serialization;
 namespace BEDA.CITIC.Contracts.Responses
 {
     /// <summary>
-    /// 其它代发汇总查询响应内容
+    /// 代理扣收个人款汇总查询响应内容
     /// </summary>
     [XmlRoot("stream")]
-    public class RS_DLOTHCOL : RsBase
+    public class RS_DLAGECOL : RsBase
     {
         /// <summary>
         /// 中信银行集合列表
         /// </summary>
         [XmlArray("list")]
         [XmlArrayItem("row")]
-        public List<OtherPaymentSummary> List { get; set; }
+        public List<WithholdPersonalFundsSummary> List { get; set; }
     }
     /// <summary>
-    /// 其它代发汇总
+    /// 代理扣收个人款汇总
     /// </summary>
-    public class OtherPaymentSummary
+    public class WithholdPersonalFundsSummary
     {
         /// <summary>
-        /// 付款账号 char(19)
+        /// 收款账号 char(19)
         /// </summary>
-        [XmlElement("payAccountNo")]
-        public string PayAccountNo { get; set; }
+        [XmlElement("rcvAccountNo")]
+        public string RcvAccountNo { get; set; }
         /// <summary>
         /// 交易日期 char(8)
         /// </summary>
         [XmlIgnore]
-        public DateTime PayDate { get; set; }
+        public DateTime TranDate { get; set; }
         /// <summary>
-        /// 交易日期 char(8), 对应<see cref="PayDate"/>
+        /// 交易日期 char(8), 对应<see cref="TranDate"/>
         /// </summary>
-        [XmlElement("payDate")]
-        public string PayDateStr
+        [XmlElement("tranDate")]
+        public string TranDateStr
         {
             get
             {
-                return this.PayDate.ToString("yyyyMMdd");
+                return this.TranDate.ToString("yyyyMMdd");
             }
             set
             {
                 if (DateTime.TryParseExact(value, "yyyyMMdd", CultureInfo.CurrentCulture, DateTimeStyles.None, out DateTime tmp))
                 {
-                    this.PayDate = tmp;
+                    this.TranDate = tmp;
                 }
             }
         }

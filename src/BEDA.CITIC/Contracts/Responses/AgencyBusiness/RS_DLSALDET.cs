@@ -33,8 +33,9 @@ namespace BEDA.CITIC.Contracts.Responses
         /// <summary>
         /// 中信银行集合列表
         /// </summary>
-        [XmlElement("list")]
-        public CITICCollection<AgencyResult> Collection { get; set; }
+        [XmlArray("list")]
+        [XmlArrayItem("row")]
+        public List<AgencyResult> List { get; set; }
     }
     /// <summary>
     /// 代发明细
