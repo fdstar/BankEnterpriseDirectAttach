@@ -90,7 +90,7 @@ namespace BEDA.CITIC.Contracts.Requests
         /// 起始记录号 char(4)
         /// </summary>
         [XmlElement("startRecord")]
-        public string StartRecord { get; set; }
+        public int StartRecord { get; set; }
         /// <summary>
         /// 控制标签char(1)，0：客户系统不兼容银行端新增返回字段 1：客户系统兼容银行端新增返回字段，标签可空
         /// </summary>
