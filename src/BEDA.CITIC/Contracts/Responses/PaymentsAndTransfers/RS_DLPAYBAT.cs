@@ -39,12 +39,12 @@ namespace BEDA.CITIC.Contracts.Responses
         /// 中信银行集合列表
         /// </summary>
         [XmlElement("list")]
-        public CITICCollection<PayBatchResult> Collection { get; set; }
+        public CITICCollection<TransResult> Collection { get; set; }
     }
     /// <summary>
-    /// 批量支付结果
+    /// 交易结果
     /// </summary>
-    public class PayBatchResult
+    public class TransResult
     {
         /// <summary>
         /// 编号char(4)

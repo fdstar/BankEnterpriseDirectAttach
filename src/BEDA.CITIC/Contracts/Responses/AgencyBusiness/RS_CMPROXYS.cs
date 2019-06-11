@@ -40,6 +40,6 @@ namespace BEDA.CITIC.Contracts.Responses
         /// </summary>
         [XmlArray("list")]
         [XmlArrayItem("row")]
-        public List<PayBatchResult> List { get; set; }
+        public List<TransResult> List { get; set; }
     }
 }

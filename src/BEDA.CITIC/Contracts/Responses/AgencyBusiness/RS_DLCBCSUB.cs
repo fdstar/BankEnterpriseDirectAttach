@@ -1,0 +1,24 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Xml.Serialization;
+
+namespace BEDA.CITIC.Contracts.Responses
+{
+    /// <summary>
+    /// 跨行收款-经办响应内容
+    /// </summary>
+    [XmlRoot("stream")]
+    public class RS_DLCBCSUB : RsBase
+    {
+        /// <summary>
+        /// 中信银行集合列表
+        /// </summary>
+        [XmlArray("list")]
+        [XmlArrayItem("row")]
+        public List<TransResult> List { get; set; }
+    }
+}
