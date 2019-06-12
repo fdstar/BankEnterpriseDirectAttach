@@ -15,20 +15,22 @@ namespace BEDA.CITIC.Contracts.Responses
     public class RS_DLOACTDT : RsBase
     {
         /// <summary>
-        /// 中信银行集合列表
-        /// </summary>
-        [XmlElement("list")]
-        public CITICCollection<AccTranDetailFromOther> Collection { get; set; }
-        /// <summary>
         /// 总记录条数 int
         /// </summary>
         [XmlElement("totalRecords")]
         public int TotalRecords { get; set; }
+
+        /// <summary>
+        /// 中信银行集合列表
+        /// </summary>
+        [XmlArray("list")]
+        [XmlArrayItem("row")]
+        public List<AccTransDetailFromOther> List { get; set; }
     }
     /// <summary>
     /// 他行账户交易明细信息
     /// </summary>
-    public class AccTranDetailFromOther
+    public class AccTransDetailFromOther
     {
         /// <summary>
         /// 交易日期 char(8)

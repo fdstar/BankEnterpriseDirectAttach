@@ -17,13 +17,14 @@ namespace BEDA.CITIC.Contracts.Responses
         /// <summary>
         /// 中信银行集合列表
         /// </summary>
-        [XmlElement("list")]
-        public CITICCollection<AccBal> Collection { get; set; }
+        [XmlArray("list")]
+        [XmlArrayItem("row")]
+        public List<AccountBalance> List { get; set; }
     }
     /// <summary>
     /// 账户余额信息
     /// </summary>
-    public class AccBal
+    public class AccountBalance
     {
         /// <summary>
         /// 账户状态 char(7)

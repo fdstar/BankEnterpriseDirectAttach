@@ -15,11 +15,6 @@ namespace BEDA.CITIC.Contracts.Responses
     public class RS_DLTRNALL : RsBase
     {
         /// <summary>
-        /// 中信银行集合列表
-        /// </summary>
-        [XmlElement("list")]
-        public CITICCollection<AccTran> Collection { get; set; }
-        /// <summary>
         /// 账号char(19)
         /// </summary>
         [XmlElement("accountNo")]
@@ -44,11 +39,18 @@ namespace BEDA.CITIC.Contracts.Responses
         /// </summary>
         [XmlElement("returnRecords")]
         public int ReturnRecords { get; set; }
+
+        /// <summary>
+        /// 中信银行集合列表
+        /// </summary>
+        [XmlArray("list")]
+        [XmlArrayItem("row")]
+        public List<AccountTransaction> List { get; set; }
     }
     /// <summary>
     /// 账户交易明细信息
     /// </summary>
-    public class AccTran
+    public class AccountTransaction
     {
         /// <summary>
         /// 交易日期 char(8) 格式YYYYMMDD

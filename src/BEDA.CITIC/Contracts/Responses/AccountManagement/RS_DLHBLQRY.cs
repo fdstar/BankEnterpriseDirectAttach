@@ -15,11 +15,6 @@ namespace BEDA.CITIC.Contracts.Responses
     public class RS_DLHBLQRY : RsBase
     {
         /// <summary>
-        /// 中信银行集合列表
-        /// </summary>
-        [XmlElement("list")]
-        public CITICCollection<AccBalHistory> Collection { get; set; }
-        /// <summary>
         /// 账号char(19)
         /// </summary>
         [XmlElement("accountNo")]
@@ -39,11 +34,18 @@ namespace BEDA.CITIC.Contracts.Responses
         /// </summary>
         [XmlElement("cryType")]
         public string CryType { get; set; }
+
+        /// <summary>
+        /// 中信银行集合列表
+        /// </summary>
+        [XmlArray("list")]
+        [XmlArrayItem("row")]
+        public List<AccountBalanceHistory> List { get; set; }
     }
     /// <summary>
     /// 账户历史余额
     /// </summary>
-    public class AccBalHistory
+    public class AccountBalanceHistory
     {
         /// <summary>
         /// 日期 char(8)，格式YYYYMMDD

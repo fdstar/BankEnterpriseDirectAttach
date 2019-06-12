@@ -17,8 +17,9 @@ namespace BEDA.CITIC.Contracts.Responses
         /// <summary>
         /// 中信银行集合列表
         /// </summary>
-        [XmlElement("list")]
-        public CITICCollection<PayBatchSumQry> Collection { get; set; }
+        [XmlArray("list")]
+        [XmlArrayItem("row")]
+        public List<PayBatchSumQry> List { get; set; }
     }
     /// <summary>
     /// 批量支付汇总查询
