@@ -69,24 +69,19 @@ namespace BEDA.CITIC.Contracts.Responses
     /// <summary>
     /// 对私付款-对账文件字符串格式
     /// </summary>
-    public class PrivatePaymentFileContent
+    public class PrivatePaymentFileContent : FileContent
     {
         /// <summary>
-        /// 文本内容
-        /// </summary>
-        [XmlText]
-        public string Value { get; set; }
-        /// <summary>
-        /// 将银行格式的字符串转化成集合
+        /// 将银行格式的字符串转化成数据实体
         /// </summary>
         /// <param name="encoding"></param>
         /// <returns></returns>
         public PrivatePaymentRecSummary GetSummary(Encoding encoding = null)
         {
             PrivatePaymentRecSummary summary = null;
-            if (!string.IsNullOrWhiteSpace(this.Value))
+            var content = this.GetContent(encoding);
+            if (!string.IsNullOrWhiteSpace(content))
             {
-                var content = (encoding ?? Encoding.GetEncoding("GB18030")).GetString(GZipHelper.Decompress(Convert.FromBase64String(this.Value)));
                 var tmp = content.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
                 var summArr = tmp[0].Split(',');
                 summary = new PrivatePaymentRecSummary

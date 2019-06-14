@@ -18,8 +18,8 @@ namespace BEDA.CITIC.Contracts.Responses
         /// <summary>
         /// 回单汇总文件内容varchar(1048576)，需用base64解码后再进行zip解压缩
         /// </summary>
-        [XmlElement("fileName")]
-        public ReconciliationFileContent FileConTent { get; set; }
+        [XmlElement("fileConTent")]
+        public FileContent FileConTent { get; set; }
         /// <summary>
         /// 回单汇总文件名称varchar(122)
         /// </summary>
@@ -58,31 +58,5 @@ namespace BEDA.CITIC.Contracts.Responses
         /// </summary>
         [XmlElement("pdfName")]
         public string PdfName { get; set; }
-    }
-    /// <summary>
-    /// 电子回单文本内容
-    /// </summary>
-    public class ReconciliationFileContent
-    {
-        /// <summary>
-        /// 文本内容
-        /// </summary>
-        [XmlText]
-        public string Value { get; set; }
-        /// <summary>
-        /// 将银行格式的字符串转化成可读的字符串
-        /// </summary>
-        /// <param name="encoding"></param>
-        /// <returns></returns>
-        public string GetContent(Encoding encoding = null)
-        {
-            if (!string.IsNullOrWhiteSpace(this.Value))
-            {
-                var content = (encoding ?? Encoding.GetEncoding("GB18030"))
-                    .GetString(GZipHelper.Decompress(Convert.FromBase64String(this.Value)));
-                return content;
-            }
-            return null;
-        }
     }
 }
