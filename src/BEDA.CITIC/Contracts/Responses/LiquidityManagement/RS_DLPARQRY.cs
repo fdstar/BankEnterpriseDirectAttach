@@ -9,85 +9,108 @@ using System.Xml.Serialization;
 namespace BEDA.CITIC.Contracts.Responses
 {
     /// <summary>
-    /// 协议代理收款查询响应内容
+    /// 现金池自动规则管理经办结果查询响应内容
     /// </summary>
     [XmlRoot("stream")]
-    public class RS_DLPAGQRY : RsBase
+    public class RS_DLPARQRY : RsBase
     {
         /// <summary>
         /// 中信银行集合列表
         /// </summary>
         [XmlArray("list")]
         [XmlArrayItem("row")]
-        public List<AgentReceiptQuery> List { get; set; }
+        public List<CashPoolAutoRuleResult> List { get; set; }
     }
     /// <summary>
-    /// 代发明细
+    /// 现金池自动规则管理经办结果
     /// </summary>
-    public class AgentReceiptQuery
+    public class CashPoolAutoRuleResult
     {
         /// <summary>
-        /// 批次号 varchar(8)
+        /// 成员单位账号 char(19)
         /// </summary>
-        [XmlElement("batNo")]
-        public string BatNo { get; set; }
+        [XmlElement("accountNo")]
+        public string AccountNo { get; set; }
         /// <summary>
-        /// 原始协议号varchar(60)
+        /// 成员单位账户名称 varchar(122)
         /// </summary>
-        [XmlElement("ptcID")]
-        public string PtcID { get; set; }
+        [XmlElement("accountNm")]
+        public string AccountNm { get; set; }
         /// <summary>
-        /// 付方所属银行行号 varchar(20)
+        /// 币种 char(2)
         /// </summary>
-        [XmlElement("payBankNo")]
-        public string PayBankNo { get; set; }
+        [XmlElement("cryType")]
+        public string CryType { get; set; }
         /// <summary>
-        /// 付方账号 varchar(32)
+        /// 交易类型char(1) 0：自动归集参数设置；1自动下拨参数设置；2：联动下拨参数设置
         /// </summary>
-        [XmlElement("payAccountNo")]
-        public string PayAccountNo { get; set; }
+        [XmlElement("tranType")]
+        public int TranType { get; set; }
         /// <summary>
-        /// 付款账户名称 varchar(122)
+        /// 下次归集日期 char(8)格式YYYYMMDD
         /// </summary>
-        [XmlElement("payAccountName")]
-        public string PayAccountName { get; set; }
+        [XmlIgnore]
+        public DateTime? NextCollDate { get; set; }
         /// <summary>
-        /// 收方所属银行行号 varchar(20)
+        /// 下次归集日期, 对应<see cref="NextCollDate"/>
         /// </summary>
-        [XmlElement("recBankNo")]
-        public string RecBankNo { get; set; }
+        [XmlElement("nextCollDate")]
+        public string NextCollDateStr
+        {
+            get
+            {
+                return this.NextCollDate?.ToString("yyyyMMdd");
+            }
+            set
+            {
+                this.NextCollDate = null;
+                if (DateTime.TryParseExact(value, "yyyyMMdd", CultureInfo.CurrentCulture, DateTimeStyles.None, out DateTime tmp))
+                {
+                    this.NextCollDate = tmp;
+                }
+            }
+        }
         /// <summary>
-        /// 收款账户名称 varchar(122)
+        /// 下次下拨日期 char(8)格式YYYYMMDD
         /// </summary>
-        [XmlElement("recAccountName")]
-        public string RecAccountName { get; set; }
+        [XmlIgnore]
+        public DateTime? NextPayDate { get; set; }
         /// <summary>
-        /// 收款账号 char(19)
+        /// 下次下拨日期, 对应<see cref="NextPayDate"/>
         /// </summary>
-        [XmlElement("recAccountNo")]
-        public string RecAccountNo { get; set; }
+        [XmlElement("nextPayDate")]
+        public string NextPayDateStr
+        {
+            get
+            {
+                return this.NextPayDate?.ToString("yyyyMMdd");
+            }
+            set
+            {
+                this.NextPayDate = null;
+                if (DateTime.TryParseExact(value, "yyyyMMdd", CultureInfo.CurrentCulture, DateTimeStyles.None, out DateTime tmp))
+                {
+                    this.NextPayDate = tmp;
+                }
+            }
+        }
         /// <summary>
-        /// 交易金额 decimal(15,2)
+        /// 联动自动拨款标志 char(1)交易类型为2时非空， 0：不自动拨款；1：自动拨款
         /// </summary>
-        [XmlElement("tranAmt")]
-        public decimal TranAmt { get; set; }
+        [XmlElement("relatePayFlag")]
+        public int RelatePayFlag { get; set; }
         /// <summary>
-        /// 状态 varchar(2) 参见附录4.2
-        /// </summary>
-        [XmlElement("stt")]
-        public string Stt { get; set; }
-        /// <summary>
-        /// 预约支付标志 0：非预约交易；1：预约交易 char(1)
+        /// 预约标志 0：非预约交易；1：预约交易 char(1)
         /// </summary>
         [XmlElement("preFlg")]
         public int PreFlg { get; set; }
         /// <summary>
-        /// 预约日期char(8) 格式YYYYMMDD
+        /// 预约日期char(8)，格式YYYYMMDD
         /// </summary>
         [XmlElement("preDate")]
         public string PreDate { get; set; }
         /// <summary>
-        /// 预约时间char(6) 格式hhmmss
+        /// 预约时间char(6)，格式hhmmss
         /// </summary>
         [XmlElement("preTime")]
         public string PreTime { get; set; }
@@ -107,16 +130,6 @@ namespace BEDA.CITIC.Contracts.Responses
                 return null;
             }
         }
-        /// <summary>
-        /// 业务类型char(5)，参见附录4.7
-        /// </summary>
-        [XmlElement("bsnType")]
-        public string BsnType { get; set; }
-        /// <summary>
-        /// 币种 char(2)
-        /// </summary>
-        [XmlElement("cryType")]
-        public string CryType { get; set; }
         /// <summary>
         /// 经办人姓名 varchar(62)
         /// </summary>
@@ -149,14 +162,9 @@ namespace BEDA.CITIC.Contracts.Responses
             }
         }
         /// <summary>
-        /// 摘要 varchar(102)
+        /// 制单状态 varchar(2) 状态取值见附录4.2
         /// </summary>
-        [XmlElement("abstract")]
-        public string Abstract { get; set; }
-        /// <summary>
-        /// 备注 varchar(60)
-        /// </summary>
-        [XmlElement("memo")]
-        public string Memo { get; set; }
+        [XmlElement("stt")]
+        public string Stt { get; set; }
     }
 }

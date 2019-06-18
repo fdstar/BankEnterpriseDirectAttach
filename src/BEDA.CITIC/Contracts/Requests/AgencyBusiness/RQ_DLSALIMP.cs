@@ -59,7 +59,7 @@ namespace BEDA.CITIC.Contracts.Requests
         /// 延期支付时间，预约时非空，时间点可选范围 100000，120000，140000，160000
         /// </summary>
         [XmlIgnore]
-        public DateTime? DeferredPaymentTime { get; set; }
+        public DateTime? AppointmentTime { get; set; }
         /// <summary>
         /// 延期支付日期char(8)　格式YYYYMMDD ，预约时非空
         /// </summary>
@@ -68,7 +68,7 @@ namespace BEDA.CITIC.Contracts.Requests
         {
             get
             {
-                return this.DeferredPaymentTime?.ToString("yyyyMMdd");
+                return this.AppointmentTime?.ToString("yyyyMMdd");
             }
             set { }
         }
@@ -80,7 +80,7 @@ namespace BEDA.CITIC.Contracts.Requests
         {
             get
             {
-                return this.DeferredPaymentTime?.ToString("HHmmss");
+                return this.AppointmentTime?.ToString("HHmmss");
             }
             set { }
         }

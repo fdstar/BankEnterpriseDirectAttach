@@ -73,7 +73,7 @@ namespace BEDA.CITIC.Contracts.Responses
         /// 预约时间 由<see cref="PreDate"/>和<see cref="PreTime"/>组成
         /// </summary>
         [XmlIgnore]
-        public DateTime? DeferredPaymentTime
+        public DateTime? AppointmentTime
         {
             get
             {
