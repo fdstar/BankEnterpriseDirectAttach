@@ -9,22 +9,22 @@ using System.Xml.Serialization;
 namespace BEDA.CITIC.Contracts.Responses
 {
     /// <summary>
-    /// 不归集额度计划管理经办查询响应内容
+    /// 不归集额度计划管理经办结果查询响应内容
     /// </summary>
     [XmlRoot("stream")]
-    public class RS_DLPLMQRY : RsBase
+    public class RS_DLPLMRQY : RsBase
     {
         /// <summary>
         /// 中信银行集合列表
         /// </summary>
         [XmlArray("list")]
         [XmlArrayItem("row")]
-        public List<NoCollectionQuotaPlan> List { get; set; }
+        public List<NoCollectionQuotaPlanResult> List { get; set; }
     }
     /// <summary>
-    /// 不归集额度计划管理
+    /// 不归集额度计划管理经办结果
     /// </summary>
-    public class NoCollectionQuotaPlan
+    public class NoCollectionQuotaPlanResult
     {
         /// <summary>
         /// 成员单位账号 char(19)
@@ -90,15 +90,10 @@ namespace BEDA.CITIC.Contracts.Responses
             }
         }
         /// <summary>
-        /// 使用状态 char(1) 0：使用中；1：暂停使用；2撤销
+        /// 操作类型 char(1) 0：启用；1：暂停；2：撤销；3：新建
         /// </summary>
-        [XmlElement("useStt")]
-        public int UseStt { get; set; }
-        /// <summary>
-        /// 设置不归集金额标志 char(1) 1：启用；0：未启用
-        /// </summary>
-        [XmlElement("noBackAmtFlg")]
-        public int NoBackAmtFlg { get; set; }
+        [XmlElement("oprType")]
+        public int OprType { get; set; }
         /// <summary>
         /// 录入人姓名 varchar(62)
         /// </summary>
@@ -130,5 +125,20 @@ namespace BEDA.CITIC.Contracts.Responses
                 return null;
             }
         }
+        /// <summary>
+        /// 制单状态 varchar(2) 状态取值见附录4.2
+        /// </summary>
+        [XmlElement("Stt")]
+        public string Stt { get; set; }
+        /// <summary>
+        /// 摘要 varchar(102)
+        /// </summary>
+        [XmlElement("abstract")]
+        public string Abstract { get; set; }
+        /// <summary>
+        /// 备注 varchar(60)
+        /// </summary>
+        [XmlElement("memo")]
+        public string Memo { get; set; }
     }
 }
