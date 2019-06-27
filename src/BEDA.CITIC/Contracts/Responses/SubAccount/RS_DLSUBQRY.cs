@@ -9,7 +9,7 @@ using System.Xml.Serialization;
 namespace BEDA.CITIC.Contracts.Responses
 {
     /// <summary>
-    /// 附属账户参数设置查询查询响应内容
+    /// 附属账户参数设置查询响应内容
     /// </summary>
     [XmlRoot("stream")]
     public class RS_DLSUBQRY : RsBase
