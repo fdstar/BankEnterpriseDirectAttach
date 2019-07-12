@@ -9,7 +9,7 @@ using System.Xml.Serialization;
 namespace BEDA.CITIC.Contracts.Responses
 {
     /// <summary>
-    /// 备付金账户余额查询(他行)响应内容
+    /// 备付金账户明细查询（他行）响应内容
     /// </summary>
     [XmlRoot("stream")]
     public class RS_DLOTACDT : RsBase

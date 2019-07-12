@@ -9,20 +9,20 @@ using System.Xml.Serialization;
 namespace BEDA.CITIC.Contracts.Requests
 {
     /// <summary>
-    /// 备付金账户余额查询(他行)请求内容
+    /// 备付金账户余额查询(本行)请求内容
     /// </summary>
     [XmlRoot("stream")]
-    public class RQ_DLOTACBL : RqBase<RS_DLOTACBL>
+    public class RQ_DLPBLQRY : RqBase<RS_DLPBLQRY>
     {
         /// <summary>
         /// 业务对应请求代码
         /// </summary>
         [XmlElement("action")]
-        public override string Action { get => "DLOTACBL"; set { } }
+        public override string Action { get => "DLPBLQRY"; set { } }
         /// <summary>
         /// 中信银行集合列表
         /// </summary>
         [XmlElement("list")]
-        public CITICCollection<AccQryFromOther> Collection { get; set; }
+        public CITICCollection<AccQuery> Collection { get; set; }
     }
 }

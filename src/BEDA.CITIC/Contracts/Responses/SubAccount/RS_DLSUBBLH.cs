@@ -49,41 +49,6 @@ namespace BEDA.CITIC.Contracts.Responses
         /// </summary>
         [XmlArray("list")]
         [XmlArrayItem("row")]
-        public List<SubAccountBalanceHistory> List { get; set; }
-    }
-    /// <summary>
-    /// 附属账户历史余额
-    /// </summary>
-    public class SubAccountBalanceHistory
-    {
-        /// <summary>
-        /// 日期 char(8) 格式YYYYMMDD
-        /// </summary>
-        [XmlIgnore]
-        public DateTime Date { get; set; }
-        /// <summary>
-        /// 日期 char(8) 格式YYYYMMDD, 对应<see cref="Date"/>
-        /// </summary>
-        [XmlElement("date")]
-        public string DateStr
-        {
-            get
-            {
-                return this.Date.ToString("yyyyMMdd");
-            }
-            set
-            {
-                if (DateTime.TryParseExact(value, "yyyyMMdd", CultureInfo.CurrentCulture, DateTimeStyles.None, out DateTime tmp))
-                {
-                    this.Date = tmp;
-                }
-            }
-        }
-        /// <summary>
-        /// 账户余额 decimal(15,2)
-        /// </summary>
-        [XmlElement("balance")]
-        public decimal Balance { get; set; }
-
+        public List<AccountBalanceHistory> List { get; set; }
     }
 }
