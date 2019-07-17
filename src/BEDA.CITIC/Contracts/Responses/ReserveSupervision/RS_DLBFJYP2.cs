@@ -43,7 +43,7 @@ namespace BEDA.CITIC.Contracts.Responses
         public List<PayResult> List { get; set; }
     }
     /// <summary>
-    /// 备付金账户余额
+    /// 预付卡备付金其他代付
     /// </summary>
     public class PayResult
     {
