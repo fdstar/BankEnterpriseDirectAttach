@@ -26,24 +26,19 @@ namespace BEDA.CITIC.Contracts.Requests
         [XmlElement("accountNo")]
         public string AccountNo { get; set; }
         /// <summary>
-        /// 起始年份 char(4)，格式YYYY
+        /// 利息状态char(1) 0：未收；1：已收
         /// </summary>
-        [XmlElement("startYear")]
-        public int StartYear { get; set; }
+        [XmlElement("inrtStatus")]
+        public int InrtStatus { get; set; }
         /// <summary>
-        /// 起始季度 char(1) 1：第一季度；2：第二季度；3：第三季度；4：第四季度
+        /// 查询年份 char(4)，格式YYYY，可空，当利息状态为1(已收)时非空
         /// </summary>
-        [XmlElement("startQuarter")]
-        public int StartQuarter { get; set; }
+        [XmlElement("qryYear")]
+        public int? QryYear { get; set; }
         /// <summary>
-        /// 截止年份 char(4)，格式YYYY
+        /// 查询季度 char(1) 1：第一季度；2：第二季度；3：第三季度；4：第四季度。可空，当利息状态为1(已收)时非空
         /// </summary>
-        [XmlElement("endYear")]
-        public int EndYear { get; set; }
-        /// <summary>
-        /// 截止季度 char(1) 1：第一季度；2：第二季度；3：第三季度；4：第四季度
-        /// </summary>
-        [XmlElement("endQuarter")]
-        public int EndQuarter { get; set; }
+        [XmlElement("qryQuarter")]
+        public int? QryQuarter { get; set; }
     }
 }
