@@ -60,7 +60,7 @@ namespace BEDA.CITIC.Contracts.Requests
         [XmlIgnore]
         public DateTime? EndDate { get; set; }
         /// <summary>
-        /// 终止日期char(8) 格式YYYYMMDD, 对应<see cref="EndDate"/>
+        /// 截止日期char(8)，格式YYYYMMDD, 对应<see cref="EndDate"/>
         /// </summary>
         [XmlElement("endDate")]
         public string EndDateStr

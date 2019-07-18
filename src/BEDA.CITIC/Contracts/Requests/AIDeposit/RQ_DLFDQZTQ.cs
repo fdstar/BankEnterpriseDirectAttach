@@ -10,31 +10,26 @@ using System.Xml.Serialization;
 namespace BEDA.CITIC.Contracts.Requests
 {
     /// <summary>
-    /// 定期型智能存款明细查询请求内容
+    /// 组合型智能存款账户交易查询请求内容
     /// </summary>
     [XmlRoot("stream")]
-    public class RQ_DLFITDDQ : RqBase<RS_DLFITDDQ>
+    public class RQ_DLFDQZTQ : RqBase<RS_DLFDQZTQ>
     {
         /// <summary>
         /// 业务对应请求代码
         /// </summary>
         [XmlElement("action")]
-        public override string Action { get => "DLFITDDQ"; set { } }
+        public override string Action { get => "DLFDQZTQ"; set { } }
         /// <summary>
         /// 智能存款账号char(19)
         /// </summary>
         [XmlElement("accountNo")]
         public string AccountNo { get; set; }
         /// <summary>
-        /// 查询类型char(1) 1：未结清；2：已结清
-        /// </summary>
-        [XmlElement("qryType")]
-        public int QryType { get; set; }
-        /// <summary>
-        /// 开始日期char(8)，格式YYYYMMDD，可空，当查询类型为2(已结清)时非空
+        /// 开始日期char(8)，格式YYYYMMDD
         /// </summary>
         [XmlIgnore]
-        public DateTime? StartDate { get; set; }
+        public DateTime StartDate { get; set; }
         /// <summary>
         /// 开始日期char(8)，格式YYYYMMDD, 对应<see cref="StartDate"/>
         /// </summary>
@@ -43,11 +38,10 @@ namespace BEDA.CITIC.Contracts.Requests
         {
             get
             {
-                return this.StartDate?.ToString("yyyyMMdd");
+                return this.StartDate.ToString("yyyyMMdd");
             }
             set
             {
-                this.StartDate = null;
                 if (DateTime.TryParseExact(value, "yyyyMMdd", CultureInfo.CurrentCulture, DateTimeStyles.None, out DateTime tmp))
                 {
                     this.StartDate = tmp;
@@ -55,10 +49,10 @@ namespace BEDA.CITIC.Contracts.Requests
             }
         }
         /// <summary>
-        /// 截止日期char(8)，格式YYYYMMDD，可空，当查询类型为2(已结清)时非空
+        /// 截止日期char(8)，格式YYYYMMDD
         /// </summary>
         [XmlIgnore]
-        public DateTime? EndDate { get; set; }
+        public DateTime EndDate { get; set; }
         /// <summary>
         /// 截止日期char(8)，格式YYYYMMDD, 对应<see cref="EndDate"/>
         /// </summary>
@@ -67,11 +61,10 @@ namespace BEDA.CITIC.Contracts.Requests
         {
             get
             {
-                return this.EndDate?.ToString("yyyyMMdd");
+                return this.EndDate.ToString("yyyyMMdd");
             }
             set
             {
-                this.EndDate = null;
                 if (DateTime.TryParseExact(value, "yyyyMMdd", CultureInfo.CurrentCulture, DateTimeStyles.None, out DateTime tmp))
                 {
                     this.EndDate = tmp;
