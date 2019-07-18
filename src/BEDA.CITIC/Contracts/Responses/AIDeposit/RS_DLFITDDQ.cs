@@ -9,30 +9,18 @@ using System.Xml.Serialization;
 namespace BEDA.CITIC.Contracts.Responses
 {
     /// <summary>
-    /// 通知型智能存款账户余额查询响应内容
+    /// 定期型智能存款明细查询响应内容
     /// </summary>
     [XmlRoot("stream")]
-    public class RS_DLFITTBQ : RsBase
+    public class RS_DLFITDDQ : RsBase
     {
         /// <summary>
-        /// 中信银行集合列表
-        /// </summary>
-        [XmlArray("list")]
-        [XmlArrayItem("row")]
-        public List<AIDepositBalance> List { get; set; }
-    }
-    /// <summary>
-    /// 智能存款账户余额
-    /// </summary>
-    public class AIDepositBalance
-    {
-        /// <summary>
-        /// 账号char(19)
+        /// 活期账号char(19)
         /// </summary>
         [XmlElement("accountNo")]
         public string AccountNo { get; set; }
         /// <summary>
-        /// 账户名称varchar(122)
+        /// 活期账户名称varchar(122)
         /// </summary>
         [XmlElement("accountNm")]
         public string AccountNm { get; set; }
@@ -42,15 +30,10 @@ namespace BEDA.CITIC.Contracts.Responses
         [XmlElement("balance")]
         public decimal Balance { get; set; }
         /// <summary>
-        /// 业务冻结金额decimal(15,2)
+        /// 冻结金额decimal(15,2)
         /// </summary>
-        [XmlElement("bsnFrzAmt")]
-        public decimal BsnFrzAmt { get; set; }
-        /// <summary>
-        /// 司法冻结金额decimal(15,2)
-        /// </summary>
-        [XmlElement("lawFrzAmt")]
-        public decimal LawFrzAmt { get; set; }
+        [XmlElement("frzAmt")]
+        public decimal FrzAmt { get; set; }
         /// <summary>
         /// 可用余额decimal(15,2)
         /// </summary>
@@ -61,15 +44,12 @@ namespace BEDA.CITIC.Contracts.Responses
         /// </summary>
         [XmlElement("cryType")]
         public string CryType { get; set; }
+
         /// <summary>
-        /// 查询状态char(7)
+        /// 中信银行集合列表
         /// </summary>
-        [XmlElement("status")]
-        public string Status { get; set; }
-        /// <summary>
-        /// 查询状态信息varchar(254)
-        /// </summary>
-        [XmlElement("statusText")]
-        public string StatusText { get; set; }
+        [XmlArray("list")]
+        [XmlArrayItem("row")]
+        public List<AIDepositDetail> List { get; set; }
     }
 }

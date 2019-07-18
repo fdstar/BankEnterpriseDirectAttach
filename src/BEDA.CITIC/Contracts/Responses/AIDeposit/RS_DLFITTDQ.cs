@@ -50,12 +50,12 @@ namespace BEDA.CITIC.Contracts.Responses
         /// </summary>
         [XmlArray("list")]
         [XmlArrayItem("row")]
-        public List<NoticeTypeAIDepositDetail> List { get; set; }
+        public List<AIDepositDetail> List { get; set; }
     }
     /// <summary>
-    /// 通知型智能存款明细
+    /// 智能存款明细
     /// </summary>
-    public class NoticeTypeAIDepositDetail
+    public class AIDepositDetail
     {
         /// <summary>
         /// 通知账号(账户序号) varchar(6)
