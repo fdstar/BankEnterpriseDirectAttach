@@ -78,7 +78,7 @@ namespace BEDA.CITIC.Contracts.Responses
         [XmlElement("drawAmt")]
         public decimal DrawAmt { get; set; }
         /// <summary>
-        /// 实存天varchar(254)
+        /// 实存天数int
         /// </summary>
         [XmlElement("inDays")]
         public string InDays { get; set; }
