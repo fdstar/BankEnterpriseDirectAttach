@@ -22,5 +22,10 @@ namespace BEDA.CITIC.Contracts.Responses
         /// </summary>
         [XmlElement("statusText")]
         public string StatusText { get; set; }
+        /// <summary>
+        /// 服务端响应报文
+        /// </summary>
+        [XmlIgnore]
+        public string ResponseContent { get; internal set; }
     }
 }

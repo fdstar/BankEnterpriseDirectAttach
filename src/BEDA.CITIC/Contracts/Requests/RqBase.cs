@@ -24,5 +24,10 @@ namespace BEDA.CITIC.Contracts.Requests
         /// </summary>
         [XmlElement("userName")]
         public string UserName { get; set; }
+        /// <summary>
+        /// 当前的请求报文，只有在执行请求后才会由程序赋值
+        /// </summary>
+        [XmlIgnore]
+        public string RequestContent { get; internal set; }
     }
 }
