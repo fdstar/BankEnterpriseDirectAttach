@@ -10,16 +10,16 @@ using System.Xml.Serialization;
 namespace BEDA.CITIC.Contracts.Requests
 {
     /// <summary>
-    /// 提示承兑申请经办请求内容
+    /// 提示付款经办请求内容
     /// </summary>
     [XmlRoot("stream")]
-    public class RQ_DLTSCDSQ : RqBase<RS_DLTSCDSQ>
+    public class RQ_DLTSFKSQ : RqBase<RS_DLTSFKSQ>
     {
         /// <summary>
         /// 业务对应请求代码
         /// </summary>
         [XmlElement("action")]
-        public override string Action { get => "DLTSCDSQ"; set { } }
+        public override string Action { get => "DLTSFKSQ"; set { } }
         /// <summary>
         /// 客户流水号 varchar (20)
         /// </summary>
@@ -36,20 +36,15 @@ namespace BEDA.CITIC.Contracts.Requests
         [XmlElement("billNo")]
         public string BillNo { get; set; }
         /// <summary>
-        /// 交易合同编号 char(32) 可空
+        /// 提示付款类型 char(2) 01正常，02逾期
         /// </summary>
-        [XmlElement("contractNo")]
-        public string ContractNo { get; set; }
+        [XmlElement("bussType")]
+        public string BussType { get; set; }
         /// <summary>
-        /// 发票编号 char(30) 可空
+        /// 逾期说明 varchar(60)，逾期时必须输入
         /// </summary>
-        [XmlElement("invoiceNo")]
-        public string InvoiceNo { get; set; }
-        /// <summary>
-        /// ECDS批次号 varchar(10) 可空；不为空时必须为数字
-        /// </summary>
-        [XmlElement("ecdsBatNo")]
-        public string EcdsBatNo { get; set; }
+        [XmlElement("overdueRsn")]
+        public string OverdueRsn { get; set; }
         /// <summary>
         /// 经办备注 varchar(256)，可空
         /// </summary>
@@ -77,5 +72,10 @@ namespace BEDA.CITIC.Contracts.Requests
             }
             set { }
         }
+        /// <summary>
+        /// 资金划扣方式 char(1)，可空，0：银行划扣；1：客户划扣
+        /// </summary>
+        [XmlElement("payMthd")]
+        public int? PayMthd { get; set; }
     }
 }

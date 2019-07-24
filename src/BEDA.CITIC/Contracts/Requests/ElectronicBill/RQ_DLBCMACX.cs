@@ -56,7 +56,7 @@ namespace BEDA.CITIC.Contracts.Requests
         [XmlElement("preFlg")]
         public int PreFlg { get; set; }
         /// <summary>
-        /// 启用联动预约时间
+        /// 预约支付时间
         /// </summary>
         [XmlIgnore]
         public DateTime? AppointmentTime { get; set; }

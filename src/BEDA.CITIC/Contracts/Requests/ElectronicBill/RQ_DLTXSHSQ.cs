@@ -10,16 +10,16 @@ using System.Xml.Serialization;
 namespace BEDA.CITIC.Contracts.Requests
 {
     /// <summary>
-    /// 提示承兑申请经办请求内容
+    /// 贴现赎回申请经办请求内容
     /// </summary>
     [XmlRoot("stream")]
-    public class RQ_DLTSCDSQ : RqBase<RS_DLTSCDSQ>
+    public class RQ_DLTXSHSQ : RqBase<RS_DLTXSHSQ>
     {
         /// <summary>
         /// 业务对应请求代码
         /// </summary>
         [XmlElement("action")]
-        public override string Action { get => "DLTSCDSQ"; set { } }
+        public override string Action { get => "DLTXSHSQ"; set { } }
         /// <summary>
         /// 客户流水号 varchar (20)
         /// </summary>
@@ -36,17 +36,22 @@ namespace BEDA.CITIC.Contracts.Requests
         [XmlElement("billNo")]
         public string BillNo { get; set; }
         /// <summary>
-        /// 交易合同编号 char(32) 可空
+        /// 转让标记 char(4)，EM00可再转让，EM01不得转让
         /// </summary>
-        [XmlElement("contractNo")]
-        public string ContractNo { get; set; }
+        [XmlElement("endorseMk")]
+        public string EndorseMk { get; set; }
         /// <summary>
-        /// 发票编号 char(30) 可空
+        /// 赎回利率 decimal(9.7)
         /// </summary>
-        [XmlElement("invoiceNo")]
-        public string InvoiceNo { get; set; }
+        [XmlElement("rpdRate")]
+        public decimal RpdRate { get; set; }
         /// <summary>
-        /// ECDS批次号 varchar(10) 可空；不为空时必须为数字
+        /// 赎回实付金额 decimal(15.2)
+        /// </summary>
+        [XmlElement("rpdAmt")]
+        public decimal RpdAmt { get; set; }
+        /// <summary>
+        /// ECDS批次号 varchar(10) 可空 ；不为空时必须为数字
         /// </summary>
         [XmlElement("ecdsBatNo")]
         public string EcdsBatNo { get; set; }
@@ -77,5 +82,17 @@ namespace BEDA.CITIC.Contracts.Requests
             }
             set { }
         }
+    }
+    /// <summary>
+    /// 转贴现赎回申请经办请求内容
+    /// </summary>
+    [XmlRoot("stream")]
+    public class RQ_DLZHTSSQ : RQ_DLTXSHSQ
+    {
+        /// <summary>
+        /// 业务对应请求代码
+        /// </summary>
+        [XmlElement("action")]
+        public override string Action { get => "DLZHTSSQ"; set { } }
     }
 }
