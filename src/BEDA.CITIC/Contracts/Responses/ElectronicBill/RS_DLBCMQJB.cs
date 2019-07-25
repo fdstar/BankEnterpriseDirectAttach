@@ -19,12 +19,12 @@ namespace BEDA.CITIC.Contracts.Responses
         /// </summary>
         [XmlArray("list")]
         [XmlArrayItem("row")]
-        public List<BillInfo> List { get; set; }
+        public List<OperableBillInfo> List { get; set; }
     }
     /// <summary>
-    /// 票据利息
+    /// 可操作票据
     /// </summary>
-    public class BillInfo
+    public class OperableBillInfo
     {
         /// <summary>
         /// 电子票据序列号 char(30)
