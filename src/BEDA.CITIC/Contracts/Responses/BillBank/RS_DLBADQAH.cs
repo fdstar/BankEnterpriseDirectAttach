@@ -27,7 +27,7 @@ namespace BEDA.CITIC.Contracts.Responses
     public class AgentBranchQuery
     {
         /// <summary>
-        /// 批复流水号 char(20)
+        /// 代保管机构号varchar(20)
         /// </summary>
         [XmlElement("agentBranchNo")]
         public string AgentBranchNo { get; set; }
