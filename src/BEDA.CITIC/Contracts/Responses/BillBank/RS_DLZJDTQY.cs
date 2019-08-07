@@ -19,12 +19,12 @@ namespace BEDA.CITIC.Contracts.Responses
         /// </summary>
         [XmlArray("list")]
         [XmlArrayItem("row")]
-        public List<AgentBillReleasedInfo> List { get; set; }
+        public List<AgentBillInfo> List { get; set; }
     }
     /// <summary>
     /// 代保管票据质押解除明细
     /// </summary>
-    public class AgentBillReleasedInfo
+    public class AgentBillInfo
     {
         /// <summary>
         /// 批次号varchar(8)
