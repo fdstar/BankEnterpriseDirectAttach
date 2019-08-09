@@ -19,6 +19,6 @@ namespace BEDA.CITIC.Contracts.Responses
         /// </summary>
         [XmlArray("list")]
         [XmlArrayItem("row")]
-        public List<AgentBillInfo> List { get; set; }
+        public List<AgentBillApplyInfo> List { get; set; }
     }
 }

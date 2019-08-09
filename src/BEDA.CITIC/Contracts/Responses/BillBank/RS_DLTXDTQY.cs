@@ -24,7 +24,7 @@ namespace BEDA.CITIC.Contracts.Responses
     /// <summary>
     /// 代保管票据贴现明细
     /// </summary>
-    public class AgentBillDiscountedInfo : AgentBillInfo
+    public class AgentBillDiscountedInfo : AgentBillApplyInfo
     {
         /// <summary>
         /// 贴入行机构号varchar(20)

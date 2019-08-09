@@ -24,7 +24,7 @@ namespace BEDA.CITIC.Contracts.Responses
     /// <summary>
     /// 代保管票据质押明细
     /// </summary>
-    public class AgentBillPawnedInfo: AgentBillInfo
+    public class AgentBillPawnedInfo: AgentBillApplyInfo
     {
         /// <summary>
         /// 质权人机构号varchar(20)

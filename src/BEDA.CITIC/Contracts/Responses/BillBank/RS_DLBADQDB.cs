@@ -9,16 +9,27 @@ using System.Xml.Serialization;
 namespace BEDA.CITIC.Contracts.Responses
 {
     /// <summary>
-    /// 委托大额查询查复明细查询响应内容
+    /// 代保管票据信息查询响应内容
     /// </summary>
     [XmlRoot("stream")]
-    public class RS_DLWTDEQY : RsBase
+    public class RS_DLBADQDB : RsBase
     {
         /// <summary>
         /// 中信银行集合列表
         /// </summary>
         [XmlArray("list")]
         [XmlArrayItem("row")]
-        public List<AgentBillApplyInfo> List { get; set; }
+        public List<AgentBillInfo> List { get; set; }
+    }
+    /// <summary>
+    /// 代保管票据信息
+    /// </summary>
+    public class AgentBillInfo : BillOperatingInfo
+    {
+        /// <summary>
+        /// 业务流水号varchar(18)
+        /// </summary>
+        [XmlElement("bsnFlwNo")]
+        public string BsnFlwNo { get; set; }
     }
 }
