@@ -24,7 +24,7 @@ namespace BEDA.CITIC.Contracts.Requests
     /// <summary>
     /// 订单通知查询(直联商户)请求内容
     /// </summary>
-    public class RQ_DLB2CNTQ : RQ_DL3RDFLE
+    public class RQ_DLB2CNTQ : RQ_DL3RDNTQ
     {
         /// <summary>
         /// 业务对应请求代码
