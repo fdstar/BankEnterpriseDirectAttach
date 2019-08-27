@@ -9,10 +9,10 @@ using System.Xml.Serialization;
 namespace BEDA.CITIC.Contracts.Responses
 {
     /// <summary>
-    /// 第三方商户提现经办响应内容
+    /// B2C商户退款经办响应内容
     /// </summary>
     [XmlRoot("stream")]
-    public class RS_DL3RTXJB : RsBase
+    public class RS_DLB2CRJB : RsBase
     {
         /// <summary>
         /// 批次号 varchar(8)
@@ -45,18 +45,18 @@ namespace BEDA.CITIC.Contracts.Responses
         /// </summary>
         [XmlArray("list")]
         [XmlArrayItem("row")]
-        public List<ThirdPartyCashResult> List { get; set; }
+        public List<B2CMerchantRefundResult> List { get; set; }
     }
     /// <summary>
-    /// 第三方商户提现经办结果
+    /// B2C商户退款经办结果
     /// </summary>
-    public class ThirdPartyCashResult
+    public class B2CMerchantRefundResult
     {
         /// <summary>
-        /// 商户提现流水号varchar(20) 
+        /// B2C退款流水号 varchar(20)
         /// </summary>
-        [XmlElement("cashFlwNo")]
-        public string CashFlwNo { get; set; }
+        [XmlElement("refundFlwNo")]
+        public string RefundFlwNo { get; set; }
         /// <summary>
         /// 交易银行受理状态char(7)
         /// </summary>

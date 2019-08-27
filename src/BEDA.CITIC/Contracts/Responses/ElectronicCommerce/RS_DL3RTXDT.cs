@@ -25,12 +25,12 @@ namespace BEDA.CITIC.Contracts.Responses
         /// </summary>
         [XmlArray("list")]
         [XmlArrayItem("row")]
-        public List<ThirdPartyRechargeCashDetail> List { get; set; }
+        public List<ThirdPartyCashDetail> List { get; set; }
     }
     /// <summary>
     /// 第三方商户提现明细
     /// </summary>
-    public class ThirdPartyRechargeCashDetail
+    public class ThirdPartyCashDetail
     {
         /// <summary>
         /// 提现日期char(8) 格式YYYYMMDD

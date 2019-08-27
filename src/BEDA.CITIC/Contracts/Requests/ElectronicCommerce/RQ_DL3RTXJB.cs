@@ -35,14 +35,14 @@ namespace BEDA.CITIC.Contracts.Requests
         /// 中信银行集合列表
         /// </summary>
         [XmlElement("list")]
-        public CITICCollection<ThirdPartyRechargeCash> Collection { get; set; }
+        public CITICCollection<ThirdPartyCash> Collection { get; set; }
 
         
     }
     /// <summary>
     /// 第三方商户提现经办
     /// </summary>
-    public class ThirdPartyRechargeCash
+    public class ThirdPartyCash
     {
         /// <summary>
         /// 商户提现流水号 varchar(20) 

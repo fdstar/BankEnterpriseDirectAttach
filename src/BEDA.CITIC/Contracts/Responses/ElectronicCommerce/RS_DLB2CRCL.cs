@@ -9,22 +9,22 @@ using System.Xml.Serialization;
 namespace BEDA.CITIC.Contracts.Responses
 {
     /// <summary>
-    /// 第三方商户提现汇总查询响应内容
+    /// B2C商户退款汇总查询响应内容
     /// </summary>
     [XmlRoot("stream")]
-    public class RS_DL3RTXCL : RsBase
+    public class RS_DLB2CRCL : RsBase
     {
         /// <summary>
         /// 中信银行集合列表
         /// </summary>
         [XmlArray("list")]
         [XmlArrayItem("row")]
-        public List<ThirdPartyCashSummary> List { get; set; }
+        public List<B2CMerchantRefundSummary> List { get; set; }
     }
     /// <summary>
-    /// 第三方商户提现汇总
+    /// B2C商户退款汇总
     /// </summary>
-    public class ThirdPartyCashSummary
+    public class B2CMerchantRefundSummary
     {
         /// <summary>
         /// 批次号 varchar(8)
@@ -36,6 +36,26 @@ namespace BEDA.CITIC.Contracts.Responses
         /// </summary>
         [XmlElement("clientID")]
         public string ClientID { get; set; }
+        /// <summary>
+        /// 借记卡总笔数 int
+        /// </summary>
+        [XmlElement("debitTotal")]
+        public int DebitTotal { get; set; }
+        /// <summary>
+        /// 借记卡总金额 decimal(15,2)
+        /// </summary>
+        [XmlElement("debitAmt")]
+        public decimal DebitAmt { get; set; }
+        /// <summary>
+        /// 信用卡总笔数 int
+        /// </summary>
+        [XmlElement("creditTotal")]
+        public int CreditTotal { get; set; }
+        /// <summary>
+        /// 信用卡总金额 decimal(15,2)
+        /// </summary>
+        [XmlElement("creditAmt")]
+        public decimal CreditAmt { get; set; }
         /// <summary>
         /// 成功总笔数 int
         /// </summary>
@@ -57,32 +77,22 @@ namespace BEDA.CITIC.Contracts.Responses
         [XmlElement("failAmt")]
         public decimal FailAmt { get; set; }
         /// <summary>
-        /// 总笔数 int
-        /// </summary>
-        [XmlElement("totalNum")]
-        public int TotalNum { get; set; }
-        /// <summary>
-        /// 总金额 decimal(15,2)
-        /// </summary>
-        [XmlElement("totalAmt")]
-        public decimal TotalAmt { get; set; }
-        /// <summary>
         /// 批次受理状态 varchar(2)，值域见附录4.2
         /// </summary>
         [XmlElement("stt")]
         public string Stt { get; set; }
         /// <summary>
-        /// 提现日期char(8) 格式YYYYMMDD
+        /// 退款日期char(8) 格式YYYYMMDD
         /// </summary>
         [XmlElement("tranDate")]
         public string TranDate { get; set; }
         /// <summary>
-        /// 提现时间char(6) 格式hhmmss
+        /// 退款时间char(6) 格式hhmmss
         /// </summary>
         [XmlElement("tranTime")]
         public string TranTime { get; set; }
         /// <summary>
-        /// 提现时间 由<see cref="TranDate"/>和<see cref="TranTime"/>组成
+        /// 退款时间 由<see cref="TranDate"/>和<see cref="TranTime"/>组成
         /// </summary>
         [XmlIgnore]
         public DateTime? TransactionTime
